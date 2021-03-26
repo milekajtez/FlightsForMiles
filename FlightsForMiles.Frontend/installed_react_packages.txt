@@ -1,0 +1,6 @@
+>>>>>>>>>> All React packages intalled with npm <<<<<<<<<<
+
+$ npm install
+$ npm install --save react-slideshow-image
+$ npm install react-router-dom
+ 

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightsForMiles", "FlightsForMiles\FlightsForMiles.csproj", "{68989D9B-08B0-47A7-9D9D-B1BAF2DEC493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightsForMiles.BLL", "FlightsForMiles.BLL\FlightsForMiles.BLL.csproj", "{6C706771-433F-4568-AFAF-BFA5BF9F343D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightsForMiles.DAL", "FlightsForMiles.DAL\FlightsForMiles.DAL.csproj", "{B6277F52-BBB6-47B2-BC4E-18F49E9A7C71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightsForMiles.BLL.Contracts", "FlightsForMiles.BLL.Contracts\FlightsForMiles.BLL.Contracts.csproj", "{68DC08D2-E3BF-4D31-80BB-1AC840A2C759}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightsForMiles.DAL.Contracts", "FlightsForMiles.DAL.Contracts\FlightsForMiles.DAL.Contracts.csproj", "{8D8EE452-8F42-45C5-907F-54AF22E170CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightsForMiles.API", "FlightsForMiles.API\FlightsForMiles.API.csproj", "{18BBA72C-D3DC-49DA-91AA-E8CAB73CD0FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68989D9B-08B0-47A7-9D9D-B1BAF2DEC493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68989D9B-08B0-47A7-9D9D-B1BAF2DEC493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68989D9B-08B0-47A7-9D9D-B1BAF2DEC493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68989D9B-08B0-47A7-9D9D-B1BAF2DEC493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C706771-433F-4568-AFAF-BFA5BF9F343D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C706771-433F-4568-AFAF-BFA5BF9F343D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C706771-433F-4568-AFAF-BFA5BF9F343D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C706771-433F-4568-AFAF-BFA5BF9F343D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6277F52-BBB6-47B2-BC4E-18F49E9A7C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6277F52-BBB6-47B2-BC4E-18F49E9A7C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6277F52-BBB6-47B2-BC4E-18F49E9A7C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6277F52-BBB6-47B2-BC4E-18F49E9A7C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68DC08D2-E3BF-4D31-80BB-1AC840A2C759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68DC08D2-E3BF-4D31-80BB-1AC840A2C759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68DC08D2-E3BF-4D31-80BB-1AC840A2C759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68DC08D2-E3BF-4D31-80BB-1AC840A2C759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D8EE452-8F42-45C5-907F-54AF22E170CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D8EE452-8F42-45C5-907F-54AF22E170CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D8EE452-8F42-45C5-907F-54AF22E170CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D8EE452-8F42-45C5-907F-54AF22E170CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18BBA72C-D3DC-49DA-91AA-E8CAB73CD0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18BBA72C-D3DC-49DA-91AA-E8CAB73CD0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18BBA72C-D3DC-49DA-91AA-E8CAB73CD0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18BBA72C-D3DC-49DA-91AA-E8CAB73CD0FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CA2A035-3241-4482-8A29-C546F1F70A3C}
+	EndGlobalSection
+EndGlobal

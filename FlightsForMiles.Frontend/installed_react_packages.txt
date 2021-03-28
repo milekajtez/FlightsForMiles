@@ -2,5 +2,7 @@
 
 $ npm install
 $ npm install --save react-slideshow-image
-$ npm install react-router-dom
+$ npm install --save react-router-dom
+$ npm install --save react-modal
+$ npm install --save react-use-form-hooks
  

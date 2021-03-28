@@ -1,0 +1,25 @@
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+}
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+.ReactModal__Html--open,
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+
+.ReactModal__Content {
+    background: white;
+    outline: none;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    box-shadow: 0 0 34px 0 rgba(0, 0, 0, 1);
+    overflow-y: scroll;
+    position: relative;
+    background-color: #141e30;
+}

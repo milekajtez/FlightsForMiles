@@ -1,21 +1,28 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import Help from './help/Help'
+import Login from './logging-in/Login'
+import Registration from './registration/Registration'
 
 function Navigation() {
+    const [helpIsOpen, setHelpIsOpen] = useState(false)
+    const [loginIsOpen, setLoginIsOpen] = useState(false)
+    const [regIsOpen, setRegIsOpen] = useState(false)
+
     return (
         <span>
             <ul className="menu-bar">
-                <NavLink to="/flights"><li><i className="fas fa-plane-departure"></i> Flights</li></NavLink>
+                <li><i className="fas fa-plane-departure"></i> Flights</li>
                 <div></div>
-                <NavLink to="/about"><li><i className="fas fa-info-circle"></i> About</li></NavLink>
+                <li onClick={() => setHelpIsOpen(true)}><i className="far fa-question-circle"></i> Help</li>
+                <Help helpIsOpen={helpIsOpen} setHelpIsOpen={setHelpIsOpen}/>
                 <div></div>
-                <NavLink to="/help"><li><i className="far fa-question-circle"></i> Help</li></NavLink>
+                <li><i className="fab fa-google"></i> Login with Google</li>
                 <div></div>
-                <NavLink to="/loginGoogle"><li><i className="fab fa-google"></i> Login with Google</li></NavLink>
+                <li onClick={() => setLoginIsOpen(true)}><i className="fas fa-sign-in-alt"></i> Sign in</li>
+                <Login loginIsOpen={loginIsOpen} setLoginIsOpen={setLoginIsOpen}/>
                 <div></div>
-                <NavLink to="/singIn"><li><i className="fas fa-sign-in-alt"></i> Sign in</li></NavLink>
-                <div></div>
-                <NavLink to="/singUp"><li><i className="fas fa-user-plus"></i> Sign up</li></NavLink>
+                <li onClick={() => setRegIsOpen(true)}><i className="fas fa-user-plus"></i> Sign up</li>
+                <Registration regIsOpen={regIsOpen} setRegIsOpen={setRegIsOpen}/>
             </ul>
         </span>
     )

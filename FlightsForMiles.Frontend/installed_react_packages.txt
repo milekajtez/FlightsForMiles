@@ -5,4 +5,10 @@ $ npm install --save react-slideshow-image
 $ npm install --save react-router-dom
 $ npm install --save react-modal
 $ npm install --save react-use-form-hooks
+$ npm install --save redux
+$ npm install --save react-redux
+$ npm install --save redux-thunk
+$ npm install --save redux-devtools-extension
+$ npm install --save axios
+
  

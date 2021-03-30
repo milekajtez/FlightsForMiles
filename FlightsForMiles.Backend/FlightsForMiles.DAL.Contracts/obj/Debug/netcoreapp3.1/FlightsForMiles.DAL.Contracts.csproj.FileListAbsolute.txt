@@ -1,0 +1,9 @@
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.deps.json
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.csprojAssemblyReference.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.AssemblyInfoInputs.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.AssemblyInfo.cs
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.pdb

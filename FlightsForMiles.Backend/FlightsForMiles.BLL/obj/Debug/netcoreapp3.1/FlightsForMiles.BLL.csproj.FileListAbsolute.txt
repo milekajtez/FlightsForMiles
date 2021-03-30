@@ -1,0 +1,9 @@
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.deps.json
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csprojAssemblyReference.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.AssemblyInfoInputs.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.AssemblyInfo.cs
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csproj.CoreCompileInputs.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb

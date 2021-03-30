@@ -1,8 +1,12 @@
 import React from 'react'
 import Modal from 'react-modal'
+import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { userRegistration } from '../../../redux/start-page/registration/registrationAction'
 
 function Registration(props) {
+    const dispatch = useDispatch()
+
     const usernameField = useFormField({
         initialValue: '',
         isRequired: true
@@ -55,10 +59,23 @@ function Registration(props) {
 
     const regForm = useFormWithFields({
         onSubmit: (e) => {
-            // ovde ce se nastaviti citav proces.. validacija na frontu + sve ostalo
+            // potrebne dodatne validacije, kao sto su poredjenje password-a i confirm password-a
+            // oblik i duzina svih polja...sve cega se setim
+            dispatch(userRegistration({
+                username: usernameField.value,
+                email: emailField.value,
+                password: passwordField.value,
+                firstname: firstNameField.value,
+                lastname: lastNameField.value,
+                pin: pinField.value,
+                address: addressField.value,
+                telephone: telephoneField.value,
+                passport: passportField.value
+            }))
+            
             e.preventDefault()
             props.setRegIsOpen(false)
-            regForm.handleReset()
+            /*regForm.handleReset()*/
         },
         fields: [usernameField, emailField, passwordField, confirmPasswordField, firstNameField,
             lastNameField, pinField, addressField, telephoneField, passportField]

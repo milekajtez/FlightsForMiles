@@ -87,7 +87,7 @@ function Registration(props) {
             style={{
                 overlay: {
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.4)'
+                    backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: "blur(8px)"
                 }
             }}
         >
@@ -132,7 +132,7 @@ function Registration(props) {
                     </div>
                     <div>
                         <span className="user-box">
-                            <input type="number" value={pinField.value} required={pinField.isRequired}
+                            <input type="text" value={pinField.value} required={pinField.isRequired}
                                 onChange={pinField.handleChange} id="pinField" />
                             <label>Personal identity number</label>
                         </span>
@@ -144,12 +144,12 @@ function Registration(props) {
                     </div>
                     <div>
                         <span className="user-box">
-                            <input type="number" value={telephoneField.value} required={telephoneField.isRequired}
+                            <input type="text" value={telephoneField.value} required={telephoneField.isRequired}
                                 onChange={telephoneField.handleChange} id="telephoneField" />
                             <label>Telephone number</label>
                         </span>
                         <span className="user-box">
-                            <input type="number" value={passportField.value} required={passportField.isRequired}
+                            <input type="text" value={passportField.value} required={passportField.isRequired}
                                 onChange={passportField.handleChange} id="passportField" />
                             <label>Passport number</label>
                         </span>

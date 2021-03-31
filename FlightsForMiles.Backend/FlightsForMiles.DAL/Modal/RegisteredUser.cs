@@ -8,8 +8,9 @@ using System.Text;
 namespace FlightsForMiles.DAL.Modal
 {
     /// <summary>
-    /// Fields JMBG, Username, E-mail, Password i Telephone number doesn't add because they are in AspNetUsers table already 
+    /// Fields, Username, E-mail, Password i Telephone number doesn't add because they are in AspNetUsers table already 
     /// NumberOfPassport -------- number of passport
+    /// Jmbg -------------------- personal identify number
     /// FirstName --------------- first name
     /// LastName ---------------- last name
     /// City -------------------- city
@@ -21,6 +22,11 @@ namespace FlightsForMiles.DAL.Modal
     public class RegisteredUser : IdentityUser
     {
         public string NumberOfPassport { get; set; }
+
+        [Required]
+        [MinLength(13)]
+        [MaxLength(13)]
+        public string Pin { get; set; }
 
         [Required]
         [MinLength(5)]

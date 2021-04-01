@@ -1,6 +1,10 @@
+using FlightsForMiles.BLL.Contracts.Services.User;
+using FlightsForMiles.BLL.Services;
 using FlightsForMiles.DAL;
+using FlightsForMiles.DAL.Contracts.Repository;
+using FlightsForMiles.DAL.DataModel.login_and_registration;
 using FlightsForMiles.DAL.Modal;
-using FlightsForMiles.DataModel.login_and_registration;
+using FlightsForMiles.DAL.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -78,6 +82,10 @@ namespace FlightsForMiles
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            // settings for dependecy injection
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

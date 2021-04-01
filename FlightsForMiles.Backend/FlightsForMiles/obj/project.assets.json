@@ -1835,6 +1835,20 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "FlightsForMiles.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "FlightsForMiles.BLL.Contracts": "1.0.0",
+          "FlightsForMiles.DAL.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/FlightsForMiles.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FlightsForMiles.BLL.dll": {}
+        }
+      },
       "FlightsForMiles.BLL.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -1849,6 +1863,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "FlightsForMiles.DAL.Contracts": "1.0.0",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.1"
         },
@@ -1857,6 +1873,16 @@
         },
         "runtime": {
           "bin/placeholder/FlightsForMiles.DAL.dll": {}
+        }
+      },
+      "FlightsForMiles.DAL.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/FlightsForMiles.DAL.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FlightsForMiles.DAL.Contracts.dll": {}
         }
       }
     }
@@ -6417,6 +6443,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "FlightsForMiles.BLL/1.0.0": {
+      "type": "project",
+      "path": "../FlightsForMiles.BLL/FlightsForMiles.BLL.csproj",
+      "msbuildProject": "../FlightsForMiles.BLL/FlightsForMiles.BLL.csproj"
+    },
     "FlightsForMiles.BLL.Contracts/1.0.0": {
       "type": "project",
       "path": "../FlightsForMiles.BLL.Contracts/FlightsForMiles.BLL.Contracts.csproj",
@@ -6426,10 +6457,16 @@
       "type": "project",
       "path": "../FlightsForMiles.DAL/FlightsForMiles.DAL.csproj",
       "msbuildProject": "../FlightsForMiles.DAL/FlightsForMiles.DAL.csproj"
+    },
+    "FlightsForMiles.DAL.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../FlightsForMiles.DAL.Contracts/FlightsForMiles.DAL.Contracts.csproj",
+      "msbuildProject": "../FlightsForMiles.DAL.Contracts/FlightsForMiles.DAL.Contracts.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "FlightsForMiles.BLL >= 1.0.0",
       "FlightsForMiles.BLL.Contracts >= 1.0.0",
       "FlightsForMiles.DAL >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Google >= 3.0.2",
@@ -6476,6 +6513,9 @@
           "projectReferences": {
             "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj": {
               "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj"
+            },
+            "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj": {
+              "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj"
             },
             "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {
               "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj"

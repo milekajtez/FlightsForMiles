@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace FlightsForMiles.DataModel.login_and_registration
+namespace FlightsForMiles.DAL.DataModel.login_and_registration
 {
     public class MailSettings
     {

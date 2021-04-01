@@ -1,4 +1,5 @@
 import React from 'react'
+import { useAlert } from 'react-alert'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
@@ -6,7 +7,9 @@ import { userRegistration } from '../../../redux/start-page/registration/registr
 
 function Registration(props) {
     const dispatch = useDispatch()
+    const alert = useAlert();
 
+    //#region Form's field and calling redux action
     const usernameField = useFormField({
         initialValue: '',
         isRequired: true
@@ -57,29 +60,85 @@ function Registration(props) {
         isRequired: false
     })
 
+
     const regForm = useFormWithFields({
         onSubmit: (e) => {
-            // potrebne dodatne validacije, kao sto su poredjenje password-a i confirm password-a
-            // oblik i duzina svih polja...sve cega se setim
-            dispatch(userRegistration({
-                username: usernameField.value,
-                email: emailField.value,
-                password: passwordField.value,
-                firstname: firstNameField.value,
-                lastname: lastNameField.value,
-                pin: pinField.value,
-                address: addressField.value,
-                telephone: telephoneField.value,
-                passport: passportField.value
-            }))
-            
+            if(Validation()){
+                dispatch(userRegistration({
+                    username: usernameField.value,
+                    email: emailField.value,
+                    password: passwordField.value,
+                    firstname: firstNameField.value,
+                    lastname: lastNameField.value,
+                    pin: pinField.value,
+                    address: addressField.value,
+                    telephone: telephoneField.value,
+                    passport: passportField.value
+                }))
+
+                alert.show("User registration successfully", {
+                    type: 'success'
+                })
+                
+                regForm.handleReset()
+            }
+
             e.preventDefault()
             props.setRegIsOpen(false)
-            /*regForm.handleReset()*/
         },
         fields: [usernameField, emailField, passwordField, confirmPasswordField, firstNameField,
             lastNameField, pinField, addressField, telephoneField, passportField]
     })
+    //#endregion
+    //#region Form fields validation
+    function Validation(){
+        // password validation
+        if(passwordField.value.length < 8 || confirmPasswordField.value.length < 8){
+            alert.show("Minimum number of caracters in password is 8!", {
+                type: 'error',
+                /*onOpen: () => {},
+                onClose: () => {}*/
+            })
+            return false
+        }
+        else{
+            if(passwordField.value !== confirmPasswordField.value){
+                alert.show("Please insert the same password and confirm password!", {
+                    type: 'error'
+                })
+                return false
+            }
+        }
+
+        // PIN validation
+        if(isNaN(Number(pinField.value)) || pinField.value.length !== 13){
+            alert.show("Please insert a valid Personal identity number! This number must to have 13 digits! (For example '3006997800000')", {
+                type: 'error'
+            })
+            return false
+        }
+
+        // telephone validation
+        if(isNaN(Number(telephoneField.value))){
+            alert.show("Please insert a valid phone number! (For example '0628508315')", {
+                type: 'error'
+            })
+            return false
+        }
+
+        // passport validation
+        if(passportField.value.trim() !== "") {
+            if(isNaN(Number(passportField.value))){
+                alert.show("Please insert a valid passport number! Passport should have 9 digits (For example '123456789')", {
+                    type: 'error'
+                })
+                return false
+            }
+        }
+
+        return true
+    }
+    //#endregion
 
     return (
         <Modal ariaHideApp={false} isOpen={props.regIsOpen} closeTimeoutMS={500}
@@ -160,8 +219,7 @@ function Registration(props) {
                             <span></span>
                             <span></span>
                             <span></span>
-                        Register
-                    </button>
+                        Register</button>
                     </div>
                 </form>
             </div>

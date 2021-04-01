@@ -16,3 +16,4 @@ C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsF
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\Debug\netcoreapp3.1\FlightsForMiles.DAL.deps.json
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\Debug\netcoreapp3.1\FlightsForMiles.DAL.dll
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\Debug\netcoreapp3.1\FlightsForMiles.DAL.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.csproj.CopyComplete

@@ -195,6 +195,44 @@ namespace FlightsForMiles.DAL.Migrations
                     b.ToTable("FriendshipRequests");
                 });
 
+            modelBuilder.Entity("FlightsForMiles.DAL.Modal.Information", b =>
+                {
+                    b.Property<Guid>("Info_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Info_ID");
+
+                    b.ToTable("AboutSiteInformations");
+                });
+
+            modelBuilder.Entity("FlightsForMiles.DAL.Modal.Question", b =>
+                {
+                    b.Property<Guid>("Question_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Answer_text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Question_text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Question_ID");
+
+                    b.ToTable("Questions");
+                });
+
             modelBuilder.Entity("FlightsForMiles.DAL.Modal.Ticket", b =>
                 {
                     b.Property<int>("Id")
@@ -437,34 +475,29 @@ namespace FlightsForMiles.DAL.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("City")
+                    b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<bool>("FirstLogin")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<bool>("IsNewReservation")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("NumberOfPassport")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Pin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(13)")
-                        .HasMaxLength(13);
 
                     b.Property<double>("Points")
                         .HasColumnType("float");

@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightsForMiles.BLL.Contracts\FlightsForMiles.BLL.Contracts.csproj" />
+    <ProjectReference Include="..\FlightsForMiles.BLL\FlightsForMiles.BLL.csproj" />
     <ProjectReference Include="..\FlightsForMiles.DAL\FlightsForMiles.DAL.csproj" />
   </ItemGroup>
 

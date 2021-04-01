@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FlightsForMiles.BLL.Contracts\FlightsForMiles.BLL.Contracts.csproj" />
+    <ProjectReference Include="..\FlightsForMiles.DAL.Contracts\FlightsForMiles.DAL.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

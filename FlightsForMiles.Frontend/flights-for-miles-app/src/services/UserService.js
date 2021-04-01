@@ -15,6 +15,10 @@ const loginService = {
         }
 
         return API.post("ApplicationUsers", body)
+    },
+
+    confirmRegistration: (username) => {
+        return API.put(`ApplicationUsers/${username}`)
     }
 }
 

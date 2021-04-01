@@ -7,3 +7,8 @@ C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsF
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csproj.CoreCompileInputs.cache
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.dll
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csproj.CopyComplete

@@ -10,15 +10,15 @@ import store from './redux/store';
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={StartPage} />
-          <Route exact path="/confirmRegYes" component={ConfirmRegYes} />
-          <Route exact path="/confirmRegNo" component={ConfirmRegNo} />
-          <Route exact path="/:username?" component={RegisteredUser} />
-          <Redirect to="/" />
-        </Switch>
-      </div>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={StartPage} />
+            <Route exact path="/confirmRegYes/:username?" component={ConfirmRegYes} />
+            <Route exact path="/confirmRegNo" component={ConfirmRegNo} />
+            <Route exact path="/:username?" component={RegisteredUser} />
+            <Redirect to="/" />
+          </Switch>
+        </div>
     </Provider>
   );
 }

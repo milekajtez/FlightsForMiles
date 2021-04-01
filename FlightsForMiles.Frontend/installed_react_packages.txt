@@ -10,5 +10,7 @@ $ npm install --save react-redux
 $ npm install --save redux-thunk
 $ npm install --save redux-devtools-extension
 $ npm install --save axios
+$ npm install --save react-alert
+$ npm install --save react-alert-template-basic
 
  

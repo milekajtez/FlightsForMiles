@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router'
+import { confirmRegistration } from '../../redux/start-page/registration/registrationAction'
 
 function ConfirmRegYes() {
-    console.log("Yes")
+    const dispatch = useDispatch()
+    let { username } = useParams()
+    useEffect(() => {
+        dispatch(confirmRegistration(username))
+    })
+    
     return (
         <div style={{background: "#363638"}}>
             <div className="alert alert-success" style={{textAlign: "center", width: "100%", height: "100%"}}>

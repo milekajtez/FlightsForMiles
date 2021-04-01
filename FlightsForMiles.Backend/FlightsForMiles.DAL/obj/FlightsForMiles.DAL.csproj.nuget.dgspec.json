@@ -4,14 +4,14 @@
     "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {
+    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
-        "projectName": "FlightsForMiles.DAL",
-        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj",
+        "projectName": "FlightsForMiles.DAL.Contracts",
+        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj",
         "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\obj\\",
+        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,7 +39,69 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
+        "projectName": "FlightsForMiles.DAL",
+        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
+        "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
+                "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.1, )"

@@ -10,7 +10,6 @@ namespace FlightsForMiles.DAL.Modal
     /// <summary>
     /// Fields, Username, E-mail, Password i Telephone number doesn't add because they are in AspNetUsers table already 
     /// NumberOfPassport -------- number of passport
-    /// Jmbg -------------------- personal identify number
     /// FirstName --------------- first name
     /// LastName ---------------- last name
     /// City -------------------- city
@@ -24,24 +23,19 @@ namespace FlightsForMiles.DAL.Modal
         public string NumberOfPassport { get; set; }
 
         [Required]
-        [MinLength(13)]
-        [MaxLength(13)]
-        public string Pin { get; set; }
-
-        [Required]
         [MinLength(5)]
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string FirstName { get; set; }
 
         [Required]
         [MinLength(5)]
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string LastName { get; set; }
 
         [Required]
         [MinLength(5)]
-        [MaxLength(30)]
-        public string City { get; set; }
+        [MaxLength(100)]
+        public string Address { get; set; }
 
         public bool FirstLogin { get; set; }
 

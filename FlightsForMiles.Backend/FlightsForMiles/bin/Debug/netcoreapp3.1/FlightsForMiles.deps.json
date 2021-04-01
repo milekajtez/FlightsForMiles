@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.1": {
       "FlightsForMiles/1.0.0": {
         "dependencies": {
+          "FlightsForMiles.BLL": "1.0.0",
           "FlightsForMiles.BLL.Contracts": "1.0.0",
           "FlightsForMiles.DAL": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Google": "3.0.2",
@@ -1596,6 +1597,18 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
+      "FlightsForMiles.BLL/1.0.0": {
+        "dependencies": {
+          "FlightsForMiles.BLL.Contracts": "1.0.0",
+          "FlightsForMiles.DAL.Contracts": "1.0.0"
+        },
+        "runtime": {
+          "FlightsForMiles.BLL.dll": {}
+        },
+        "compile": {
+          "FlightsForMiles.BLL.dll": {}
+        }
+      },
       "FlightsForMiles.BLL.Contracts/1.0.0": {
         "runtime": {
           "FlightsForMiles.BLL.Contracts.dll": {}
@@ -1606,6 +1619,8 @@
       },
       "FlightsForMiles.DAL/1.0.0": {
         "dependencies": {
+          "FlightsForMiles.DAL.Contracts": "1.0.0",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.1"
         },
@@ -1614,6 +1629,14 @@
         },
         "compile": {
           "FlightsForMiles.DAL.dll": {}
+        }
+      },
+      "FlightsForMiles.DAL.Contracts/1.0.0": {
+        "runtime": {
+          "FlightsForMiles.DAL.Contracts.dll": {}
+        },
+        "compile": {
+          "FlightsForMiles.DAL.Contracts.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -4117,12 +4140,22 @@
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
+    "FlightsForMiles.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "FlightsForMiles.BLL.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "FlightsForMiles.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FlightsForMiles.DAL.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

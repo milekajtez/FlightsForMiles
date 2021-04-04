@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAlert } from 'react-alert'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
@@ -63,6 +62,9 @@ function Registration(props) {
 
     const regForm = useFormWithFields({
         onSubmit: (e) => {
+            e.preventDefault()
+            props.setRegIsOpen(false)
+
             if(Validation()){
                 dispatch(userRegistration({
                     username: usernameField.value,
@@ -75,16 +77,34 @@ function Registration(props) {
                     telephone: telephoneField.value,
                     passport: passportField.value
                 }))
-
-                alert.show("User registration successfully", {
-                    type: 'success'
+                .then(response => {
+                    if(response.status === 201){
+                        alert.show("User registration successfully.", {
+                            type: 'success'
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.error(error)
+                    if(error.response.data.indexOf("(Entered username has been reserved already.)") !== -1){
+                        alert.show("Registration unsuccesfully. Entered username has been reserved already.", {
+                            type: 'error'
+                        })
+                    }
+                    else if(error.response.data.indexOf("(Please enter a different personal identify number.)") !== -1){
+                        alert.show("Registration unsuccesfully. Please enter a different personal identify number.", {
+                            type: 'error'
+                        })
+                    }
+                    else {
+                        alert.show("Unknown error", {
+                            type: 'error'
+                        })
+                    }
                 })
                 
                 regForm.handleReset()
             }
-
-            e.preventDefault()
-            props.setRegIsOpen(false)
         },
         fields: [usernameField, emailField, passwordField, confirmPasswordField, firstNameField,
             lastNameField, pinField, addressField, telephoneField, passportField]

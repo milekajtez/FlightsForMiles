@@ -1,13 +1,30 @@
 import React, { useEffect } from 'react'
+import { useAlert } from 'react-alert'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
 import { confirmRegistration } from '../../redux/start-page/registration/registrationAction'
 
 function ConfirmRegYes() {
     const dispatch = useDispatch()
+    const alert = useAlert()
     let { username } = useParams()
+
     useEffect(() => {
         dispatch(confirmRegistration(username))
+        .then(response => {
+            console.log(response)
+            if(response.status === 204){
+                alert.show("Confirm registration successfully.", {
+                    type: 'success'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            alert.show("Confirm registration unsuccessfully.", {
+                type: 'error'
+            })
+        })
     })
     
     return (

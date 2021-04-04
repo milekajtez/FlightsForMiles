@@ -10,6 +10,7 @@ namespace FlightsForMiles.DAL.Contracts.Repository
     {
         Task<long> AddUser(IUser newUser);
         Task<IUser> LoadUser(long id);
-        Task<bool> ConfirmRegistratiion(string username);
+        Task<bool> ConfirmRegistration(string username);
+        Task<object> LoginUser(ILoginUser loginUser);
     }
 }

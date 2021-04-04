@@ -4,8 +4,11 @@ using FlightsForMiles.DAL.DataModel.login_and_registration;
 using FlightsForMiles.DAL.Modal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Owin.Security.DataProtection;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
@@ -37,10 +40,9 @@ namespace FlightsForMiles.DAL.Repository
         #region 1 - Add user (Registration user)
         public async Task<long> AddUser(IUser newUser)
         {
-            // zastita da se niko ne zove kao glavni admin i da u bazi ne postoji korisnik sa istim PIN-om
-            if (newUser.Username.Equals("mainAdmin") || await _userManager.FindByIdAsync(newUser.Pin) != null)
+            if (newUser.Username.Equals("mainAdmin"))
             {
-                throw new ArgumentException("Username is incorrect or has been reserved already!");
+                throw new ArgumentException("Entered username has been reserved already.");
             }
 
             var resultFind = await _userManager.FindByIdAsync(newUser.Pin);
@@ -66,7 +68,7 @@ namespace FlightsForMiles.DAL.Repository
             }
             else
             {
-                throw new Exception("Registration unsuccesfully. Please enter a different personal identify number!");
+                throw new Exception("Please enter a different personal identify number.");
             }
         }
         #endregion
@@ -94,7 +96,7 @@ namespace FlightsForMiles.DAL.Repository
         }
         #endregion
         #region 3 - Confirm registration
-        public async Task<bool> ConfirmRegistratiion(string username)
+        public async Task<bool> ConfirmRegistration(string username)
         {
             var resultFind = await _userManager.FindByNameAsync(username);
             if (resultFind != null && resultFind.IsNewReservation)
@@ -121,9 +123,8 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             return false;
-            
-    }
-    #endregion
+        }
+        #endregion
         #region 4 - Load one user
         public async Task<IUser> LoadUser(long id)
         {
@@ -144,6 +145,44 @@ namespace FlightsForMiles.DAL.Repository
 
             return user ?? null;
             throw new NotImplementedException();
+        }
+        #endregion
+        #region 5 - User login
+        public async Task<object> LoginUser(ILoginUser loginUser)
+        {
+            var user = await _userManager.FindByNameAsync(loginUser.Username);
+            if (user == null)
+            {
+                throw new ArgumentException("Username is incorrect.");
+            }
+            else if (await _userManager.CheckPasswordAsync(user, loginUser.Password) == false)
+            {
+                throw new ArgumentException("Password is incorrect.");
+            }
+            else if (user.IsNewReservation == true)
+            {
+                throw new InvalidOperationException("Please go to your mail accont and confirm you registration.");
+            }
+            else 
+            {
+                var claims = await _userManager.GetClaimsAsync(user);
+                claims.Add(new Claim("FirstLogin", user.FirstLogin.ToString()));        // claim for avio admin
+
+                // define tokens
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.UtcNow.AddMinutes(30),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature),
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+
+                return new { token };
+            }
         }
         #endregion
     }

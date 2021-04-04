@@ -93,9 +93,12 @@ C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsF
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\obj\Debug\netcoreapp3.1\FlightsForMiles.dll
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\obj\Debug\netcoreapp3.1\FlightsForMiles.pdb
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\obj\Debug\netcoreapp3.1\FlightsForMiles.genruntimeconfig.cache
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.pdb
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Debug\netcoreapp3.1\FlightsForMiles.DAL.deps.json
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.dll
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.dll
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.Owin.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.Owin.Security.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Owin.dll

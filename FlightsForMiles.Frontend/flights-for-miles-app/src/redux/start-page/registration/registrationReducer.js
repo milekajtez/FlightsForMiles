@@ -1,4 +1,6 @@
-const registrationReducer = (state = {}, action) => {
+const initialState = { }
+
+const registrationReducer = (state = initialState, action) => {
     return state
 }
 

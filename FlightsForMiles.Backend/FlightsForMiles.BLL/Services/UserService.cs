@@ -34,9 +34,9 @@ namespace FlightsForMiles.BLL.Services
         #region 2 - Confirm registration
         public void ConfirmRegistration(string username)
         {
-            if (!_userRepository.ConfirmRegistratiion(username).Result) 
+            if (!_userRepository.ConfirmRegistration(username).Result) 
             {
-                throw new Exception("Confirm unsuccessfully becouse user is not found");
+                throw new Exception("Confirm unsuccessfully becouse user is not found or current user already confirm his registration");
             }
         }
         #endregion
@@ -44,6 +44,17 @@ namespace FlightsForMiles.BLL.Services
         public IUserResponseDTO LoadUser(long id)
         {
             return ConvertUserToResponseObject(_userRepository.LoadUser(id).Result);
+        }
+        #endregion
+        #region 4 - User login
+        public object UserLogin(ILoginUserRequestDTO loginUserRequestDTO)
+        {
+            if (loginUserRequestDTO == null) 
+            {
+                throw new ArgumentNullException(nameof(loginUserRequestDTO));
+            }
+
+            return _userRepository.LoginUser(ConvertLoginRequestToLoginUser(loginUserRequestDTO)).Result;
         }
         #endregion
 
@@ -66,9 +77,14 @@ namespace FlightsForMiles.BLL.Services
         }
         private IUser ConvertRequestObjectToUser(IUserRequestDTO userRequestDTO)
         {
-            return new User(userRequestDTO.Username, userRequestDTO.Email, userRequestDTO.Password, userRequestDTO.Firstname,
-                userRequestDTO.Lastname, userRequestDTO.Pin, userRequestDTO.Address, userRequestDTO.Telephone, userRequestDTO.Passport,
-                0);
+            return new User(userRequestDTO.Username, userRequestDTO.Email, userRequestDTO.Password, 
+                userRequestDTO.Firstname, userRequestDTO.Lastname, userRequestDTO.Pin, userRequestDTO.Address, 
+                userRequestDTO.Telephone, userRequestDTO.Passport, 0);
+        }
+
+        private ILoginUser ConvertLoginRequestToLoginUser(ILoginUserRequestDTO loginUserRequestDTO) 
+        {
+            return new LoginUser(loginUserRequestDTO.Username, loginUserRequestDTO.Password);
         }
         #endregion
     }

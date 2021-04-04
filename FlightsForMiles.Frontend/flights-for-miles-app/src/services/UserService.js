@@ -19,6 +19,15 @@ const loginService = {
 
     confirmRegistration: (username) => {
         return API.put(`ApplicationUsers/${username}`)
+    },
+
+    login: (user) => {
+        var body = {
+            Username: user.username,
+            Password: user.password
+        }
+
+        return API.post(`ApplicationUsers/UserLogin`, body)
     }
 }
 

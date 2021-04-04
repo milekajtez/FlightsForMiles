@@ -10,6 +10,7 @@ namespace FlightsForMiles.BLL.Contracts.Services.User
         long AddUser(IUserRequestDTO userRequestDTO);
         IUserResponseDTO LoadUser(long id);
         void ConfirmRegistration(string username);
+        object UserLogin(ILoginUserRequestDTO loginUserRequestDTO);
 
 
         /* primeri definisanih metoda

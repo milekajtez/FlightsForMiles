@@ -49,5 +49,14 @@ namespace FlightsForMiles.Controllers
             return NotFound("User not found");
         }
         #endregion
+        #region 4 - User login
+        [HttpPost]
+        [Route("UserLogin")]
+        public IActionResult UserLogin(LoginUserRequestDTO loginUser) 
+        {
+            object result = _userService.UserLogin(loginUser);
+            return Ok(result);
+        }
+        #endregion
     }
 }

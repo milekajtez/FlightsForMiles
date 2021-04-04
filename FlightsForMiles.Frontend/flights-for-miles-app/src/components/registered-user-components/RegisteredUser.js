@@ -2,7 +2,7 @@ import React from 'react'
 
 function RegistredUser() {
     return (
-        <div>
+        <div style={{color: "white"}}>
             RegistredUser            
         </div>
     )

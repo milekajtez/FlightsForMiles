@@ -5,7 +5,7 @@ function Logo() {
     return (
         <span>
             <NavLink to="/">
-                <img className="img" src="logo.png" alt=""></img>
+                <img className="img" src={process.env.PUBLIC_URL + '/logo.png'} alt=""></img>
             </NavLink>
         </span>
     )

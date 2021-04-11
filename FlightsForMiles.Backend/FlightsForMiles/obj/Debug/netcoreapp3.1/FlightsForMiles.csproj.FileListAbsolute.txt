@@ -99,6 +99,3 @@ C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsF
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.pdb
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.pdb
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.Owin.dll
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.Owin.Security.dll
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Owin.dll

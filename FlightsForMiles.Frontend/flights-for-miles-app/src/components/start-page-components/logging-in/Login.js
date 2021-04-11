@@ -35,15 +35,15 @@ function Login(props) {
                 .then(response => {
                     console.log(response)
                     if(response.status === 200){
-                        alert.show("User login successfully", {
-                            type: 'success'
-                        })
-
                         localStorage.setItem("User_JWT_Token", response.data.token)
                         // u zavisnosti od toga koji tip korisnika se prijavio na sistem...ide se na odredjenu rutu
                         // ili se ide na stranicu za glavnog admina ili na stranicu za avio admina ili na stranicu
                         // za regularnog user-a
                         history.push(`/${usernameField.value}`)
+
+                        alert.show("User login successfully", {
+                            type: 'success'
+                        })
                     }
                 })
                 .catch(error => {

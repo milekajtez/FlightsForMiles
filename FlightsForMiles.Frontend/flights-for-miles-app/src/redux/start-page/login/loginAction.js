@@ -10,3 +10,15 @@ export const login = (user) => () =>
             reject(error)
         })
     })
+
+export const loginViaGoogle = (user) => () => 
+    new Promise(function(resolve, reject) {
+        userService.loginViaGoogle(user)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+

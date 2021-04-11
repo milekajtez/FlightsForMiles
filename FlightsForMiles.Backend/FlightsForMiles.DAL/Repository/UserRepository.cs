@@ -5,11 +5,12 @@ using FlightsForMiles.DAL.Modal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Owin.Security.DataProtection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
@@ -20,21 +21,16 @@ namespace FlightsForMiles.DAL.Repository
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<RegisteredUser> _userManager;
-        private readonly SignInManager<RegisteredUser> _signInManager;
         private readonly ApplicationSettings _appSettings;
         private readonly MailSettings _mailSettings;
         private const string GoogleApiTokenInfoUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={0}";
-        private readonly ApplicationDbContext _context;
 
-        public UserRepository(UserManager<RegisteredUser> userManager,
-            SignInManager<RegisteredUser> signInManager, IOptions<ApplicationSettings> appSettings,
-            IOptions<MailSettings> mailSettings, ApplicationDbContext context)
+        public UserRepository(UserManager<RegisteredUser> userManager, IOptions<ApplicationSettings> appSettings,
+            IOptions<MailSettings> mailSettings)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _appSettings = appSettings.Value;
             _mailSettings = mailSettings.Value;
-            _context = context;
         }
 
         #region 1 - Add user (Registration user)
@@ -183,6 +179,91 @@ namespace FlightsForMiles.DAL.Repository
 
                 return new { token };
             }
+        }
+        #endregion
+        #region 6 - User google login
+        public object GoogleLoginUser(IGoogleLoginUser googleLoginUser) 
+        {
+            string userID = VerifyGoogleToken(googleLoginUser.IdToken).Result;
+            if (!userID.Equals(""))
+            {
+                // token is invalid and I make new
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Expires = DateTime.UtcNow.AddMinutes(30),
+                    //Key min: 16 characters
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature),
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim(ClaimTypes.Role, "regular_user"),
+                        new Claim(ClaimTypes.PrimarySid, userID)
+                    }),
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+
+                return new { token };
+            }
+
+            throw new InvalidOperationException("Login via google unsuccessfully.");
+        }
+        #endregion
+        #region 7 - Metoda za validaciju google tokena
+        public async Task<string> VerifyGoogleToken(string providerToken)
+        {
+            var httpClient = new HttpClient();
+            var requestUri = new Uri(string.Format(GoogleApiTokenInfoUrl, providerToken));
+
+            HttpResponseMessage httpResponseMessage;
+
+            try
+            {
+                httpResponseMessage = httpClient.GetAsync(requestUri).Result;
+            }
+            catch
+            {
+                return "";
+            }
+
+            if (httpResponseMessage.StatusCode != HttpStatusCode.OK)
+            {
+                return "";
+            }
+
+            var response = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            var googleApiTokenInfo = JsonConvert.DeserializeObject<GoogleApiTokenInfo>(response);
+
+            var resultFind = await _userManager.FindByIdAsync(googleApiTokenInfo.Sub.ToString());
+            if (resultFind == null)
+            {
+                // ne postoji korisnik i ubacujem ga u bazu
+                RegisteredUser registeredUser = new RegisteredUser()
+                {
+                    UserName = googleApiTokenInfo.Name,
+                    Email = googleApiTokenInfo.Email,
+                    FirstName = googleApiTokenInfo.Given_name,
+                    LastName = googleApiTokenInfo.Family_name,
+                    Id = googleApiTokenInfo.Sub/*.Substring(0, 13)*/,
+                    Address = "",
+                    PhoneNumber = "",
+                    NumberOfPassport = "",
+                    IsNewReservation = false,
+                    Points = 0
+                };
+
+                try
+                {
+                    var result = await _userManager.CreateAsync(registeredUser);
+                    return googleApiTokenInfo.Sub;      // return new id
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return resultFind.Id;
         }
         #endregion
     }

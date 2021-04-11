@@ -12,5 +12,6 @@ $ npm install --save redux-devtools-extension
 $ npm install --save axios
 $ npm install --save react-alert
 $ npm install --save react-alert-template-basic
+$ npm install --save react-google-login
 
  

@@ -12,5 +12,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<IUser> LoadUser(long id);
         Task<bool> ConfirmRegistration(string username);
         Task<object> LoginUser(ILoginUser loginUser);
+        object GoogleLoginUser(IGoogleLoginUser googleLoginUser);
     }
 }

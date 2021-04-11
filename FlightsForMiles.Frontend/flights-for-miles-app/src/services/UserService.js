@@ -13,7 +13,7 @@ const loginService = {
             Telephone: newUser.telephone,
             Passport: newUser.passport
         }
-
+        
         return API.post("ApplicationUsers", body)
     },
 
@@ -28,6 +28,15 @@ const loginService = {
         }
 
         return API.post(`ApplicationUsers/UserLogin`, body)
+    },
+
+    loginViaGoogle: (user) => {
+        console.log(user)
+        var body = {
+            IdToken: user.tokenId
+        }
+
+        return API.post(`ApplicationUsers/UserGoogleLogin`, body)
     }
 }
 

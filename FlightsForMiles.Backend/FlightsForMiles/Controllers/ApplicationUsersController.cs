@@ -1,6 +1,7 @@
 ﻿using FlightsForMiles.BLL.Contracts.DTO.User;
 using FlightsForMiles.BLL.Contracts.Services.User;
 using FlightsForMiles.RequestDTO.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -55,6 +56,16 @@ namespace FlightsForMiles.Controllers
         public IActionResult UserLogin(LoginUserRequestDTO loginUser) 
         {
             object result = _userService.UserLogin(loginUser);
+            return Ok(result);
+        }
+        #endregion
+        #region 5 - User google login
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("UserGoogleLogin")]
+        public IActionResult UserGoogleLogin(GoogleLoginUserRequestDTO googleLoginUser)
+        {
+            object result = _userService.UserGoogleLogin(googleLoginUser);
             return Ok(result);
         }
         #endregion

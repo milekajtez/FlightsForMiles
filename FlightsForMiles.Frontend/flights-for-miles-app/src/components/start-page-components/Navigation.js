@@ -4,23 +4,47 @@ import Help from './help/Help'
 import Login from './logging-in/Login'
 import Registration from './registration/Registration'
 import GoogleLogin from 'react-google-login'
+import { loginViaGoogle } from '../../redux/start-page/login/loginAction'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 
 function Navigation() {
+    const dispatch = useDispatch()
+    const alert = useAlert()
+    const history = useHistory()
+
     const [helpIsOpen, setHelpIsOpen] = useState(false)
     const [loginIsOpen, setLoginIsOpen] = useState(false)
     const [regIsOpen, setRegIsOpen] = useState(false)
-    const alert = useAlert()
 
     const responseGoogle = (response) => {
-        console.log(response);
-        // ovde ce ici pozivanje backend-a za logovanje preko google-a
-        // kao response ce biti promise i onda cu odraditi:
-        alert.show("User login successfully.", {
-            type: 'success'
+        var currentUser = response.Qs.Se;
+        dispatch(loginViaGoogle(response))
+        .then(response => {
+            if(response.status === 200){
+                localStorage.setItem("User_JWT_Token", response.data.token)
+                // ovde cu se automatski prebaciti na regular user-a..jer se samo oni loguju preko google-a
+                history.push(`/${currentUser}`)
+
+                alert.show("User login successfully", {
+                    type: 'success'
+                })
+            }
+
         })
-    }
-    const responseErrorGoogle = (error) => {
-        console.log(error);
+        .catch(error => {
+            console.log(error)
+            if(error.response.data.indexOf("(Login via google unsuccessfully.)") !== -1){
+                alert.show("User login unsuccesfully.", {
+                    type: 'error'
+                })
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })
+            }
+        })
     }
 
     return (
@@ -38,11 +62,10 @@ function Navigation() {
                             <span onClick={renderProps.onClick} disabled={renderProps.disabled}> Login with Google</span>
                         )}
                         buttonText="Login with Google" 
-                        onSuccess={responseGoogle} 
-                        onFailure={responseErrorGoogle}
+                        onSuccess={responseGoogle}
                         isSignedIn={false} 
                         cookiePolicy={'single_host_origin'}
-                    />
+                        />
                 </li>
                 <div></div>
                 <li onClick={() => setLoginIsOpen(true)}><i className="fas fa-sign-in-alt"></i> Sign in</li>

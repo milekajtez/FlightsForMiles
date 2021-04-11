@@ -11,6 +11,7 @@ namespace FlightsForMiles.BLL.Contracts.Services.User
         IUserResponseDTO LoadUser(long id);
         void ConfirmRegistration(string username);
         object UserLogin(ILoginUserRequestDTO loginUserRequestDTO);
+        object UserGoogleLogin(IGoogleLoginUserRequestDTO googleLoginUserRequestDTO);
 
 
         /* primeri definisanih metoda

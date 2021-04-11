@@ -57,6 +57,17 @@ namespace FlightsForMiles.BLL.Services
             return _userRepository.LoginUser(ConvertLoginRequestToLoginUser(loginUserRequestDTO)).Result;
         }
         #endregion
+        #region 5 - User google login
+        public object UserGoogleLogin(IGoogleLoginUserRequestDTO googleLoginUserRequestDTO) 
+        {
+            if (googleLoginUserRequestDTO == null)
+            {
+                throw new ArgumentNullException(nameof(googleLoginUserRequestDTO));
+            }
+
+            return _userRepository.GoogleLoginUser(ConvertGoogleLoginRequestToGoogleLoginUser(googleLoginUserRequestDTO));
+        }
+        #endregion
 
         #region Converting methods
         private IUserResponseDTO ConvertUserToResponseObject(IUser user)
@@ -85,6 +96,11 @@ namespace FlightsForMiles.BLL.Services
         private ILoginUser ConvertLoginRequestToLoginUser(ILoginUserRequestDTO loginUserRequestDTO) 
         {
             return new LoginUser(loginUserRequestDTO.Username, loginUserRequestDTO.Password);
+        }
+
+        private IGoogleLoginUser ConvertGoogleLoginRequestToGoogleLoginUser(IGoogleLoginUserRequestDTO googleLoginUserRequestDTO)
+        {
+            return new GoogleLoginUser(googleLoginUserRequestDTO.IdToken);
         }
         #endregion
     }

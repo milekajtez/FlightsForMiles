@@ -209,7 +209,7 @@ namespace FlightsForMiles.DAL.Repository
             throw new InvalidOperationException("Login via google unsuccessfully.");
         }
         #endregion
-        #region 7 - Metoda za validaciju google tokena
+        #region 7 - Methos for token (google login) validation
         public async Task<string> VerifyGoogleToken(string providerToken)
         {
             var httpClient = new HttpClient();

@@ -5,6 +5,7 @@ import { useAlert } from 'react-alert'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
 import { login } from '../../../redux/start-page/login/loginAction'
+import jwtDecode from 'jwt-decode'
 
 function Login(props) {
     const dispatch = useDispatch()
@@ -39,9 +40,24 @@ function Login(props) {
                         // u zavisnosti od toga koji tip korisnika se prijavio na sistem...ide se na odredjenu rutu
                         // ili se ide na stranicu za glavnog admina ili na stranicu za avio admina ili na stranicu
                         // za regularnog user-a
-                        history.push(`/${usernameField.value}`)
+                        var token = response.data.token;
+                        var decoded = jwtDecode(token)
 
-                        alert.show("User login successfully", {
+                        
+                        if(decoded.role === "regular_user"){
+                            // regular user
+                            history.push(`/regular/${usernameField.value}`)
+                        }
+                        else if(decoded.role === "main_admin"){
+                            // system admin
+                            history.push(`/system/${usernameField.value}`)
+                        }
+                        else {
+                            // avio admin
+                            history.push(`/avio/${usernameField.value}`)
+                        }
+                        
+                        alert.show("Login successfully", {
                             type: 'success'
                         })
                     }

@@ -23,10 +23,11 @@ function Navigation() {
         .then(response => {
             if(response.status === 200){
                 localStorage.setItem("User_JWT_Token", response.data.token)
-                // ovde cu se automatski prebaciti na regular user-a..jer se samo oni loguju preko google-a
-                history.push(`/${currentUser}`)
 
-                alert.show("User login successfully", {
+                // regular user
+                history.push(`/regular/${currentUser}`)
+
+                alert.show("Login successfully", {
                     type: 'success'
                 })
             }

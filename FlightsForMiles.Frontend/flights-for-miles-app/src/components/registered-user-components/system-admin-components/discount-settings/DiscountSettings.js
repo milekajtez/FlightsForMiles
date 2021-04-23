@@ -2,7 +2,7 @@ import React from 'react'
 
 function DiscountSettings() {
     return (
-        <div>
+        <div style={{ color: "white" }}>
             DiscountSettings
         </div>
     )

@@ -6,7 +6,8 @@ import Registration from './registration/Registration'
 import GoogleLogin from 'react-google-login'
 import { loginViaGoogle } from '../../redux/start-page/login/loginAction'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router'
+import { Redirect, useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 function Navigation() {
     const dispatch = useDispatch()
@@ -25,13 +26,13 @@ function Navigation() {
                 localStorage.setItem("User_JWT_Token", response.data.token)
 
                 // regular user
+                
                 history.push(`/regular/${currentUser}`)
 
                 alert.show("Login successfully", {
                     type: 'success'
                 })
             }
-
         })
         .catch(error => {
             console.log(error)

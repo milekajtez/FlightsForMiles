@@ -8,6 +8,9 @@ import ConfirmRegYes from './components/confirm-pages-component/ConfirmRegYes';
 import ConfirmRegNo from './components/confirm-pages-component/ConfirmRegNo';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import AdminRegistration from './components/registered-user-components/system-admin-components/admin-registration/AdminRegistration';
+import AirlineRegistration from './components/registered-user-components/system-admin-components/airline-registration/AirlineRegistration';
+import DiscountSettings from './components/registered-user-components/system-admin-components/discount-settings/DiscountSettings';
 
 function App() {
   return (
@@ -17,10 +20,10 @@ function App() {
             <Route exact path="/" component={StartPage} />
             <Route exact path="/confirmRegYes/:username?" component={ConfirmRegYes} />
             <Route exact path="/confirmRegNo" component={ConfirmRegNo} />
-            <Route exact path="/system/:username" component={SystemAdmin} />
+            <Route exact path="/system/:username/:option" component={SystemAdmin} />
             <Route exact path="/avio/:username" component={AvioAdmin} />
             <Route exact path="/regular/:username" component={RegularUser} />
-            <Redirect to="/" />
+            <Redirect to="/"/>
           </Switch>
         </div>
     </Provider>

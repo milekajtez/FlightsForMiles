@@ -37,23 +37,19 @@ function Login(props) {
                     console.log(response)
                     if(response.status === 200){
                         localStorage.setItem("User_JWT_Token", response.data.token)
-                        // u zavisnosti od toga koji tip korisnika se prijavio na sistem...ide se na odredjenu rutu
-                        // ili se ide na stranicu za glavnog admina ili na stranicu za avio admina ili na stranicu
-                        // za regularnog user-a
+
                         var token = response.data.token;
                         var decoded = jwtDecode(token)
 
-                        
                         if(decoded.role === "regular_user"){
-                            // regular user
+                            // doraditi
                             history.push(`/regular/${usernameField.value}`)
                         }
                         else if(decoded.role === "main_admin"){
-                            // system admin
-                            history.push(`/system/${usernameField.value}`)
+                            history.push(`/system/${usernameField.value}/adminReg`)
                         }
                         else {
-                            // avio admin
+                            //doraditi
                             history.push(`/avio/${usernameField.value}`)
                         }
                         
@@ -135,8 +131,8 @@ function Login(props) {
                             <span></span>
                             <span></span>
                             <span></span>
-                        Login
-                    </button>
+                            Login
+                        </button>
                     </div>
                 </form>
             </div>

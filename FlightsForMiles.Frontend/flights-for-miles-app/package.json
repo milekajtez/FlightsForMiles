@@ -19,6 +19,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-slideshow-image": "^3.4.3",
+    "react-table": "^7.6.3",
     "react-use-form-hooks": "^0.4.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",

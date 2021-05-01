@@ -9,7 +9,9 @@ namespace FlightsForMiles.DAL.Modal
     /// <summary>
     /// Id -------------------------------- airline identificator
     /// Name ------------------------------ name of the airline
-    /// Address --------------------------- address of the airline
+    /// City ------------------------------ airline city
+    /// Street ---------------------------- airline street
+    /// House_number ---------------------- airline house number
     /// Promotional_description ----------- promotional description of the airline 
     /// Sum_of_all_grades ----------------- sum of all airline's grades (Rating = Sum_of_all_grades / Number_of_grades)
     /// Number_of_grades ------------------ number of airline's grades (Rating = Sum_of_all_grades / Number_of_grades)
@@ -30,9 +32,18 @@ namespace FlightsForMiles.DAL.Modal
         public string Name { get; set; }
 
         [Required]
-        [MinLength(10)]
+        [MinLength(1)]
         [MaxLength(100)]
-        public string Address { get; set; }
+        public string City { get; set; }
+
+        [Required]
+        [MinLength(1)]
+        [MaxLength(100)]
+        public string Street { get; set; }
+        
+        
+        [Required]
+        public uint House_number { get; set; }
 
         [Required]
         [MinLength(10)]

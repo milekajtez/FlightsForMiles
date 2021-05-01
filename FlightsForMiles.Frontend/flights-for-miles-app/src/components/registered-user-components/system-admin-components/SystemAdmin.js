@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header'
-import { Switch, Route, Redirect, useParams } from 'react-router-dom' 
+import { Switch, Route } from 'react-router-dom' 
 import AdminRegistration from './admin-registration/AdminRegistration'
 import AirlineRegistration from './airline-registration/AirlineRegistration'
 import DiscountSettings from './discount-settings/DiscountSettings'

@@ -8,9 +8,6 @@ import ConfirmRegYes from './components/confirm-pages-component/ConfirmRegYes';
 import ConfirmRegNo from './components/confirm-pages-component/ConfirmRegNo';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import AdminRegistration from './components/registered-user-components/system-admin-components/admin-registration/AdminRegistration';
-import AirlineRegistration from './components/registered-user-components/system-admin-components/airline-registration/AirlineRegistration';
-import DiscountSettings from './components/registered-user-components/system-admin-components/discount-settings/DiscountSettings';
 
 function App() {
   return (

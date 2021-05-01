@@ -1,0 +1,30 @@
+table {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 1%;
+    width: 70%;
+    background-color: #202932;
+}
+
+tr {
+    padding-bottom: 10px;
+    font-family: sans-serif;
+}
+  
+td {
+    padding: 10px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+th {
+    text-align: left;
+    font-weight: 700;
+}
+  
+thead th {
+    background-color: #1b2229;
+    color: #fff;
+    border: 1px solid #1b2229;
+    padding: 10px;
+}

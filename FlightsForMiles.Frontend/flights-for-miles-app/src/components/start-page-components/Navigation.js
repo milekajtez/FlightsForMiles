@@ -6,8 +6,7 @@ import Registration from './registration/Registration'
 import GoogleLogin from 'react-google-login'
 import { loginViaGoogle } from '../../redux/start-page/login/loginAction'
 import { useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
 
 function Navigation() {
     const dispatch = useDispatch()

@@ -9,10 +9,12 @@ function DiscountSettings() {
     return (
         <div style={{ color: "white" }}>
             <DiscountTable />
-            <Quick/>
-            <Disc300/>
-            <Disc600/>
-            <Disc1200/>
+            <div>
+                <Quick />
+                <Disc300 />
+                <Disc600 />
+                <Disc1200 />
+            </div>
         </div>
     )
 }

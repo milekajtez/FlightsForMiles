@@ -33,7 +33,6 @@ namespace FlightsForMiles.Controllers
             return NotFound("Discounts not found");
         }
         #endregion
-
         #region 2 - Update discount
         [HttpPut]
         public IActionResult UpdateDiscount(DiscountRequestDTO discountRequestDTO) 

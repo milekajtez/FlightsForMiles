@@ -4,7 +4,7 @@ import { useFormField, useFormWithFields } from 'react-use-form-hooks'
 import { useAlert } from 'react-alert'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { login } from '../../../redux/start-page/login/loginAction'
+import { changePasswordFirstLogin, login } from '../../../redux/start-page/login/loginAction'
 import jwtDecode from 'jwt-decode'
 
 function Login(props) {
@@ -40,22 +40,56 @@ function Login(props) {
 
                         var token = response.data.token;
                         var decoded = jwtDecode(token)
-
+                        
                         if(decoded.role === "regular_user"){
                             // doraditi
                             history.push(`/regular/${usernameField.value}`)
+
+                            alert.show("Login successfully", {
+                                type: 'success'
+                            })
                         }
                         else if(decoded.role === "main_admin"){
                             history.push(`/system/${usernameField.value}/adminReg`)
+
+                            alert.show("Login successfully", {
+                                type: 'success'
+                            })
                         }
                         else {
-                            //doraditi
-                            history.push(`/avio/${usernameField.value}`)
+                            if(decoded.FirstLogin === "True") {
+                                var enteredPassword = prompt('Please enter your new password:')
+                                if(enteredPassword != null){
+                                    dispatch(changePasswordFirstLogin({
+                                        id: decoded.primarysid,
+                                        password: enteredPassword
+                                    }))
+                                    .then(response => {
+                                        if(response.status === 204){
+                                           alert.show("Update password successfully. Now you can login.", {
+                                               type: 'success'
+                                           }) 
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.log(error)
+                                        alert.show("Unsuccessfully update password", {
+                                            type: 'error'
+                                        })
+                                    })
+                                }
+                                else {
+                                    alert.show("You need to insert new password because your role is 'avio admin' and this is yours first login and.")
+                                }
+                            }
+                            else {
+                                history.push(`/avio/${usernameField.value}/na_kraju_definisati`)
+
+                                alert.show("Login successfully", {
+                                    type: 'success'
+                                })
+                            }
                         }
-                        
-                        alert.show("Login successfully", {
-                            type: 'success'
-                        })
                     }
                 })
                 .catch(error => {

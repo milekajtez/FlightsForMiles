@@ -26,19 +26,21 @@ namespace FlightsForMiles.DAL.Repository
                 throw new KeyNotFoundException("Discounts not found in database.");
             }
 
-            return new DiscountDataModel()
+            DiscountDataModel result = new DiscountDataModel() 
             {
                 DiscQuick = discount.Is_quick_reservation.ToString(),
                 Disc300 = discount.Points_300.ToString(),
                 Disc600 = discount.Points_600.ToString(),
                 Disc1200 = discount.Points_1200.ToString()
             };
+
+            return result;
         }
         #endregion
         #region 2 - Method for update discount
-        public async Task UpdateDiscount(IDiscountChange discountChange)
+        public void UpdateDiscount(IDiscountChange discountChange)
         {
-            var currentData = _context.Discounts.FindAsync("discID").Result;
+            var currentData = _context.Discounts.Find("discID");
             double newValue = double.Parse(discountChange.Value);
             
             if (discountChange.Type.Equals("quick"))

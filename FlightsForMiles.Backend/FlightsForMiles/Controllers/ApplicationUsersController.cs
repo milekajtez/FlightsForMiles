@@ -69,5 +69,23 @@ namespace FlightsForMiles.Controllers
             return Ok(result);
         }
         #endregion
+        #region 6 - Avio admin registration
+        [HttpPost]
+        [Route("AvioAdminRegistration")]
+        public IActionResult AvioAdminRegistration(AvioAdminRequestDTO newAvioAdmin) 
+        {
+            long newAvioAdminID = _userService.AddAvioAdmin(newAvioAdmin);
+            return CreatedAtRoute("GetUser", new { id = newAvioAdminID }, newAvioAdmin);
+        }
+        #endregion
+        #region 7 - Method for changing password for first avio admin login
+        [HttpPut]
+        [Route("FirstLoginChangePass/{pin}")]
+        public ActionResult FirstLoginChangePass(string pin, NewPassRequestDTO newPass) 
+        {
+            _userService.ChangePass(pin, newPass.Password);
+            return NoContent();
+        }
+        #endregion
     }
 }

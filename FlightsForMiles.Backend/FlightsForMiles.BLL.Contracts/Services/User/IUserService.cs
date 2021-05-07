@@ -12,7 +12,8 @@ namespace FlightsForMiles.BLL.Contracts.Services.User
         void ConfirmRegistration(string username);
         object UserLogin(ILoginUserRequestDTO loginUserRequestDTO);
         object UserGoogleLogin(IGoogleLoginUserRequestDTO googleLoginUserRequestDTO);
-
+        long AddAvioAdmin(IAvioAdminRequestDTO avioAdminRequestDTO);
+        void ChangePass(string pin, string password);
 
         /* primeri definisanih metoda
          IEnumerable<IClientResponseDTO> LoadClients();

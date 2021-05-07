@@ -3,9 +3,11 @@ import DiscountForm from './DiscountForm'
 
 function Form300() {
     return (
-        <span className="box" style={{float:"left"}}>
-            <DiscountForm  discountType={"300"}/>
-        </span>
+        <div style={{display: "inline-block"}}>
+            <span className="box">
+                <DiscountForm  discountType={"300"}/>
+            </span>
+        </div>
     )
 }
 

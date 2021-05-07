@@ -22,3 +22,14 @@ export const loginViaGoogle = (user) => () =>
         })
     })
 
+export const changePasswordFirstLogin = (newPassObj) => () =>
+    new Promise(function(resolve, reject) {
+        userService.changePasswordFirstLogin(newPassObj)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+

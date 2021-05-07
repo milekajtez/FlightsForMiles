@@ -2,7 +2,6 @@ import discountService from "../../../services/DiscountService"
 import { DISCOUNTS_LOADING } from "./discountTypes"
 
 export const loadDiscountsAction = (discounts) => {
-    debugger;
     return {
         type: DISCOUNTS_LOADING,
         payload: discounts
@@ -23,16 +22,13 @@ export const loadDiscounts = () => {
     }
 }
 
-export const chageDiscount = (newValue, type) => {
-    return () => {
+export const chageDiscount = (newValue, type) => () => 
+    new Promise(function(resolve, reject){
         discountService.changeDiscount(newValue, type)
         .then(response => {
-            if(response.status === 204){
-                console.log("Udpate successfully.")
-            }
+            resolve(response)
         })
         .catch(error => {
-            console.log(error)
+            reject(error)
         })
-    }
-}
+    })

@@ -10,8 +10,7 @@ const discountService = {
             Value: newValue,
             Type: type
         }
-
-        console.log(body)
+        
         return API.put(`Discounts`, body)
     }
 }

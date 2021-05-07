@@ -7,3 +7,12 @@ C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsF
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.csproj.CoreCompileInputs.cache
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.dll
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\bin\Debug\netcoreapp3.1\FlightsForMiles.API.deps.json
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\bin\Debug\netcoreapp3.1\FlightsForMiles.API.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\bin\Debug\netcoreapp3.1\FlightsForMiles.API.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.csprojAssemblyReference.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.AssemblyInfoInputs.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.AssemblyInfo.cs
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.csproj.CoreCompileInputs.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.API\obj\Debug\netcoreapp3.1\FlightsForMiles.API.pdb

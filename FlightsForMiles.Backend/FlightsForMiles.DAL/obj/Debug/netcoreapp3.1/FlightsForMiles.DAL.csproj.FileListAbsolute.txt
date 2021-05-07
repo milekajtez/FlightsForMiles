@@ -17,3 +17,13 @@ C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsF
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.csproj.CopyComplete
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.dll
 C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.deps.json
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.csprojAssemblyReference.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.AssemblyInfoInputs.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.AssemblyInfo.cs
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.csproj.CoreCompileInputs.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.csproj.CopyComplete
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.DAL\obj\Debug\netcoreapp3.1\FlightsForMiles.DAL.pdb

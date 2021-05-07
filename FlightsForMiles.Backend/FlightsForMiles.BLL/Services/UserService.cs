@@ -68,6 +68,51 @@ namespace FlightsForMiles.BLL.Services
             return _userRepository.GoogleLoginUser(ConvertGoogleLoginRequestToGoogleLoginUser(googleLoginUserRequestDTO));
         }
         #endregion
+        #region 6 - Avio admin registration
+        public long AddAvioAdmin(IAvioAdminRequestDTO avioAdminRequestDTO)
+        {
+            if (avioAdminRequestDTO == null)
+            {
+                throw new ArgumentNullException(nameof(avioAdminRequestDTO));
+            }
+
+            IAvioAdmin avioAdmin = ConvertRequestObjectToAvioAdmin(avioAdminRequestDTO);
+            return _userRepository.AddAvioAdmin(avioAdmin).Result; 
+        }
+        #endregion
+        #region 7 - Methods for change passwrd for first login of avio admin
+        public void ChangePass(string pin, string password)
+        {
+            NewPassValidation(pin, password);
+            if (!_userRepository.ChangePass(pin, password).Result) 
+            {
+                throw new ArgumentException("User with entered pin doesn't exsist.");
+            }
+        }
+
+        private void NewPassValidation(string pin, string newPass) 
+        {
+            if (string.IsNullOrWhiteSpace(pin)) 
+            {
+                throw new ArgumentNullException(nameof(pin));
+            }
+
+            if (string.IsNullOrWhiteSpace(newPass)) 
+            {
+                throw new ArgumentNullException(nameof(pin));
+            }
+
+            if (!long.TryParse(pin, out _)) 
+            {
+                throw new ArgumentException(nameof(pin));
+            }
+
+            if (newPass.Length < 8) 
+            {
+                throw new ArgumentException(nameof(newPass), "New password must has minimum 8 characters.");
+            }
+        }
+        #endregion
 
         #region Converting methods
         private IUserResponseDTO ConvertUserToResponseObject(IUser user)
@@ -101,6 +146,12 @@ namespace FlightsForMiles.BLL.Services
         private IGoogleLoginUser ConvertGoogleLoginRequestToGoogleLoginUser(IGoogleLoginUserRequestDTO googleLoginUserRequestDTO)
         {
             return new GoogleLoginUser(googleLoginUserRequestDTO.IdToken);
+        }
+
+        private IAvioAdmin ConvertRequestObjectToAvioAdmin(IAvioAdminRequestDTO avioAdminRequestDTO) 
+        {
+            return new AvioAdmin(avioAdminRequestDTO.Username, avioAdminRequestDTO.Email, avioAdminRequestDTO.Password, avioAdminRequestDTO.Pin,
+                avioAdminRequestDTO.Telephone);
         }
         #endregion
     }

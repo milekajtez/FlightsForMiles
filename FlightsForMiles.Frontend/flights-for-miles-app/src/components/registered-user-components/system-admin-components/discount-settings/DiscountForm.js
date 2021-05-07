@@ -1,11 +1,13 @@
 import React from 'react'
+import { useAlert } from 'react-alert'
 import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
 import { chageDiscount, loadDiscounts } from '../../../../redux/system-admin/discounts/discountsAction'
 
 function DiscountForm(props) {
     const dispatch = useDispatch()
-
+    const alert = useAlert()
+    
     const discountField = useFormField({
         initialValue: '',
         isRequired: true
@@ -14,9 +16,39 @@ function DiscountForm(props) {
     const discountForm = useFormWithFields({
         onSubmit: (e) => {
             dispatch(chageDiscount(discountField.value, props.discountType))
-            console.log("1111")
-            dispatch(loadDiscounts())
-            console.log("2222")
+            .then(response => {
+                if(response.status === 204){
+                    alert.show("Update discount successfully", {
+                        type: 'success'
+                    })
+
+                    dispatch(loadDiscounts())
+                }
+            })
+            .catch(error => {
+                console.log(error.response.data)
+                if(error.response.data.indexOf("Value of 'Percent 300 points' must be smaller than 'Percent 600 points'") !== -1){
+                    alert.show("Value of 'Percent 300 points' must be smaller than 'Percent 600 points'", {
+                        type: 'error'
+                    })
+                }
+                else if(error.response.data.indexOf("Value of 'Percent 600 points' must be between 'Percent 300 points' and 'Percent 1200 points'") !== -1){
+                    alert.show("Value of 'Percent 600 points' must be between 'Percent 300 points' and 'Percent 1200 points'", {
+                        type: 'error'
+                    })
+                }
+                else if(error.response.data.indexOf("Value of 'Percent 1200 points' must be bigger than 'Percent 600 points'") !== -1){
+                    alert.show("Value of 'Percent 1200 points' must be bigger than 'Percent 600 points'", {
+                        type: 'error'
+                    })
+                }
+                else {
+                    alert.show("unknown error.", {
+                        type: 'error'
+                    })
+                 }
+            })
+
             e.preventDefault()
             discountForm.handleReset()
         },

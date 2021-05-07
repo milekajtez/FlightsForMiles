@@ -209,7 +209,7 @@ namespace FlightsForMiles.DAL.Repository
             throw new InvalidOperationException("Login via google unsuccessfully.");
         }
         #endregion
-        #region 7 - Methos for token (google login) validation
+        #region 7 - Methods for token (google login) validation
         public async Task<string> VerifyGoogleToken(string providerToken)
         {
             var httpClient = new HttpClient();
@@ -264,6 +264,59 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             return resultFind.Id;
+        }
+        #endregion
+        #region 8 - New avio admin registration
+        public async Task<long> AddAvioAdmin(IAvioAdmin newAvioAdmin)
+        {
+            if (newAvioAdmin.Username.Equals("mainAdmin"))
+            {
+                throw new ArgumentException("Entered username has been reserved already.");
+            }
+
+            var resultFind = await _userManager.FindByIdAsync(newAvioAdmin.Pin);
+            if (resultFind == null)
+            {
+                var registeredUser = new RegisteredUser()
+                {
+                    UserName = newAvioAdmin.Username,
+                    Email = newAvioAdmin.Email,
+                    Id = newAvioAdmin.Pin,
+                    PhoneNumber = newAvioAdmin.Telephone,
+                    FirstLogin = true,
+                    IsNewReservation = false,
+                    Points = 0
+                };
+
+                await _userManager.CreateAsync(registeredUser, newAvioAdmin.Password);
+                await _userManager.AddClaimAsync(registeredUser, new Claim(ClaimTypes.Role, "avio_admin"));
+                await _userManager.AddClaimAsync(registeredUser, new Claim(ClaimTypes.PrimarySid, registeredUser.Id));
+                await _userManager.AddToRoleAsync(registeredUser, "avio_admin");
+
+                return long.Parse(registeredUser.Id);
+            }
+            else 
+            {
+                throw new Exception("Please enter a different personal identify number.");
+            }
+        }
+        #endregion
+        #region 9 - Changing password
+        public async Task<bool> ChangePass(string pin, string password)
+        {
+            var resultFind = _userManager.FindByIdAsync(pin).Result ;
+            if (resultFind != null)
+            {
+                resultFind.FirstLogin = false;
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(resultFind);
+                await _userManager.ResetPasswordAsync(resultFind, code, password);
+                await _userManager.UpdateAsync(resultFind);
+
+                return true;
+            }
+
+            return false;
         }
         #endregion
     }

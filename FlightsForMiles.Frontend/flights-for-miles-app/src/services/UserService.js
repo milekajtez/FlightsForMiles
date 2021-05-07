@@ -37,6 +37,26 @@ const loginService = {
         }
 
         return API.post(`ApplicationUsers/UserGoogleLogin`, body)
+    },
+
+    avioAdminRegistration: (newAvioAdmin) => {
+        var body = {
+            Username: newAvioAdmin.username,
+            Email: newAvioAdmin.email,
+            Password: newAvioAdmin.password,
+            Pin: newAvioAdmin.pin,
+            Telephone: newAvioAdmin.telephone
+        }
+        
+        return API.post("ApplicationUsers/AvioAdminRegistration", body)
+    },
+
+    changePasswordFirstLogin: (newPassObj) => {
+        var body = {
+            Password: newPassObj.password
+        }
+
+        return API.put(`ApplicationUsers/FirstLoginChangePass/${newPassObj.id}`, body)
     }
 }
 

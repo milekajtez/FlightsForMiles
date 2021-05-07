@@ -13,5 +13,7 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<bool> ConfirmRegistration(string username);
         Task<object> LoginUser(ILoginUser loginUser);
         object GoogleLoginUser(IGoogleLoginUser googleLoginUser);
+        Task<long> AddAvioAdmin(IAvioAdmin newAvioAdmin);
+        Task<bool> ChangePass(string pin, string password);
     }
 }

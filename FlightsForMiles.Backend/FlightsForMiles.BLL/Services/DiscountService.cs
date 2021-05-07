@@ -12,7 +12,7 @@ namespace FlightsForMiles.BLL.Services
 {
     public class DiscountService : IDiscountService
     {
-        private IDiscountRepository _discountRepository;
+        private readonly IDiscountRepository _discountRepository;
         public DiscountService(IDiscountRepository discountRepository) 
         {
             _discountRepository = discountRepository;

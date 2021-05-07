@@ -3,9 +3,12 @@ import DiscountForm from './DiscountForm'
 
 function FormQuick() {
     return (
-        <span className="box" style={{float:"left"}}>
-            <DiscountForm discountType={"quick"}/>
-        </span>
+        <div style={{display: "inline-block"}}>
+            <span className="box">
+                <DiscountForm discountType={"quick"}/>
+            </span>
+        </div>
+        
     )
 }
 

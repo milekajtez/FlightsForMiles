@@ -9,6 +9,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
     public interface IDiscountRepository
     {
         Task<IDiscount> LoadDiscounts();
-        Task UpdateDiscount(IDiscountChange discountChange);
+        void UpdateDiscount(IDiscountChange discountChange);
     }
 }

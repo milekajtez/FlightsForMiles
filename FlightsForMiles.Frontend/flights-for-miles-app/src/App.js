@@ -18,7 +18,7 @@ function App() {
             <Route exact path="/confirmRegYes/:username?" component={ConfirmRegYes} />
             <Route exact path="/confirmRegNo" component={ConfirmRegNo} />
             <Route exact path="/system/:username/:option" component={SystemAdmin} />
-            <Route exact path="/avio/:username" component={AvioAdmin} />
+            <Route exact path="/avio/:username/:option" component={AvioAdmin} />
             <Route exact path="/regular/:username" component={RegularUser} />
             <Redirect to="/"/>
           </Switch>

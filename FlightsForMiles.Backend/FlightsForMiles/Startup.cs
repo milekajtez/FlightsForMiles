@@ -1,3 +1,4 @@
+using FlightsForMiles.BLL.Contracts.Services.Discount;
 using FlightsForMiles.BLL.Contracts.Services.User;
 using FlightsForMiles.BLL.Services;
 using FlightsForMiles.DAL;
@@ -86,6 +87,8 @@ namespace FlightsForMiles
             // settings for dependecy injection
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IDiscountService, DiscountService>();
+            services.AddScoped<IDiscountRepository, DiscountRepository>();
 
         }
 

@@ -1,7 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { chageDiscount, loadDiscounts } from '../../../../redux/system-admin/discounts/discountsAction'
 
 function DiscountForm(props) {
+    const dispatch = useDispatch()
+
     const discountField = useFormField({
         initialValue: '',
         isRequired: true
@@ -9,9 +13,11 @@ function DiscountForm(props) {
 
     const discountForm = useFormWithFields({
         onSubmit: (e) => {
-            console.log(e)
+            dispatch(chageDiscount(discountField.value, props.discountType))
+            console.log("1111")
+            dispatch(loadDiscounts())
+            console.log("2222")
             e.preventDefault()
-            //...
             discountForm.handleReset()
         },
         fields: [discountField]

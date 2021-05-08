@@ -1,3 +1,4 @@
+using FlightsForMiles.BLL.Contracts.Services.Airline;
 using FlightsForMiles.BLL.Contracts.Services.Discount;
 using FlightsForMiles.BLL.Contracts.Services.User;
 using FlightsForMiles.BLL.Services;
@@ -89,7 +90,8 @@ namespace FlightsForMiles
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IDiscountService, DiscountService>();
             services.AddScoped<IDiscountRepository, DiscountRepository>();
-
+            services.AddScoped<IAirlineService, AirlineService>();
+            services.AddScoped<IAirlineRepository, AirlineRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,7 +1,13 @@
 import React from 'react'
+import { useAlert } from 'react-alert'
+import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { addAirline } from '../../../../redux/system-admin/airline-reg/airlineRegAction'
 
 function AirlineRegistration() {
+    const dispatch = useDispatch()
+    const alert = useAlert()
+
     const nameField = useFormField({
         initialValue: '',
         isRequired: true
@@ -30,13 +36,54 @@ function AirlineRegistration() {
 
     const registerAirlineForm = useFormWithFields({
         onSubmit: (e) => {
-            console.log(e)
+            if(Validation()){
+                dispatch(addAirline({
+                    name: nameField.value,
+                    houseNumber: houseNumberField.value,
+                    street: streetField.value,
+                    city: streetField.value,
+                    description: descriptionField.value,
+                    pricelist: pricelistField.value
+                }))
+                .then(response => {
+                    if (response.status === 201) {
+                        console.log(response)
+                        alert.show("Airline create successfully.", {
+                            type: 'success'
+                        })
+                        registerAirlineForm.handleReset()
+                    }
+                })
+                .catch(error => {
+                    console.error(error)
+                    if(error.response.data.indexOf("Please enter a different airline name") !== -1){
+                        alert.show("Adding airline unsuccessfully. Please enter a different airline name", {
+                            type: 'error'
+                        })
+                    }
+                    else {
+                        alert.show("Unknown error", {
+                            type: 'error'
+                        })
+                    }
+                })
+            }
+
             e.preventDefault()
-            //...
-            registerAirlineForm.handleReset()
         },
         fields: [nameField, houseNumberField, streetField, cityField, descriptionField, pricelistField]
     })
+
+    function Validation(){
+        if(isNaN(Number(houseNumberField.value)) || parseInt(houseNumberField.value) <= 0){
+            alert.show("Please insert a valid phone number! (For example '0628508315')", {
+                type: 'error'
+            })
+            return false
+        }
+
+        return true
+    }
 
     return (
         <div className="box">

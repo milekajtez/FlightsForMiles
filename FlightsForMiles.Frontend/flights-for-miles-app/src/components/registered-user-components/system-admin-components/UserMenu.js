@@ -5,7 +5,7 @@ function UserMenu() {
     const params = useParams()
 
     return (
-        <span style={{float: "right", marginRight:"3%"}}>
+        <span style={{float: "right", marginRight:"5%"}}>
             <div className="dropdown">
                 <button className="dropbtn">{params.username}</button>
                 <div className="dropdown-content">

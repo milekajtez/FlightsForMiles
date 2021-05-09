@@ -14,7 +14,6 @@ function Navigation() {
     }
 
     const discountsSettings = () => {
-    
         history.push(`/system/${username}/discSettings`)
     }
 

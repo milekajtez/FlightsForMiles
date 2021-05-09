@@ -83,7 +83,7 @@ function Login(props) {
                                 }
                             }
                             else {
-                                history.push(`/avio/${usernameField.value}/na_kraju_definisati`)
+                                history.push(`/avio/${usernameField.value}/configD`)
 
                                 alert.show("Login successfully", {
                                     type: 'success'

@@ -31,5 +31,11 @@
     <ProjectReference Include="..\FlightsForMiles.DAL\FlightsForMiles.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
 </Project>

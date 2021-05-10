@@ -7,7 +7,6 @@ import ConfigDestionation from './config-destination/ConfigDestionation'
 import ConfigFlight from './config-flight/ConfigFlight'
 import ConfigSeats from './config-seats/ConfigSeats'
 import HelpConfiguration from './help-configuration/HelpConfiguration'
-import ModifyFlightSeats from './modify-flight-seats/ModifyFlightSeats'
 
 function AvioAdmin() {
     return (
@@ -17,7 +16,6 @@ function AvioAdmin() {
                 <Route exact path="/avio/:username/configD" component={ConfigDestionation} />
                 <Route exact path="/avio/:username/configF" component={ConfigFlight} />
                 <Route exact path="/avio/:username/configS" component={ConfigSeats} />
-                <Route exact path="/avio/:username/configMFS" component={ModifyFlightSeats} />
                 <Route exact path="/avio/:username/airlineReview" component={AirlineReview} />
                 <Route exact path="/avio/:username/configH" component={HelpConfiguration} />
                 <Route exact path="/avio/:username/avioProfile" component={AvioAdminProfile} />

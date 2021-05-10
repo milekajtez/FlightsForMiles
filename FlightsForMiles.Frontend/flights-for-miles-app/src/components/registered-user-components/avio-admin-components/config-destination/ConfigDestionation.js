@@ -1,9 +1,10 @@
 import React from 'react'
+import AllDestinations from './AllDestinations'
 
 function ConfigDestionation() {
     return (
         <div>
-            ConfigDestionation
+            <AllDestinations />
         </div>
     )
 }

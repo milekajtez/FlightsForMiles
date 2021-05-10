@@ -26,3 +26,17 @@ C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\Flights
 C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csproj.CopyComplete
 C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.dll
 C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.deps.json
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\bin\Debug\netcoreapp3.1\FlightsForMiles.DAL.Contracts.pdb
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csprojAssemblyReference.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.AssemblyInfoInputs.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.AssemblyInfo.cs
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csproj.CoreCompileInputs.cache
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.csproj.CopyComplete
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.dll
+C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.pdb

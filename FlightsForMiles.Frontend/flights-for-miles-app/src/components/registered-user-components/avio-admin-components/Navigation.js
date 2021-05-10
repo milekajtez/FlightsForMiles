@@ -17,10 +17,6 @@ function Navigation() {
         history.push(`/avio/${username}/configS`)
     }
 
-    const modifyFlightSeats = () => {
-        history.push(`/avio/${username}/configMFS`)
-    }
-
     const airlineReview = () => {
         history.push(`/avio/${username}/airlineReview`)
     }
@@ -31,17 +27,15 @@ function Navigation() {
     return (
         <span>
             <ul className="menu-bar">
-                <li onClick={() => destinationConfiguration()}><i className="fas fa-map-marked-alt"></i> Destination config</li>
+                <li onClick={() => destinationConfiguration()}><i className="fas fa-map-marked-alt"></i> Destination configuration</li>
                 <div></div>
-                <li onClick={() => flightConfiguration()}><i className="fas fa-plane"></i> Flight config</li>
+                <li onClick={() => flightConfiguration()}><i className="fas fa-plane"></i> Flight configuration</li>
                 <div></div>
-                <li onClick={() => seatsConfiguration()}><i className="fas fa-ticket-alt"></i> Seats config</li>
-                <div></div>
-                <li onClick={() => modifyFlightSeats()}><i className="fas fa-cog"></i> Modify flight seats</li>
+                <li onClick={() => seatsConfiguration()}><i className="fas fa-ticket-alt"></i> Seats configuration</li>
                 <div></div>
                 <li onClick={() => airlineReview()}><i className="fas fa-plane-departure"></i> Airlines review</li>
                 <div></div>
-                <li onClick={() => helpConfiguration()}><i className="far fa-question-circle"></i> Help config</li>
+                <li onClick={() => helpConfiguration()}><i className="far fa-question-circle"></i> Help configuration</li>
             </ul>
         </span>
     )

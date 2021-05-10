@@ -1,0 +1,43 @@
+.items-table {
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1%;
+}
+
+.items-table th,
+.items-table td {
+  padding: 15px;
+  background-color: transparent;
+  color: darkturquoise;
+  text-align: center;
+}
+
+.items-table th {
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.items-table thead th {
+  background-color: darkslategray;
+}
+
+.items-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.items-table tbody td {
+  position: relative;
+}
+
+.items-table tbody td:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}

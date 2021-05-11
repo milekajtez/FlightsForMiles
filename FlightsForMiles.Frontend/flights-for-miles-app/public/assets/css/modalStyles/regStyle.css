@@ -61,6 +61,27 @@
     color: aqua;
 }
 
+[type="date"] {
+  background-color:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  background-color: aqua;
+}
+
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+
+input[type=date]:focus::-webkit-datetime-edit {
+    color: white !important;
+}
+
 .reg-box .user-box label {
     position: absolute;
     top:0;

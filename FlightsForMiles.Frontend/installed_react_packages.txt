@@ -15,5 +15,6 @@ $ npm install --save react-alert-template-basic
 $ npm install --save react-google-login
 $ npm install --save jwt-decode
 $ npm install --save bootstrap
+$ npm install --save react-datetime-picker
 
  

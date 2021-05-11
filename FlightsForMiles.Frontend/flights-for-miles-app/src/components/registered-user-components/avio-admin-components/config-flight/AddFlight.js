@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import "react-datepicker/dist/react-datepicker.css";
 
 function AddFlights(props) {
     const startTimeField = useFormField({
@@ -96,13 +97,13 @@ function AddFlights(props) {
                 <form onSubmit={addFlightForm.handleSubmit}>
                     <div>
                         <span className="user-box">
-                            <input type="text" value={startTimeField.value} required={startTimeField.isRequired}
-                                onChange={startTimeField.handleChange} id="startTimeField" />
-                            <label>Start time</label>
+                            <input type="date" value={startTimeField.value} required={startTimeField.isRequired}
+                                onChange={startTimeField.handleChange} id="startTimeField" ></input>
+                                <label>Start time</label>
                         </span>
                         <span className="user-box">
-                            <input type="text" value={startTimeField.value} required={startTimeField.isRequired}
-                                onChange={startTimeField.handleChange} id="startTimeField" />
+                            <input type="date" value={endTimeField.value} required={endTimeField.isRequired}
+                                onChange={endTimeField.handleChange} id="endTimeField" />
                             <label>End time</label>
                         </span>
                     </div>

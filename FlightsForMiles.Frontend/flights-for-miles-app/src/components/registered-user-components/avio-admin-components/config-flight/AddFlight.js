@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-modal'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
 
-function ChangeFlight(props) {
+function AddFlights(props) {
     const startTimeField = useFormField({
         initialValue: '',
         isRequired: true
@@ -43,6 +43,10 @@ function ChangeFlight(props) {
         initialValue: '',
         isRequired: true
     })
+    const airlineField = useFormField({
+        initialValue: '',
+        isRequired: true
+    })
     const economicSeatsField = useFormField({
         initialValue: '',
         isRequired: true
@@ -68,17 +72,19 @@ function ChangeFlight(props) {
         isRequired: true
     })
 
-    const changeFlightForm = useFormWithFields({
+    const addFlightForm = useFormWithFields({
         onSubmit: (e) => {
-            //pocetak logike za izmenu leta
+            //pocetak logike za dodavanje leta
         },
         fields: [startTimeField, endTimeField, startLocationField, endLocationField, flightLengthField, additionalInfoField, numOfTransfersField, allTransfersField,
-            planeNameField, luggageWeightField, economicSeatsField, economicPriceField, firstClassSeatsField, firstClassPriceField, businessSeatsField, businessPriceField]
+            planeNameField, luggageWeightField, airlineField, economicSeatsField, economicPriceField, firstClassSeatsField, firstClassPriceField,
+            businessSeatsField, businessPriceField]
     })
-    
+
+
     return (
-        <Modal ariaHideApp={false} isOpen={props.changeIsOpen} closeTimeoutMS={500}
-            className="new-member-inner-reg" onRequestClose={() => props.setChangeIsOpen(false)}
+        <Modal ariaHideApp={false} isOpen={props.addIsOpen} closeTimeoutMS={500}
+            className="new-member-inner-reg" onRequestClose={() => props.setAddIsOpen(false)}
             style={{
                 overlay: {
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -86,8 +92,8 @@ function ChangeFlight(props) {
                 }
             }}>
             <div className="reg-box">
-                <h2>CHANGE FLIGHT</h2>
-                <form onSubmit={changeFlightForm.handleSubmit}>
+                <h2>ADD NEW FLIGHT</h2>
+                <form onSubmit={addFlightForm.handleSubmit}>
                     <div>
                         <span className="user-box">
                             <input type="text" value={startTimeField.value} required={startTimeField.isRequired}
@@ -143,36 +149,46 @@ function ChangeFlight(props) {
                             <label>Lugage weight</label>
                         </span>
                         <span className="user-box">
+                            <select value={airlineField.value} required={airlineField.isRequired}
+                                onChange={airlineField.handleChange} id="airlineField">
+                                <option value=""></option>
+                                <option value="1">Airline 1</option>
+                                <option value="2">Airline 2</option>
+                                <option value="3">Airline 3</option>
+                            </select>
+                            <label>Airline</label>
+                        </span>
+                    </div>
+                    <div>
+                        <span className="user-box">
                             <input type="number" value={economicSeatsField.value} required={economicSeatsField.isRequired}
                                 onChange={economicSeatsField.handleChange} id="economicSeatsField" />
                             <label>Number of economic class seats</label>
                         </span>
-                    </div>
-                    <div>
                         <span className="user-box">
                             <input type="number" value={economicPriceField.value} required={economicPriceField.isRequired}
                                 onChange={economicPriceField.handleChange} id="economicPriceField" />
                             <label>Price of economic class seat (&euro;)</label>
                         </span>
+                    </div>
+                    <div>
                         <span className="user-box">
                             <input type="number" value={firstClassSeatsField.value} required={firstClassSeatsField.isRequired}
                                 onChange={firstClassSeatsField.handleChange} id="firstClassSeatsField" />
                             <label>Number of first class seats</label>
                         </span>
-                    </div>
-                    <div>
                         <span className="user-box">
                             <input type="number" value={firstClassPriceField.value} required={firstClassPriceField.isRequired}
                                 onChange={firstClassPriceField.handleChange} id="firstClassPriceField" />
                             <label>Price of first class seat (&euro;)</label>
                         </span>
+                    </div>
+                    <div>
                         <span className="user-box">
                             <input type="number" value={businessSeatsField.value} required={businessSeatsField.isRequired}
                                 onChange={businessSeatsField.handleChange} id="businessSeatsField" />
                             <label>Number of business class seats</label>
                         </span>
-                    </div>
-                    <div>
                         <span className="user-box">
                             <input type="number" value={businessPriceField.value} required={businessPriceField.isRequired}
                                 onChange={businessPriceField.handleChange} id="businessPriceField" />
@@ -192,15 +208,13 @@ function ChangeFlight(props) {
                             <span></span>
                             <span></span>
                             <span></span>
-                            Change
+                            Add
                         </button>
                     </div>
                 </form>
             </div>
-
-
         </Modal>
     )
 }
 
-export default ChangeFlight
+export default AddFlights

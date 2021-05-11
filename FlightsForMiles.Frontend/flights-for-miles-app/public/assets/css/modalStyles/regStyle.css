@@ -43,6 +43,24 @@
     outline: none;
     background: transparent;
 }
+
+.reg-box .user-box select, textarea {
+    width: 45%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.reg-box .user-box select option {
+    background-color: #0563af;
+    color: aqua;
+}
+
 .reg-box .user-box label {
     position: absolute;
     top:0;
@@ -61,7 +79,15 @@
     color: #03e9f4;
     font-size: 12px;
 }
-  
+
+.reg-box .user-box select:focus ~ label,
+.reg-box .user-box select:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+}
+
 .reg-box form button {
     position: relative;
     display: inline-block;

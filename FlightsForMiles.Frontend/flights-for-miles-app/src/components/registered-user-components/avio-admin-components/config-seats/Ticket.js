@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ChangeTicket from './ChangeTicket'
 
 function Ticket() {
+    const [changeTicket, setChangeTicket] = useState(false)
+
     return (
         <div className="ticket-box">
             <div className="ticket">
@@ -48,7 +51,7 @@ function Ticket() {
                         </div>&emsp;&emsp;
                     </div>
                     <div className="box" style={{height: "20%"}}>
-                        <button type="submit" style={{ backgroundColor: "#141e30" }}>
+                        <button type="submit" style={{ backgroundColor: "#141e30" }}  onClick={() => setChangeTicket(true)}>
                             <span></span>
                             <span></span>
                             <span></span>
@@ -63,6 +66,7 @@ function Ticket() {
                             Delete
                         </button>
                     </div>
+                    <ChangeTicket changeTicket={changeTicket} setChangeTicket={setChangeTicket}/>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import TicketPanel from './TicketPanel'
 function AllFlightsSeats() {
     const [showHideIndicator, setIndicator] = useState(0)
     const [addTicket, setAddTicket] = useState(false)
+
     // 0 - nema prikaza
     // != 0 - prikaz (id leta)
 
@@ -40,7 +41,7 @@ function AllFlightsSeats() {
                         <td>test1</td>
                         <td>
                             <button className="btn btn-primary" onClick={() => showTickets(1)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary"><i className="fas fa-plus" onClick={() => setAddTicket(true)}></i> ADD NEW TICKET</button>
+                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
                         </td>
                     </tr>
                     <tr>
@@ -52,7 +53,7 @@ function AllFlightsSeats() {
                         <td>test2</td>
                         <td>
                             <button className="btn btn-primary" onClick={() => showTickets(2)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary"><i className="fas fa-plus" onClick={() => setAddTicket(true)}></i> ADD NEW TICKET</button>
+                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
                         </td>
                     </tr>
                     <tr>
@@ -63,8 +64,8 @@ function AllFlightsSeats() {
                         <td>test3</td>
                         <td>test3</td>
                         <td>
-                            <button className="btn btn-primary"  onClick={() => showTickets(3)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary"><i className="fas fa-plus" onClick={() => setAddTicket(true)}></i> ADD NEW TICKET</button>
+                            <button className="btn btn-primary" onClick={() => showTickets(3)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
+                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
                         </td>
                     </tr>
                     <tr>
@@ -75,8 +76,8 @@ function AllFlightsSeats() {
                         <td>test4</td>
                         <td>test4</td>
                         <td>
-                            <button className="btn btn-primary"  onClick={() => showTickets(4)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary"><i className="fas fa-plus" onClick={() => setAddTicket(true)}></i> ADD NEW TICKET</button>
+                            <button className="btn btn-primary" onClick={() => showTickets(4)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
+                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
                         </td>
                     </tr>
                     <tr>
@@ -87,8 +88,8 @@ function AllFlightsSeats() {
                         <td>test5</td>
                         <td>test5</td>
                         <td>
-                            <button className="btn btn-primary"  onClick={() => showTickets(5)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary"><i className="fas fa-plus" onClick={() => setAddTicket(true)}></i> ADD NEW TICKET</button>
+                            <button className="btn btn-primary" onClick={() => showTickets(5)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
+                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
                         </td>
                     </tr>
                 </tbody>

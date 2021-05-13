@@ -1,7 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
-import "react-datepicker/dist/react-datepicker.css";
 
 function AddFlights(props) {
     const startTimeField = useFormField({

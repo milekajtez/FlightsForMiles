@@ -1,9 +1,10 @@
 import React from 'react'
+import AllFlightsSeats from './AllFlightsSeats'
 
 function ConfigSeats() {
     return (
         <div>
-            ConfigSeats
+            <AllFlightsSeats />
         </div>
     )
 }

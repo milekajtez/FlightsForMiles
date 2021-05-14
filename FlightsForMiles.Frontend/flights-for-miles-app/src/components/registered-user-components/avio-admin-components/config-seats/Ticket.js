@@ -56,7 +56,7 @@ function Ticket() {
                             <span></span>
                             <span></span>
                             <span></span>
-                            Chnage
+                            Change
                         </button>
                         <button type="submit" style={{ backgroundColor: "#141e30" }}>
                             <span></span>

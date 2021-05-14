@@ -1,9 +1,12 @@
 import React from 'react'
+import AllQuestions from './AllQuestions'
+import AppDescription from './AppDescription'
 
 function HelpConfiguration() {
     return (
         <div>
-            HelpConfiguration
+            <AppDescription />
+            <AllQuestions />
         </div>
     )
 }

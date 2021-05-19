@@ -87,5 +87,19 @@ namespace FlightsForMiles.Controllers
             return NoContent();
         }
         #endregion
+        #region 8 - Method for load user profile data
+        [HttpGet]
+        [Route("LoadUserProfileData/{username}")]
+        public IActionResult LoadUserProfileData(string username) 
+        {
+            IProfileDataResponseDTO profileData = _userService.LoadUserProfileData(username);
+            if (profileData != null)
+            {
+                return Ok(profileData);
+            }
+
+            return NotFound("User profile data not found");
+        }
+        #endregion
     }
 }

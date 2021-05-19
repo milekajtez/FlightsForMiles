@@ -319,5 +319,33 @@ namespace FlightsForMiles.DAL.Repository
             return false;
         }
         #endregion
+        #region 10 - Method for load profile data
+        public async Task<IProfileData> LoadUserProfileData(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null) 
+            {
+                throw new Exception("Load unsuccesfully because user not found");
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            IProfileData profileData = new ProfileDataModel()
+            {
+                Username = user.UserName,
+                Type = roles[0],
+                Telephone = user.PhoneNumber,
+                Email = user.Email,
+                Points = user.Points.ToString(),
+                Firstname = user.FirstName,
+                Lastname = user.LastName,
+                Pin = user.Id,
+                Address = user.Address,
+                Passport = user.NumberOfPassport
+            };
+
+            return profileData;
+        }
+        #endregion
     }
 }

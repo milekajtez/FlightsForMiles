@@ -57,6 +57,10 @@ const loginService = {
         }
 
         return API.put(`ApplicationUsers/FirstLoginChangePass/${newPassObj.id}`, body)
+    },
+
+    loadProfileData: (username) => {
+        return API.get(`ApplicationUsers/LoadUserProfileData/${username}`)
     }
 }
 

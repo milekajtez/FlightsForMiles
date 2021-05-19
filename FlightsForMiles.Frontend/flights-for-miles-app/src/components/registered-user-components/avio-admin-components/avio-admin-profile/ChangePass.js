@@ -24,17 +24,18 @@ function ChangePass() {
             <br></br>
             <form onSubmit={changePassForm.handleSubmit}>
                 <div style={{ display: "inline-block" }}>
-                    <input type="password" value={currentPassField.value} onChange={currentPassField.handleChange} id="currentPassField" 
-                        placeholder="Current password" />
+                    <input type="password" value={currentPassField.value} onChange={currentPassField.handleChange} 
+                    id="currentPassField" placeholder="Current password" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
-                    <input type="password" value={newPassField.value} onChange={newPassField.handleChange} id="newPassField" placeholder="New password"/>
+                    <input type="password" value={newPassField.value} onChange={newPassField.handleChange} 
+                    id="newPassField" placeholder="New password"/>
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
-                    <input type="password" value={confirmNewPassField.value} onChange={confirmNewPassField.handleChange} id="confirmNewPassField" 
-                        placeholder="Confirm new password" />
+                    <input type="password" value={confirmNewPassField.value} onChange={confirmNewPassField.handleChange} 
+                    id="confirmNewPassField" placeholder="Confirm new password" />
                 </div>
                 <div>
                     <button type="submit" style={{ backgroundColor: "#141e30" }}>

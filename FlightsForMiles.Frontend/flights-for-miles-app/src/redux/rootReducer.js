@@ -4,13 +4,15 @@ import loginReducer from './start-page/login/loginReducer'
 import discountsReducer from "./system-admin/discounts/discountsReducer";
 import destinationReducer from './avio-admin/destination/destinationReducer'
 import airlineReducer from "./system-admin/airline-reg/airlineRegReducer";
+import profileReducer from './avio-admin/profile/profileReducer'
 
 const rootReducer = combineReducers({
     registration: registrationReducer,
     login: loginReducer,
     discount: discountsReducer,
     airline: airlineReducer,
-    destination: destinationReducer
+    destination: destinationReducer,
+    profile: profileReducer
 })
 
 export default rootReducer

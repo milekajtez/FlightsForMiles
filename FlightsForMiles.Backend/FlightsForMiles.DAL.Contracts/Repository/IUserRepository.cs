@@ -15,5 +15,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         object GoogleLoginUser(IGoogleLoginUser googleLoginUser);
         Task<long> AddAvioAdmin(IAvioAdmin newAvioAdmin);
         Task<bool> ChangePass(string pin, string password);
+        Task<IProfileData> LoadUserProfileData(string username);
     }
 }

@@ -14,12 +14,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.User
         object UserGoogleLogin(IGoogleLoginUserRequestDTO googleLoginUserRequestDTO);
         long AddAvioAdmin(IAvioAdminRequestDTO avioAdminRequestDTO);
         void ChangePass(string pin, string password);
-
-        /* primeri definisanih metoda
-         IEnumerable<IClientResponseDTO> LoadClients();
-        IClientResponseDTO LoadClient(Guid id);
-        Guid AddClient(IClientRequestDTO newClient);
-        bool DeleteClient(Guid id);
-        void UpdateClient(IClientRequestDTO currentClient, Guid id);*/
+        IProfileDataResponseDTO LoadUserProfileData(string username);
     }
 }

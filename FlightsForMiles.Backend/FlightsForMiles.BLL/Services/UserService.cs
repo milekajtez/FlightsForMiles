@@ -113,6 +113,12 @@ namespace FlightsForMiles.BLL.Services
             }
         }
         #endregion
+        #region 8 - Method for load user profile data
+        public IProfileDataResponseDTO LoadUserProfileData(string username)
+        {
+            return ConvertProfileDataToResponseObject(_userRepository.LoadUserProfileData(username).Result);
+        }
+        #endregion
 
         #region Converting methods
         private IUserResponseDTO ConvertUserToResponseObject(IUser user)
@@ -152,6 +158,23 @@ namespace FlightsForMiles.BLL.Services
         {
             return new AvioAdmin(avioAdminRequestDTO.Username, avioAdminRequestDTO.Email, avioAdminRequestDTO.Password, avioAdminRequestDTO.Pin,
                 avioAdminRequestDTO.Telephone);
+        }
+
+        private IProfileDataResponseDTO ConvertProfileDataToResponseObject(IProfileData profileData) 
+        {
+            return new ProfileDataResponseDTO()
+            {
+                Username = profileData.Username,
+                Type = profileData.Type,
+                Telephone = profileData.Telephone,
+                Email = profileData.Email,
+                Points = profileData.Points,
+                Firstname = profileData.Firstname,
+                Lastname = profileData.Lastname,
+                Pin = profileData.Pin,
+                Address = profileData.Address,
+                Passport = profileData.Passport
+            };
         }
         #endregion
     }

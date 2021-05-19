@@ -42,29 +42,38 @@ function ChangeProfile() {
             <br></br>
             <form onSubmit={changeProfileDataForm.handleSubmit}>
                 <div style={{ display: "inline-block" }}>
-                    <input type="text" value={usernameField.value} onChange={usernameField.handleChange} id="usernameField" placeholder="Username" />
+                    <input type="text" value={usernameField.value} onChange={usernameField.handleChange} 
+                    id="usernameField" placeholder="Username" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
-                    <input type="email" value={emailField.value} onChange={emailField.handleChange} id="emailField" placeholder="Email" />
+                    <input type="email" value={emailField.value} onChange={emailField.handleChange} 
+                    id="emailField" placeholder="Email" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
-                    <input type="number" value={phoneNumberField.value} onChange={phoneNumberField.handleChange} id="phoneNumberField" placeholder="Phone number" />
-                </div>
-                <div style={{ display: "inline-block" }}>
-                    <input type="text" value={firstnameField.value} onChange={firstnameField.handleChange} id="firstnameField" placeholder="First name" />
+                    <input type="number" value={phoneNumberField.value} onChange={phoneNumberField.handleChange} 
+                    id="phoneNumberField" placeholder="Phone number" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
-                    <input type="text" value={lastNameField.value} onChange={lastNameField.handleChange} id="lastNameField" placeholder="Last name" />
+                    <input type="text" value={firstnameField.value} onChange={firstnameField.handleChange} 
+                    id="firstnameField" placeholder="First name" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
-                    <input type="text" value={addressField.value} onChange={addressField.handleChange} id="addressField" placeholder="Address" />
+                    <input type="text" value={lastNameField.value} onChange={lastNameField.handleChange} 
+                    id="lastNameField" placeholder="Last name" />
                 </div>
+                &emsp;
                 <div style={{ display: "inline-block" }}>
-                    <input type="number" value={passportField.value} onChange={passportField.handleChange} id="passportField" placeholder="Passport" />
+                    <input type="text" value={addressField.value} onChange={addressField.handleChange} 
+                    id="addressField" placeholder="Address" />
+                </div>
+                &emsp;
+                <div style={{ display: "inline-block" }}>
+                    <input type="number" value={passportField.value} onChange={passportField.handleChange} 
+                    id="passportField" placeholder="Passport" />
                 </div>
                 <div>
                     <button type="submit" style={{ backgroundColor: "#141e30" }}>

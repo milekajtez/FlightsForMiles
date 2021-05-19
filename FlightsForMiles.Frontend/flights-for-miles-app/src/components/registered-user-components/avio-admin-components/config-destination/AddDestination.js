@@ -1,8 +1,25 @@
 import Modal from 'react-modal'
 import React from 'react'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { useDispatch } from 'react-redux'
+import { addDestination, loadDestinations } from '../../../../redux/avio-admin/destination/destinationAction'
+import { useEffect } from 'react'
+import { loadAirlines } from '../../../../redux/system-admin/airline-reg/airlineRegAction'
+import { useSelector } from 'react-redux'
+import { useAlert } from 'react-alert'
+/*import { useState } from 'react'*/
 
 function AddDestination(props) {
+    const dispatch = useDispatch()
+    const alert = useAlert();
+
+    const airlines = useSelector(
+        state => state.airline,
+    )
+
+    useEffect(() => {
+        dispatch(loadAirlines())
+    }, [dispatch])
 
     const nameField = useFormField({
         initialValue: '',
@@ -24,9 +41,48 @@ function AddDestination(props) {
         isRequired: true
     })
 
+
     const addDestinationForm = useFormWithFields({
         onSubmit: (e) => {
-            //pocetak logike za menjanje destinacije
+            dispatch(addDestination({
+                airportName: nameField.value,
+                city: cityField.value,
+                country: countryField.value,
+                airlineID: airlineField.value
+            }))
+            .then(response => {
+                if(response.status === 201){
+                    alert.show("Adding destination successfully.", {
+                        type: 'success'
+                    })
+
+                    // ponovo ucitavanje svih destinacija..jer se baza izmenila
+                    dispatch(loadDestinations())
+
+                    addDestinationForm.handleReset()
+                    props.setAddIsOpen(false)
+                }
+                else {
+                    alert.show("Unknown error.", {
+                        type: 'error'
+                    })
+                }
+            })
+            .catch(error => {
+                console.error(error)
+                if(error.response.data.indexOf("(Add destination is unsuccessffully. Server not found selected airline.)") !== -1){
+                    alert.show("Add destination is unsuccessffully. Server not found selected airline.", {
+                        type: 'error'
+                    })
+                }
+                else {
+                    alert.show("Unknown error.", {
+                        type: 'error'
+                    })  
+                }
+            })
+            
+            e.preventDefault()
         },
         fields: [nameField, cityField, countryField, airlineField]
     })
@@ -62,9 +118,11 @@ function AddDestination(props) {
                         <select value={airlineField.value} required={airlineField.isRequired}
                             onChange={airlineField.handleChange} id="airlineField">
                                 <option value=""></option>
-                                <option value="1">Airline 1</option>
-                                <option value="2">Airline 2</option>
-                                <option value="3">Airline 3</option>
+                                {
+                                    airlines.allAirlines.map((airline) =>{
+                                       return <option key={airline.id} value={airline.id}>{airline.name}</option>
+                                    })
+                                }
                         </select>
                         <label>Airline</label>
                     </div>

@@ -12,7 +12,11 @@ const airlineService = {
         }
         
         return API.post("Airlines", body)
-    }
+    },
+
+    loadAirlines: () => {
+        return API.get(`Airlines`)
+    },
 }
 
 export default airlineService;

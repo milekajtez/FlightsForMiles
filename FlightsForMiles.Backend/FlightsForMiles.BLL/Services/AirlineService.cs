@@ -36,6 +36,20 @@ namespace FlightsForMiles.BLL.Services
             return ConvertAirlineObjectToAirlineResponse(_airlineRepository.LoadAirline(id).Result);
         }
         #endregion
+        #region 3 - Method for load all airlines
+        public List<IAirlineResponseDTO> LoadAllAirlines()
+        {
+            List<IAirline> airlines = _airlineRepository.LoadAllAirlines();
+            List<IAirlineResponseDTO> result = new List<IAirlineResponseDTO>();
+
+            foreach (var air in airlines)
+            {
+                result.Add(ConvertAirlineObjectToAirlineResponse(air));
+            }
+
+            return result;
+        }
+        #endregion
 
         #region Converting methods
         private IAirline ConvertRequestObjectToAirline(IAirlineRequestDTO airlineRequestDTO) 

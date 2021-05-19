@@ -1,15 +1,56 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useAlert } from 'react-alert'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { loadDestinations, deleteDestination } from '../../../../redux/avio-admin/destination/destinationAction'
 import AddDestination from './AddDestination'
 import ChangeDestination from './ChangeDestination'
 
 function AllDestinations() {
     const [addIsOpen, setAddIsOpen] = useState(false)
-    const [changeIsOpen, setChangeIsOpen] = useState(false)
+    const [changeIsOpen, setChangeIsOpen] = useState({ open: false, currentDest: {} })
+    const dispatch = useDispatch()
+    const alert = useAlert();
 
-    const deleteDestination = (destinationID) => {
-        if(window.confirm(`Are you sure to delete destination with id ${destinationID}?`)){
-            console.log("Deleting....")
-        }
+    const destinations = useSelector(
+        state => state.destination,
+    )
+
+    useEffect(() => {
+        dispatch(loadDestinations())
+    }, [dispatch])
+
+    const deleteSelectedDestination = (destinationID) => {
+        dispatch(deleteDestination(destinationID))
+        .then(response => {
+            if (response.status === 204) {
+                alert.show("Deleting destination successfully.", {
+                    type: 'success'
+                })
+
+                // na kraju ponovo ucitavanje jer se promenilo stanje baze
+                dispatch(loadDestinations())
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            if(error.response.data.indexOf("(Deleting unsuccessfully. Destination with sended id doesn't exsist.)") !== -1){
+                alert.show("Deleting unsuccessfully. Destination with sended id doesn't exsist.", {
+                    type: 'error'
+                })
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })  
+            }
+        })
     }
 
     return (
@@ -26,61 +67,23 @@ function AllDestinations() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Name 1</td>
-                        <td>City 1</td>
-                        <td>Country 1</td>
-                        <td>1 (Airline name 1)</td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteDestination(1)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Name 2</td>
-                        <td>City 2</td>
-                        <td>Country 2</td>
-                        <td>2 (Airline name 2)</td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteDestination(2)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Name 3</td>
-                        <td>City 3</td>
-                        <td>Country 3</td>
-                        <td>3 (Airline name 3)</td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteDestination(3)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Name 4</td>
-                        <td>City 4</td>
-                        <td>Country 4</td>
-                        <td>4 (Airline name 4)</td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteDestination(4)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Name 5</td>
-                        <td>City 5</td>
-                        <td>Country 5</td>
-                        <td>5 (Airline name 5)</td>
-                        <td>
-                            <button type="submit" className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteDestination(5)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
+                    {
+                        destinations.allDestinations.map((destination => {
+                            return (
+                                <tr key={destination.airportID}>
+                                    <td>{destination.airportID}</td>
+                                    <td>{destination.airportName}</td>
+                                    <td>{destination.city}</td>
+                                    <td>{destination.country}</td>
+                                    <td>{destination.airlineID}</td>
+                                    <td>
+                                        <button className="btn btn-warning" onClick={() => setChangeIsOpen({open: true, currentDest: destination})}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
+                                        <button className="btn btn-danger" onClick={() => deleteSelectedDestination(destination.airportID)}><i className="fas fa-trash-alt"></i> DELETE</button>
+                                    </td>
+                                </tr>
+                            )
+                        }))
+                    }
                 </tbody>
             </table>
             <div className="box">
@@ -93,7 +96,7 @@ function AllDestinations() {
                 </button>
             </div>
             <AddDestination addIsOpen={addIsOpen} setAddIsOpen={setAddIsOpen} />
-            <ChangeDestination changeIsOpen={changeIsOpen} setChangeIsOpen={setChangeIsOpen} />
+            <ChangeDestination changeIsOpen={changeIsOpen} setChangeIsOpen={setChangeIsOpen}/>
         </div>
     )
 }

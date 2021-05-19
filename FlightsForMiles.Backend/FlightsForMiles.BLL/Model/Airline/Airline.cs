@@ -95,7 +95,6 @@ namespace FlightsForMiles.BLL.Model.Airline
             {
                 throw new ArgumentException(nameof(sumOfAllGrades));
             }
-
         }
         #endregion
     }

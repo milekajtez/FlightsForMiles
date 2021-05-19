@@ -1,4 +1,5 @@
 using FlightsForMiles.BLL.Contracts.Services.Airline;
+using FlightsForMiles.BLL.Contracts.Services.Destination;
 using FlightsForMiles.BLL.Contracts.Services.Discount;
 using FlightsForMiles.BLL.Contracts.Services.User;
 using FlightsForMiles.BLL.Services;
@@ -86,12 +87,22 @@ namespace FlightsForMiles
             });
 
             // settings for dependecy injection
+
+            // user service and repository
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+
+            // discount service and repository
             services.AddScoped<IDiscountService, DiscountService>();
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+
+            // airline service and repository
             services.AddScoped<IAirlineService, AirlineService>();
             services.AddScoped<IAirlineRepository, AirlineRepository>();
+
+            // destination service and repository
+            services.AddScoped<IDestinationService, DestinationService>();
+            services.AddScoped<IDestinationRepository, DestinationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

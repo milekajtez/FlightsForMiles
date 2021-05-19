@@ -1,0 +1,1 @@
+export const AIRLINES_LOADING = 'AIRLINES_LOADING'

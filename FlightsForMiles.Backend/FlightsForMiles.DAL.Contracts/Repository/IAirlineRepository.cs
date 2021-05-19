@@ -10,5 +10,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
     {
         Task<long> AddAirline(IAirline newAirline);
         Task<IAirline> LoadAirline(int id);
+        List<IAirline> LoadAllAirlines();
     }
 }

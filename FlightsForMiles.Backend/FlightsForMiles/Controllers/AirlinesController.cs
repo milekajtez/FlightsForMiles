@@ -41,5 +41,18 @@ namespace FlightsForMiles.Controllers
             return NotFound("Airline not found");
         }
         #endregion
+        #region 3 - Method for load all airlines
+        [HttpGet]
+        public IActionResult LoadAllAirlines() 
+        {
+            List<IAirlineResponseDTO> airlines = _airlineService.LoadAllAirlines();
+            if (airlines != null) 
+            {
+                return Ok(airlines);
+            }
+
+            return NotFound("Server not found any airline.");
+        }
+        #endregion
     }
 }

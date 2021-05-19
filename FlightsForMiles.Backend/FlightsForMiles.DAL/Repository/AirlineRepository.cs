@@ -74,5 +74,35 @@ namespace FlightsForMiles.DAL.Repository
             throw new NotImplementedException("Airline with this id (" + id + ") doesn't exsist.");
         }
         #endregion
+        #region 3 - Method for load all airlines
+        public List<IAirline> LoadAllAirlines()
+        {
+            var airlines =  _context.Airlines;
+            if (airlines == null) 
+            {
+                throw new Exception("Server not found any airline bacause the airline table is empty.");
+            }
+
+            List<IAirline> result = new List<IAirline>();
+            foreach (var air in airlines) 
+            {
+                result.Add(new AirlineDataModel() 
+                {
+                    Id = air.Id,
+                    Name = air.Name,
+                    HouseNumber = air.House_number.ToString(),
+                    Street = air.Street,
+                    City = air.City,
+                    Description = air.Promotional_description,
+                    Pricelist = air.Pricelist,
+                    NumberOfGrades = air.Number_of_grades,
+                    NumberOfSoldTickets = air.Number_of_sold_tickets,
+                    SumOfAllGrades = air.Sum_of_all_grades
+                });
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

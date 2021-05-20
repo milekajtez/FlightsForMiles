@@ -16,5 +16,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<long> AddAvioAdmin(IAvioAdmin newAvioAdmin);
         Task<bool> ChangePass(string pin, string password);
         Task<IProfileData> LoadUserProfileData(string username);
+        Task<bool> UpdateProfileData(IProfileChangeData profileChangeData);
     }
 }

@@ -15,5 +15,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.User
         long AddAvioAdmin(IAvioAdminRequestDTO avioAdminRequestDTO);
         void ChangePass(string pin, string password);
         IProfileDataResponseDTO LoadUserProfileData(string username);
+        void UpdateProfileData(string id, IProfileDataRequestDTO profileDataRequestDTO);
     }
 }

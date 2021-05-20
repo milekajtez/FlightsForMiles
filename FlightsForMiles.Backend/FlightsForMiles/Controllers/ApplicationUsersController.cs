@@ -78,10 +78,10 @@ namespace FlightsForMiles.Controllers
             return CreatedAtRoute("GetUser", new { id = newAvioAdminID }, newAvioAdmin);
         }
         #endregion
-        #region 7 - Method for changing password for first avio admin login
+        #region 7 - Method for changing password for first avio admin login / or change password on profile
         [HttpPut]
-        [Route("FirstLoginChangePass/{pin}")]
-        public ActionResult FirstLoginChangePass(string pin, NewPassRequestDTO newPass) 
+        [Route("ChangePassword/{pin}")]
+        public ActionResult ChangePassword(string pin, NewPassRequestDTO newPass) 
         {
             _userService.ChangePass(pin, newPass.Password);
             return NoContent();
@@ -101,5 +101,15 @@ namespace FlightsForMiles.Controllers
             return NotFound("User profile data not found");
         }
         #endregion
+        #region 9 - Method for update user profile data
+        [HttpPut]
+        [Route("UpdateProfileData/{id}")]
+        public IActionResult UpdateProfileData(string id, ProfileDataRequestDTO profileDataRequestDTO) 
+        {
+            _userService.UpdateProfileData(id, profileDataRequestDTO);
+            return NoContent();
+        }
+        #endregion
+
     }
 }

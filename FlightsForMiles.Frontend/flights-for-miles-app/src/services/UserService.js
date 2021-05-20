@@ -56,11 +56,25 @@ const loginService = {
             Password: newPassObj.password
         }
 
-        return API.put(`ApplicationUsers/FirstLoginChangePass/${newPassObj.id}`, body)
+        return API.put(`ApplicationUsers/ChangePassword/${newPassObj.id}`, body)
     },
 
     loadProfileData: (username) => {
         return API.get(`ApplicationUsers/LoadUserProfileData/${username}`)
+    },
+
+    changeProfileData: (changedProfileData) => {
+        var body = {
+            Username: changedProfileData.username,
+            Email: changedProfileData.email,
+            Firstname: changedProfileData.firstname,
+            Lastname: changedProfileData.lastname,
+            Address: changedProfileData.address,
+            Telephone: changedProfileData.telephone,
+            Passport: changedProfileData.passport
+        }
+
+        return API.put(`ApplicationUsers/UpdateProfileData/${changedProfileData.pin}`, body)
     }
 }
 

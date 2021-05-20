@@ -21,3 +21,14 @@ export const loadProfileData = (username) => {
         })
     }
 }
+
+export const changeProfileData = (currentUsername, changedProfileData) => () => 
+    new Promise(function(resolve, reject){
+        userService.changeProfileData(currentUsername, changedProfileData)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })

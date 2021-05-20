@@ -8,19 +8,24 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\milek\\.nuget\\packages\\": {}
+    "C:\\Users\\m.kajtez\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
+      "projectUniqueName": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
       "projectName": "FlightsForMiles.BLL.Contracts",
-      "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
-      "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\obj\\",
+      "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
+      "packagesPath": "C:\\Users\\m.kajtez\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\m.kajtez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -60,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

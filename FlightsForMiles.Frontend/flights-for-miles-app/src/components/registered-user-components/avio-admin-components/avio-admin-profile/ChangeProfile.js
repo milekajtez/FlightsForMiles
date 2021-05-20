@@ -1,40 +1,115 @@
 import React from 'react'
+import { useAlert } from 'react-alert'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { changeProfileData, loadProfileData } from '../../../../redux/avio-admin/profile/profileAction'
 
 function ChangeProfile() {
-    const usernameField = useFormField({
-        initialValue: ''
-    })
+    const dispatch = useDispatch()
+    const alert = useAlert()
+    const params = useParams()
+
+    const profile = useSelector(
+        state => state.profile,
+    )
+
     const emailField = useFormField({
-        initialValue: ''
+        initialValue: '',
+        isRequired: false
     })
     const phoneNumberField = useFormField({
-        initialValue: ''
+        initialValue: '',
+        isRequired: false
     })
 
     const firstnameField = useFormField({
-        initialValue: ''
+        initialValue: '',
+        isRequired: false
     })
 
     const lastNameField = useFormField({
-        initialValue: ''
+        initialValue: '',
+        isRequired: false
     })
 
     const addressField = useFormField({
-        initialValue: ''
+        initialValue: '',
+        isRequired: false
     })
 
     const passportField = useFormField({
-        initialValue: ''
+        initialValue: '',
+        isRequired: false
     })
 
     const changeProfileDataForm = useFormWithFields({
         onSubmit: (e) => {
-            // izmena podataka korisnika
+            if(IsProfileChanged()){
+                dispatch(changeProfileData({
+                    username: params.username,
+                    email: emailField.value,
+                    firstname: firstnameField.value,
+                    lastname: lastNameField.value,
+                    pin: profile.profileData.pin,
+                    address: addressField.value,
+                    telephone: phoneNumberField.value,
+                    passport: passportField.value
+                }))
+                .then(response => {
+                    if(response.status === 204){
+                        alert.show("Update successfully.", {
+                            type: 'success'
+                        })
+    
+                        changeProfileDataForm.handleReset()
+
+                        dispatch(loadProfileData(params.username))
+                    }
+                    else{
+                        alert.show('Unknown error.', {
+                            type: 'error'
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    if(error.response.data.indexOf("(Updating unsuccessfully. Server not found user.)") !== -1){
+                        alert.show("Updating unsuccessfully. Server not found user.", {
+                            type: 'error'
+                        })
+                    }
+                    else if(error.response.data.indexOf("(Update unsuccessfully. Alredy exsist user with entered username.)") !== -1){
+                        alert.show("Update unsuccessfully. Alredy exsist user with entered username.", {
+                            type: 'error'
+                        })
+                    }
+                    else {
+                        alert.show("Unknown error.", {
+                            type: 'error'
+                        })  
+                    }
+                })
+            }
+            else{
+                alert.show("You didn't enter any change.", {
+                    type: 'info'
+                })
+            } 
+
+            e.preventDefault()
         },
-        fields: [usernameField, emailField, phoneNumberField, firstnameField, lastNameField, addressField, passportField]
+        fields: [emailField, phoneNumberField, firstnameField, lastNameField, addressField, passportField]
     })
 
+    function IsProfileChanged(){
+        if(emailField.value === "" && phoneNumberField.value === "" && firstnameField.value === ""
+            && lastNameField.value === "" && addressField.value === "" && passportField.value === ""){
+                return false;
+            }
+        return true;
+    }
 
     return (
         <div className="profile-change reg-box">
@@ -42,38 +117,33 @@ function ChangeProfile() {
             <br></br>
             <form onSubmit={changeProfileDataForm.handleSubmit}>
                 <div style={{ display: "inline-block" }}>
-                    <input type="text" value={usernameField.value} onChange={usernameField.handleChange} 
-                    id="usernameField" placeholder="Username" />
-                </div>
-                &emsp;
-                <div style={{ display: "inline-block" }}>
                     <input type="email" value={emailField.value} onChange={emailField.handleChange} 
-                    id="emailField" placeholder="Email" />
+                    required={emailField.isRequired} id="emailField" placeholder="Email" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
                     <input type="number" value={phoneNumberField.value} onChange={phoneNumberField.handleChange} 
-                    id="phoneNumberField" placeholder="Phone number" />
+                    required={phoneNumberField.isRequired} id="phoneNumberField" placeholder="Phone number" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
                     <input type="text" value={firstnameField.value} onChange={firstnameField.handleChange} 
-                    id="firstnameField" placeholder="First name" />
+                    required={firstnameField.isRequired} id="firstnameField" placeholder="First name" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
                     <input type="text" value={lastNameField.value} onChange={lastNameField.handleChange} 
-                    id="lastNameField" placeholder="Last name" />
+                    required={lastNameField.isRequired} id="lastNameField" placeholder="Last name" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
                     <input type="text" value={addressField.value} onChange={addressField.handleChange} 
-                    id="addressField" placeholder="Address" />
+                    required={addressField.isRequired} id="addressField" placeholder="Address" />
                 </div>
                 &emsp;
                 <div style={{ display: "inline-block" }}>
                     <input type="number" value={passportField.value} onChange={passportField.handleChange} 
-                    id="passportField" placeholder="Passport" />
+                    required={passportField.isRequired} id="passportField" placeholder="Passport" />
                 </div>
                 <div>
                     <button type="submit" style={{ backgroundColor: "#141e30" }}>

@@ -119,6 +119,16 @@ namespace FlightsForMiles.BLL.Services
             return ConvertProfileDataToResponseObject(_userRepository.LoadUserProfileData(username).Result);
         }
         #endregion
+        #region 9 - Method for update profile data
+        public void UpdateProfileData(string id, IProfileDataRequestDTO profileDataRequestDTO)
+        {
+            bool result = _userRepository.UpdateProfileData(ConvertProfileDataRequestToProfileChangeDataObject(id, profileDataRequestDTO)).Result;
+            if (!result) 
+            {
+                throw new KeyNotFoundException("Updating unsuccessfully. Server not found user.");
+            }
+        }
+        #endregion
 
         #region Converting methods
         private IUserResponseDTO ConvertUserToResponseObject(IUser user)
@@ -174,6 +184,21 @@ namespace FlightsForMiles.BLL.Services
                 Pin = profileData.Pin,
                 Address = profileData.Address,
                 Passport = profileData.Passport
+            };
+        }
+
+        private IProfileChangeData ConvertProfileDataRequestToProfileChangeDataObject(string pin, IProfileDataRequestDTO profileDataRequestDTO) 
+        {
+            return new ProfileChangeData()
+            {
+                Pin = pin,
+                Username = profileDataRequestDTO.Username,
+                Email = profileDataRequestDTO.Email,
+                Telephone = profileDataRequestDTO.Telephone,
+                Firstname = profileDataRequestDTO.Firstname,
+                Lastname = profileDataRequestDTO.Lastname,
+                Address = profileDataRequestDTO.Address,
+                Passport = profileDataRequestDTO.Passport
             };
         }
         #endregion

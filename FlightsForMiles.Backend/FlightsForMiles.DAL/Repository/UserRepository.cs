@@ -26,7 +26,7 @@ namespace FlightsForMiles.DAL.Repository
         private const string GoogleApiTokenInfoUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={0}";
 
         public UserRepository(UserManager<RegisteredUser> userManager, IOptions<ApplicationSettings> appSettings,
-            IOptions<MailSettings> mailSettings)
+            IOptions<MailSettings> mailSettings, ApplicationDbContext context)
         {
             _userManager = userManager;
             _appSettings = appSettings.Value;
@@ -159,7 +159,7 @@ namespace FlightsForMiles.DAL.Repository
             {
                 throw new InvalidOperationException("Please go to your mail accont and confirm you registration.");
             }
-            else 
+            else
             {
                 var claims = await _userManager.GetClaimsAsync(user);
                 claims.Add(new Claim("FirstLogin", user.FirstLogin.ToString()));        // claim for avio admin
@@ -182,7 +182,7 @@ namespace FlightsForMiles.DAL.Repository
         }
         #endregion
         #region 6 - User google login
-        public object GoogleLoginUser(IGoogleLoginUser googleLoginUser) 
+        public object GoogleLoginUser(IGoogleLoginUser googleLoginUser)
         {
             string userID = VerifyGoogleToken(googleLoginUser.IdToken).Result;
             if (!userID.Equals(""))
@@ -295,7 +295,7 @@ namespace FlightsForMiles.DAL.Repository
 
                 return long.Parse(registeredUser.Id);
             }
-            else 
+            else
             {
                 throw new Exception("Please enter a different personal identify number.");
             }
@@ -304,7 +304,7 @@ namespace FlightsForMiles.DAL.Repository
         #region 9 - Changing password
         public async Task<bool> ChangePass(string pin, string password)
         {
-            var resultFind = _userManager.FindByIdAsync(pin).Result ;
+            var resultFind = _userManager.FindByIdAsync(pin).Result;
             if (resultFind != null)
             {
                 resultFind.FirstLogin = false;
@@ -323,7 +323,7 @@ namespace FlightsForMiles.DAL.Repository
         public async Task<IProfileData> LoadUserProfileData(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
-            if (user == null) 
+            if (user == null)
             {
                 throw new Exception("Load unsuccesfully because user not found");
             }
@@ -345,6 +345,28 @@ namespace FlightsForMiles.DAL.Repository
             };
 
             return profileData;
+        }
+        #endregion
+        #region 11 - Metohd for update profile data
+        public async Task<bool> UpdateProfileData(IProfileChangeData profileChangeData)
+        {
+            var resultFind = await _userManager.FindByIdAsync(profileChangeData.Pin);
+            if (resultFind != null)
+            {
+                resultFind.Email = profileChangeData.Email != "" ? profileChangeData.Email : resultFind.Email;
+                resultFind.FirstName = profileChangeData.Firstname != "" ? profileChangeData.Firstname : resultFind.FirstName;
+                resultFind.LastName = profileChangeData.Lastname != "" ? profileChangeData.Lastname : resultFind.LastName;
+                resultFind.Address = profileChangeData.Address != "" ? profileChangeData.Address : resultFind.Address;
+                resultFind.PhoneNumber = profileChangeData.Telephone != "" ? profileChangeData.Telephone : resultFind.PhoneNumber;
+                resultFind.NumberOfPassport = profileChangeData.Passport != "" ? profileChangeData.Passport : resultFind.NumberOfPassport;
+
+                await _userManager.UpdateAsync(resultFind);
+
+                return true;
+
+            }
+
+            return false;
         }
         #endregion
     }

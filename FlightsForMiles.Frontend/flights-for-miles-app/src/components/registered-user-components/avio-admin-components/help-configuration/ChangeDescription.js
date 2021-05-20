@@ -1,8 +1,14 @@
 import Modal from 'react-modal'
 import React from 'react'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { useAlert } from 'react-alert'
+import { useDispatch } from 'react-redux'
+import { changeAppDescription, loadAppDescription } from '../../../../redux/avio-admin/help/helpAction'
 
 function ChangeDescription(props) {
+    const alert = useAlert()
+    const dispatch = useDispatch()
+
     const descriptionField = useFormField({
         initialValue: '',
         isRequired: false
@@ -10,11 +16,57 @@ function ChangeDescription(props) {
 
     const changeDescriptionForm = useFormWithFields({
         onSubmit: (e) => {
-            //pocetak logike za menjanje app description
+            if(Validation()){
+                dispatch(changeAppDescription(descriptionField.value))
+                .then(response => {
+                    if(response.status === 204){
+                        alert.show("Updating application description successfully.", {
+                            type: 'success'
+                        })
+
+                        changeDescriptionForm.handleReset()
+                        props.setChangeDescriptionIsOpen(false)
+
+                        dispatch(loadAppDescription())
+                    }
+                    else{
+                        alert.show("Unknown error", {
+                            type: 'error'
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    if(error.response.data.indexOf("(Update unsuccessfully. Server not found any pplication description.)") !== -1){
+                        alert.show("Update unsuccessfully. Server not found any pplication description.", {
+                            type: 'error'
+                        })
+                    }
+                    else{
+                        alert.show("Unknown error", {
+                            type: 'error'
+                        })
+                    }
+                })
+            }
+            else{
+                alert.show("You must enter some information if you want to change application description.", {
+                    type: 'info'
+                })
+            }
+            
+            e.preventDefault()
         },
         fields: [descriptionField]
     })
 
+    function Validation(){
+        if(descriptionField.value === ""){
+            return false
+        }
+
+        return true
+    }
     return (
         <Modal ariaHideApp={false} isOpen={props.changeDescriptionIsOpen} closeTimeoutMS={500}
             className="new-member-inner-login" onRequestClose={() => props.setChangeDescriptionIsOpen(false)}

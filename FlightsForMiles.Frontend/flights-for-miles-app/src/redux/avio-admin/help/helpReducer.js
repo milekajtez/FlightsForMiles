@@ -1,7 +1,8 @@
-import { DESCRIPTION_LOADING } from "./helpTypes"
+import { DESCRIPTION_LOADING, QUESTIONS_LOADING } from "./helpTypes"
 
 const initialState =  {
-    appDescription: {}
+    appDescription: {},
+    allQuestions: []
 }
 
 const helpReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const helpReducer = (state = initialState, action) => {
             return {
                 ...state,
                 appDescription: action.payload
+            }
+        case QUESTIONS_LOADING:
+            return {
+                ...state,
+                allQuestions: action.payload
             }
         default:
             return state

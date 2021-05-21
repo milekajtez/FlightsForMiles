@@ -30,9 +30,42 @@ namespace FlightsForMiles.Controllers
         #endregion
         #region 2 - Method for update application description
         [HttpPut]
-        public IActionResult UpdateAppDescription(AppDescriptionRequestDTO updatedAppDescription) 
+        public IActionResult UpdateAppDescription(AppDescriptionRequestDTO updatedAppDescription)
         {
             _helpService.UpdateAppDescription(updatedAppDescription);
+            return NoContent();
+        }
+        #endregion
+        #region 3 - Method for load questions
+        [HttpGet]
+        [Route("LoadQuestions")]
+        public IActionResult LoadQuestions()
+        {
+            List<IQuestionResponseDTO> result = _helpService.LoadQuestions();
+            return Ok(result);
+        }
+        #endregion
+        #region 4 - Method for delete question
+        [HttpDelete]
+        [Route("{questionID}")]
+        public IActionResult DeleteQuestion(string questionID)
+        {
+            bool isDeleted = _helpService.DeleteQuestion(questionID);
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Deleting unsuccessfully. Question with sended id doesn't exsist.");
+            
+        }
+        #endregion
+        #region 5 - Method for update (answer) on question
+        [HttpPut]
+        [Route("UpdateQuestion")]
+        public IActionResult UpdateQuestion(QuestionRequestDTO questionRequestDTO) 
+        {
+            _helpService.UpdateQuestion(questionRequestDTO);
             return NoContent();
         }
         #endregion

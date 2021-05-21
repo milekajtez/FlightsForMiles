@@ -9,5 +9,8 @@ namespace FlightsForMiles.BLL.Contracts.Services.Help
     {
         IAppDescriptionResponseDTO LoadAppDescription();
         void UpdateAppDescription(IAppDescriptionRequestDTO appDescriptionRequestDTO);
+        List<IQuestionResponseDTO> LoadQuestions();
+        bool DeleteQuestion(string questionID);
+        void UpdateQuestion(IQuestionRequestDTO questionRequestDTO);
     }
 }

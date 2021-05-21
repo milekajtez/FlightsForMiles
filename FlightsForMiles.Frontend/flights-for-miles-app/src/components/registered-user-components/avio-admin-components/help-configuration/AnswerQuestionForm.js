@@ -1,8 +1,14 @@
 import Modal from 'react-modal'
 import React from 'react'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { useDispatch } from 'react-redux'
+import { useAlert } from 'react-alert'
+import { changeQuestion, loadQuestions } from '../../../../redux/avio-admin/help/helpAction'
 
 function AnswerQuestionForm(props) {
+    const dispatch = useDispatch()
+    const alert = useAlert()
+
     const answerField = useFormField({
         initialValue: '',
         isRequired: false
@@ -10,15 +16,51 @@ function AnswerQuestionForm(props) {
 
     const answerForm = useFormWithFields({
         onSubmit: (e) => {
-            //pocetak logike za odgovor na pitanje
+            dispatch(changeQuestion({
+                questionID: props.answerIsOpen.currentQuest.questionID,
+                questionText: props.answerIsOpen.currentQuest.questionText,
+                answer: answerField.value,
+            }))
+            .then(response => {
+                if(response.status === 204){
+                    alert.show("Update successfully.", {
+                        type: 'success'
+                    })
+
+                    answerForm.handleReset()
+                    props.setAnswerIsOpen({ open: !props.answerIsOpen.open, currentQuest: props.answerIsOpen.currentQuest })
+                    
+                    dispatch(loadQuestions())
+                }
+                else{
+                    alert.show('Unknown error.', {
+                        type: 'error'
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                if(error.response.data.indexOf("(Update unsuccessfully. Server not found any question.)") !== -1){
+                    alert.show("Update unsuccessfully. Server not found any question.", {
+                        type: 'error'
+                    })
+                }
+                else {
+                    alert.show("Unknown error.", {
+                        type: 'error'
+                    })  
+                }
+            })
+
             e.preventDefault()
         },
         fields: [answerField]
     })
 
     return (
-        <Modal ariaHideApp={false} isOpen={props.answerIsOpen} closeTimeoutMS={500}
-            className="new-member-inner-login" onRequestClose={() => props.setAnswerIsOpen(false)}
+        <Modal ariaHideApp={false} isOpen={props.answerIsOpen.open} closeTimeoutMS={500}
+            className="new-member-inner-login" onRequestClose={() => props.setAnswerIsOpen({ open: !props.answerIsOpen.open, 
+                currentQuest: props.answerIsOpen.currentQuest })}
             style={{
                 overlay: {
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -28,8 +70,11 @@ function AnswerQuestionForm(props) {
             <div className="login-box">
                 <div style={{ color: "#fff", marginTop: "1%", textAlign: 'center'}}>
                     <h2>ANSWER ON QUESTION</h2>
-                    When application will be done?    
+                    {props.answerIsOpen.currentQuest.questionText}  
                 </div>
+                <hr style={{backgroundColor: 'aqua'}}></hr>
+                <p style={{color: 'aqua'}}>Current answer:</p>
+                <p style={{color: 'white'}}>{props.answerIsOpen.currentQuest.answer}</p>
                 <hr style={{backgroundColor: 'aqua'}}></hr>
                 <form onSubmit={answerForm.handleSubmit}>
                     <div className="user-box">

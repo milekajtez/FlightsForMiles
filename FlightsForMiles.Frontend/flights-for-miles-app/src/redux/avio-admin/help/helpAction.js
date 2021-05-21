@@ -1,5 +1,5 @@
 import helpService from "../../../services/HelpService"
-import { DESCRIPTION_LOADING } from "./helpTypes"
+import { DESCRIPTION_LOADING, QUESTIONS_LOADING } from "./helpTypes"
 
 export const loadAppDescriptionAction = (appDescription) => {
     return {
@@ -25,6 +25,49 @@ export const loadAppDescription = () => {
 export const changeAppDescription = (newAppDescription) => () => 
     new Promise(function(resolve, reject){
         helpService.changeAppDescription(newAppDescription)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+
+export const loadQuestionsAction = (allQuestions) => {
+    return {
+        type: QUESTIONS_LOADING,
+        payload: allQuestions
+    }
+}    
+    
+export const loadQuestions = () => {
+    return (dispatch) => {
+        helpService.loadQuestions()
+        .then(response => {
+            if(response.status === 200){
+                dispatch(loadQuestionsAction(response.data))
+            }
+        })  
+        .catch(error => {
+            console.log(error)
+        })
+    }
+}
+
+export const deleteQuestion = (questionID) => () => 
+    new Promise(function(resolve, reject){
+        helpService.deleteQuestion(questionID)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+
+export const changeQuestion = (changedQuestion) => () => 
+    new Promise(function(resolve, reject){
+        helpService.changeQuestion(changedQuestion)
         .then(response => {
             resolve(response)
         })

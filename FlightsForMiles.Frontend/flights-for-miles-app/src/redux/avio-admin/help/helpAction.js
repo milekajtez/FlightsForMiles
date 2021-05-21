@@ -75,3 +75,15 @@ export const changeQuestion = (changedQuestion) => () =>
             reject(error)
         })
     })
+
+
+export const askQuestion = (question) => () => 
+    new Promise(function(resolve, reject) {
+        helpService.askQuestion(question)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })

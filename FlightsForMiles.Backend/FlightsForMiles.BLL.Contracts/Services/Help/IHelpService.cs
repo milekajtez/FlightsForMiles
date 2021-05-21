@@ -12,5 +12,7 @@ namespace FlightsForMiles.BLL.Contracts.Services.Help
         List<IQuestionResponseDTO> LoadQuestions();
         bool DeleteQuestion(string questionID);
         void UpdateQuestion(IQuestionRequestDTO questionRequestDTO);
+        Guid AddQuestion(IAskQuestionRequestDTO askQuestionRequestDTO);
+        IQuestionResponseDTO LoadQuestion(Guid id);
     }
 }

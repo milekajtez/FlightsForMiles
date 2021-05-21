@@ -29,7 +29,15 @@ const helpService = {
         }
         
         return API.put(`Helps/UpdateQuestion`, body)
-    }
+    },
+
+    askQuestion: (question) => {
+        var body = {
+            Question: question
+        }
+        
+        return API.post(`Helps`, body)
+    },
 }
 
 export default helpService

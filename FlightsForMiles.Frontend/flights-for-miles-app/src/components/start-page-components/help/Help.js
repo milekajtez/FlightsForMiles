@@ -1,5 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
+import DisplayAllQuestions from './DisplayAllQuestions'
+import DisplayAppDescription from './DisplayAppDescription'
 
 function Help(props) {
     return (
@@ -12,17 +14,11 @@ function Help(props) {
                 }
             }}
         >
-            <div style={{ backgroundColor: "#141e30", padding: "10px", color: "white" }}>
-                <img src="../assets/images/help.png" alt="" width="100%" height="400px" />
+            <div style={{ backgroundColor: "#141e30", padding: "10px", color: "white", textAlign: 'center' }}>
+                <img src="../assets/images/help.png" alt="" width="80%" height="400px" />
                 <h3 style={{ textAlign: "center" }}>How FlightsForMiles works?</h3>
-                <p>Ovde ce ici nova pravila i tekstovi...kako budem radio projekat</p>
-                <p>Ovde ce biti skup accordition-a, gde ce svaki biti posebna komponenta</p>
-                <p>Scroll test</p>
-                <p>Scroll test</p>
-                <p>Scroll test</p>
-                <p>Scroll test</p>
-                <p>Scroll test</p>
-                <p>Scroll test</p>
+                <DisplayAppDescription />
+                <DisplayAllQuestions />
             </div>
         </Modal>
     )

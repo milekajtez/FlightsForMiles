@@ -69,5 +69,26 @@ namespace FlightsForMiles.Controllers
             return NoContent();
         }
         #endregion
+        #region 6 - Method for ask question
+        [HttpPost]
+        public IActionResult AddQuestion(AskQuestionRequestDTO question) 
+        {
+            Guid newQuestionID = _helpService.AddQuestion(question);
+            return CreatedAtRoute("GetQuestion", new { id = newQuestionID }, question);
+        }
+        #endregion
+        #region 7 - Get (Load one user)
+        [HttpGet("{id}", Name = "GetQuestion")]
+        public ActionResult GetGetQuestionUser(Guid id)
+        {
+            IQuestionResponseDTO newQuestion = _helpService.LoadQuestion(id);
+            if (newQuestion != null)
+            {
+                return Ok(newQuestion);
+            }
+
+            return NotFound("Server not found a question.");
+        }
+        #endregion
     }
 }

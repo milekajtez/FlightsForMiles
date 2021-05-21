@@ -66,6 +66,42 @@ namespace FlightsForMiles.BLL.Services
             }
         }
         #endregion
+        #region 6 - Method for ask question
+        public Guid AddQuestion(IAskQuestionRequestDTO askQuestionRequestDTO)
+        {
+            if (askQuestionRequestDTO == null)
+            {
+                throw new ArgumentNullException(nameof(askQuestionRequestDTO));
+            }
+
+            IQuestion question = ConvertAskQuestionObjectToQuestion(askQuestionRequestDTO);
+            return _helpRepository.AddQuestion(question).Result;
+        }
+        #endregion
+        #region 7 - Method for load one question
+        public IQuestionResponseDTO LoadQuestion(Guid id)
+        {
+            List<IQuestion> questions = _helpRepository.LoadQuestions();
+            IQuestionResponseDTO question = null;
+
+            foreach (var quest in questions) 
+            {
+                if (quest.QuestionID.Equals(id)) 
+                {
+                    question = ConvertQuestionObjectToResponse(quest);
+                    break;
+                }
+            }
+
+            if (question == null) 
+            {
+                throw new KeyNotFoundException("Server not found question with entered id.");
+            }
+
+            return question;
+
+        }
+        #endregion
 
         #region Converting methods
         private IAppDescriptionResponseDTO ConvertAppDescriptionObjectToResponse(IAppDescription appDescription) 
@@ -94,6 +130,11 @@ namespace FlightsForMiles.BLL.Services
         private IQuestion ConverQuestionRequestObjectToQuestion(IQuestionRequestDTO questionRequestDTO) 
         {
             return new Question(questionRequestDTO.QuestionID, questionRequestDTO.QuestionText, questionRequestDTO.Answer);
+        }
+
+        private IQuestion ConvertAskQuestionObjectToQuestion(IAskQuestionRequestDTO askQuestionRequestDTO) 
+        {
+            return new Question(Guid.NewGuid(), askQuestionRequestDTO.Question, "No answered yet");
         }
         #endregion
         #region Validation method

@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Info from './Info'
 import Pictures from './Pictures'
+import QuestionMark from './QuestionMark'
 
 function StartPage() {
     return (
@@ -9,6 +10,7 @@ function StartPage() {
             <Header /> 
             <Info />
             <Pictures />
+            <QuestionMark />
         </div>
     )
 }

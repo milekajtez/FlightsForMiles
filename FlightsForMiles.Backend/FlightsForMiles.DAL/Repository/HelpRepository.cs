@@ -1,6 +1,7 @@
 ﻿using FlightsForMiles.DAL.Contracts.Model;
 using FlightsForMiles.DAL.Contracts.Repository;
 using FlightsForMiles.DAL.DataModel.help;
+using FlightsForMiles.DAL.Modal;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -105,6 +106,37 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             return false;
+        }
+        #endregion
+        #region 6 - Method for ask question
+        public async Task<Guid> AddQuestion(IQuestion question)
+        {
+            var resultFind = await _context.Questions.FindAsync(question.QuestionID);
+            if (resultFind == null) 
+            {
+                var questions = _context.Questions;
+                foreach (var quest in questions) 
+                {
+                    if (quest.Question_text.Equals(question.QuestionText)) 
+                    {
+                        throw new Exception("Add question unsuccessfully. We already have the same question. Please find that in Help window.");
+                    }
+                }
+
+                Question newQuestion = new Question() 
+                {
+                    Question_ID = question.QuestionID,
+                    Question_text = question.QuestionText,
+                    Answer_text = question.Answer
+                };
+
+                await _context.Questions.AddAsync(newQuestion);
+                await _context.SaveChangesAsync();
+
+                return newQuestion.Question_ID;
+            }
+
+            throw new Exception("Add question unsuccessfully because server can't to add new question currently.");
         }
         #endregion
     }

@@ -13,5 +13,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         List<IQuestion> LoadQuestions();
         Task<bool> DeleteQuestion(string questionID);
         Task<bool> UpdateQuestion(IQuestion question);
+        Task<Guid> AddQuestion(IQuestion question);
     }
 }

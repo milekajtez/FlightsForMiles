@@ -30,12 +30,11 @@ const flightService = {
 
     changeFlight: (changedFlight) => {
         var body = {
-            //FlightID = changedFlight.flightID,      //!!!
             StartTime: changedFlight.startTime,
             EndTime: changedFlight.endTime,
             StartLocation: changedFlight.startLocation,
             EndLocation: changedFlight.endLocation,
-            FlightLengthTime: changedFlight.flightLengthTime,
+            FlightTime: changedFlight.flightTime,
             FlightLength: changedFlight.flightLength,
             NumOfTransfers: changedFlight.numOfTransfers,
             AllTransfers: changedFlight.allTransfers,

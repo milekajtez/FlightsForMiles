@@ -9,9 +9,9 @@ import ChangeFlight from './ChangeFlight'
 import FlightMoreInfo from './FlightMoreInfo'
 
 function AllFlights() {
-    const [moreInfoIsOpen, setMoreInfoIsOpen] = useState(false)
+    const [moreInfoIsOpen, setMoreInfoIsOpen] = useState({ isOpen: false, currentFlight: {} })
     const [addIsOpen, setAddIsOpen] = useState(false)
-    const [changeIsOpen, setChangeIsOpen] = useState(false)
+    const [changeIsOpen, setChangeIsOpen] = useState({ isOpen: false, currentFlight: {} })
 
     const dispatch = useDispatch()
     const alert = useAlert()
@@ -32,7 +32,6 @@ function AllFlights() {
                     type: 'success'
                 })
 
-                // na kraju ponovo ucitavanje jer se promenilo stanje baze
                 dispatch(loadFlights())
             }
             else {
@@ -83,10 +82,10 @@ function AllFlights() {
                                     <td>{flight.endLocation}</td>
                                     <td>{flight.airlineID}</td>
                                     <td>
-                                        <button className="btn btn-info" onClick={() => setMoreInfoIsOpen(true)}><i className="fas fa-info"></i> MORE INFO</button>
+                                        <button className="btn btn-info" onClick={() => setMoreInfoIsOpen({ isOpen: true, currentFlight: flight})}><i className="fas fa-info"></i> MORE INFO</button>
                                     </td>
                                     <td>
-                                        <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
+                                        <button className="btn btn-warning" onClick={() => setChangeIsOpen({ isOpen: true, currentFlight: flight})}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
                                         <button className="btn btn-danger" onClick={() => deleteCurrentFlight(flight.flightID)}><i className="fas fa-trash-alt"></i> DELETE</button>
                                     </td>
                                 </tr>

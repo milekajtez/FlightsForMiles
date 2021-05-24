@@ -18,7 +18,6 @@ namespace FlightsForMiles.DAL.Repository
             _context = context;
         }
 
-
         #region 1 - Method for add new flight
         public async Task<long> AddFlight(IFlight newFlight)
         {
@@ -54,12 +53,38 @@ namespace FlightsForMiles.DAL.Repository
             throw new KeyNotFoundException("Add flight is unsuccessffully. Server not found selected airline.");
         }
         #endregion
-
-        public Task<IFlight> LoadFlight(int id)
+        #region 2 - Method for load one flight
+        public async Task<IFlight> LoadFlight(int id)
         {
-            throw new NotImplementedException();
-        }
+            var resultFind = await _context.Flights.FindAsync(id);
+            if (resultFind != null)
+            {
+                IFlight flight = new FlightDataModel()
+                {
+                    FlightID = resultFind.Id,
+                    StartTime = resultFind.Start_time.ToString(),
+                    EndTime = resultFind.End_time.ToString(),
+                    StartLocation = resultFind.Start_location,
+                    EndLocation = resultFind.End_location,
+                    FlightTime = resultFind.Flight_length_time.ToString(),
+                    FlightLengthKM = resultFind.Flight_length_km.ToString(),
+                    SumOfAllGrades = resultFind.Sum_of_all_grades,
+                    AdditionalInformation = resultFind.Additional_information,
+                    AllTransfers = resultFind.All_transfers,
+                    LugageWeight = resultFind.Lugage_weight.ToString(),
+                    NumberOfGrades = resultFind.Number_of_grades,
+                    NumberOfTransfers = resultFind.Number_of_transfers.ToString(),
+                    PlaneName = resultFind.Plane_name,
+                    AirlineID = resultFind.Airline.Id.ToString()
+                };
 
+                return flight;
+            }
+
+            throw new NotImplementedException("Flight with this id (" + id + ") doesn't exsist.");
+        }
+        #endregion
+        #region 3 - Method for delete flight
         public async Task<bool> DeleteFlight(string flightID)
         {
             var resultFind = await _context.Flights.FindAsync(int.Parse(flightID));
@@ -72,7 +97,8 @@ namespace FlightsForMiles.DAL.Repository
 
             return false;
         }
-
+        #endregion
+        #region 4 - Method for load all flights
         public List<IFlight> LoadAllFlights()
         {
             var flights = _context.Flights.Include(a => a.Airline);
@@ -87,8 +113,8 @@ namespace FlightsForMiles.DAL.Repository
                 result.Add(new FlightDataModel()
                 {
                     FlightID = flight.Id,
-                    StartTime = flight.Start_time.Date.ToString(),
-                    EndTime = flight.End_time.Date.ToString(),
+                    StartTime = flight.Start_time.ToString(),
+                    EndTime = flight.End_time.ToString(),
                     StartLocation = flight.Start_location,
                     EndLocation = flight.End_location,
                     FlightTime = flight.Flight_length_time.ToString(),
@@ -106,12 +132,33 @@ namespace FlightsForMiles.DAL.Repository
 
             return result;
         }
-
-       
-
+        #endregion
+        #region 5 - Method for update flight
         public void UpdateFlight(string flightID, IFlight flight)
         {
-            throw new NotImplementedException();
+            var resultFind = _context.Flights.Find(int.Parse(flightID));
+            if (resultFind != null)
+            {
+                resultFind.Start_time = flight.StartTime.Trim() != "" ? DateTime.Parse(flight.StartTime) : resultFind.Start_time;
+                resultFind.End_time = flight.EndTime.Trim() != "" ? DateTime.Parse(flight.EndTime) : resultFind.End_time;
+                resultFind.Start_location = flight.StartLocation != "" ? flight.StartLocation : resultFind.Start_location;
+                resultFind.End_location = flight.EndLocation != "" ? flight.EndLocation : resultFind.End_location;
+                resultFind.Flight_length_time = flight.FlightTime != "" ? double.Parse(flight.FlightTime) : resultFind.Flight_length_time;
+                resultFind.Flight_length_km = flight.FlightLengthKM != "" ? double.Parse(flight.FlightLengthKM) : resultFind.Flight_length_km;
+                resultFind.Number_of_transfers = flight.NumberOfTransfers != "" ? uint.Parse(flight.NumberOfTransfers) : resultFind.Number_of_transfers;
+                resultFind.All_transfers = flight.AllTransfers != "" ? flight.AllTransfers : resultFind.All_transfers;
+                resultFind.Plane_name = flight.PlaneName != "" ? flight.PlaneName : resultFind.Plane_name;
+                resultFind.Lugage_weight = flight.LugageWeight != "" ? double.Parse(flight.LugageWeight) : resultFind.Lugage_weight;
+                resultFind.Additional_information = flight.AdditionalInformation != "" ? flight.AdditionalInformation : resultFind.Additional_information;
+
+                _context.Flights.Update(resultFind);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Updating unsuccessfully. Server not found flight for updating.");
+            }
         }
+        #endregion
     }
 }

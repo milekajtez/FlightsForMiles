@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj": {}
+    "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj": {}
   },
   "projects": {
-    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj": {
+    "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
         "projectName": "FlightsForMiles.BLL.Contracts",
-        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
-        "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\obj\\",
+        "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj",
+        "packagesPath": "C:\\Users\\m.kajtez\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\m.kajtez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,21 +58,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj": {
+    "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj",
+        "projectUniqueName": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj",
         "projectName": "FlightsForMiles.BLL",
-        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj",
-        "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\obj\\",
+        "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj",
+        "packagesPath": "C:\\Users\\m.kajtez\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\m.kajtez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,11 +90,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj": {
-                "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj"
+              "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj": {
+                "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj"
               },
-              "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
-                "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj"
+              "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
+                "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj"
               }
             }
           }
@@ -115,21 +123,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
+    "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj",
         "projectName": "FlightsForMiles.DAL.Contracts",
-        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj",
-        "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\obj\\",
+        "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj",
+        "packagesPath": "C:\\Users\\m.kajtez\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\m.kajtez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -169,21 +181,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {
+    "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
         "projectName": "FlightsForMiles.DAL",
-        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
-        "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\obj\\",
+        "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj",
+        "packagesPath": "C:\\Users\\m.kajtez\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\m.kajtez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -197,8 +213,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
-                "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj"
+              "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj": {
+                "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL.Contracts\\FlightsForMiles.DAL.Contracts.csproj"
               }
             }
           }
@@ -249,21 +265,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj": {
+    "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj",
+        "projectUniqueName": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj",
         "projectName": "FlightsForMiles",
-        "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj",
-        "packagesPath": "C:\\Users\\milek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\obj\\",
+        "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj",
+        "packagesPath": "C:\\Users\\m.kajtez\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\milek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\m.kajtez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -277,14 +297,14 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj": {
-                "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj"
+              "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj": {
+                "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL.Contracts\\FlightsForMiles.BLL.Contracts.csproj"
               },
-              "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj": {
-                "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj"
+              "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj": {
+                "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.BLL\\FlightsForMiles.BLL.csproj"
               },
-              "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {
-                "projectPath": "C:\\Users\\milek\\OneDrive\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj"
+              "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj": {
+                "projectPath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles.DAL\\FlightsForMiles.DAL.csproj"
               }
             }
           }
@@ -372,7 +392,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

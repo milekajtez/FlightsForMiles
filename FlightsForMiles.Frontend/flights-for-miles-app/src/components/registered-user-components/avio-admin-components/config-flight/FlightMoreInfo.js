@@ -3,8 +3,9 @@ import React from 'react'
 
 function FlightMoreInfo(props) {
     return (
-        <Modal ariaHideApp={false} isOpen={props.moreInfoIsOpen} closeTimeoutMS={500}
-            className="new-member-inner-reg" onRequestClose={() => props.setMoreInfoIsOpen(false)}
+        <Modal ariaHideApp={false} isOpen={props.moreInfoIsOpen.isOpen} closeTimeoutMS={500}
+            className="new-member-inner-reg" onRequestClose={() => props.setMoreInfoIsOpen({ isOpen: !props.moreInfoIsOpen.isOpen, 
+                currentFlight: props.moreInfoIsOpen.currentFlight })}
             style={{
                 overlay: {
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -13,42 +14,51 @@ function FlightMoreInfo(props) {
             }}>
             <div className="reg-box" style={{ color: "white" }}>
                 <h2>FLIGHT MORE INFO</h2>
-                <div style={{ textAlign: "center" }}>
+                {
+                    props.moreInfoIsOpen.currentFlight.flightTime !== undefined ? 
+                    <div style={{ textAlign: "center" }}>
+                    <span className="user-box" style={{ display: "inline-block" }}>
+                        <h5 style={{ color: "aqua" }}>Flight time (hours)</h5>
+                        <p>{props.moreInfoIsOpen.currentFlight.flightTime}</p>
+                    </span>
                     <span className="user-box" style={{ display: "inline-block" }}>
                         <h5 style={{ color: "aqua" }}>Flight length (km)</h5>
-                        <p>3</p>
+                        <p>{props.moreInfoIsOpen.currentFlight.flightLengthKM}</p>
                     </span>
                     <span className="user-box" style={{ display: "inline-block" }}>
                         <h5 style={{ color: "aqua" }}>Number of transfers</h5>
-                        <p>3</p>
+                        <p>{props.moreInfoIsOpen.currentFlight.numberOfTransfers}</p>
                     </span>
                     <span className="user-box" style={{ display: "inline-block" }}>
                         <h5 style={{ color: "aqua" }}>All transfers</h5>
-                        <p>Belgrade - Budapest - Berlin</p>
+                        <p>{props.moreInfoIsOpen.currentFlight.allTransfers}</p>
                     </span>
                     <span className="user-box" style={{ display: "inline-block" }}>
                         <h5 style={{ color: "aqua" }}>Plane name</h5>
-                        <p>Plane name test</p>
+                        <p>{props.moreInfoIsOpen.currentFlight.planeName}</p>
                     </span>
                     <span className="user-box" style={{ display: "inline-block" }}>
                         <h5 style={{ color: "aqua" }}>Lugage weight (kg)</h5>
-                        <p>3</p>
-                    </span>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                    <span className="user-box" style={{ display: "inline-block" }}>
-                        <h5 style={{ color: "aqua" }}>Number of economic class seats</h5>
-                        <p>3</p>
+                        <p>{props.moreInfoIsOpen.currentFlight.lugageWeight}</p>
                     </span>
                     <span className="user-box" style={{ display: "inline-block" }}>
-                        <h5 style={{ color: "aqua" }}>Number of first class seats</h5>
-                        <p>3</p>
+                        <h5 style={{ color: "aqua" }}>Sum of all grades</h5>
+                        <p>{props.moreInfoIsOpen.currentFlight.sumOfAllGrades}</p>
                     </span>
                     <span className="user-box" style={{ display: "inline-block" }}>
-                        <h5 style={{ color: "aqua" }}>Number of business class seats</h5>
-                        <p>3</p>
+                        <h5 style={{ color: "aqua" }}>Number of grades</h5>
+                        <p>{props.moreInfoIsOpen.currentFlight.numberOfGrades}</p>
                     </span>
-                </div>
+                    <div>
+                        <span className="user-box" style={{ display: "inline-block" }}>
+                            <h5 style={{ color: "aqua" }}>Additional informations</h5>
+                            <p>{props.moreInfoIsOpen.currentFlight.additionalInformation}</p>
+                        </span>
+                    </div>
+                </div>: null
+                }
+                
+                
             </div>
         </Modal>
     )

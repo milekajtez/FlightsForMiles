@@ -27,6 +27,14 @@ function AddFlights(props) {
         initialValue: '',
         isRequired: true
     })
+    const startHourField = useFormField({
+        initialValue: '',
+        isRequired: true
+    })
+    const endHourField = useFormField({
+        initialValue: '',
+        isRequired: true
+    })
     const startLocationField = useFormField({
         initialValue: '',
         isRequired: true
@@ -70,20 +78,21 @@ function AddFlights(props) {
 
     const addFlightForm = useFormWithFields({
         onSubmit: (e) => {
-            dispatch(addFlight({
-                startTime: startTimeField.value,
-                endTime: endTimeField.value,
-                startLocation: startLocationField.value,
-                endLocation: endLocationField.value,
-                flightTime: flightTimeField.value,
-                flightLength: flightLengthField.value,
-                numOfTransfers: numOfTransfersField.value,
-                allTransfers: allTransfersField.value,
-                planeName: planeNameField.value,
-                lugageWeight: luggageWeightField.value,
-                airline: airlineField.value,
-                additionalInfo: additionalInfoField.value
-            }))
+            if (Validation()) {
+                dispatch(addFlight({
+                    startTime: startTimeField.value + " " + startHourField.value,
+                    endTime: endTimeField.value + " " + endHourField.value,
+                    startLocation: startLocationField.value,
+                    endLocation: endLocationField.value,
+                    flightTime: flightTimeField.value,
+                    flightLength: flightLengthField.value,
+                    numOfTransfers: numOfTransfersField.value,
+                    allTransfers: allTransfersField.value,
+                    planeName: planeNameField.value,
+                    lugageWeight: luggageWeightField.value,
+                    airline: airlineField.value,
+                    additionalInfo: additionalInfoField.value
+                }))
                 .then(response => {
                     if (response.status === 201) {
                         alert.show("Adding flight successfully.", {
@@ -113,14 +122,59 @@ function AddFlights(props) {
                         })
                     }
                 })
+            }
 
             e.preventDefault()
         },
-        fields: [startTimeField, endTimeField, startLocationField, endLocationField, flightLengthField, 
-            flightTimeField, additionalInfoField, numOfTransfersField, allTransfersField, planeNameField, 
+        fields: [startTimeField, endTimeField, startHourField, endHourField, startLocationField, endLocationField, flightLengthField,
+            flightTimeField, additionalInfoField, numOfTransfersField, allTransfersField, planeNameField,
             luggageWeightField, airlineField]
     })
 
+    function Validation() {
+        var timeError = "";
+        var flightTimeError = "";
+        var flightLengthError = "";
+        var numOfTransfersError = "";
+        var lugageWeightError = "";
+
+        var start = startTimeField.value + ' ' + startHourField.value
+        var end = endTimeField.value + ' ' + endHourField.value
+        var startDate = new Date(start);
+        var endDate = new Date(end)
+
+        if(startDate.getTime() === endDate.getTime() || startDate.getTime() > endDate.getTime()){
+            timeError = "Start time must be older then end time. "
+        }
+
+        if (parseFloat(flightTimeField.value) <= 0) {
+            flightTimeError = "Fligth time must be positive number. "
+        }
+
+        if (parseFloat(flightLengthField.value) <= 0) {
+            flightLengthError = "Fligth length must be positive number. "
+        }
+
+        if (parseInt(numOfTransfersField.value) < 0) {
+            numOfTransfersError = "Number of transfers can't be negative number. "
+        }
+
+        if (parseFloat(luggageWeightField.value) <= 0) {
+            lugageWeightError = "Lugage weight must be positive number."
+        }
+
+        if(timeError === "" && flightTimeError === "" && flightLengthError === "" 
+            && numOfTransfersError === "" && lugageWeightError === ""){
+                return true
+            }
+        
+            alert.show(timeError +  flightTimeError + flightLengthError
+                 + numOfTransfersError + lugageWeightError, {
+                     type: 'error'
+                 })
+
+        return false
+    }
 
     return (
         <Modal ariaHideApp={false} isOpen={props.addIsOpen} closeTimeoutMS={500}
@@ -138,12 +192,24 @@ function AddFlights(props) {
                         <span className="user-box">
                             <input type="date" value={startTimeField.value} required={startTimeField.isRequired}
                                 onChange={startTimeField.handleChange} id="startTimeField" ></input>
-                            <label>Start time</label>
+                            <label>Start date time</label>
                         </span>
                         <span className="user-box">
                             <input type="date" value={endTimeField.value} required={endTimeField.isRequired}
                                 onChange={endTimeField.handleChange} id="endTimeField" />
-                            <label>End time</label>
+                            <label>End date time</label>
+                        </span>
+                    </div>
+                    <div>
+                        <span className="user-box">
+                            <input type="time" value={startHourField.value} required={startHourField.isRequired}
+                                onChange={startHourField.handleChange} id="startHourField" ></input>
+                            <label>Start hour time</label>
+                        </span>
+                        <span className="user-box">
+                            <input type="time" value={endHourField.value} required={endHourField.isRequired}
+                                onChange={endHourField.handleChange} id="endHourField" />
+                            <label>End hour time</label>
                         </span>
                     </div>
                     <div>

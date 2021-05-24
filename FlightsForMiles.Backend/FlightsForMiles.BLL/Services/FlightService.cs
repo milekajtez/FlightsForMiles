@@ -97,7 +97,10 @@ namespace FlightsForMiles.BLL.Services
 
         private IFlight ConvertRequestObjectToUpdatedFlight(string flightID, IFlightRequestDTO flightRequestDTO)
         {
-            return new UpdatedFlight(/*int.Parse(destinationID), destinationRequestDTO.AirportName, destinationRequestDTO.City, destinationRequestDTO.Country, destinationRequestDTO.AirlineID*/);
+            return new UpdatedFlight(int.Parse(flightID), flightRequestDTO.StartTime, flightRequestDTO.EndTime, flightRequestDTO.StartLocation, flightRequestDTO.EndLocation,
+               flightRequestDTO.FlightTime, flightRequestDTO.FlightLength, 0, 0, flightRequestDTO.AdditionalInfo,
+               flightRequestDTO.NumOfTransfers, flightRequestDTO.AllTransfers, flightRequestDTO.PlaneName, flightRequestDTO.LugageWeight,
+               "");
         }
         #endregion
         #region Validation method

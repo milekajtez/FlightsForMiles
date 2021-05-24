@@ -67,6 +67,7 @@
 
 [type="date"]::-webkit-inner-spin-button {
   display: none;
+  content: attr(placeholder);
 }
 
 [type="date"]::-webkit-calendar-picker-indicator {
@@ -79,6 +80,19 @@ input[type=date]:required:invalid::-webkit-datetime-edit {
 }
 
 input[type=date]:focus::-webkit-datetime-edit {
+    color: white !important;
+}
+
+[type="time"]::-webkit-calendar-picker-indicator {
+    opacity: 1;
+    background-color: aqua;
+}
+
+input[type=time]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
+}
+
+input[type=time]:focus::-webkit-datetime-edit {
     color: white !important;
 }
 

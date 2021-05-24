@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useAlert } from 'react-alert'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { loadFlights, deleteFlight } from '../../../../redux/avio-admin/flight/flightAction'
 import AddFlight from './AddFlight'
 import ChangeFlight from './ChangeFlight'
 import FlightMoreInfo from './FlightMoreInfo'
@@ -8,12 +13,49 @@ function AllFlights() {
     const [addIsOpen, setAddIsOpen] = useState(false)
     const [changeIsOpen, setChangeIsOpen] = useState(false)
 
-    const deleteFlight = (flightID) => {
-        if(window.confirm(`Are you sure to delete flight with id ${flightID}?`)){
-            console.log("Deleting....")
-        }
+    const dispatch = useDispatch()
+    const alert = useAlert()
+
+    const flights = useSelector(
+        state => state.flight
+    )
+
+    useEffect(() => {
+        dispatch(loadFlights())
+    }, [dispatch])
+
+    const deleteCurrentFlight = (flightID) => {
+        dispatch(deleteFlight(flightID))
+        .then(response => {
+            if (response.status === 204) {
+                alert.show("Deleting flight successfully.", {
+                    type: 'success'
+                })
+
+                // na kraju ponovo ucitavanje jer se promenilo stanje baze
+                dispatch(loadFlights())
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            if(error.response.data.indexOf("(Deleting unsuccessfully. Flight with sended id doesn't exsist.)") !== -1){
+                alert.show("Deleting unsuccessfully. Flight with sended id doesn't exsist.", {
+                    type: 'error'
+                })
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })  
+            }
+        })
     }
-    
+
     return (
         <div>
             <table className="items-table">
@@ -30,81 +72,27 @@ function AllFlights() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>
-                            <button className="btn btn-info" onClick={() => setMoreInfoIsOpen(true)}><i className="fas fa-info"></i> MORE INFO</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteFlight(1)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>
-                            <button className="btn btn-info" onClick={() => setMoreInfoIsOpen(true)}><i className="fas fa-info"></i> MORE INFO</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteFlight(2)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>
-                            <button className="btn btn-info" onClick={() => setMoreInfoIsOpen(true)}><i className="fas fa-info"></i> MORE INFO</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteFlight(3)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>
-                            <button className="btn btn-info" onClick={() => setMoreInfoIsOpen(true)}><i className="fas fa-info"></i> MORE INFO</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteFlight(4)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>
-                            <button className="btn btn-info" onClick={() => setMoreInfoIsOpen(true)}><i className="fas fa-info"></i> MORE INFO</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
-                            <button className="btn btn-danger" onClick={() => deleteFlight(5)}><i className="fas fa-trash-alt"></i> DELETE</button>
-                        </td>
-                    </tr>
+                    {
+                        flights.allFlights.map((flight => {
+                            return (
+                                <tr key={flight.flightID}>
+                                    <td>{flight.flightID}</td>
+                                    <td>{flight.startTime}</td>
+                                    <td>{flight.endTime}</td>
+                                    <td>{flight.startLocation}</td>
+                                    <td>{flight.endLocation}</td>
+                                    <td>{flight.airlineID}</td>
+                                    <td>
+                                        <button className="btn btn-info" onClick={() => setMoreInfoIsOpen(true)}><i className="fas fa-info"></i> MORE INFO</button>
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-warning" onClick={() => setChangeIsOpen(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>&nbsp;
+                                        <button className="btn btn-danger" onClick={() => deleteCurrentFlight(flight.flightID)}><i className="fas fa-trash-alt"></i> DELETE</button>
+                                    </td>
+                                </tr>
+                            )
+                        }))
+                    }
                 </tbody>
             </table>
             <div className="box">
@@ -116,7 +104,7 @@ function AllFlights() {
                     ADD NEW FLIGHT
                 </button>
             </div>
-            <AddFlight addIsOpen={addIsOpen} setAddIsOpen={setAddIsOpen}/>
+            <AddFlight addIsOpen={addIsOpen} setAddIsOpen={setAddIsOpen} />
             <ChangeFlight changeIsOpen={changeIsOpen} setChangeIsOpen={setChangeIsOpen} />
             <FlightMoreInfo moreInfoIsOpen={moreInfoIsOpen} setMoreInfoIsOpen={setMoreInfoIsOpen} />
         </div>

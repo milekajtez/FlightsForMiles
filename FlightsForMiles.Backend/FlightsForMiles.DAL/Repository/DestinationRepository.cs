@@ -35,7 +35,7 @@ namespace FlightsForMiles.DAL.Repository
                 await _context.Destinations.AddAsync(destination);
                 _context.SaveChanges();
 
-                return newDestination.AirportID;
+                return destination.Airport_ID;      // Ailrine_ID
             }
 
             throw new KeyNotFoundException("Add destination is unsuccessffully. Server not found selected airline.");

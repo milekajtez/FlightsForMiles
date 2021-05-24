@@ -1,8 +1,24 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useAlert } from 'react-alert'
 import Modal from 'react-modal'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { loadAirlines } from '../../../../redux/system-admin/airline-reg/airlineRegAction'
+import { addFlight, loadFlights } from '../../../../redux/avio-admin/flight/flightAction'
 
 function AddFlights(props) {
+    const dispatch = useDispatch()
+    const alert = useAlert();
+
+    const airlines = useSelector(
+        state => state.airline,
+    )
+
+    useEffect(() => {
+        dispatch(loadAirlines())
+    })
     const startTimeField = useFormField({
         initialValue: '',
         isRequired: true
@@ -20,6 +36,10 @@ function AddFlights(props) {
         isRequired: true
     })
     const flightLengthField = useFormField({
+        initialValue: '',
+        isRequired: true
+    })
+    const flightTimeField = useFormField({
         initialValue: '',
         isRequired: true
     })
@@ -47,38 +67,58 @@ function AddFlights(props) {
         initialValue: '',
         isRequired: true
     })
-    const economicSeatsField = useFormField({
-        initialValue: '',
-        isRequired: true
-    })
-    const economicPriceField = useFormField({
-        initialValue: '',
-        isRequired: true
-    })
-    const firstClassSeatsField = useFormField({
-        initialValue: '',
-        isRequired: true
-    })
-    const firstClassPriceField = useFormField({
-        initialValue: '',
-        isRequired: true
-    })
-    const businessSeatsField = useFormField({
-        initialValue: '',
-        isRequired: true
-    })
-    const businessPriceField = useFormField({
-        initialValue: '',
-        isRequired: true
-    })
 
     const addFlightForm = useFormWithFields({
         onSubmit: (e) => {
-            //pocetak logike za dodavanje leta
+            dispatch(addFlight({
+                startTime: startTimeField.value,
+                endTime: endTimeField.value,
+                startLocation: startLocationField.value,
+                endLocation: endLocationField.value,
+                flightTime: flightTimeField.value,
+                flightLength: flightLengthField.value,
+                numOfTransfers: numOfTransfersField.value,
+                allTransfers: allTransfersField.value,
+                planeName: planeNameField.value,
+                lugageWeight: luggageWeightField.value,
+                airline: airlineField.value,
+                additionalInfo: additionalInfoField.value
+            }))
+                .then(response => {
+                    if (response.status === 201) {
+                        alert.show("Adding flight successfully.", {
+                            type: 'success'
+                        })
+
+                        dispatch(loadFlights())
+                        addFlightForm.handleReset()
+                        props.setAddIsOpen(false)
+                    }
+                    else {
+                        alert.show("Unknown error.", {
+                            type: 'error'
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.error(error)
+                    if (error.response.data.indexOf("(Add flight is unsuccessffully. Server not found selected airline.)") !== -1) {
+                        alert.show("Add flight is unsuccessffully. Server not found selected airline.", {
+                            type: 'error'
+                        })
+                    }
+                    else {
+                        alert.show("Unknown error.", {
+                            type: 'error'
+                        })
+                    }
+                })
+
+            e.preventDefault()
         },
-        fields: [startTimeField, endTimeField, startLocationField, endLocationField, flightLengthField, additionalInfoField, numOfTransfersField, allTransfersField,
-            planeNameField, luggageWeightField, airlineField, economicSeatsField, economicPriceField, firstClassSeatsField, firstClassPriceField,
-            businessSeatsField, businessPriceField]
+        fields: [startTimeField, endTimeField, startLocationField, endLocationField, flightLengthField, 
+            flightTimeField, additionalInfoField, numOfTransfersField, allTransfersField, planeNameField, 
+            luggageWeightField, airlineField]
     })
 
 
@@ -98,7 +138,7 @@ function AddFlights(props) {
                         <span className="user-box">
                             <input type="date" value={startTimeField.value} required={startTimeField.isRequired}
                                 onChange={startTimeField.handleChange} id="startTimeField" ></input>
-                                <label>Start time</label>
+                            <label>Start time</label>
                         </span>
                         <span className="user-box">
                             <input type="date" value={endTimeField.value} required={endTimeField.isRequired}
@@ -120,79 +160,52 @@ function AddFlights(props) {
                     </div>
                     <div>
                         <span className="user-box">
+                            <input type="number" value={flightTimeField.value} required={flightTimeField.isRequired}
+                                onChange={flightTimeField.handleChange} id="flightTimeField" />
+                            <label>Flight time (hours)</label>
+                        </span>
+                        <span className="user-box">
                             <input type="number" value={flightLengthField.value} required={flightLengthField.isRequired}
                                 onChange={flightLengthField.handleChange} id="flightLengthField" />
                             <label>Flight length (km)</label>
                         </span>
+                    </div>
+                    <div>
                         <span className="user-box">
                             <input type="number" value={numOfTransfersField.value} required={numOfTransfersField.isRequired}
                                 onChange={numOfTransfersField.handleChange} id="numOfTransfersField" />
                             <label>Number of transfers</label>
                         </span>
-                    </div>
-                    <div>
                         <span className="user-box">
                             <input type="text" value={allTransfersField.value} required={allTransfersField.isRequired}
                                 onChange={allTransfersField.handleChange} id="allTransfersField" />
                             <label>All transfers (for example: Belgrade-Budapest-Berlin)</label>
                         </span>
+                    </div>
+                    <div>
                         <span className="user-box">
                             <input type="text" value={planeNameField.value} required={planeNameField.isRequired}
                                 onChange={planeNameField.handleChange} id="planeNameField" />
                             <label>Plane name</label>
                         </span>
-                    </div>
-                    <div>
                         <span className="user-box">
                             <input type="number" value={luggageWeightField.value} required={luggageWeightField.isRequired}
                                 onChange={luggageWeightField.handleChange} id="luggageWeightField" />
                             <label>Lugage weight</label>
                         </span>
+                    </div>
+                    <div>
                         <span className="user-box">
                             <select value={airlineField.value} required={airlineField.isRequired}
                                 onChange={airlineField.handleChange} id="airlineField">
                                 <option value=""></option>
-                                <option value="1">Airline 1</option>
-                                <option value="2">Airline 2</option>
-                                <option value="3">Airline 3</option>
+                                {
+                                    airlines.allAirlines.map((airline) => {
+                                        return <option key={airline.id} value={airline.id}>{airline.name}</option>
+                                    })
+                                }
                             </select>
                             <label>Airline</label>
-                        </span>
-                    </div>
-                    <div>
-                        <span className="user-box">
-                            <input type="number" value={economicSeatsField.value} required={economicSeatsField.isRequired}
-                                onChange={economicSeatsField.handleChange} id="economicSeatsField" />
-                            <label>Number of economic class seats</label>
-                        </span>
-                        <span className="user-box">
-                            <input type="number" value={economicPriceField.value} required={economicPriceField.isRequired}
-                                onChange={economicPriceField.handleChange} id="economicPriceField" />
-                            <label>Price of economic class seat (&euro;)</label>
-                        </span>
-                    </div>
-                    <div>
-                        <span className="user-box">
-                            <input type="number" value={firstClassSeatsField.value} required={firstClassSeatsField.isRequired}
-                                onChange={firstClassSeatsField.handleChange} id="firstClassSeatsField" />
-                            <label>Number of first class seats</label>
-                        </span>
-                        <span className="user-box">
-                            <input type="number" value={firstClassPriceField.value} required={firstClassPriceField.isRequired}
-                                onChange={firstClassPriceField.handleChange} id="firstClassPriceField" />
-                            <label>Price of first class seat (&euro;)</label>
-                        </span>
-                    </div>
-                    <div>
-                        <span className="user-box">
-                            <input type="number" value={businessSeatsField.value} required={businessSeatsField.isRequired}
-                                onChange={businessSeatsField.handleChange} id="businessSeatsField" />
-                            <label>Number of business class seats</label>
-                        </span>
-                        <span className="user-box">
-                            <input type="number" value={businessPriceField.value} required={businessPriceField.isRequired}
-                                onChange={businessPriceField.handleChange} id="businessPriceField" />
-                            <label>Price of business class seat (&euro;)</label>
                         </span>
                     </div>
                     <div>

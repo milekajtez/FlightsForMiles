@@ -1,8 +1,15 @@
 import React from 'react'
+import { useAlert } from 'react-alert'
 import Modal from 'react-modal'
+import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { addTicket } from '../../../../redux/avio-admin/ticket/ticketAction'
 
 function AddTicket(props) {
+    const dispatch = useDispatch()
+    const alert = useAlert()
+
+    console.log(props)
     const numberField = useFormField({
         initialValue: '',
         isRequired: true
@@ -20,19 +27,56 @@ function AddTicket(props) {
 
     const isQuickBookingField = useFormField({
         initialValue: '',
-        isRequired: false
+        isRequired: true
     })
 
     const addTicketForm = useFormWithFields({
         onSubmit: (e) => {
-            //pocetak logike za dodavanje leta
+            if(Validation()){
+                dispatch(addTicket({
+                    number: numberField.value,
+                    type: typeField.value,
+                    price: priceField.value,
+                    timePurchased: new Date(),
+                    isPurchased: false,
+                    isQuickBooking: isQuickBookingField.value,
+                    flightID: props.addTicket.flightID
+                }))
+                .then(response => {
+                    if(response.status === 201){
+                        alert.show("Adding ticket successfully.", {
+                            type: 'success'
+                        })
+    
+                        // ponovo ucitavanje svih ticket-a odredjenog leta..jer se baza izmenila
+                        //dispatch(loadDestinations())
+    
+                        addTicketForm.handleReset()
+                        props.setAddTicket({isOpen: false, flightID: ""})
+                    }
+                    else {
+                        alert.show("Unknown error.", {
+                            type: 'error'
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            }
+
+            e.preventDefault()
         },
         fields: [numberField, typeField, priceField, isQuickBookingField]
     })
 
+    function Validation(){
+        return true
+    }
+
     return (
-        <Modal ariaHideApp={false} isOpen={props.addTicket} closeTimeoutMS={500}
-            className="new-member-inner-login" onRequestClose={() => props.setAddTicket(false)}
+        <Modal ariaHideApp={false} isOpen={props.addTicket.isOpen} closeTimeoutMS={500}
+            className="new-member-inner-login" onRequestClose={() => props.setAddTicket({isOpen: false, flightID: ""})}
             style={{
                 overlay: {
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -51,9 +95,9 @@ function AddTicket(props) {
                         <select value={typeField.value} required={typeField.isRequired}
                             onChange={typeField.handleChange} id="typeField">
                             <option value=""></option>
-                            <option value="1">BUSINESS</option>
-                            <option value="2">FIRTS</option>
-                            <option value="3">ECONOMIC</option>
+                            <option value="BUSINESS">BUSINESS</option>
+                            <option value="FIRST">FIRST</option>
+                            <option value="ECONOMIC">ECONOMIC</option>
                         </select>
                         <label>Ticket type</label>
                     </div>
@@ -63,8 +107,12 @@ function AddTicket(props) {
                         <label>Ticket price</label>
                     </div>
                     <div className="user-box">
-                        <input type="checkbox" value={isQuickBookingField.value} required={isQuickBookingField.isRequired}
-                            onChange={isQuickBookingField.handleChange} id="isQuickBookingField" />
+                        <select value={isQuickBookingField.value} required={isQuickBookingField.isRequired}
+                            onChange={isQuickBookingField.handleChange} id="isQuickBookingField">
+                            <option value=""></option>
+                            <option value="YES">YES</option>
+                            <option value="NO">NO</option>
+                        </select>
                         <label>Is quick booking?</label>
                     </div>
                     <div>

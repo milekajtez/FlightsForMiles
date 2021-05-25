@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import AddTicket from './AddTicket'
 import TicketPanel from './TicketPanel'
+import { loadFlights } from '../../../../redux/avio-admin/flight/flightAction'
+import { useSelector } from 'react-redux'
 
 function AllFlightsSeats() {
-    const [showHideIndicator, setIndicator] = useState(0)
-    const [addTicket, setAddTicket] = useState(false)
+    const [showHideIndicator, setIndicator] = useState(0)   // 0 - nema prikaza // != 0 - prikaz (id leta)
+    const [addTicket, setAddTicket] = useState({isOpen: false, flightID: ''})
 
-    // 0 - nema prikaza
-    // != 0 - prikaz (id leta)
+    const dispatch = useDispatch()
+
+    const flights = useSelector(
+        state => state.flight
+    )
+
+    useEffect(() => {
+        dispatch(loadFlights())
+    }, [dispatch])
+
 
     const showTickets = (flightID) => {
         setIndicator(flightID)
     }
-
-    /*const hideTickets = () => {
-        setIndicator(0)
-    }*/
 
     return (
         <div>
@@ -32,66 +40,24 @@ function AllFlightsSeats() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>test1</td>
-                        <td>
-                            <button className="btn btn-primary" onClick={() => showTickets(1)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>test2</td>
-                        <td>
-                            <button className="btn btn-primary" onClick={() => showTickets(2)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>test3</td>
-                        <td>
-                            <button className="btn btn-primary" onClick={() => showTickets(3)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>test4</td>
-                        <td>
-                            <button className="btn btn-primary" onClick={() => showTickets(4)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>test5</td>
-                        <td>
-                            <button className="btn btn-primary" onClick={() => showTickets(5)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                            <button className="btn btn-secondary" onClick={() => setAddTicket(true)}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
-                        </td>
-                    </tr>
+                    {
+                        flights.allFlights.map((flight => {
+                            return (
+                                <tr key={flight.flightID}>
+                                    <td>{flight.flightID}</td>
+                                    <td>{flight.startTime}</td>
+                                    <td>{flight.endTime}</td>
+                                    <td>{flight.startLocation}</td>
+                                    <td>{flight.endLocation}</td>
+                                    <td>{flight.airlineID}</td>
+                                    <td>
+                                        <button className="btn btn-primary" onClick={() => showTickets(flight.flightID)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
+                                        <button className="btn btn-secondary" onClick={() => setAddTicket({isOpen: true, flightID: flight.flightID})}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
+                                    </td>
+                                </tr>
+                            )
+                        }))
+                    }
                 </tbody>
             </table>
             {showHideIndicator !== 0 ? <TicketPanel /> : null}

@@ -7,6 +7,7 @@ import airlineReducer from "./system-admin/airline-reg/airlineRegReducer";
 import profileReducer from './avio-admin/profile/profileReducer'
 import helpReducer from "./avio-admin/help/helpReducer";
 import flightReducer from "./avio-admin/flight/flightReducer";
+import ticketReducer from "./avio-admin/ticket/ticketReducer";
 
 const rootReducer = combineReducers({
     registration: registrationReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     destination: destinationReducer,
     profile: profileReducer,
     help: helpReducer,
-    flight: flightReducer
+    flight: flightReducer,
+    ticket: ticketReducer
 })
 
 export default rootReducer

@@ -1,0 +1,1 @@
+export const LOADING_TICKETS = 'LOADING_TICKETS'

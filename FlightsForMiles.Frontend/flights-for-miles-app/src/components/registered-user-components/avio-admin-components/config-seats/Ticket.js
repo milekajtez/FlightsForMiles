@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import ChangeTicket from './ChangeTicket'
 
-function Ticket() {
+function Ticket(props) {
     const [changeTicket, setChangeTicket] = useState(false)
-
+    console.log(props)
     return (
         <div className="ticket-box">
             <div className="ticket">
-                <span className="airline">Airline</span>
+                <span className="airline">{props.ticket.airline}</span>
                 <div className="content">
                     <span className="jfk">Belgrade</span>
                     <span className="plane">
@@ -29,25 +29,25 @@ function Ticket() {
                             <span className="item">PASSENGER NAME<br /><span>Kajtez, Mile</span></span>
                         </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
-                            <span className="item">FLIGHT N&deg;<br /><span>flight ID</span></span>
+                            <span className="item">FLIGHT N&deg;<br /><span>{props.ticket.flightID}</span></span>
                         </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
-                            <span className="item">TYPE<br /><span>BUSINESS</span></span>
+                            <span className="item">TYPE<br /><span>{props.ticket.type}</span></span>
                         </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
-                            <span className="item">SEAT<br /><span>2</span></span>
+                            <span className="item">SEAT<br /><span>{props.ticket.number}</span></span>
                         </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
-                            <span className="item">PRICE<br /><span>10 euros</span></span>
+                            <span className="item">PRICE<br /><span>{props.ticket.price}</span></span>
                         </div>
                         <div style={{ display: "inline-block" }}>
-                            <span className="item"><br />TICKET PURCHASE TIME<br /><span>8:25PM ON AUGUST 2014</span></span>
+                            <span className="item"><br />TICKET PURCHASE TIME<br /><span>{props.ticket.timePurchased}</span></span>
                         </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
-                            <span className="item"><br />IS PURCHASED<br /><span>Yes</span></span>
+                            <span className="item"><br />IS PURCHASED<br /><span>{props.ticket.isPurchased}</span></span>
                         </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
-                            <span className="item"><br />IS QUICK BOOKING<br /><span>Yes</span></span>
+                            <span className="item"><br />IS QUICK BOOKING<br /><span>{props.ticket.isQuickBooking}</span></span>
                         </div>&emsp;&emsp;
                     </div>
                     <div className="box" style={{height: "20%"}}>

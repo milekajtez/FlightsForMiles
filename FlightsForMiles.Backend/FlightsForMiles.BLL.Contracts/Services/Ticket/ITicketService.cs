@@ -9,5 +9,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Ticket
     {
         long AddTicket(ITicketRequestDTO ticketRequestDTO);
         ITicketResponseDTO LoadTicket(long id);
+        List<ITicketResponseDTO> LoadTickets(int flightID);
     }
 }

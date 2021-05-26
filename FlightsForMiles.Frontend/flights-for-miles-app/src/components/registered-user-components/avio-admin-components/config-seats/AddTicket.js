@@ -3,7 +3,7 @@ import { useAlert } from 'react-alert'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
-import { addTicket } from '../../../../redux/avio-admin/ticket/ticketAction'
+import { addTicket, loadTickets } from '../../../../redux/avio-admin/ticket/ticketAction'
 
 function AddTicket(props) {
     const dispatch = useDispatch()
@@ -37,8 +37,6 @@ function AddTicket(props) {
                     number: numberField.value,
                     type: typeField.value,
                     price: priceField.value,
-                    timePurchased: new Date(),
-                    isPurchased: false,
                     isQuickBooking: isQuickBookingField.value,
                     flightID: props.addTicket.flightID
                 }))
@@ -47,9 +45,8 @@ function AddTicket(props) {
                         alert.show("Adding ticket successfully.", {
                             type: 'success'
                         })
-    
-                        // ponovo ucitavanje svih ticket-a odredjenog leta..jer se baza izmenila
-                        //dispatch(loadDestinations())
+
+                        dispatch(loadTickets(props.addTicket.flightID))
     
                         addTicketForm.handleReset()
                         props.setAddTicket({isOpen: false, flightID: ""})
@@ -62,6 +59,26 @@ function AddTicket(props) {
                 })
                 .catch(error => {
                     console.log(error)
+                    if(error.response.data.indexOf("(Add ticket unsuccessfully. This flight already has ticket with entered number.)") !== -1){
+                        alert.show("Add ticket unsuccessfully. This flight already has ticket with entered number.", {
+                            type: 'error'
+                        })
+                    }
+                    else if(error.response.data.indexOf("(Add ticket unsuccessfully. Flight dosn't exsist.)") !== -1){
+                        alert.show("Add ticket unsuccessfully. Flight dosn't exsist.", {
+                            type: 'error'
+                        })
+                    }
+                    else if(error.response.data.indexOf("(Add ticket unsuccessfully. Base already has this ticket.)") !== -1){
+                        alert.show("Add ticket unsuccessfully. Base already has this ticket.", {
+                            type: 'error'
+                        })
+                    }
+                    else {
+                        alert.show("Unknown error.", {
+                            type: 'error'
+                        })  
+                    }
                 })
             }
 

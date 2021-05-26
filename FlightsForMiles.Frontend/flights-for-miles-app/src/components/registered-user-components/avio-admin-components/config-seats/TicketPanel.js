@@ -1,14 +1,14 @@
 import React from 'react'
 import Ticket from './Ticket'
 
-function TicketPanel() {
+function TicketPanel(props) {
     return (
         <div>
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
+            {
+                props.tickets.ticketsForOneFlight.map((ticket, index) => {
+                    return <Ticket ticket={ticket} key={index}/>
+                })
+            }
             <div className="box" style={{ height: "20%" }}>
                 <button type="submit" style={{ backgroundColor: "#141e30", margin:"1%" }}>
                     <span></span>

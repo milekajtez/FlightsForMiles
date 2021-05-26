@@ -30,7 +30,7 @@ namespace FlightsForMiles.Controllers
         #endregion
         #region 2 - Get (Load one ticket)
         [HttpGet("{id}", Name = "GetTicket")]
-        public ActionResult GetTicket(long id)          //GetGetTicket....zato nije pozivalo metode kod destination i ostalim kontrolerima..popraviti to!!!!
+        public ActionResult GetTicket(long id)   //GetGetTicket....zato nije pozivalo metode kod destination i ostalim kontrolerima..popraviti to!!!!
         {
             ITicketResponseDTO newTicket = _ticketService.LoadTicket(id);
             if (newTicket != null)
@@ -39,6 +39,19 @@ namespace FlightsForMiles.Controllers
             }
 
             return NotFound("Server not found a ticket.");
+        }
+        #endregion
+        #region 3 - Metgod for load tickets for one flight
+        [HttpGet("LoadTickets/{flightID}")]
+        public IActionResult LoadTickets(int flightID)
+        {
+            List<ITicketResponseDTO> result = _ticketService.LoadTickets(flightID);
+            if (result == null) 
+            {
+                throw new Exception("Not found any ticket.");
+            }
+
+            return Ok(result);
         }
         #endregion
     }

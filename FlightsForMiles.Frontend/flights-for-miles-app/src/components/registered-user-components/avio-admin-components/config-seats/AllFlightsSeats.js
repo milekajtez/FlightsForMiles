@@ -5,6 +5,7 @@ import AddTicket from './AddTicket'
 import TicketPanel from './TicketPanel'
 import { loadFlights } from '../../../../redux/avio-admin/flight/flightAction'
 import { useSelector } from 'react-redux'
+import { loadTickets } from '../../../../redux/avio-admin/ticket/ticketAction'
 
 function AllFlightsSeats() {
     const [showHideIndicator, setIndicator] = useState(0)   // 0 - nema prikaza // != 0 - prikaz (id leta)
@@ -13,7 +14,11 @@ function AllFlightsSeats() {
     const dispatch = useDispatch()
 
     const flights = useSelector(
-        state => state.flight
+        state => state.flight,
+    )
+
+    const tickets = useSelector(
+        state => state.ticket,
     )
 
     useEffect(() => {
@@ -22,6 +27,7 @@ function AllFlightsSeats() {
 
 
     const showTickets = (flightID) => {
+        dispatch(loadTickets(flightID))
         setIndicator(flightID)
     }
 
@@ -60,7 +66,7 @@ function AllFlightsSeats() {
                     }
                 </tbody>
             </table>
-            {showHideIndicator !== 0 ? <TicketPanel /> : null}
+            {showHideIndicator !== 0 ? <TicketPanel tickets={tickets}/> : null}
             <AddTicket addTicket={addTicket} setAddTicket={setAddTicket}/>
         </div>
     )

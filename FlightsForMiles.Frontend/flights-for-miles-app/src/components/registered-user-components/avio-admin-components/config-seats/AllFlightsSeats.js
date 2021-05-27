@@ -5,13 +5,15 @@ import AddTicket from './AddTicket'
 import TicketPanel from './TicketPanel'
 import { loadFlights } from '../../../../redux/avio-admin/flight/flightAction'
 import { useSelector } from 'react-redux'
-import { loadTickets } from '../../../../redux/avio-admin/ticket/ticketAction'
+import { loadTickets, deleteAllTickets } from '../../../../redux/avio-admin/ticket/ticketAction'
+import { useAlert } from 'react-alert'
 
 function AllFlightsSeats() {
     const [showHideIndicator, setIndicator] = useState(0)   // 0 - nema prikaza // != 0 - prikaz (id leta)
     const [addTicket, setAddTicket] = useState({isOpen: false, flightID: ''})
 
     const dispatch = useDispatch()
+    const alert = useAlert()
 
     const flights = useSelector(
         state => state.flight,
@@ -29,6 +31,37 @@ function AllFlightsSeats() {
     const showTickets = (flightID) => {
         dispatch(loadTickets(flightID))
         setIndicator(flightID)
+    }
+
+    const deleteAllCurrentTickets = (flightID) => {
+        dispatch(deleteAllTickets(flightID))
+        .then(response => {
+            if (response.status === 204) {
+                alert.show("Deleting all tickets successfully.", {
+                    type: 'success'
+                })
+
+                dispatch(loadTickets(flightID))
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            if(error.response.data.indexOf("(Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist.)") !== -1){
+                alert.show("Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist.", {
+                    type: 'error'
+                })
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })  
+            }
+        })
     }
 
     return (
@@ -58,7 +91,9 @@ function AllFlightsSeats() {
                                     <td>{flight.airlineID}</td>
                                     <td>
                                         <button className="btn btn-primary" onClick={() => showTickets(flight.flightID)}><i className="far fa-eye"></i> VIEW TICKETS</button>&nbsp;
-                                        <button className="btn btn-secondary" onClick={() => setAddTicket({isOpen: true, flightID: flight.flightID})}><i className="fas fa-plus"></i> ADD NEW TICKET</button>
+                                        <button className="btn btn-secondary" onClick={() => setAddTicket({isOpen: true, flightID: flight.flightID})}><i className="fas fa-plus"></i> ADD NEW TICKET</button>&nbsp;
+                                        <button className="btn btn-danger" onClick={() => deleteAllCurrentTickets(flight.flightID)}>
+                                            <i className="fas fa-trash-alt"></i> DELETE ALL TICKETS</button>
                                     </td>
                                 </tr>
                             )

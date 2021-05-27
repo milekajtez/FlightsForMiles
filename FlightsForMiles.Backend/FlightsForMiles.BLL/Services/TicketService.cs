@@ -50,6 +50,20 @@ namespace FlightsForMiles.BLL.Services
             return result;
         }
         #endregion
+        #region 4 - Method for delete ticket
+        public bool DeleteTicket(string ticketID)
+        {
+            DeleteTicketValidation(ticketID);
+            return _ticketRepository.DeleteTicket(ticketID).Result;
+        }
+        #endregion
+        #region 5 - Method for delete all tickets for selected flight
+        public bool DeleteAllTickets(string flightID)
+        {
+            DeleteTicketValidation(flightID);
+            return _ticketRepository.DeleteAllTickets(flightID).Result;
+        }
+        #endregion
 
         #region Converting methods
         private ITicket ConvertTicketRequestObjectToTicket(ITicketRequestDTO ticketRequestDTO) 
@@ -74,6 +88,16 @@ namespace FlightsForMiles.BLL.Services
                 StartLocation = ticket.StartLocation,
                 EndLocation = ticket.EndLocation
             };
+        }
+        #endregion
+
+        #region Validation method
+        private void DeleteTicketValidation(string ticketID)
+        {
+            if (string.IsNullOrEmpty(ticketID) || !int.TryParse(ticketID, out _))
+            {
+                throw new ArgumentException(nameof(ticketID));
+            }
         }
         #endregion
     }

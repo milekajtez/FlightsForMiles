@@ -32,3 +32,26 @@ export const loadTickets = (flightID) => {
         })
     }
 }
+
+
+export const deleteTicket = (ticketID) => () => 
+    new Promise(function(resolve, reject){
+        ticketService.deleteTicket(ticketID)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+
+export const deleteAllTickets = (flightID) => () => 
+    new Promise(function(resolve, reject){
+        ticketService.deleteAllTickets(flightID)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })

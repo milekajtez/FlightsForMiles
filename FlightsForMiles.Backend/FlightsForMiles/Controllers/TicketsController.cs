@@ -54,5 +54,31 @@ namespace FlightsForMiles.Controllers
             return Ok(result);
         }
         #endregion
+        #region 4 - Method for delete ticket
+        [HttpDelete("{ticketID}")]
+        public IActionResult DeleteTicket(string ticketID) 
+        {
+            bool isDeleted = _ticketService.DeleteTicket(ticketID);
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Deleting unsuccessfully. Ticket with sended id doesn't exsist.");
+        }
+        #endregion
+        #region 5 - Method for delete all ticket for selected flight
+        [HttpDelete("DeleteAllTickets/{flightID}")]
+        public IActionResult DeleteAllTickets(string flightID) 
+        {
+            bool isDeleted = _ticketService.DeleteAllTickets(flightID);
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist.");
+        }
+        #endregion
     }
 }

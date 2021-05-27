@@ -9,15 +9,6 @@ function TicketPanel(props) {
                     return <Ticket ticket={ticket} key={index}/>
                 })
             }
-            <div className="box" style={{ height: "20%" }}>
-                <button type="submit" style={{ backgroundColor: "#141e30", margin:"1%" }}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                        Delete all tickets
-                </button>
-            </div>
         </div>
     )
 }

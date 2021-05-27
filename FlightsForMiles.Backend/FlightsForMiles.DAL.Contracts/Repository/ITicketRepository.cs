@@ -11,5 +11,7 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<long> AddTicket(ITicket ticket);
         ITicket LoadOneTicket(long id);
         List<ITicket> LoadTickets(int flightID);
+        Task<bool> DeleteTicket(string ticketID);
+        Task<bool> DeleteAllTickets(string flightID);
     }
 }

@@ -134,5 +134,60 @@ namespace FlightsForMiles.DAL.Repository
             throw new Exception("Server not found any ticket.");
         }
         #endregion
+        #region 4 - Method for delete ticket
+        public async Task<bool> DeleteTicket(string ticketID)
+        {
+            var resultFind = await _context.Tickets.FindAsync(int.Parse(ticketID));
+            if (resultFind != null)
+            {
+                _context.Tickets.Remove(resultFind);
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+        #endregion
+        #region 5 - Method for delete all ticket for selected flight
+        public async Task<bool> DeleteAllTickets(string flightID)
+        {
+            var flight = await _context.Flights.FindAsync(int.Parse(flightID));
+            if (flight != null) 
+            {
+                var allTickets = _context.Tickets.Include(f => f.Flight);
+                if (allTickets != null) 
+                {
+                    List<Ticket> tickets = new List<Ticket>();
+
+                    foreach (var ticket in allTickets) 
+                    {
+                        if (ticket.Flight.Id.Equals(int.Parse(flightID))) 
+                        {
+                            tickets.Add(ticket);
+                        }
+                    }
+
+                    if (tickets.Count != 0)
+                    {
+                        for (int i = 0; i < tickets.Count; i++) 
+                        {
+                            _context.Tickets.Remove(tickets[i]);
+                            _context.SaveChanges();
+                        }
+
+                        return true;
+                    }
+                    else 
+                    {
+                        return false;
+                    }
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+        #endregion
     }
 }

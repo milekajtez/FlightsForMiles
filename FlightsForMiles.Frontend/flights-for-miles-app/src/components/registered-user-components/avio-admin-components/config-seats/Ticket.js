@@ -1,9 +1,45 @@
 import React, { useState } from 'react'
+import { useAlert } from 'react-alert'
+import { useDispatch } from 'react-redux'
+import { deleteTicket, loadTickets } from '../../../../redux/avio-admin/ticket/ticketAction'
 import ChangeTicket from './ChangeTicket'
 
 function Ticket(props) {
     const [changeTicket, setChangeTicket] = useState(false)
-    console.log(props)
+    const dispatch = useDispatch()
+    const alert = useAlert()
+
+    const deleteCurrentTicket = (ticketID) => {
+        dispatch(deleteTicket(ticketID))
+        .then(response => {
+            if (response.status === 204) {
+                alert.show("Deleting ticket successfully.", {
+                    type: 'success'
+                })
+
+                dispatch(loadTickets(props.ticket.flightID))
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            if(error.response.data.indexOf("(Deleting unsuccessfully. Ticket with sended id doesn't exsist.)") !== -1){
+                alert.show("Deleting unsuccessfully. Ticket with sended id doesn't exsist.", {
+                    type: 'error'
+                })
+            }
+            else {
+                alert.show("Unknown error.", {
+                    type: 'error'
+                })  
+            }
+        })
+    }
+
     return (
         <div className="ticket-box">
             <div className="ticket">
@@ -55,7 +91,7 @@ function Ticket(props) {
                             <span></span>
                             Change
                         </button>
-                        <button type="submit" style={{ backgroundColor: "#141e30" }}>
+                        <button type="submit" style={{ backgroundColor: "#141e30" }} onClick={() => deleteCurrentTicket(props.ticket.ticketID)}>
                             <span></span>
                             <span></span>
                             <span></span>

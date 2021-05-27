@@ -8,8 +8,7 @@ import { addTicket, loadTickets } from '../../../../redux/avio-admin/ticket/tick
 function AddTicket(props) {
     const dispatch = useDispatch()
     const alert = useAlert()
-
-    console.log(props)
+    
     const numberField = useFormField({
         initialValue: '',
         isRequired: true

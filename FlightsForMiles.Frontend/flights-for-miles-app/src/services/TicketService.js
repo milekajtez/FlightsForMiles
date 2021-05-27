@@ -16,6 +16,14 @@ const ticketService = {
     loadTickets: (flightID) => {
         return API.get(`Tickets/LoadTickets/${flightID}`)
     },
+
+    deleteTicket: (ticketID) => {
+        return API.delete(`Tickets/${ticketID}`)
+    },
+
+    deleteAllTickets: (flightID) => {
+        return API.delete(`Tickets/DeleteAllTickets/${flightID}`)
+    }
 }
 
 export default ticketService

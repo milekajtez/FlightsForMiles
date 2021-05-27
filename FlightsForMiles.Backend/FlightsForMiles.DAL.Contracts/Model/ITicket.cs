@@ -15,5 +15,7 @@ namespace FlightsForMiles.DAL.Contracts.Model
         public string IsPurchased { get; }
         public string IsQuickBooking { get; }
         public string FlightID { get; }
+        public string StartLocation { get; }
+        public string EndLocation { get; }
     }
 }

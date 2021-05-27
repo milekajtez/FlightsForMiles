@@ -8,9 +8,9 @@ namespace FlightsForMiles.BLL.Model.Ticket
     public class Ticket : ITicket
     {
         public Ticket(int ticketID, string airline, string number, string type, string price, string timePurchased,
-            string isPurchased, string isQuickBooking, string flightID) 
+            string isPurchased, string isQuickBooking, string flightID, string startLocation, string endLocation) 
         {
-            Validation(ticketID, airline, number, type, price, timePurchased, isPurchased, isQuickBooking, flightID);
+            Validation(ticketID, airline, number, type, price, timePurchased, isPurchased, isQuickBooking, flightID, startLocation, endLocation);
 
             TicketID = ticketID;
             Airline = airline;
@@ -21,6 +21,8 @@ namespace FlightsForMiles.BLL.Model.Ticket
             IsPurchased = isPurchased;
             IsQuickBooking = isQuickBooking;
             FlightID = flightID;
+            StartLocation = startLocation;
+            EndLocation = endLocation;
         }
 
         public int TicketID { get; }
@@ -32,10 +34,12 @@ namespace FlightsForMiles.BLL.Model.Ticket
         public string IsPurchased { get; }
         public string IsQuickBooking { get; }
         public string FlightID { get; }
+        public string StartLocation { get; }
+        public string EndLocation { get; }
 
         #region Validation
         private void Validation(int ticketID, string airline, string number, string type, string price, string timePurchased,
-            string isPurchased, string isQuickBooking, string flightID) 
+            string isPurchased, string isQuickBooking, string flightID, string startLocation, string endLocation) 
         {
             if (ticketID != 0) 
             {
@@ -94,6 +98,16 @@ namespace FlightsForMiles.BLL.Model.Ticket
             if (string.IsNullOrWhiteSpace(flightID) || !int.TryParse(number, out int _))
             {
                 throw new ArgumentException(nameof(flightID));
+            }
+
+            if (!string.IsNullOrEmpty(startLocation))
+            {
+                throw new ArgumentException(nameof(startLocation));
+            }
+
+            if (!string.IsNullOrEmpty(endLocation))
+            {
+                throw new ArgumentException(nameof(endLocation));
             }
         }
         #endregion

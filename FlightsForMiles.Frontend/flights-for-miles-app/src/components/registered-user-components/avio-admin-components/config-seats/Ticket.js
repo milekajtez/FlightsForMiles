@@ -9,7 +9,7 @@ function Ticket(props) {
             <div className="ticket">
                 <span className="airline">{props.ticket.airline}</span>
                 <div className="content">
-                    <span className="jfk">Belgrade</span>
+                    <span className="jfk">{props.ticket.startLocation}</span>
                     <span className="plane">
                         <svg clipRule="evenodd" fillRule="evenodd" height="60" width="60"
                             imageRendering="optimizeQuality" shapeRendering="geometricPrecision"
@@ -23,11 +23,8 @@ function Ticket(props) {
                             </g>
                         </svg>
                     </span>
-                    <span className="sfo">Berlin</span>
+                    <span className="sfo">{props.ticket.endLocation}</span>
                     <div className="sub-content">
-                        <div style={{ display: "inline-block" }}>
-                            <span className="item">PASSENGER NAME<br /><span>Kajtez, Mile</span></span>
-                        </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
                             <span className="item">FLIGHT N&deg;<br /><span>{props.ticket.flightID}</span></span>
                         </div>&emsp;&emsp;

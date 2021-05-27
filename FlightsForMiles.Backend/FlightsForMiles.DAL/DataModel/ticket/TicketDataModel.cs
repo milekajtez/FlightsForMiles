@@ -16,5 +16,7 @@ namespace FlightsForMiles.DAL.DataModel.ticket
         public string IsPurchased { get; set; }
         public string IsQuickBooking { get; set; }
         public string FlightID { get; set; }
+        public string StartLocation { get; set; }
+        public string EndLocation { get; set; }
     }
 }

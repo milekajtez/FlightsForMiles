@@ -55,7 +55,7 @@ namespace FlightsForMiles.BLL.Services
         private ITicket ConvertTicketRequestObjectToTicket(ITicketRequestDTO ticketRequestDTO) 
         {
             return new Ticket(0, "", ticketRequestDTO.Number, ticketRequestDTO.Type, ticketRequestDTO.Price, 
-                "", "", ticketRequestDTO.IsQuickBooking, ticketRequestDTO.FlightID);
+                "", "", ticketRequestDTO.IsQuickBooking, ticketRequestDTO.FlightID, "", "");
         }
 
         private ITicketResponseDTO ConvertTicketObjectToResponse(ITicket ticket) 
@@ -70,7 +70,9 @@ namespace FlightsForMiles.BLL.Services
                 IsQuickBooking = ticket.IsQuickBooking,
                 Price = ticket.Price,
                 Type = ticket.Type,
-                TimePurchased = ticket.TimePurchased
+                TimePurchased = ticket.TimePurchased,
+                StartLocation = ticket.StartLocation,
+                EndLocation = ticket.EndLocation
             };
         }
         #endregion

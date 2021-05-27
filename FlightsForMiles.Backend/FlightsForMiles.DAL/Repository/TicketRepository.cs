@@ -61,7 +61,7 @@ namespace FlightsForMiles.DAL.Repository
             throw new Exception("Add ticket unsuccessfully. Base already has this ticket.");
         }
         #endregion
-
+        #region 2 - Method for load one ticket
         public ITicket LoadOneTicket(long id)
         {
             var tickets = _context.Tickets.Include(f => f.Flight.Airline);
@@ -88,7 +88,9 @@ namespace FlightsForMiles.DAL.Repository
                     IsPurchased = currentTicket.Is_ticket_purchased == true ? "YES" : "NO",
                     IsQuickBooking = currentTicket.Is_quick_booking == true ? "YES" : "NO",
                     FlightID = currentTicket.Flight.Id.ToString(),
-                    Airline = currentTicket.Flight.Airline.Id + " " + currentTicket.Flight.Airline.Name
+                    Airline = currentTicket.Flight.Airline.Id + " " + currentTicket.Flight.Airline.Name,
+                    StartLocation = currentTicket.Flight.Start_location,
+                    EndLocation = currentTicket.Flight.End_location
                 };
 
                 return ticket;
@@ -96,7 +98,8 @@ namespace FlightsForMiles.DAL.Repository
 
             throw new NotImplementedException("Flight with this id (" + id + ") doesn't exsist.");
         }
-
+        #endregion
+        #region 3 - Method for load ticket for defined flight
         public List<ITicket> LoadTickets(int flightID)
         {
             List<ITicket> result = new List<ITicket>();
@@ -118,7 +121,9 @@ namespace FlightsForMiles.DAL.Repository
                             IsPurchased = currentTicket.Is_ticket_purchased == true ? "YES" : "NO",
                             IsQuickBooking = currentTicket.Is_quick_booking == true ? "YES" : "NO",
                             FlightID = currentTicket.Flight.Id.ToString(),
-                            Airline = currentTicket.Flight.Airline.Id + " (" + currentTicket.Flight.Airline.Name + ")"
+                            Airline = currentTicket.Flight.Airline.Id + " (" + currentTicket.Flight.Airline.Name + ")",
+                            StartLocation = currentTicket.Flight.Start_location,
+                            EndLocation = currentTicket.Flight.End_location
                         });
                     }
                 }
@@ -128,5 +133,6 @@ namespace FlightsForMiles.DAL.Repository
 
             throw new Exception("Server not found any ticket.");
         }
+        #endregion
     }
 }

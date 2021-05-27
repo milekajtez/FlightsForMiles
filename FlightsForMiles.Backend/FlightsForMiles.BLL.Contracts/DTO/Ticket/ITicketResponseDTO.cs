@@ -15,5 +15,7 @@ namespace FlightsForMiles.BLL.Contracts.DTO.Ticket
         public string TimePurchased { get; set; }
         public string IsPurchased { get; set; }
         public string IsQuickBooking { get; set; }
+        public string StartLocation { get; set; }
+        public string EndLocation { get; set; }
     }
 }

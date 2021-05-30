@@ -189,5 +189,26 @@ namespace FlightsForMiles.DAL.Repository
             return false;
         }
         #endregion
+        #region 6 - Method for update ticket
+        public void UpdateTicket(string ticketID, ITicket ticket)
+        {
+            var resultFind = _context.Tickets.Find(int.Parse(ticketID));
+            if (resultFind != null)
+            {
+                resultFind.Number_of_seat = ticket.Number != "" ? int.Parse(ticket.Number) : resultFind.Number_of_seat;
+                resultFind.Ticket_type = ticket.Type == "BUSINESS" ? TicketType.BUSINESS_CLASS : ticket.Type == "FIRST" ?
+                    TicketType.FIRST_CLASS : TicketType.ECONOMIC_CLASS;
+                resultFind.Price = ticket.Price != "" ? double.Parse(ticket.Price) : resultFind.Price;
+                resultFind.Is_quick_booking = ticket.IsQuickBooking == "YES";
+
+                _context.Tickets.Update(resultFind);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Updating unsuccessfully. Server not found ticket for updating.");
+            }
+        }
+        #endregion
     }
 }

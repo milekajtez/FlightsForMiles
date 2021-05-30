@@ -12,5 +12,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Ticket
         List<ITicketResponseDTO> LoadTickets(int flightID);
         bool DeleteTicket(string ticketID);
         bool DeleteAllTickets(string flightID);
+        void UpdateTicket(string ticketID, ITicketRequestDTO ticketRequestDTO);
     }
 }

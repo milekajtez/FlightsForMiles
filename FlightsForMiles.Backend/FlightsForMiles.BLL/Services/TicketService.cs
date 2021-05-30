@@ -64,6 +64,12 @@ namespace FlightsForMiles.BLL.Services
             return _ticketRepository.DeleteAllTickets(flightID).Result;
         }
         #endregion
+        #region 6 - Method for update ticket
+        public void UpdateTicket(string ticketID, ITicketRequestDTO ticketRequestDTO)
+        {
+            _ticketRepository.UpdateTicket(ticketID, ConvertTicketRequestObjectToUpdatedTicket(ticketID, ticketRequestDTO));
+        }
+        #endregion
 
         #region Converting methods
         private ITicket ConvertTicketRequestObjectToTicket(ITicketRequestDTO ticketRequestDTO) 
@@ -88,6 +94,12 @@ namespace FlightsForMiles.BLL.Services
                 StartLocation = ticket.StartLocation,
                 EndLocation = ticket.EndLocation
             };
+        }
+
+        private ITicket ConvertTicketRequestObjectToUpdatedTicket(string ticketID, ITicketRequestDTO ticketRequestDTO)
+        {
+            return new UpdatedTicket(int.Parse(ticketID), "", ticketRequestDTO.Number, ticketRequestDTO.Type,
+                ticketRequestDTO.Price, "", "", ticketRequestDTO.IsQuickBooking, ticketRequestDTO.FlightID, "", "");
         }
         #endregion
 

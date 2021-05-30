@@ -55,3 +55,14 @@ export const deleteAllTickets = (flightID) => () =>
             reject(error)
         })
     })
+
+export const changeTicket = (changedTicket) => () => 
+    new Promise(function(resolve, reject){
+        ticketService.changeTicket(changedTicket)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })

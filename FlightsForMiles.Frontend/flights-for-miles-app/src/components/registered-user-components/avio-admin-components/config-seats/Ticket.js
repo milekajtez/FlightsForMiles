@@ -5,7 +5,7 @@ import { deleteTicket, loadTickets } from '../../../../redux/avio-admin/ticket/t
 import ChangeTicket from './ChangeTicket'
 
 function Ticket(props) {
-    const [changeTicket, setChangeTicket] = useState(false)
+    const [changeTicket, setChangeTicket] = useState({ isOpen: false, ticketID: '', flightID: '' })
     const dispatch = useDispatch()
     const alert = useAlert()
 
@@ -72,7 +72,7 @@ function Ticket(props) {
                         </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
                             <span className="item">PRICE<br /><span>{props.ticket.price}</span></span>
-                        </div>
+                        </div>&emsp;&emsp;
                         <div style={{ display: "inline-block" }}>
                             <span className="item"><br />TICKET PURCHASE TIME<br /><span>{props.ticket.timePurchased}</span></span>
                         </div>&emsp;&emsp;
@@ -84,7 +84,8 @@ function Ticket(props) {
                         </div>&emsp;&emsp;
                     </div>
                     <div className="box" style={{height: "20%"}}>
-                        <button type="submit" style={{ backgroundColor: "#141e30" }}  onClick={() => setChangeTicket(true)}>
+                        <button type="submit" style={{ backgroundColor: "#141e30" }} 
+                            onClick={() => setChangeTicket({isOpen: true, ticketID: props.ticket.ticketID, flightID: props.ticket.flightID})}>
                             <span></span>
                             <span></span>
                             <span></span>

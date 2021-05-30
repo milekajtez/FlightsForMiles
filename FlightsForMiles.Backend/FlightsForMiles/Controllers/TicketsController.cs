@@ -80,5 +80,13 @@ namespace FlightsForMiles.Controllers
             throw new KeyNotFoundException("Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist.");
         }
         #endregion
+        #region 6 - Method for update ticket
+        [HttpPut("{ticketID}")]
+        public IActionResult UpdateTicket(string ticketID, TicketRequestDTO ticketRequestDTO) 
+        {
+            _ticketService.UpdateTicket(ticketID, ticketRequestDTO);
+            return NoContent();
+        }
+        #endregion
     }
 }

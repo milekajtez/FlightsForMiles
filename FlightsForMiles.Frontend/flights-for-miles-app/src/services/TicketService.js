@@ -23,6 +23,18 @@ const ticketService = {
 
     deleteAllTickets: (flightID) => {
         return API.delete(`Tickets/DeleteAllTickets/${flightID}`)
+    },
+
+    changeTicket: (changedTicket) => {
+        var body = {
+            Number: changedTicket.number,
+            Type: changedTicket.type,
+            Price: changedTicket.price,
+            IsQuickBooking: changedTicket.isQuickBooking,
+            FlightID: changedTicket.flightID
+        }
+        
+        return API.put(`Tickets/${changedTicket.ticketID}`, body)
     }
 }
 

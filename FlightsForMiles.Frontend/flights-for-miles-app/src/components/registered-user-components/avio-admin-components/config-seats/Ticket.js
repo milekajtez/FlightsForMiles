@@ -27,8 +27,8 @@ function Ticket(props) {
         })
         .catch(error => {
             console.log(error)
-            if(error.response.data.indexOf("(Deleting unsuccessfully. Ticket with sended id doesn't exsist.)") !== -1){
-                alert.show("Deleting unsuccessfully. Ticket with sended id doesn't exsist.", {
+            if(error.response.data.indexOf("(Deleting unsuccessfully. Ticket with sended id doesn't exsist or ticket is purchased.)") !== -1){
+                alert.show("Deleting unsuccessfully. Ticket with sended id doesn't exsist or ticket is purchased.", {
                     type: 'error'
                 })
             }

@@ -51,8 +51,8 @@ function AllFlightsSeats() {
         })
         .catch(error => {
             console.log(error)
-            if(error.response.data.indexOf("(Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist.)") !== -1){
-                alert.show("Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist.", {
+            if(error.response.data.indexOf("(Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist or ticket is already purchased.)") !== -1){
+                alert.show("Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist or ticket is already purchased.", {
                     type: 'error'
                 })
             }

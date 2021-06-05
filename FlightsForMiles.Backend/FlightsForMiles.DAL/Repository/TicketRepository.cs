@@ -140,9 +140,12 @@ namespace FlightsForMiles.DAL.Repository
             var resultFind = await _context.Tickets.FindAsync(int.Parse(ticketID));
             if (resultFind != null)
             {
-                _context.Tickets.Remove(resultFind);
-                _context.SaveChanges();
-                return true;
+                if (!resultFind.Is_ticket_purchased)
+                {
+                    _context.Tickets.Remove(resultFind);
+                    _context.SaveChanges();
+                    return true;
+                }
             }
 
             return false;
@@ -171,8 +174,11 @@ namespace FlightsForMiles.DAL.Repository
                     {
                         for (int i = 0; i < tickets.Count; i++) 
                         {
-                            _context.Tickets.Remove(tickets[i]);
-                            _context.SaveChanges();
+                            if (!tickets[i].Is_ticket_purchased) 
+                            {
+                                _context.Tickets.Remove(tickets[i]);
+                                _context.SaveChanges();
+                            }
                         }
 
                         return true;
@@ -195,18 +201,25 @@ namespace FlightsForMiles.DAL.Repository
             var resultFind = _context.Tickets.Find(int.Parse(ticketID));
             if (resultFind != null)
             {
-                resultFind.Number_of_seat = ticket.Number != "" ? int.Parse(ticket.Number) : resultFind.Number_of_seat;
-                resultFind.Ticket_type = ticket.Type == "BUSINESS" ? TicketType.BUSINESS_CLASS : ticket.Type == "FIRST" ?
-                    TicketType.FIRST_CLASS : TicketType.ECONOMIC_CLASS;
-                resultFind.Price = ticket.Price != "" ? double.Parse(ticket.Price) : resultFind.Price;
-                resultFind.Is_quick_booking = ticket.IsQuickBooking == "YES";
+                if (!resultFind.Is_ticket_purchased)
+                {
+                    resultFind.Number_of_seat = ticket.Number != "" ? int.Parse(ticket.Number) : resultFind.Number_of_seat;
+                    resultFind.Ticket_type = ticket.Type == "BUSINESS" ? TicketType.BUSINESS_CLASS : ticket.Type == "FIRST" ?
+                        TicketType.FIRST_CLASS : TicketType.ECONOMIC_CLASS;
+                    resultFind.Price = ticket.Price != "" ? double.Parse(ticket.Price) : resultFind.Price;
+                    resultFind.Is_quick_booking = ticket.IsQuickBooking == "YES";
 
-                _context.Tickets.Update(resultFind);
-                _context.SaveChanges();
+                    _context.Tickets.Update(resultFind);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    throw new KeyNotFoundException("Updating unsuccessfully. Server not found ticket for updating or ticket is purchased.");
+                }
             }
             else
             {
-                throw new KeyNotFoundException("Updating unsuccessfully. Server not found ticket for updating.");
+                throw new KeyNotFoundException("Updating unsuccessfully. Server not found ticket for updating or ticket is purchased.");
             }
         }
         #endregion

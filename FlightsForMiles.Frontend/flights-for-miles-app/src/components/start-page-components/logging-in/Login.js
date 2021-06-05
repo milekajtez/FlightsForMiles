@@ -42,8 +42,7 @@ function Login(props) {
                         var decoded = jwtDecode(token)
                         
                         if(decoded.role === "regular_user"){
-                            // doraditi
-                            history.push(`/regular/${usernameField.value}`)
+                            history.push(`/regular/${usernameField.value}/airlineReview`)
 
                             alert.show("Login successfully", {
                                 type: 'success'

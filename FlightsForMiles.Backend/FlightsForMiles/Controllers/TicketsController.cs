@@ -64,7 +64,7 @@ namespace FlightsForMiles.Controllers
                 return NoContent();
             }
 
-            throw new KeyNotFoundException("Deleting unsuccessfully. Ticket with sended id doesn't exsist.");
+            throw new KeyNotFoundException("Deleting unsuccessfully. Ticket with sended id doesn't exsist or ticket is purchased.");
         }
         #endregion
         #region 5 - Method for delete all ticket for selected flight
@@ -77,7 +77,7 @@ namespace FlightsForMiles.Controllers
                 return NoContent();
             }
 
-            throw new KeyNotFoundException("Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist.");
+            throw new KeyNotFoundException("Deleting unsuccessfully. Selected flight doesn't have any ticket or it dosn't exsist or ticket is already purchased.");
         }
         #endregion
         #region 6 - Method for update ticket

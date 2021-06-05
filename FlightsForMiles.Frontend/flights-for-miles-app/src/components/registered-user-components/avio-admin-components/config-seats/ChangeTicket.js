@@ -58,8 +58,8 @@ function ChangeTicket(props) {
                 })
                 .catch(error => {
                     console.error(error)
-                    if (error.response.data.indexOf("(Updating unsuccessfully. Server not found ticket for updating.)") !== -1) {
-                        alert.show("Updating unsuccessfully. Server not found ticket for updating.", {
+                    if (error.response.data.indexOf("(Updating unsuccessfully. Server not found ticket for updating or ticket is purchased.)") !== -1) {
+                        alert.show("Updating unsuccessfully. Server not found ticket for updating or ticket is purchased.", {
                             type: 'error'
                         })
                     }

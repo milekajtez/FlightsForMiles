@@ -1,12 +1,3 @@
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.deps.json
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.csprojAssemblyReference.cache
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.AssemblyInfoInputs.cache
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.AssemblyInfo.cs
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.csproj.CoreCompileInputs.cache
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
-C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb
 C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.deps.json
 C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
 C:\Users\m.kajtez\Desktop\FlightsForMiles-master\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb
@@ -25,3 +16,12 @@ C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMile
 C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.csproj.CoreCompileInputs.cache
 C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
 C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.deps.json
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\bin\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.csprojAssemblyReference.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.AssemblyInfoInputs.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.AssemblyInfo.cs
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles.BLL.Contracts\obj\Debug\netcoreapp3.1\FlightsForMiles.BLL.Contracts.pdb

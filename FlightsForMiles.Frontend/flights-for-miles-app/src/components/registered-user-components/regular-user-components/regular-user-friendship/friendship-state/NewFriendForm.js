@@ -1,8 +1,15 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
+import { useDispatch } from 'react-redux'
+import { useAlert } from 'react-alert'
+import { addFriend } from '../../../../../redux/regular-user/friendship/friendshipAction';
+import { useParams } from 'react-router'
 
 function NewFriendForm(props) {
+    const dispatch = useDispatch()
+    const alert = useAlert()
+    const params = useParams()
 
     const usernameField = useFormField({
         initialValue: '',
@@ -11,8 +18,59 @@ function NewFriendForm(props) {
 
     const newFriendForm = useFormWithFields({
         onSubmit: (e) => {
+            dispatch(addFriend(params.username, usernameField.value))
+            .then(response => {
+                if(response.status === 201){
+                    alert.show("Send friendship request successfully.", {
+                        type: 'success'
+                    })
+
+                    console.log(response)
+
+                    newFriendForm.handleReset()
+                    props.newFriendIsOpen(false)
+                }
+                else {
+                    alert.show("Unknown error.", {
+                        type: 'error'
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                if(error.response.data.indexOf("(Sender of request doesn't exsist in database.)") !== -1){
+                    alert.show("(Sender of request doesn't exsist in database.)", {
+                        type: 'error'
+                    })
+                }
+                else if(error.response.data.indexOf("(Receiver of request doesn't exsist in database.)") !== -1){
+                    alert.show("Receiver of request doesn't exsist in database.", {
+                        type: 'error'
+                    })
+                }
+                else if(error.response.data.indexOf("(Receiver of request is not regular user.)") !== -1){
+                    alert.show("Receiver of request is not regular user.", {
+                        type: 'error'
+                    })
+                }
+                else if(error.response.data.indexOf("(You have this friendship request or you are already friend with user with entered username.)") !== -1){
+                    alert.show("You have this friendship request or you are already friend with user with entered username.", {
+                        type: 'error'
+                    })
+                }
+                else if(error.response.data.indexOf("(You can't send request yourself.)") !== -1){
+                    alert.show("You can't send request yourself.", {
+                        type: 'error'
+                    })
+                }
+                else {
+                    alert.show("Unknown error", {
+                        type: 'error'
+                    })
+                }
+            })
+
             e.preventDefault()
-            props.newFriendIsOpen(false)
         },
         fields: [usernameField]
     })

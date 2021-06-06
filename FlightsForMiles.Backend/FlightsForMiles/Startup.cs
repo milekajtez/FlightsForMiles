@@ -2,6 +2,7 @@ using FlightsForMiles.BLL.Contracts.Services.Airline;
 using FlightsForMiles.BLL.Contracts.Services.Destination;
 using FlightsForMiles.BLL.Contracts.Services.Discount;
 using FlightsForMiles.BLL.Contracts.Services.Flight;
+using FlightsForMiles.BLL.Contracts.Services.Friendship;
 using FlightsForMiles.BLL.Contracts.Services.Help;
 using FlightsForMiles.BLL.Contracts.Services.Ticket;
 using FlightsForMiles.BLL.Contracts.Services.User;
@@ -118,6 +119,10 @@ namespace FlightsForMiles
             // ticket service and repository
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<ITicketRepository, TicketRepository>();
+
+            //friendship service and repository
+            services.AddScoped<IFriendshipService, FriendshipService>();
+            services.AddScoped<IFriendshipRepository, FriendshipRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

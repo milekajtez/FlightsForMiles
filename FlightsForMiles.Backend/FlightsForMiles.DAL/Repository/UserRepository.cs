@@ -26,7 +26,7 @@ namespace FlightsForMiles.DAL.Repository
         private const string GoogleApiTokenInfoUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={0}";
 
         public UserRepository(UserManager<RegisteredUser> userManager, IOptions<ApplicationSettings> appSettings,
-            IOptions<MailSettings> mailSettings, ApplicationDbContext context)
+            IOptions<MailSettings> mailSettings)
         {
             _userManager = userManager;
             _appSettings = appSettings.Value;

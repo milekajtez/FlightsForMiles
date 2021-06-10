@@ -52,11 +52,29 @@ namespace FlightsForMiles.BLL.Services
             return result;
         }
         #endregion
-        #region 4  -Method for cancel request
+        #region 4 - Method for cancel request
         public bool CancelRequest(string username, string secondUsername)
         {
-            DeleteRequestValidation(username, secondUsername);
+            Validation(username, secondUsername);
             return _friendshipRepository.CancelRequest(username, secondUsername).Result;
+        }
+        #endregion
+        #region 5 - Method for reject request
+        public bool RejectRequest(string username, string secondUsername)
+        {
+            Validation(username, secondUsername);
+            return _friendshipRepository.RejectRequest(username, secondUsername).Result;
+        }
+        #endregion
+        #region 6 - Method for accept request
+        public void AcceptRequest(string username, string secondUsername)
+        {
+            Validation(username, secondUsername);
+            bool isDeleted = _friendshipRepository.AcceptRequest(username, secondUsername).Result;
+            if (!isDeleted) 
+            {
+                throw new KeyNotFoundException("Accepting unsuccessfully. Request doesn't exsist.");
+            }
         }
         #endregion
 
@@ -100,7 +118,7 @@ namespace FlightsForMiles.BLL.Services
             }
         }
 
-        private void DeleteRequestValidation(string username, string secondUsername) 
+        private void Validation(string username, string secondUsername) 
         {
             if (string.IsNullOrWhiteSpace(username))
             {

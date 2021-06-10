@@ -100,7 +100,6 @@ namespace FlightsForMiles.DAL.Repository
                 throw new Exception("Server not found user.");
             }
 
-            var allUsers = _userManager.Users;
             var allRequests = _context.FriendshipRequests;
 
             List<IFriendRequest> result = new List<IFriendRequest>();
@@ -158,6 +157,7 @@ namespace FlightsForMiles.DAL.Repository
                 if (req.Sender_pin.ToString().Equals(user.Id) && req.Reciever_pin.ToString().Equals(anotherUser.Id)) 
                 {
                     friendshipRequest = req;
+                    break;
                 }
             }
 
@@ -167,6 +167,65 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             _context.FriendshipRequests.Remove(friendshipRequest);
+            _context.SaveChanges();
+
+            return true;
+        }
+        #endregion
+        #region 5 - Method for reject request
+        public async Task<bool> RejectRequest(string username, string secondUsername)
+        {
+            var friendshipRequests = _context.FriendshipRequests;
+            var user = await _userManager.FindByNameAsync(username);
+            var anotherUser = await _userManager.FindByNameAsync(secondUsername);
+
+            FriendshipRequest friendshipRequest = null;
+            foreach (var req in friendshipRequests)
+            {
+                if (req.Reciever_pin.ToString().Equals(user.Id) && req.Sender_pin.ToString().Equals(anotherUser.Id))
+                {
+                    friendshipRequest = req;
+                    break;
+                }
+            }
+
+            if (friendshipRequest == null)
+            {
+                return false;
+            }
+
+            _context.FriendshipRequests.Remove(friendshipRequest);
+            _context.SaveChanges();
+
+            return true;
+        }
+        #endregion
+        #region 6 - Method for accept request
+        public async Task<bool> AcceptRequest(string username, string secondUsername)
+        {
+            var friendshipRequests = _context.FriendshipRequests;
+            var user = await _userManager.FindByNameAsync(username);
+            var anotherUser = await _userManager.FindByNameAsync(secondUsername);
+
+            FriendshipRequest friendshipRequest = null;
+
+            foreach (var req in friendshipRequests) 
+            {
+                if (req.Reciever_pin.ToString().Equals(user.Id) && req.Sender_pin.ToString().Equals(anotherUser.Id) && !req.Request_accepted) 
+                {
+                    friendshipRequest = req;
+                    break;
+                }
+            }
+
+            if (friendshipRequest == null)
+            {
+                return false;
+            }
+
+            friendshipRequest.Request_accepted = true;
+
+            _context.FriendshipRequests.Update(friendshipRequest);
             _context.SaveChanges();
 
             return true;

@@ -51,3 +51,25 @@ export const cancelRequest = (username, secondUsername) => () =>
             reject(error)
         })
     })
+
+export const rejectRequest = (username, secondUsername) => () => 
+    new Promise(function(resolve, reject){
+        friendshipService.rejectRequest(username, secondUsername)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+
+export const acceptRequest = (username, secondUsername) => () => 
+    new Promise(function(resolve, reject){
+        friendshipService.acceptRequest(username, secondUsername)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })

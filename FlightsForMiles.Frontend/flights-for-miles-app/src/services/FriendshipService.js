@@ -16,7 +16,15 @@ const friendshipService = {
 
     cancelRequest: (username, secondUsername) => {
         return API.delete(`Friendships/CancelRequest/${username}/${secondUsername}`)
-    }
+    },
+
+    rejectRequest: (username, secondUsername) => {
+        return API.delete(`Friendships/RejectRequest/${username}/${secondUsername}`)
+    },
+
+    acceptRequest: (username, secondUsername) => {
+        return API.get(`Friendships/AcceptRequest/${username}/${secondUsername}`)
+    },
 }
 
 export default friendshipService

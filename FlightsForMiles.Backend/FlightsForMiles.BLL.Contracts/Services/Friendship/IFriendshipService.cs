@@ -11,5 +11,7 @@ namespace FlightsForMiles.BLL.Contracts.Services.Friendship
         IFriendshipResponseDTO LoadFriendship(long idSender, long idReceiver);
         List<IFriendRequestResponseDTO> LoadRequests(string username, string requestType);
         bool CancelRequest(string username, string secondUsername);
+        bool RejectRequest(string username, string secondUsername);
+        void AcceptRequest(string username, string secondUsername);
     }
 }

@@ -75,5 +75,28 @@ namespace FlightsForMiles.Controllers
             throw new KeyNotFoundException("Canceling unsuccessfully. Request doesn't exsist.");
         }
         #endregion
+        #region 5 - Method for reject request
+        [HttpDelete]
+        [Route("RejectRequest/{username}/{secondUsername}")]
+        public IActionResult RejectRequest(string username, string secondUsername)
+        {
+            bool isDeleted = _friendshipService.RejectRequest(username, secondUsername);
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Rejecting unsuccessfully. Request doesn't exsist.");
+        }
+        #endregion
+        #region 6 - Method for accept request
+        [HttpGet]
+        [Route("AcceptRequest/{username}/{secondUsername}")]
+        public IActionResult AcceptRequest(string username, string secondUsername)
+        {
+            _friendshipService.AcceptRequest(username, secondUsername);
+            return NoContent();
+        }
+        #endregion
     }
 }

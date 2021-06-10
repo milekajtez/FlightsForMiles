@@ -12,5 +12,7 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         IFriendship LoadFrinedship(long idSender, long idReceiver);
         Task<List<IFriendRequest>> LoadRequests(string username, string requestType);
         Task<bool> CancelRequest(string username, string secondUsername);
+        Task<bool> RejectRequest(string username, string secondUsername);
+        Task<bool> AcceptRequest(string username, string secondUsername);
     }
 }

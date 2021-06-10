@@ -47,5 +47,33 @@ namespace FlightsForMiles.Controllers
             return NotFound("Friendship not found");
         }
         #endregion
+        #region 3 - Method for load my requests
+        [HttpGet]
+        [Route("LoadRequests/{username}/{requestType}")]
+        public IActionResult LoadRequests(string username, string requestType) 
+        {
+            List<IFriendRequestResponseDTO> requests = _friendshipService.LoadRequests(username, requestType);
+            if (requests != null)
+            {
+                return Ok(requests);
+            }
+
+            return NotFound("Server not found any request.");
+        }
+        #endregion
+        #region 4 - Method for cancel request
+        [HttpDelete]
+        [Route("CancelRequest/{username}/{secondUsername}")]
+        public IActionResult CancelRequest(string username, string secondUsername) 
+        {
+            bool isDeleted = _friendshipService.CancelRequest(username, secondUsername);
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Canceling unsuccessfully. Request doesn't exsist.");
+        }
+        #endregion
     }
 }

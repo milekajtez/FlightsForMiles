@@ -62,7 +62,7 @@ namespace FlightsForMiles.DAL.Repository
             throw new NotImplementedException("Destination with this id (" + id + ") doesn't exsist.");
         }
         #endregion
-        #region 3 - Metho for load all destinations
+        #region 3 - Method for load all destinations
         public List<IDestination> LoadAllDestinations()
         {
             var destinations = _context.Destinations.Include(a => a.Airline);

@@ -9,5 +9,7 @@ namespace FlightsForMiles.BLL.Contracts.Services.Friendship
     {
         Tuple<long, long> SendFriendshipRequest(IFriendshipRequestDTO friendshipRequestDTO);
         IFriendshipResponseDTO LoadFriendship(long idSender, long idReceiver);
+        List<IFriendRequestResponseDTO> LoadRequests(string username, string requestType);
+        bool CancelRequest(string username, string secondUsername);
     }
 }

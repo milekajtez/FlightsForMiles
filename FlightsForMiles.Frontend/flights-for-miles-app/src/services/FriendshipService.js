@@ -9,6 +9,14 @@ const friendshipService = {
         
         return API.post(`Friendships`, body)
     },
+
+    loadRequests: (username, requestType) => {
+        return API.get(`Friendships/LoadRequests/${username}/${requestType}`)
+    },
+
+    cancelRequest: (username, secondUsername) => {
+        return API.delete(`Friendships/CancelRequest/${username}/${secondUsername}`)
+    }
 }
 
 export default friendshipService

@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import { useFormField, useFormWithFields } from 'react-use-form-hooks'
 import { useDispatch } from 'react-redux'
 import { useAlert } from 'react-alert'
-import { addFriend } from '../../../../../redux/regular-user/friendship/friendshipAction';
+import { addFriend, loadRequests } from '../../../../../redux/regular-user/friendship/friendshipAction';
 import { useParams } from 'react-router'
 
 function NewFriendForm(props) {
@@ -25,7 +25,7 @@ function NewFriendForm(props) {
                         type: 'success'
                     })
 
-                    console.log(response)
+                    dispatch(loadRequests(params.username, "fromMe"))
 
                     newFriendForm.handleReset()
                     props.newFriendIsOpen(false)

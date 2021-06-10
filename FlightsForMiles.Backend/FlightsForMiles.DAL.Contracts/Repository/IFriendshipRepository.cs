@@ -10,5 +10,7 @@ namespace FlightsForMiles.DAL.Contracts.Repository
     {
         Task<Tuple<long, long>> AddFriendship(IFriendship friendship);
         IFriendship LoadFrinedship(long idSender, long idReceiver);
+        Task<List<IFriendRequest>> LoadRequests(string username, string requestType);
+        Task<bool> CancelRequest(string username, string secondUsername);
     }
 }

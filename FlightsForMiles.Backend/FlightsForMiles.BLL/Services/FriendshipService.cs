@@ -36,6 +36,29 @@ namespace FlightsForMiles.BLL.Services
             return ConvertFriendshipObjectToFriendshipResponse(_friendshipRepository.LoadFrinedship(idSender, idReceiver));
         }
         #endregion
+        #region 3 - Method for load my requests
+        public List<IFriendRequestResponseDTO> LoadRequests(string username, string requestType)
+        {
+            FriendRequestValidation(username, requestType);
+
+            List<IFriendRequest> requests = _friendshipRepository.LoadRequests(username, requestType).Result;
+            List<IFriendRequestResponseDTO> result = new List<IFriendRequestResponseDTO>();
+
+            foreach (var req in requests)
+            {
+                result.Add(ConvertFriendRequesteObjectToFriendRequestResponse(req));
+            }
+
+            return result;
+        }
+        #endregion
+        #region 4  -Method for cancel request
+        public bool CancelRequest(string username, string secondUsername)
+        {
+            DeleteRequestValidation(username, secondUsername);
+            return _friendshipRepository.CancelRequest(username, secondUsername).Result;
+        }
+        #endregion
 
         #region Converting methods
         private IFriendship ConvertRequestObjectToFriendship(IFriendshipRequestDTO friendshipRequestDTO)
@@ -51,6 +74,43 @@ namespace FlightsForMiles.BLL.Services
                 RecieverPin = friendship.Reciever,
                 RequestAccepted = friendship.RequestAccepted
             };
+        }
+
+        private IFriendRequestResponseDTO ConvertFriendRequesteObjectToFriendRequestResponse(IFriendRequest friendRequest) 
+        {
+            return new FriendRequestResponseDTO()
+            {
+                Username = friendRequest.Username,
+                Firstname = friendRequest.Firstname,
+                Lastname = friendRequest.Lastname
+            };
+        }
+        #endregion
+        #region FriendRequestValidation
+        private void FriendRequestValidation(string username, string requestType) 
+        {
+            if (string.IsNullOrWhiteSpace(username)) 
+            {
+                throw new ArgumentException(nameof(username));
+            }
+
+            if (string.IsNullOrWhiteSpace(requestType) || (!requestType.Equals("fromMe") && !requestType.Equals("toMe"))) 
+            {
+                throw new ArgumentException(nameof(requestType));
+            }
+        }
+
+        private void DeleteRequestValidation(string username, string secondUsername) 
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                throw new ArgumentException(nameof(username));
+            }
+
+            if (string.IsNullOrWhiteSpace(secondUsername))
+            {
+                throw new ArgumentException(nameof(secondUsername));
+            }
         }
         #endregion
     }

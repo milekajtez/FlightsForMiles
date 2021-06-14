@@ -2,7 +2,7 @@ import React from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
-import { loadRequests, rejectRequest, acceptRequest } from '../../../../../redux/regular-user/friendship/friendshipAction'
+import { loadRequests, rejectRequest, acceptRequest, loadFriends } from '../../../../../redux/regular-user/friendship/friendshipAction'
 
 function YourRequest(props) {
     const dispatch = useDispatch()
@@ -49,8 +49,7 @@ function YourRequest(props) {
                 })
 
                 dispatch(loadRequests(params.username, "toMe"))
-                // load frineds..mozda ne ovde vec u komponenti iznad...
-                // gde se i vrsi ispis, jer pri promeni ce se renderovati i parent komponenta
+                dispatch(loadFriends(params.username))
             }
             else {
                 alert.show("Unknown error.", {

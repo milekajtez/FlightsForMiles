@@ -77,6 +77,29 @@ namespace FlightsForMiles.BLL.Services
             }
         }
         #endregion
+        #region 6 - Method for load friends
+        public List<IFriendResponseDTO> LoadFriends(string username)
+        {
+            UsernameValidation(username);
+            List<IFriend> friends = _friendshipRepository.LoadFriends(username).Result;
+            List<IFriendResponseDTO> result = new List<IFriendResponseDTO>();
+
+            foreach (var fri in friends)
+            {
+                result.Add(ConvertFriendObjectToFriendResponse(fri));
+            }
+
+            return result;
+        }
+        #endregion
+        #region 7 - Method for delete friend
+        public bool DeleteFriend(string username, string pin)
+        {
+            UsernameValidation(username);
+            PinValidation(pin);
+            return _friendshipRepository.DeleteFriend(username, pin).Result;
+        }
+        #endregion
 
         #region Converting methods
         private IFriendship ConvertRequestObjectToFriendship(IFriendshipRequestDTO friendshipRequestDTO)
@@ -103,14 +126,23 @@ namespace FlightsForMiles.BLL.Services
                 Lastname = friendRequest.Lastname
             };
         }
+
+        private IFriendResponseDTO ConvertFriendObjectToFriendResponse(IFriend friend) 
+        {
+            return new FriendResponseDTO() 
+            {
+                Pin = friend.Pin,
+                Username = friend.Username,
+                Firstname = friend.Firstname,
+                Lastname = friend.Lastname,
+                PhoneNumber = friend.PhoneNumber
+            };
+        }
         #endregion
         #region FriendRequestValidation
         private void FriendRequestValidation(string username, string requestType) 
         {
-            if (string.IsNullOrWhiteSpace(username)) 
-            {
-                throw new ArgumentException(nameof(username));
-            }
+            UsernameValidation(username);
 
             if (string.IsNullOrWhiteSpace(requestType) || (!requestType.Equals("fromMe") && !requestType.Equals("toMe"))) 
             {
@@ -120,14 +152,34 @@ namespace FlightsForMiles.BLL.Services
 
         private void Validation(string username, string secondUsername) 
         {
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                throw new ArgumentException(nameof(username));
-            }
+            UsernameValidation(username);
 
             if (string.IsNullOrWhiteSpace(secondUsername))
             {
                 throw new ArgumentException(nameof(secondUsername));
+            }
+        }
+
+        private void UsernameValidation(string username) 
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                throw new ArgumentException(nameof(username));
+            }
+        }
+
+        private void PinValidation(string pin) 
+        {
+            if (string.IsNullOrWhiteSpace(pin) || !pin.Trim().Length.Equals(13))
+            {
+                throw new ArgumentException(nameof(pin));
+            }
+            else 
+            {
+                if (!long.TryParse(pin, out _)) 
+                {
+                    throw new ArgumentException(nameof(pin));
+                }
             }
         }
         #endregion

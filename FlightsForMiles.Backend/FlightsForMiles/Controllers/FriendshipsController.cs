@@ -22,7 +22,7 @@ namespace FlightsForMiles.Controllers
 
         #region 1 - Method for send friendship request
         [HttpPost]
-        public IActionResult SendFriendshipRequest(FriendshipRequestDTO newFriendshipRequest) 
+        public IActionResult SendFriendshipRequest(FriendshipRequestDTO newFriendshipRequest)
         {
             Tuple<long, long> newFriendshipIDs = _friendshipService.SendFriendshipRequest(newFriendshipRequest);
             FriendshipRequestDTO newObj = new FriendshipRequestDTO()
@@ -34,10 +34,10 @@ namespace FlightsForMiles.Controllers
         }
         #endregion
         #region 2 - Method for Get one frinedship
-        [HttpGet(Name= "GetFrinedship")]
+        [HttpGet(Name = "GetFrinedship")]
         public ActionResult GetFrinedship(FriendshipRequestDTO newFriendshipRequest)
         {
-            IFriendshipResponseDTO friendship = _friendshipService.LoadFriendship(long.Parse(newFriendshipRequest.SenderUsername), 
+            IFriendshipResponseDTO friendship = _friendshipService.LoadFriendship(long.Parse(newFriendshipRequest.SenderUsername),
                 long.Parse(newFriendshipRequest.ReceiverUsername));
             if (friendship != null)
             {
@@ -50,7 +50,7 @@ namespace FlightsForMiles.Controllers
         #region 3 - Method for load my requests
         [HttpGet]
         [Route("LoadRequests/{username}/{requestType}")]
-        public IActionResult LoadRequests(string username, string requestType) 
+        public IActionResult LoadRequests(string username, string requestType)
         {
             List<IFriendRequestResponseDTO> requests = _friendshipService.LoadRequests(username, requestType);
             if (requests != null)
@@ -64,7 +64,7 @@ namespace FlightsForMiles.Controllers
         #region 4 - Method for cancel request
         [HttpDelete]
         [Route("CancelRequest/{username}/{secondUsername}")]
-        public IActionResult CancelRequest(string username, string secondUsername) 
+        public IActionResult CancelRequest(string username, string secondUsername)
         {
             bool isDeleted = _friendshipService.CancelRequest(username, secondUsername);
             if (isDeleted)
@@ -96,6 +96,34 @@ namespace FlightsForMiles.Controllers
         {
             _friendshipService.AcceptRequest(username, secondUsername);
             return NoContent();
+        }
+        #endregion
+        #region 7 - Method for load friends
+        [HttpGet]
+        [Route("LoadFriends/{username}")]
+        public IActionResult LoadFriends(string username)
+        {
+            List<IFriendResponseDTO> friends = _friendshipService.LoadFriends(username);
+            if (friends != null)
+            {
+                return Ok(friends);
+            }
+
+            return NotFound("You don't have any frineds yet.");
+        }
+        #endregion
+        #region 8 - Method for delete friend
+        [HttpDelete]
+        [Route("DeleteFriend/{username}/{pin}")]
+        public IActionResult DeleteFriend(string username, string pin) 
+        {
+            bool isDeleted = _friendshipService.DeleteFriend(username, pin);
+            if (isDeleted)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Deleting unsuccessfully. Friend doesn't exsist.");
         }
         #endregion
     }

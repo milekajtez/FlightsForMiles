@@ -231,5 +231,89 @@ namespace FlightsForMiles.DAL.Repository
             return true;
         }
         #endregion
+        #region 7 - Method for load friends
+        public async Task<List<IFriend>> LoadFriends(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null) 
+            {
+                throw new Exception("Server not found user.");
+            }
+
+            var friendships = _context.FriendshipRequests;
+            List<IFriend> result = new List<IFriend>();
+
+            foreach (var f in friendships) 
+            {
+                if (f.Request_accepted) 
+                {
+                    if (f.Sender_pin.ToString().Equals(user.Id))
+                    {
+                        var friend = await _userManager.FindByIdAsync(f.Reciever_pin.ToString());
+                        result.Add(new FriendDataModel()
+                        {
+                            Pin = friend.Id,
+                            Username = friend.UserName,
+                            Firstname = friend.FirstName,
+                            Lastname = friend.LastName,
+                            PhoneNumber = friend.PhoneNumber
+                        });
+                    }
+                    else if (f.Reciever_pin.ToString().Equals(user.Id)) 
+                    {
+                        var friend = await _userManager.FindByIdAsync(f.Sender_pin.ToString());
+                        result.Add(new FriendDataModel()
+                        {
+                            Pin = friend.Id,
+                            Username = friend.UserName,
+                            Firstname = friend.FirstName,
+                            Lastname = friend.LastName,
+                            PhoneNumber = friend.PhoneNumber
+                        });
+                    }
+                }
+            }
+
+            return result;
+        }
+        #endregion
+        #region 8 - Method for delete friend
+        public async Task<bool> DeleteFriend(string username, string pin)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null) 
+            {
+                return false;
+            }
+
+            var friend = await _userManager.FindByIdAsync(pin);
+            if (friend == null)
+            {
+                return false;
+            }
+
+            var friendships = _context.FriendshipRequests;
+            FriendshipRequest friendshipRequest = null;
+            foreach (var f in friendships) 
+            {
+                if (((f.Sender_pin.ToString().Equals(user.Id) && f.Reciever_pin.ToString().Equals(friend.Id)) 
+                    || (f.Reciever_pin.ToString().Equals(user.Id) && f.Sender_pin.ToString().Equals(friend.Id))) && f.Request_accepted) 
+                {
+                    friendshipRequest = f;
+                    break;
+                }
+            }
+
+            if (friendshipRequest == null) 
+            {
+                return false;
+            }
+
+            _context.FriendshipRequests.Remove(friendshipRequest);
+            _context.SaveChanges();
+
+            return true;
+        }
+        #endregion
     }
 }

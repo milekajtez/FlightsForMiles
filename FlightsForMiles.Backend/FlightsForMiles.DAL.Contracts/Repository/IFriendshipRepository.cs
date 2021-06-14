@@ -14,5 +14,7 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<bool> CancelRequest(string username, string secondUsername);
         Task<bool> RejectRequest(string username, string secondUsername);
         Task<bool> AcceptRequest(string username, string secondUsername);
+        Task<List<IFriend>> LoadFriends(string username);
+        Task<bool> DeleteFriend(string username, string pin);
     }
 }

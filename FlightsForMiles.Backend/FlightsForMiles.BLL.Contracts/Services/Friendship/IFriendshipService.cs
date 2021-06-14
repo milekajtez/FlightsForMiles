@@ -13,5 +13,7 @@ namespace FlightsForMiles.BLL.Contracts.Services.Friendship
         bool CancelRequest(string username, string secondUsername);
         bool RejectRequest(string username, string secondUsername);
         void AcceptRequest(string username, string secondUsername);
+        List<IFriendResponseDTO> LoadFriends(string username);
+        bool DeleteFriend(string username, string pin);
     }
 }

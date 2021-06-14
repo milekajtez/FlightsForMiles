@@ -25,6 +25,14 @@ const friendshipService = {
     acceptRequest: (username, secondUsername) => {
         return API.get(`Friendships/AcceptRequest/${username}/${secondUsername}`)
     },
+
+    loadFriends: (username) => {
+        return API.get(`Friendships/LoadFriends/${username}`)
+    },
+
+    deleteFriend: (username, pin) => {
+        return API.delete(`Friendships/DeleteFriend/${username}/${pin}`)
+    }
 }
 
 export default friendshipService

@@ -1,5 +1,5 @@
 import friendshipService from '../../../services/FriendshipService'
-import { LOADING_MY_REQUESTS, LOADING_REQUESTS_FOR_ME } from './friendshipTypes'
+import { LOADING_FRIENDS, LOADING_MY_REQUESTS, LOADING_REQUESTS_FOR_ME } from './friendshipTypes'
 
 export const addFriend = (senderUsername, reciverUsername) => () => 
     new Promise(function(resolve, reject){
@@ -66,6 +66,39 @@ export const rejectRequest = (username, secondUsername) => () =>
 export const acceptRequest = (username, secondUsername) => () => 
     new Promise(function(resolve, reject){
         friendshipService.acceptRequest(username, secondUsername)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })
+
+export const loadFriendsAction = (friends) => {
+    return {
+        type: LOADING_FRIENDS,
+        payload: friends
+    }    
+}
+
+export const loadFriends = (username) => {
+    return (dispatch) => {
+        friendshipService.loadFriends(username)
+        .then(response => {
+            if(response.status === 200){
+                dispatch(loadFriendsAction(response.data))
+            }
+        })  
+        .catch(error => {
+            console.log(error)
+        })
+    }
+}
+
+
+export const deleteFriend = (username, pin) => () => 
+    new Promise(function(resolve, reject){
+        friendshipService.deleteFriend(username, pin)
         .then(response => {
             resolve(response)
         })

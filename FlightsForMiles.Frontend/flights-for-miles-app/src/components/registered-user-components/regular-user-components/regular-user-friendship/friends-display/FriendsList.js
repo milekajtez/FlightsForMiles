@@ -4,7 +4,7 @@ import { useAlert } from 'react-alert'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
-import { loadFriends, deleteFriend } from '../../../../../redux/regular-user/friendship/friendshipAction'
+import { loadFriends, deleteFriend, searchAction } from '../../../../../redux/regular-user/friendship/friendshipAction'
 
 function FriendsList() {
     const dispatch = useDispatch()
@@ -27,6 +27,7 @@ function FriendsList() {
                 })
 
                 dispatch(loadFriends(params.username))
+                dispatch(searchAction([]))
             }
             else {
                 alert.show("Unknown error.", {

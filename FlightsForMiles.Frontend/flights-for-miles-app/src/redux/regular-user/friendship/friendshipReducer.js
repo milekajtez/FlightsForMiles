@@ -1,9 +1,10 @@
-import { LOADING_FRIENDS, LOADING_MY_REQUESTS, LOADING_REQUESTS_FOR_ME } from "./friendshipTypes"
+import { LOADING_FRIENDS, LOADING_MY_REQUESTS, LOADING_REQUESTS_FOR_ME, SEARCH_FRIENDS } from "./friendshipTypes"
 
 const initialState =  {
     myRequests: [],
     requestsToMe: [],
-    friends: []
+    friends: [],
+    searchedFriends: []
 }
 
 const friendshipReducer = (state = initialState, action) => {
@@ -22,6 +23,11 @@ const friendshipReducer = (state = initialState, action) => {
             return {
                 ...state,
                 friends: action.payload
+            }
+        case SEARCH_FRIENDS:
+            return {
+                ...state,
+                searchedFriends: action.payload
             }
         default:
             return state

@@ -1,5 +1,5 @@
 import friendshipService from '../../../services/FriendshipService'
-import { LOADING_FRIENDS, LOADING_MY_REQUESTS, LOADING_REQUESTS_FOR_ME } from './friendshipTypes'
+import { LOADING_FRIENDS, LOADING_MY_REQUESTS, LOADING_REQUESTS_FOR_ME, SEARCH_FRIENDS } from './friendshipTypes'
 
 export const addFriend = (senderUsername, reciverUsername) => () => 
     new Promise(function(resolve, reject){
@@ -106,3 +106,10 @@ export const deleteFriend = (username, pin) => () =>
             reject(error)
         })
     })
+
+export const searchAction = (searchedFriends) => {
+    return {
+        type: SEARCH_FRIENDS,
+        payload: searchedFriends
+    }    
+}

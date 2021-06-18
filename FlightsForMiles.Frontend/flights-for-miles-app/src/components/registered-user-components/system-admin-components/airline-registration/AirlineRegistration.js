@@ -41,7 +41,7 @@ function AirlineRegistration() {
                     name: nameField.value,
                     houseNumber: houseNumberField.value,
                     street: streetField.value,
-                    city: streetField.value,
+                    city: cityField.value,
                     description: descriptionField.value,
                     pricelist: pricelistField.value
                 }))

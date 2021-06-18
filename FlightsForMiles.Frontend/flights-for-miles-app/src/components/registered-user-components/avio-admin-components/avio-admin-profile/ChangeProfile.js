@@ -125,7 +125,7 @@ function ChangeProfile() {
                     <input type="number" value={phoneNumberField.value} onChange={phoneNumberField.handleChange} 
                     required={phoneNumberField.isRequired} id="phoneNumberField" placeholder="Phone number" />
                 </div>
-                &emsp;
+                <br></br>
                 <div style={{ display: "inline-block" }}>
                     <input type="text" value={firstnameField.value} onChange={firstnameField.handleChange} 
                     required={firstnameField.isRequired} id="firstnameField" placeholder="First name" />
@@ -135,7 +135,7 @@ function ChangeProfile() {
                     <input type="text" value={lastNameField.value} onChange={lastNameField.handleChange} 
                     required={lastNameField.isRequired} id="lastNameField" placeholder="Last name" />
                 </div>
-                &emsp;
+                <br></br>
                 <div style={{ display: "inline-block" }}>
                     <input type="text" value={addressField.value} onChange={addressField.handleChange} 
                     required={addressField.isRequired} id="addressField" placeholder="Address" />

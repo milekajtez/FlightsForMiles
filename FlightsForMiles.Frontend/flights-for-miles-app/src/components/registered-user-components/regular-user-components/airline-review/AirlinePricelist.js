@@ -12,7 +12,7 @@ function AirlinePricelist(props) {
                 }
             }}>
             <div className="reg-box" style={{ color: "white" }}>
-                <h2>AIRLINE DESCRIPTION</h2>
+                <h2>AIRLINE PRICELIST</h2>
                 {
                     <div style={{ textAlign: "center" }}>
                         <span className="user-box" style={{ display: "inline-block" }}>

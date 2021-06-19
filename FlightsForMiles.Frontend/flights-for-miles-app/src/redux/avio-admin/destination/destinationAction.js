@@ -1,5 +1,5 @@
 import destinationService from "../../../services/DestinationService"
-import { DESTINATIONS_LOADING } from "./destinationTypes"
+import { DESTINATIONS_FOR_AIRLINE_LOADING, DESTINATIONS_LOADING } from "./destinationTypes"
 
 export const addDestination = (newDestination) => () => 
     new Promise(function(resolve, reject){
@@ -54,3 +54,24 @@ export const changeDestination = (changedDestination) => () =>
             reject(error)
         })
     })
+
+export const loadDestinationsForAirlineAction = (destinationsForAirline) => {
+    return {
+        type: DESTINATIONS_FOR_AIRLINE_LOADING,
+        payload: destinationsForAirline
+    }
+}  
+
+export const loadDestinationsForAirline = (airlineID) => {
+    return (dispatch) => {
+        destinationService.loadDestinationsForAirline(airlineID)
+        .then(response => {
+            if(response.status === 200){
+                dispatch(loadDestinationsForAirlineAction(response.data))
+            }
+        })  
+        .catch(error => {
+            console.log(error)
+        })
+    }
+}

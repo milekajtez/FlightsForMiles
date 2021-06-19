@@ -54,5 +54,14 @@ namespace FlightsForMiles.Controllers
             return NotFound("Server not found any airline.");
         }
         #endregion
+        #region 4 - Method for update airline
+        [HttpPut]
+        [Route("{airlineID}")]
+        public IActionResult UpdateAiriline(string airlineID, AirlineRequestDTO airlineRequestDTO)
+        {
+            _airlineService.UpdateAiriline(airlineID, airlineRequestDTO);
+            return NoContent();
+        }
+        #endregion
     }
 }

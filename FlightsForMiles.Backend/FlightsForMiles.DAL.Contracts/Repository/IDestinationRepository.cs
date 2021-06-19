@@ -13,5 +13,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         List<IDestination> LoadAllDestinations();
         Task<bool> DeleteDestination(string destinationID);
         void UpdateDestination(string destinationID, IDestination destination);
+        List<IDestination> LoadDestinationsForAirline(string airlineID);
     }
 }

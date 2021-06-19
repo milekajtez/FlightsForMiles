@@ -10,5 +10,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Airline
         long AddAirline(IAirlineRequestDTO airlineRequestDTO);
         IAirlineResponseDTO LoadAirline(int id);
         List<IAirlineResponseDTO> LoadAllAirlines();
+        void UpdateAiriline(string airlineID, IAirlineRequestDTO airlineRequestDTO);
     }
 }

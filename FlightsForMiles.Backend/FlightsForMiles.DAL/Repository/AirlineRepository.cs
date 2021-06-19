@@ -104,5 +104,27 @@ namespace FlightsForMiles.DAL.Repository
             return result;
         }
         #endregion
+        #region 4 - Method for update airline
+        public void UpdateAiriline(string airlineID, IAirline airline)
+        {
+            var resultFind = _context.Airlines.Find(int.Parse(airlineID));
+            if (resultFind != null)
+            {
+                resultFind.Name = airline.Name != "" ? airline.Name : resultFind.Name;
+                resultFind.House_number = airline.HouseNumber != "" ? uint.Parse(airline.HouseNumber) : resultFind.House_number;
+                resultFind.Street = airline.Street != "" ? airline.Street : resultFind.Street;
+                resultFind.City = airline.City != "" ? airline.City : resultFind.City;
+                resultFind.Promotional_description = airline.Description != "" ? airline.Description : resultFind.Promotional_description;
+                resultFind.Pricelist = airline.Pricelist != "" ? airline.Pricelist : resultFind.Pricelist;
+
+                _context.Airlines.Update(resultFind);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Updating unsuccessfully. Server not found airline for updating.");
+            }
+        }
+        #endregion
     }
 }

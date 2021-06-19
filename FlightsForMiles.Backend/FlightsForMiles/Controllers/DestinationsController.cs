@@ -77,5 +77,19 @@ namespace FlightsForMiles.Controllers
             return NoContent();
         }
         #endregion
+        #region 6 - Method for load airline's destinations
+        [HttpGet]
+        [Route("LoadDestinationsForAirline/{airlineID}")]
+        public IActionResult LoadDestinationsForAirline(string airlineID) 
+        {
+            List<IDestinationResponseDTO> destinations = _destinationService.LoadDestinationsForAirline(airlineID);
+            if (destinations != null)
+            {
+                return Ok(destinations);
+            }
+
+            return NotFound("Server not found any destination for this airline.");
+        }
+        #endregion
     }
 }

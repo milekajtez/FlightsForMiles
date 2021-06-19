@@ -29,6 +29,10 @@ const destinationService = {
         }
         
         return API.put(`Destinations/${changedDestination.airportID}`, body)
+    },
+
+    loadDestinationsForAirline: (airlineID) => {
+        return API.get(`Destinations/LoadDestinationsForAirline/${airlineID}`);
     }
 }
 

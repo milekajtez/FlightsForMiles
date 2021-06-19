@@ -28,3 +28,14 @@ thead th {
     border: 1px solid #1b2229;
     padding: 10px;
 }
+
+.checked {
+    color: orange;
+}
+
+.leaflet-container {
+    width: 75%;
+    height: 75vh;
+    margin: auto;
+    box-shadow: 0 0 100px aqua;
+}

@@ -17,6 +17,19 @@ const airlineService = {
     loadAirlines: () => {
         return API.get(`Airlines`)
     },
+
+    changeAirline: (changedAirline) => {
+        var body = {
+            Name: changedAirline.name,
+            HouseNumber: changedAirline.houseNumber,
+            Street: changedAirline.street,
+            City: changedAirline.city,
+            Description: changedAirline.description,
+            Pricelist: changedAirline.pricelist
+        }
+
+        return API.put(`Airlines/${changedAirline.airlineID}`, body)
+    }
 }
 
 export default airlineService;

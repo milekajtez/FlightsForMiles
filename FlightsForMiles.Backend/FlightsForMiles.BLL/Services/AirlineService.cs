@@ -50,6 +50,12 @@ namespace FlightsForMiles.BLL.Services
             return result;
         }
         #endregion
+        #region 4 - Method for update airline
+        public void UpdateAiriline(string airlineID, IAirlineRequestDTO airlineRequestDTO)
+        {
+            _airlineRepository.UpdateAiriline(airlineID, ConvertRequestObjectToUpdatedAirline(airlineID, airlineRequestDTO));
+        }
+        #endregion
 
         #region Converting methods
         private IAirline ConvertRequestObjectToAirline(IAirlineRequestDTO airlineRequestDTO) 
@@ -73,6 +79,13 @@ namespace FlightsForMiles.BLL.Services
                 NumberOfSoldTickets = airline.NumberOfSoldTickets.ToString(),
                 SumOfAllGrades = airline.SumOfAllGrades.ToString()
             };
+        }
+
+        private IAirline ConvertRequestObjectToUpdatedAirline(string airlineID, IAirlineRequestDTO airlineRequestDTO)
+        {
+            return new UpdatedAirline(int.Parse(airlineID), airlineRequestDTO.Name, 
+                airlineRequestDTO.HouseNumber, airlineRequestDTO.Street, airlineRequestDTO.City,
+                airlineRequestDTO.Description, airlineRequestDTO.Pricelist, 0, 0, 0);
         }
         #endregion
     }

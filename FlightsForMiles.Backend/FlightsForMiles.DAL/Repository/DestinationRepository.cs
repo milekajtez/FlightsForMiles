@@ -120,5 +120,33 @@ namespace FlightsForMiles.DAL.Repository
             }
         }
         #endregion
+        #region 6 - Method for load destinations for airline
+        public List<IDestination> LoadDestinationsForAirline(string airlineID)
+        {
+            var destinations = _context.Destinations.Include(a => a.Airline);
+            if (destinations == null) 
+            {
+                throw new Exception("Serve not found any destinations.");
+            }
+
+            List<IDestination> result = new List<IDestination>();
+            foreach (var dest in destinations) 
+            {
+                if (dest.Airline.Id.ToString().Equals(airlineID)) 
+                {
+                    result.Add(new DestinationDataModel()
+                    {
+                        AirportID = dest.Airport_ID,
+                        AirportName = dest.Airport_name,
+                        City = dest.City,
+                        Country = dest.Country,
+                        AirlineID = airlineID
+                    });
+                }
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

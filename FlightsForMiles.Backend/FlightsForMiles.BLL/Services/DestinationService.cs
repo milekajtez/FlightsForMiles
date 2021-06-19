@@ -63,6 +63,21 @@ namespace FlightsForMiles.BLL.Services
             _destinationRepository.UpdateDestination(destinationID, ConvertRequestObjectToUpdatedDestination(destinationID, destinationRequestDTO));
         }
         #endregion
+        #region 6 - Method for load destination for airline
+        public List<IDestinationResponseDTO> LoadDestinationsForAirline(string airlineID)
+        {
+            ValidationAirlineID(airlineID);
+            List<IDestination> destinations = _destinationRepository.LoadDestinationsForAirline(airlineID);
+            List<IDestinationResponseDTO> result = new List<IDestinationResponseDTO>();
+
+            foreach (var dest in destinations)
+            {
+                result.Add(ConvertDestinationeObjectToDestinationResponse(dest));
+            }
+
+            return result;
+        }
+        #endregion
 
         #region Converting methods
         private IDestination ConvertRequestObjectToDestination(IDestinationRequestDTO destinationRequestDTO)
@@ -90,9 +105,17 @@ namespace FlightsForMiles.BLL.Services
         #region Validation method
         private void DeleteDestinationValidation(string destinationID) 
         {
-            if (string.IsNullOrEmpty(destinationID) || !int.TryParse(destinationID, out _)) 
+            if (string.IsNullOrWhiteSpace(destinationID) || !int.TryParse(destinationID, out _)) 
             {
                 throw new ArgumentException(nameof(destinationID));
+            }
+        }
+
+        private void ValidationAirlineID(string airlineID) 
+        {
+            if (string.IsNullOrWhiteSpace(airlineID) || !int.TryParse(airlineID, out _)) 
+            {
+                throw new ArgumentException(nameof(airlineID));
             }
         }
         #endregion

@@ -12,5 +12,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Destination
         List<IDestinationResponseDTO> LoadAllDestinations();
         bool DeleteDestination(string destinationID);
         void UpdateDestination(string destinationID, IDestinationRequestDTO destinationRequestDTO);
+        List<IDestinationResponseDTO> LoadDestinationsForAirline(string airlineID);
     }
 }

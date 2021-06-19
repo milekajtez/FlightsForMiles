@@ -1,7 +1,8 @@
-import { DESTINATIONS_LOADING } from "./destinationTypes"
+import { DESTINATIONS_FOR_AIRLINE_LOADING, DESTINATIONS_LOADING } from "./destinationTypes"
 
 const initialState =  {
-    allDestinations: []
+    allDestinations: [],
+    destinationsForAirline: []
 }
 
 const destinationReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const destinationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allDestinations: action.payload
+            }
+        case DESTINATIONS_FOR_AIRLINE_LOADING:
+            return {
+                ...state,
+                destinationsForAirline: action.payload
             }
         default:
             return state

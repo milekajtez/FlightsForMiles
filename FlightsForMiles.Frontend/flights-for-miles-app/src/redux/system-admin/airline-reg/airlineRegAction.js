@@ -32,3 +32,14 @@ export const loadAirlines = () => {
         })
     }
 }
+
+export const changeAirline = (changedAirline) => () => 
+    new Promise(function(resolve, reject){
+        airlineService.changeAirline(changedAirline)
+        .then(response => {
+            resolve(response)
+        })
+        .catch(error => {
+            reject(error)
+        })
+    })

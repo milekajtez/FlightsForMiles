@@ -1,7 +1,8 @@
-import { FLIGHT_LOADING } from "./flightTypes"
+import { FLIGHTS_FOR_AIRLINE_LOADING, FLIGHT_LOADING } from "./flightTypes"
 
 const initialState =  {
-    allFlights: []
+    allFlights: [],
+    flightsForAirline: []
 }
 
 const flightReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const flightReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allFlights: action.payload
+            }
+        case FLIGHTS_FOR_AIRLINE_LOADING:
+            return {
+                ...state,
+                flightsForAirline: action.payload
             }
         default:
             return state

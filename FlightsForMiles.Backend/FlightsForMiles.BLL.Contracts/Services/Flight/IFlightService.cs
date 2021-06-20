@@ -12,5 +12,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Flight
         List<IFlightResponseDTO> LoadAllFlights();
         bool DeleteFlight(string flightID);
         void UpdateFlight(string flightID, IFlightRequestDTO flightRequestDTO);
+        List<IFlightResponseDTO> LoadFlightsForAirline(string airlineID);
     }
 }

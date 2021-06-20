@@ -48,10 +48,14 @@ function Navigation() {
         })
     }
 
+    const airlineAndFlight = () => {
+        history.push(`/airlineReview`)
+    }
+
     return (
         <span>
             <ul className="menu-bar">
-                <li><i className="fas fa-plane-departure"></i> Flights</li>
+                <li onClick={() => airlineAndFlight()}><i className="fas fa-plane-departure"></i> Airlines and Flights</li>
                 <div></div>
                 <li onClick={() => setHelpIsOpen(true)}><i className="far fa-question-circle"></i> Help</li>
                 <Help helpIsOpen={helpIsOpen} setHelpIsOpen={setHelpIsOpen} />

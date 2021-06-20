@@ -160,5 +160,43 @@ namespace FlightsForMiles.DAL.Repository
             }
         }
         #endregion
+        #region 6 - Method for load airline's flights
+        public List<IFlight> LoadFlightsForAirline(string airlineID)
+        {
+            var flights = _context.Flights.Include(a => a.Airline);
+            if (flights == null)
+            {
+                throw new Exception("Serve not found any flights.");
+            }
+
+            List<IFlight> result = new List<IFlight>();
+            foreach (var fly in flights) 
+            {
+                if (fly.Airline.Id.ToString().Equals(airlineID))
+                {
+                    result.Add(new FlightDataModel()
+                    {
+                        FlightID = fly.Id,
+                        StartTime = fly.Start_time.ToString(),
+                        EndTime = fly.End_time.ToString(),
+                        StartLocation = fly.Start_location,
+                        EndLocation = fly.End_location,
+                        FlightTime = fly.Flight_length_time.ToString(),
+                        FlightLengthKM = fly.Flight_length_km.ToString(),
+                        SumOfAllGrades = fly.Sum_of_all_grades,
+                        NumberOfGrades = fly.Number_of_grades,
+                        AdditionalInformation = fly.Additional_information,
+                        NumberOfTransfers = fly.Number_of_transfers.ToString(),
+                        AllTransfers = fly.All_transfers,
+                        PlaneName = fly.Plane_name,
+                        LugageWeight = fly.Lugage_weight.ToString(),
+                        AirlineID = airlineID
+                    });
+                }
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

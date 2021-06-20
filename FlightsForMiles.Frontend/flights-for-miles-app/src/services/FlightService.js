@@ -45,6 +45,10 @@ const flightService = {
         }
         
         return API.put(`Flights/${changedFlight.flightID}`, body)
+    },
+
+    loadFlightsForAirline: (airlineID) => {
+        return API.get(`Flights/LoadFlightsForAirline/${airlineID}`)
     }
 }
 

@@ -63,6 +63,21 @@ namespace FlightsForMiles.BLL.Services
             _flightRepository.UpdateFlight(flightID, ConvertRequestObjectToUpdatedFlight(flightID, flightRequestDTO));
         }
         #endregion
+        #region 6 - Method for load airline's flight
+        public List<IFlightResponseDTO> LoadFlightsForAirline(string airlineID)
+        {
+            ValidationAirlineID(airlineID);
+            List<IFlight> flights = _flightRepository.LoadFlightsForAirline(airlineID);
+            List<IFlightResponseDTO> result = new List<IFlightResponseDTO>();
+
+            foreach (var fly in flights)
+            {
+                result.Add(ConvertFlightObjectToFlightResponse(fly));
+            }
+
+            return result;
+        }
+        #endregion
 
         #region Converting methods
         private IFlight ConvertRequestObjectToFlight(IFlightRequestDTO flightRequestDTO)
@@ -109,6 +124,14 @@ namespace FlightsForMiles.BLL.Services
             if (string.IsNullOrEmpty(flightID) || !int.TryParse(flightID, out _))
             {
                 throw new ArgumentException(nameof(flightID));
+            }
+        }
+
+        private void ValidationAirlineID(string airlineID)
+        {
+            if (string.IsNullOrWhiteSpace(airlineID) || !int.TryParse(airlineID, out _))
+            {
+                throw new ArgumentException(nameof(airlineID));
             }
         }
         #endregion

@@ -14,7 +14,7 @@ function App() {
     <Provider store={store}>
         <div className="App">
           <Switch>
-            <Route exact path="/" component={StartPage} />
+            <Route exact path="/:option?" component={StartPage} />
             <Route exact path="/confirmRegYes/:username?" component={ConfirmRegYes} />
             <Route exact path="/confirmRegNo" component={ConfirmRegNo} />
             <Route exact path="/system/:username/:option" component={SystemAdmin} />

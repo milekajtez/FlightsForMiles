@@ -27,7 +27,7 @@ function AirlineReview() {
                         <th>Rating</th>
                         <th>Destinations</th>
                         <th>Flights</th>
-                        <th>Change info</th>
+                        {/*<th>Change info</th> ovo ce trebati kod ispisa kod avio admin-a (kod reguar user ne treba)*/}
                     </tr>
                 </thead>
                 <tbody>

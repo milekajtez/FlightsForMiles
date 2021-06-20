@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import AirlineAddressMap from './AirlineAddressMap'
-import AirlineChangeInfo from './AirlineChangeInfo'
+//import AirlineChangeInfo from './AirlineChangeInfo'
 import AirlineDescription from './AirlineDescription'
 import AirlineDestinations from './AirlineDestinations'
 import AirlineFlights from './AirlineFlights'
@@ -13,7 +13,7 @@ function OneAirline(props) {
     const [pricelistIsOpen, setPricelist] = useState(false)
     const [destinationsIsOpen, setDestinations] = useState(false)
     const [flightsIsOpen, setFlights] = useState(false)
-    const [changeInfoIsOpen, setChangeInfo] = useState(false)
+    /*const [changeInfoIsOpen, setChangeInfo] = useState(false)*/
 
     function makeAddress() {
         return props.airline.street + ',' + props.airline.houseNumber + ',' + props.airline.city
@@ -52,9 +52,9 @@ function OneAirline(props) {
                 <td>
                     <button className="btn btn-info" onClick={() => setFlights(true)}><i className="fas fa-plane"></i> FLIGHTS</button>
                 </td>
-                <td>
+                {/*<td>
                     <button className="btn btn-warning" onClick={() => setChangeInfo(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>
-                </td>
+                </td>*/}
             </tr>
             <AirlineAddressMap addressMapIsOpen={addressMapIsOpen} setAddressMap={setAddressMap}
                 address={props.airline.street + ',' + props.airline.houseNumber + ',' + props.airline.city}/>
@@ -66,8 +66,8 @@ function OneAirline(props) {
                 airlineID={props.airline.id}/>
             <AirlineFlights flightsIsOpen={flightsIsOpen} setFlights={setFlights}
                 airlineID={props.airline.id}/>
-            <AirlineChangeInfo changeInfoIsOpen={changeInfoIsOpen} setChangeInfo={setChangeInfo} 
-                airline={props.airline}/>
+            {/*<AirlineChangeInfo changeInfoIsOpen={changeInfoIsOpen} setChangeInfo={setChangeInfo} 
+                airline={props.airline}/>*/}
         </>
     )
 }

@@ -1,16 +1,20 @@
 import React from 'react'
+import { Route, Switch } from 'react-router'
+import AirlinesAndFlights from './airline-and-flights/AirlinesAndFlights'
 import Header from './Header'
-import Info from './Info'
-import Pictures from './Pictures'
-import QuestionMark from './QuestionMark'
+import StartPageInformations from './StartPageInformations'
 
 function StartPage() {
     return (
         <div>
             <Header /> 
-            <Info />
+            <Switch>
+                <Route exact path="/" component={StartPageInformations}/>
+                <Route exact path="/airlineReview" component={AirlinesAndFlights}/>
+            </Switch>
+           {/* <Info />
             <Pictures />
-            <QuestionMark />
+           <QuestionMark />*/}
         </div>
     )
 }

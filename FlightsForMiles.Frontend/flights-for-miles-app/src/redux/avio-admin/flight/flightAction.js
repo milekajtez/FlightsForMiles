@@ -1,5 +1,5 @@
 import flightService from "../../../services/FlightService"
-import { FLIGHT_LOADING } from "./flightTypes"
+import { FLIGHTS_FOR_AIRLINE_LOADING, FLIGHT_LOADING } from "./flightTypes"
 
 export const addFlight = (newFlight) => () => 
     new Promise(function(resolve, reject){
@@ -54,3 +54,24 @@ export const changeFlight = (changedFlight) => () =>
             reject(error)
         })
     })
+
+export const loadFlightsForAirlineAction = (flights) => {
+    return {
+        type: FLIGHTS_FOR_AIRLINE_LOADING,
+        payload: flights
+    }
+}    
+    
+export const loadFlightsForAirline = (airlineID) => {
+    return (dispatch) => {
+        flightService.loadFlightsForAirline(airlineID)
+        .then(response => {
+            if(response.status === 200){
+                dispatch(loadFlightsForAirlineAction(response.data))
+            }
+        })  
+        .catch(error => {
+            console.log(error)
+        })
+    }
+}

@@ -1,81 +1,84 @@
-import API from './api'
+import API from "./api";
 
 const loginService = {
-    userRegistration: (newUser) => {
-        var body = {
-            Username: newUser.username,
-            Email: newUser.email,
-            Password: newUser.password,
-            Firstname: newUser.firstname,
-            Lastname: newUser.lastname,
-            Pin: newUser.pin,
-            Address: newUser.address,
-            Telephone: newUser.telephone,
-            Passport: newUser.passport
-        }
-        
-        return API.post("ApplicationUsers", body)
-    },
+  userRegistration: (newUser) => {
+    var body = {
+      Username: newUser.username,
+      Email: newUser.email,
+      Password: newUser.password,
+      Firstname: newUser.firstname,
+      Lastname: newUser.lastname,
+      Pin: newUser.pin,
+      Address: newUser.address,
+      Telephone: newUser.telephone,
+      Passport: newUser.passport,
+    };
 
-    confirmRegistration: (username) => {
-        return API.put(`ApplicationUsers/${username}`)
-    },
+    return API.post("ApplicationUsers", body);
+  },
 
-    login: (user) => {
-        var body = {
-            Username: user.username,
-            Password: user.password
-        }
+  confirmRegistration: (username) => {
+    return API.put(`ApplicationUsers/${username}`);
+  },
 
-        return API.post(`ApplicationUsers/UserLogin`, body)
-    },
+  login: (user) => {
+    var body = {
+      Username: user.username,
+      Password: user.password,
+    };
 
-    loginViaGoogle: (user) => {
-        console.log(user)
-        var body = {
-            IdToken: user.tokenId
-        }
+    return API.post(`ApplicationUsers/UserLogin`, body);
+  },
 
-        return API.post(`ApplicationUsers/UserGoogleLogin`, body)
-    },
+  loginViaGoogle: (user) => {
+    console.log(user);
+    var body = {
+      IdToken: user.tokenId,
+    };
 
-    avioAdminRegistration: (newAvioAdmin) => {
-        var body = {
-            Username: newAvioAdmin.username,
-            Email: newAvioAdmin.email,
-            Password: newAvioAdmin.password,
-            Pin: newAvioAdmin.pin,
-            Telephone: newAvioAdmin.telephone
-        }
-        
-        return API.post("ApplicationUsers/AvioAdminRegistration", body)
-    },
+    return API.post(`ApplicationUsers/UserGoogleLogin`, body);
+  },
 
-    changePasswordFirstLogin: (newPassObj) => {
-        var body = {
-            Password: newPassObj.password
-        }
+  avioAdminRegistration: (newAvioAdmin) => {
+    var body = {
+      Username: newAvioAdmin.username,
+      Email: newAvioAdmin.email,
+      Password: newAvioAdmin.password,
+      Pin: newAvioAdmin.pin,
+      Telephone: newAvioAdmin.telephone,
+    };
 
-        return API.put(`ApplicationUsers/ChangePassword/${newPassObj.id}`, body)
-    },
+    return API.post("ApplicationUsers/AvioAdminRegistration", body);
+  },
 
-    loadProfileData: (username) => {
-        return API.get(`ApplicationUsers/LoadUserProfileData/${username}`)
-    },
+  changePasswordFirstLogin: (newPassObj) => {
+    var body = {
+      Password: newPassObj.password,
+    };
 
-    changeProfileData: (changedProfileData) => {
-        var body = {
-            Username: changedProfileData.username,
-            Email: changedProfileData.email,
-            Firstname: changedProfileData.firstname,
-            Lastname: changedProfileData.lastname,
-            Address: changedProfileData.address,
-            Telephone: changedProfileData.telephone,
-            Passport: changedProfileData.passport
-        }
+    return API.put(`ApplicationUsers/ChangePassword/${newPassObj.id}`, body);
+  },
 
-        return API.put(`ApplicationUsers/UpdateProfileData/${changedProfileData.pin}`, body)
-    }
-}
+  loadProfileData: (username) => {
+    return API.get(`ApplicationUsers/LoadUserProfileData/${username}`);
+  },
 
-export default loginService
+  changeProfileData: (changedProfileData) => {
+    var body = {
+      Username: changedProfileData.username,
+      Email: changedProfileData.email,
+      Firstname: changedProfileData.firstname,
+      Lastname: changedProfileData.lastname,
+      Address: changedProfileData.address,
+      Telephone: changedProfileData.telephone,
+      Passport: changedProfileData.passport,
+    };
+
+    return API.put(
+      `ApplicationUsers/UpdateProfileData/${changedProfileData.pin}`,
+      body
+    );
+  },
+};
+
+export default loginService;

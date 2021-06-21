@@ -24,7 +24,6 @@ namespace FlightsForMiles.BLL.Services
             return ConvertDiscountsToResponseObject(_discountRepository.LoadDiscounts().Result);
         }
         #endregion
-
         #region 2 - Method for update discount
         public void UpdateDiscount(IDiscountRequestDTO discountRequestDTO) 
         {

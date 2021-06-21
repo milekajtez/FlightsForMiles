@@ -1,18 +1,18 @@
-import API from './api'
+import API from "./api";
 
 const discountService = {
-    loadDiscounts: () => {
-        return API.get(`Discounts`)
-    },
+  loadDiscounts: () => {
+    return API.get(`Discounts`);
+  },
 
-    changeDiscount: (newValue, type) => {
-        var body = {
-            Value: newValue,
-            Type: type
-        }
-        
-        return API.put(`Discounts`, body)
-    }
-}
+  changeDiscount: (newValue, type) => {
+    var body = {
+      Value: newValue,
+      Type: type,
+    };
 
-export default discountService
+    return API.put(`Discounts`, body);
+  },
+};
+
+export default discountService;

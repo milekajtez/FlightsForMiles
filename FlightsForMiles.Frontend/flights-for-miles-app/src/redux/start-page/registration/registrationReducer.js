@@ -1,7 +1,7 @@
-const initialState = { }
+const initialState = {};
 
 const registrationReducer = (state = initialState, action) => {
-    return state
-}
+  return state;
+};
 
-export default registrationReducer
+export default registrationReducer;

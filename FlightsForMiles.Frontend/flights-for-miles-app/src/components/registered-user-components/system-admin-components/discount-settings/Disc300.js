@@ -1,14 +1,14 @@
-import React from 'react'
-import DiscountForm from './DiscountForm'
+import React from "react";
+import DiscountForm from "./DiscountForm";
 
 function Form300() {
-    return (
-        <div style={{display: "inline-block"}}>
-            <span className="box">
-                <DiscountForm  discountType={"300"}/>
-            </span>
-        </div>
-    )
+  return (
+    <div style={{ display: "inline-block" }}>
+      <span className="box">
+        <DiscountForm discountType={"300"} />
+      </span>
+    </div>
+  );
 }
 
-export default Form300
+export default Form300;

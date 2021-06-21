@@ -102,7 +102,6 @@ namespace FlightsForMiles.BLL.Services
                 ticketRequestDTO.Price, "", "", ticketRequestDTO.IsQuickBooking, ticketRequestDTO.FlightID, "", "");
         }
         #endregion
-
         #region Validation method
         private void DeleteTicketValidation(string ticketID)
         {

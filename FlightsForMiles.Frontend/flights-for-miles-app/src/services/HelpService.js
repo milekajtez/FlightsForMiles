@@ -1,43 +1,43 @@
-import API from './api'
+import API from "./api";
 
 const helpService = {
-    loadAppDescription: () => {
-        return API.get(`Helps`)
-    },
+  loadAppDescription: () => {
+    return API.get(`Helps`);
+  },
 
-    changeAppDescription: (newAppDescription) => {
-        var body = {
-            Description: newAppDescription
-        }
-        
-        return API.put(`Helps`, body)
-    },
+  changeAppDescription: (newAppDescription) => {
+    var body = {
+      Description: newAppDescription,
+    };
 
-    loadQuestions: () => {
-        return API.get(`Helps/LoadQuestions`)
-    },
+    return API.put(`Helps`, body);
+  },
 
-    deleteQuestion: (questionID) => {
-        return API.delete(`Helps/${questionID}`)
-    },
+  loadQuestions: () => {
+    return API.get(`Helps/LoadQuestions`);
+  },
 
-    changeQuestion: (changedQuestion) => {
-        var body = {
-            QuestionID: changedQuestion.questionID,
-            QuestionText: changedQuestion.questionText,
-            Answer: changedQuestion.answer,
-        }
-        
-        return API.put(`Helps/UpdateQuestion`, body)
-    },
+  deleteQuestion: (questionID) => {
+    return API.delete(`Helps/${questionID}`);
+  },
 
-    askQuestion: (question) => {
-        var body = {
-            Question: question
-        }
-        
-        return API.post(`Helps`, body)
-    },
-}
+  changeQuestion: (changedQuestion) => {
+    var body = {
+      QuestionID: changedQuestion.questionID,
+      QuestionText: changedQuestion.questionText,
+      Answer: changedQuestion.answer,
+    };
 
-export default helpService
+    return API.put(`Helps/UpdateQuestion`, body);
+  },
+
+  askQuestion: (question) => {
+    var body = {
+      Question: question,
+    };
+
+    return API.post(`Helps`, body);
+  },
+};
+
+export default helpService;

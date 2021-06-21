@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function FlightBooking() {
-    return (
-        <div>
-            FlightBooking
-        </div>
-    )
+  return <div>FlightBooking</div>;
 }
 
-export default FlightBooking
+export default FlightBooking;

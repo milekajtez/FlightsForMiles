@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function QuickBooking() {
-    return (
-        <div>
-            QuickBooking
-        </div>
-    )
+  return <div>QuickBooking</div>;
 }
 
-export default QuickBooking
+export default QuickBooking;

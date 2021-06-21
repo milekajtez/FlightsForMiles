@@ -1,41 +1,41 @@
 table {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 1%;
-    width: 80%;
-    background-color: #202932;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  width: 80%;
+  background-color: #202932;
 }
 
 tr {
-    padding-bottom: 10px;
-    font-family: sans-serif;
+  padding-bottom: 10px;
+  font-family: sans-serif;
 }
-  
+
 td {
-    padding: 10px;
-    text-align: center;
-    font-family: sans-serif;
+  padding: 10px;
+  text-align: center;
+  font-family: sans-serif;
 }
 
 th {
-    text-align: left;
-    font-weight: 700;
+  text-align: left;
+  font-weight: 700;
 }
-  
+
 thead th {
-    background-color: #1b2229;
-    color: #fff;
-    border: 1px solid #1b2229;
-    padding: 10px;
+  background-color: #1b2229;
+  color: #fff;
+  border: 1px solid #1b2229;
+  padding: 10px;
 }
 
 .checked {
-    color: orange;
+  color: orange;
 }
 
 .leaflet-container {
-    width: 75%;
-    height: 75vh;
-    margin: auto;
-    box-shadow: 0 0 100px aqua;
+  width: 75%;
+  height: 75vh;
+  margin: auto;
+  box-shadow: 0 0 100px aqua;
 }

@@ -1,12 +1,12 @@
-import React from 'react'
-import AirlineReview from '../../registered-user-components/regular-user-components/airline-review/AirlineReview'
+import React from "react";
+import AirlineReview from "../../registered-user-components/regular-user-components/airline-review/AirlineReview";
 
 function AirlinesAndFlights() {
-    return (
-        <div>
-            <AirlineReview />
-        </div>
-    )
+  return (
+    <div>
+      <AirlineReview />
+    </div>
+  );
 }
 
-export default AirlinesAndFlights
+export default AirlinesAndFlights;

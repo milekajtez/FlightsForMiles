@@ -1,12 +1,12 @@
-import React from 'react'
-import AllFlightsSeats from './AllFlightsSeats'
+import React from "react";
+import AllFlightsSeats from "./AllFlightsSeats";
 
 function ConfigSeats() {
-    return (
-        <div>
-            <AllFlightsSeats />
-        </div>
-    )
+  return (
+    <div>
+      <AllFlightsSeats />
+    </div>
+  );
 }
 
-export default ConfigSeats
+export default ConfigSeats;

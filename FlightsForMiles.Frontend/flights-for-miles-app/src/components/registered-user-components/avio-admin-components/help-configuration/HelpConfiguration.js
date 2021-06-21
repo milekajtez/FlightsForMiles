@@ -1,14 +1,14 @@
-import React from 'react'
-import AllQuestions from './AllQuestions'
-import AppDescription from './AppDescription'
+import React from "react";
+import AllQuestions from "./AllQuestions";
+import AppDescription from "./AppDescription";
 
 function HelpConfiguration() {
-    return (
-        <div>
-            <AppDescription />
-            <AllQuestions />
-        </div>
-    )
+  return (
+    <div>
+      <AppDescription />
+      <AllQuestions />
+    </div>
+  );
 }
 
-export default HelpConfiguration
+export default HelpConfiguration;

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function AirlineReview() {
-    return (
-        <div>
-            AirlineReview
-        </div>
-    )
+  return <div>AirlineReview</div>;
 }
 
-export default AirlineReview
+export default AirlineReview;

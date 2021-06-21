@@ -1,20 +1,19 @@
-import { AIRLINES_LOADING } from "./airlineRegTypes"
+import { AIRLINES_LOADING } from "./airlineRegTypes";
 
 const initialState = {
-    allAirlines: []
-}
+  allAirlines: [],
+};
 
 const airlineReducer = (state = initialState, action) => {
-    switch(action.type)
-    {
-        case AIRLINES_LOADING:
-            return {
-                ...state,
-                allAirlines: action.payload
-            }
-        default:
-            return state
-    }
-}
+  switch (action.type) {
+    case AIRLINES_LOADING:
+      return {
+        ...state,
+        allAirlines: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-export default airlineReducer
+export default airlineReducer;

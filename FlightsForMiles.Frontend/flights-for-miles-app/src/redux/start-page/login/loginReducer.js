@@ -1,7 +1,7 @@
-const initialState = { }
+const initialState = {};
 
 const loginReducer = (state = initialState, action) => {
-    return state
-}
+  return state;
+};
 
-export default loginReducer
+export default loginReducer;

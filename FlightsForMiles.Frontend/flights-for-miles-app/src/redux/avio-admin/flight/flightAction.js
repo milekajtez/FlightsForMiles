@@ -1,5 +1,5 @@
 import flightService from "../../../services/FlightService";
-import { FLIGHTS_FOR_AIRLINE_LOADING, FLIGHT_LOADING } from "./flightTypes";
+import { FILTER_FLIGHTS, FLIGHTS_FOR_AIRLINE_LOADING, FLIGHT_LOADING, SEARCH_FLIGHTS, SELECT_FLIGHT_FOR_BOOKING } from "./flightTypes";
 
 export const addFlight = (newFlight) => () =>
   new Promise(function (resolve, reject) {
@@ -80,3 +80,24 @@ export const loadFlightsForAirline = (airlineID) => {
       });
   };
 };
+
+export const searchAction = (searchedFlights) => {
+  return {
+    type: SEARCH_FLIGHTS,
+    payload: searchedFlights,
+  };
+};
+
+export const fliterAction = (filteredFlights) => {
+  return {
+    type: FILTER_FLIGHTS,
+    payload: filteredFlights,
+  };
+};
+
+export const selectFlightForBooking = (selectedFlight) => {
+  return {
+    type: SELECT_FLIGHT_FOR_BOOKING,
+    payload: selectedFlight,
+  };
+}

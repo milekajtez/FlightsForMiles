@@ -25,11 +25,6 @@ function RegularUser() {
         />
         <Route
           exact
-          path="/regular/:username/flightBooking"
-          component={FlightBooking}
-        />
-        <Route
-          exact
           path="/regular/:username/quickBooking"
           component={QuickBooking}
         />
@@ -42,6 +37,11 @@ function RegularUser() {
           exact
           path="/regular/:username/regProfile"
           component={RegularUserProfile}
+        />
+        <Route
+          exact
+          path="/regular/:username/:option"
+          component={FlightBooking}
         />
       </Switch>
     </div>

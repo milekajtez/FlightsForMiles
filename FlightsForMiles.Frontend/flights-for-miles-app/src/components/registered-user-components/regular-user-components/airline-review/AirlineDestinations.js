@@ -34,7 +34,7 @@ function AirlineDestinations(props) {
     >
       <div className="login-box" style={{ color: "white" }}>
         <h2>AIRLINE DESTINATIONS</h2>
-        <table className="items-table" style={{ boxShadow: "0 0 100px aqua" }}>
+        <table className="items-table">
           <thead>
             <tr>
               <th>Airport ID</th>

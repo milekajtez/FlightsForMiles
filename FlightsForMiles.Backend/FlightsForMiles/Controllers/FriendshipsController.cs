@@ -126,5 +126,19 @@ namespace FlightsForMiles.Controllers
             throw new KeyNotFoundException("Deleting unsuccessfully. Friend doesn't exsist.");
         }
         #endregion
+        #region 9 - Method for choosing friend for booking
+        [HttpGet]
+        [Route("ChooseFriendForBooking/{myusername}/{username}/{passport}")]
+        public IActionResult ChooseFriendForBooking(string myusername, string username, string passport) 
+        {
+            IFriendResponseDTO friend = _friendshipService.ChooseFriendForBooking(myusername, username, passport);
+            if (friend != null)
+            {
+                return Ok(friend);
+            }
+
+            return NotFound("Server not found friend with entered username / passport.");
+        }
+        #endregion
     }
 }

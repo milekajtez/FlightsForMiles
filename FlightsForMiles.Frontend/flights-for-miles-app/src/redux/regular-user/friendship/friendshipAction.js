@@ -1,5 +1,7 @@
 import friendshipService from "../../../services/FriendshipService";
 import {
+  ADD_FRIEND_FOR_BOOKING,
+  DELETE_FRIEND_FOR_BOOKING,
   LOADING_FRIENDS,
   LOADING_MY_REQUESTS,
   LOADING_REQUESTS_FOR_ME,
@@ -121,5 +123,31 @@ export const searchAction = (searchedFriends) => {
   return {
     type: SEARCH_FRIENDS,
     payload: searchedFriends,
+  };
+};
+
+export const addFriendForBooking = (friend) => {
+  return {
+    type: ADD_FRIEND_FOR_BOOKING,
+    payload: friend,
+  };
+};
+
+export const chooseFriendForBooking = (friend) => () =>
+  new Promise(function (resolve, reject) {
+    friendshipService
+      .chooseFriendForBooking(friend)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+
+export const deleteFriendForBooking = (friend) => {
+  return {
+    type: DELETE_FRIEND_FOR_BOOKING,
+    payload: friend,
   };
 };

@@ -45,7 +45,7 @@ function AirlineFlights(props) {
       <div className="reg-box" style={{ color: "white" }}>
         <h2>AIRLINE FLIGHTS</h2>
         <SearchForm />
-        <table className="items-table" style={{ boxShadow: "0 0 100px aqua" }}>
+        <table className="items-table">
           <thead>
             <tr>
               <th>ID</th>

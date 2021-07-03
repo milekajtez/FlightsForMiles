@@ -16,5 +16,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<bool> AcceptRequest(string username, string secondUsername);
         Task<List<IFriend>> LoadFriends(string username);
         Task<bool> DeleteFriend(string username, string pin);
+        Task<IFriend> ChooseFriendForBooking(string myusername, string username, string passport);
     }
 }

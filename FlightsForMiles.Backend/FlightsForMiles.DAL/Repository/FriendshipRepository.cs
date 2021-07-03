@@ -315,5 +315,48 @@ namespace FlightsForMiles.DAL.Repository
             return true;
         }
         #endregion
+        #region 9 - Metgod for choose friend for booking
+        public async Task<IFriend> ChooseFriendForBooking(string myusername, string username, string passport)
+        {
+            var friendForbooking = await _userManager.FindByNameAsync(username);
+            var user = await _userManager.FindByNameAsync(myusername);
+            if (friendForbooking == null || user == null)
+            {
+                throw new Exception("Server not found user.");
+            }
+
+            var friendships = _context.FriendshipRequests;
+            FriendDataModel result = null;
+
+            foreach (var f in friendships)
+            {
+                if (f.Request_accepted && ((user.Id == f.Reciever_pin.ToString() && friendForbooking.Id == f.Sender_pin.ToString())
+                    || (user.Id == f.Sender_pin.ToString() && friendForbooking.Id == f.Reciever_pin.ToString()))) 
+                {
+                    if (friendForbooking.NumberOfPassport == passport)
+                    {
+                        var myFriend = await _userManager.FindByNameAsync(username);
+                        result = new FriendDataModel()
+                        {
+                            Username = myFriend.UserName,
+                            Pin = myFriend.Id,
+                            Firstname = myFriend.FirstName,
+                            Lastname = myFriend.LastName,
+                            PhoneNumber = myFriend.PhoneNumber,
+                        };
+
+                        break;
+                    }
+                }
+            }
+
+            if (result == null) 
+            {
+                throw new Exception("Server not found friend with entered username / passport.");
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

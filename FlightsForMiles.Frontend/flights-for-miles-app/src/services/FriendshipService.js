@@ -37,6 +37,10 @@ const friendshipService = {
   deleteFriend: (username, pin) => {
     return API.delete(`Friendships/DeleteFriend/${username}/${pin}`);
   },
+
+  chooseFriendForBooking: (friend) => {
+    return API.get(`Friendships/ChooseFriendForBooking/${friend.myusername}/${friend.username}/${friend.passport}`);
+  },
 };
 
 export default friendshipService;

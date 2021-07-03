@@ -1,7 +1,8 @@
-import { LOADING_TICKETS } from "./ticketTypes";
+import { ADD_SELECTED_TICKETS, LOADING_TICKETS } from "./ticketTypes";
 
 const initialState = {
   ticketsForOneFlight: [],
+  selectedTickets: [],
 };
 
 const ticketReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const ticketReducer = (state = initialState, action) => {
       return {
         ...state,
         ticketsForOneFlight: action.payload,
+      };
+    case ADD_SELECTED_TICKETS:
+      return {
+        ...state,
+        selectedTickets: action.payload,
       };
     default:
       return state;

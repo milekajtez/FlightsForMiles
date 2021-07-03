@@ -1,5 +1,5 @@
 import ticketService from "../../../services/TicketService";
-import { LOADING_TICKETS } from "./ticketTypes";
+import { ADD_SELECTED_TICKETS, LOADING_TICKETS } from "./ticketTypes";
 
 export const addTicket = (newTicket) => () =>
   new Promise(function (resolve, reject) {
@@ -70,3 +70,10 @@ export const changeTicket = (changedTicket) => () =>
         reject(error);
       });
   });
+
+export const addSelectedTickets = (selectedTickets) => {
+  return {
+    type: ADD_SELECTED_TICKETS,
+    payload: selectedTickets,
+  };
+};

@@ -37,5 +37,9 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RequestDTO\Friendship\" />
+  </ItemGroup>
+
 
 </Project>

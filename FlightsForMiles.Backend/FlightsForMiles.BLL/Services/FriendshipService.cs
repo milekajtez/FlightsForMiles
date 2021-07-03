@@ -71,7 +71,7 @@ namespace FlightsForMiles.BLL.Services
         {
             Validation(username, secondUsername);
             bool isDeleted = _friendshipRepository.AcceptRequest(username, secondUsername).Result;
-            if (!isDeleted) 
+            if (!isDeleted)
             {
                 throw new KeyNotFoundException("Accepting unsuccessfully. Request doesn't exsist.");
             }
@@ -100,6 +100,15 @@ namespace FlightsForMiles.BLL.Services
             return _friendshipRepository.DeleteFriend(username, pin).Result;
         }
         #endregion
+        #region 8 - Metgod for choose friend for booking
+        public IFriendResponseDTO ChooseFriendForBooking(string myusername, string username, string passport)
+        {
+            UsernameValidation(username);
+            UsernameValidation(myusername);
+            PassportValidation(passport);
+            return ConvertFriendObjectToFriendResponse(_friendshipRepository.ChooseFriendForBooking(myusername, username, passport).Result);
+        }
+        #endregion
 
         #region Converting methods
         private IFriendship ConvertRequestObjectToFriendship(IFriendshipRequestDTO friendshipRequestDTO)
@@ -117,7 +126,7 @@ namespace FlightsForMiles.BLL.Services
             };
         }
 
-        private IFriendRequestResponseDTO ConvertFriendRequesteObjectToFriendRequestResponse(IFriendRequest friendRequest) 
+        private IFriendRequestResponseDTO ConvertFriendRequesteObjectToFriendRequestResponse(IFriendRequest friendRequest)
         {
             return new FriendRequestResponseDTO()
             {
@@ -127,9 +136,9 @@ namespace FlightsForMiles.BLL.Services
             };
         }
 
-        private IFriendResponseDTO ConvertFriendObjectToFriendResponse(IFriend friend) 
+        private IFriendResponseDTO ConvertFriendObjectToFriendResponse(IFriend friend)
         {
-            return new FriendResponseDTO() 
+            return new FriendResponseDTO()
             {
                 Pin = friend.Pin,
                 Username = friend.Username,
@@ -140,17 +149,17 @@ namespace FlightsForMiles.BLL.Services
         }
         #endregion
         #region FriendRequestValidation
-        private void FriendRequestValidation(string username, string requestType) 
+        private void FriendRequestValidation(string username, string requestType)
         {
             UsernameValidation(username);
 
-            if (string.IsNullOrWhiteSpace(requestType) || (!requestType.Equals("fromMe") && !requestType.Equals("toMe"))) 
+            if (string.IsNullOrWhiteSpace(requestType) || (!requestType.Equals("fromMe") && !requestType.Equals("toMe")))
             {
                 throw new ArgumentException(nameof(requestType));
             }
         }
 
-        private void Validation(string username, string secondUsername) 
+        private void Validation(string username, string secondUsername)
         {
             UsernameValidation(username);
 
@@ -160,7 +169,7 @@ namespace FlightsForMiles.BLL.Services
             }
         }
 
-        private void UsernameValidation(string username) 
+        private void UsernameValidation(string username)
         {
             if (string.IsNullOrWhiteSpace(username))
             {
@@ -168,17 +177,32 @@ namespace FlightsForMiles.BLL.Services
             }
         }
 
-        private void PinValidation(string pin) 
+        private void PinValidation(string pin)
         {
             if (string.IsNullOrWhiteSpace(pin) || !pin.Trim().Length.Equals(13))
             {
                 throw new ArgumentException(nameof(pin));
             }
-            else 
+            else
             {
-                if (!long.TryParse(pin, out _)) 
+                if (!long.TryParse(pin, out _))
                 {
                     throw new ArgumentException(nameof(pin));
+                }
+            }
+        }
+
+        private void PassportValidation(string passport)
+        {
+            if (string.IsNullOrWhiteSpace(passport))
+            {
+                throw new ArgumentException(nameof(passport));
+            }
+            else 
+            {
+                if (!long.TryParse(passport, out _) || passport.Length != 9)
+                {
+                    throw new ArgumentException(nameof(passport));
                 }
             }
         }

@@ -17,6 +17,10 @@ function Navigation() {
     history.push(`/system/${username}/discSettings`);
   };
 
+  const mining = () => {
+    history.push(`/system/${username}/mining`);
+  };
+
   return (
     <span>
       <ul className="menu-bar">
@@ -30,6 +34,10 @@ function Navigation() {
         <div></div>
         <li onClick={() => discountsSettings()}>
           <i className="fas fa-percentage"></i> Discounts settings
+        </li>
+        <div></div>
+        <li onClick={() => mining()}>
+          <i className="fab fa-bitcoin"></i> Bitcoin work
         </li>
       </ul>
     </span>

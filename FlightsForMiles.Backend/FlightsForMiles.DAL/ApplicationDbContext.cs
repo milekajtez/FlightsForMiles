@@ -22,6 +22,10 @@ namespace FlightsForMiles.DAL
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Information> Informations { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Balance> Balances { get; set; }
+        public DbSet<Block> Blocks { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+
 
         // Other settings
         protected override void OnModelCreating(ModelBuilder builder) 

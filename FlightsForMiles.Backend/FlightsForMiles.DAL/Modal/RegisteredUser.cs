@@ -44,6 +44,7 @@ namespace FlightsForMiles.DAL.Modal
         [Required]
         public double Points { get; set; }
 
-        /*public ICollection<RegisteredUserFlight> RegisteredUserFlights { get; set; }*/
+        [Required]
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

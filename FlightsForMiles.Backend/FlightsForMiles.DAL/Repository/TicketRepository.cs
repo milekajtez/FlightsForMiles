@@ -50,6 +50,7 @@ namespace FlightsForMiles.DAL.Repository
                     Time_of_ticket_purchase = DateTime.Now,
                     Is_quick_booking = ticket.IsQuickBooking == "YES",
                     Flight = flight,
+                    RegisteredUser = null
                 };
 
                 await _context.AddAsync(newTicket);

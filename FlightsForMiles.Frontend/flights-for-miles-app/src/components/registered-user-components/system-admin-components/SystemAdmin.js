@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import AdminRegistration from "./admin-registration/AdminRegistration";
 import AirlineRegistration from "./airline-registration/AirlineRegistration";
 import DiscountSettings from "./discount-settings/DiscountSettings";
+import BitcoinMining from "./bitcoin-mining/BitcoinMining";
 
 function SystemAdmin() {
   return (
@@ -24,6 +25,11 @@ function SystemAdmin() {
           exact
           path="/system/:username/discSettings"
           component={DiscountSettings}
+        />
+        <Route
+          exact
+          path="/system/:username/mining"
+          component={BitcoinMining}
         />
       </Switch>
     </div>

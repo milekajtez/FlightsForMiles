@@ -85,9 +85,5 @@ namespace FlightsForMiles.DAL.Modal
 
         [Required]
         public ICollection<Ticket> Tickets { get; set; }
-
-        // dodati
-        // lista korisnika koji su rezervisali let
-        /*public ICollection<RegisteredUserFlight> RegisteredUserFlights { get; set; }*/
     }
 }

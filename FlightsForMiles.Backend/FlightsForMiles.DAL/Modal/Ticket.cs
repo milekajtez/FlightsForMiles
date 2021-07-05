@@ -43,6 +43,9 @@ namespace FlightsForMiles.DAL.Modal
         [Required]
         [JsonIgnore]
         public Flight Flight { get; set; }
+
+        [JsonIgnore]
+        public RegisteredUser RegisteredUser { get; set; }
     }
 
     public enum TicketType { ECONOMIC_CLASS, FIRST_CLASS, BUSINESS_CLASS };

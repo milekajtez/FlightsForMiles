@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210703174030_BitcoinMigration.cs" />
+    <Compile Remove="Migrations\20210703174030_BitcoinMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210703174613_BitcoinMigration.cs" />
+    <Compile Remove="Migrations\20210703174613_BitcoinMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />

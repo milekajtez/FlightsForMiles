@@ -29,5 +29,7 @@ namespace FlightsForMiles.DAL.Modal
 
         [Required]
         public List<Transaction> Transactions { get; set; }
+
+        //mozda ce trebati dodati "ublic string Nonce {get; set;}"
     }
 }

@@ -1,21 +1,87 @@
 import React from "react";
 import { useState } from "react";
+import { useAlert } from "react-alert";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
+import { createDefaultBlock, deleteBlockchain } from "../../../../redux/system-admin/bitcoin-mining/bitcoinMiningAction";
 import BlockchainView from "./BlockchainView";
 
 function MiningOperations() {
   const [blockchain, setBlockchain] = useState(false);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const alert = useAlert();
 
-  const deleteBlockchain = () => {
+  const destroyBlockchain = () => {
     if (window.confirm("Are you sure you want to delete blockchain?")) {
-      // brisanje blockchain-a
-    } else {
-      // ne brise se
+      dispatch(deleteBlockchain(params.username))
+      .then(response => {
+        if(response.status === 204){
+          alert.show("Deleting blockchain successfully.", {
+            type: 'success'
+          })
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.response.data.indexOf("Deleting unsuccessfully. Blockchain doesn't exsist or operation is currenly invalid.") !== -1) {
+          alert.show("Deleting unsuccessfully. Blockchain doesn't exsist or operation is currenly invalid.",
+            {
+              type: "error",
+            }
+          );
+        } 
+        else if(error.response.data.indexOf("This is not system admin. Only system admin can to work with configuration of blockchain.") !== -1) {
+          alert.show("This is not system admin. Only system admin can to work with configuration of blockchain.",
+            {
+              type: "error",
+            }
+          );
+        }
+        else {
+          alert.show("Unknown error.",
+            {
+              type: "error",
+            }
+          );
+        } 
+      })
     }
   };
 
-  const createDefaultBlock = () => {
-      // poziva se metoda koja ce kreirati defaault-ni block tj samim tim i blockchain
-      // hash i sve ostalo ce imati defaultne vrednosti
+  const createBlockchain = () => {
+    dispatch(createDefaultBlock(params.username))
+    .then(response => {
+      if(response.status === 200){
+        alert.show("Default block created successfully.", {
+          type: 'success'
+        })
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      if (error.response.data.indexOf("This is not system admin. Only system admin can to work with configuration of blockchain.") !== -1) {
+        alert.show("This is not system admin. Only system admin can to work with configuration of blockchain.",
+          {
+            type: "error",
+          }
+        );
+      } 
+      else if(error.response.data.indexOf("Creating block chain unsuccessfully. We've already had defined blcokchain.") !== -1) {
+        alert.show("Creating block chain unsuccessfully. We've already had defined blcokchain.",
+          {
+            type: "error",
+          }
+        );
+      }
+      else {
+        alert.show("Unknown error.",
+          {
+            type: "error",
+          }
+        );
+      } 
+    })
   }
 
 
@@ -27,7 +93,7 @@ function MiningOperations() {
           <button
             type="submit"
             style={{ backgroundColor: "#141e30" }}
-            onClick={() => createDefaultBlock()}
+            onClick={() => createBlockchain()}
           >
             <span></span>
             <span></span>
@@ -40,7 +106,7 @@ function MiningOperations() {
           <button
             type="submit"
             style={{ backgroundColor: "#141e30" }}
-            onClick={() => deleteBlockchain()}
+            onClick={() => destroyBlockchain()}
           >
             <span></span>
             <span></span>

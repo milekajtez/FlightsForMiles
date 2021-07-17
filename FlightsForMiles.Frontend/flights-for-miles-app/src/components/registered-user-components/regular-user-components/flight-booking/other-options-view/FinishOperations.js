@@ -1,11 +1,15 @@
 import React from "react";
 import { useAlert } from "react-alert";
-import { /*useDispatch,*/ useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { bookingWithoutFriends } from "../../../../../redux/regular-user/booking/bookingAction";
 
 function FinishOperations() {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const alert = useAlert();
+  const params = useParams();
   const ticket = useSelector((state) => state.ticket);
+  const flight = useSelector((state) => state.flight);
   const friendship = useSelector((state) => state.friendship);
 
   const bookingFlightWithoutFriends = () => {
@@ -17,7 +21,17 @@ function FinishOperations() {
         }
       );
     } else {
-      // poziv za booking - pravljanje transakcije...
+      dispatch(bookingWithoutFriends({
+        username: params.username,
+        flightID: flight.flightForBooking.flightID,
+        ticketID: ticket.selectedTickets[0].ticketID
+      }))
+      .then(response => {
+
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
   };
 

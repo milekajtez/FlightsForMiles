@@ -90,8 +90,10 @@ namespace FlightsForMiles.DAL.Migrations
 
             modelBuilder.Entity("FlightsForMiles.DAL.Modal.Block", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("BlockID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Hash")
                         .IsRequired()
@@ -110,7 +112,7 @@ namespace FlightsForMiles.DAL.Migrations
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("BlockID");
 
                     b.ToTable("Blocks");
                 });
@@ -336,12 +338,14 @@ namespace FlightsForMiles.DAL.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<string>("BlockId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double>("Fees")
                         .HasColumnType("float");
+
+                    b.Property<bool>("IsValid")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MyBlockBlockID")
+                        .HasColumnType("int");
 
                     b.Property<string>("RecipientPublicKey")
                         .IsRequired()
@@ -357,7 +361,7 @@ namespace FlightsForMiles.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlockId");
+                    b.HasIndex("MyBlockBlockID");
 
                     b.ToTable("Transactions");
                 });
@@ -634,9 +638,9 @@ namespace FlightsForMiles.DAL.Migrations
 
             modelBuilder.Entity("FlightsForMiles.DAL.Modal.Transaction", b =>
                 {
-                    b.HasOne("FlightsForMiles.DAL.Modal.Block", "Block")
+                    b.HasOne("FlightsForMiles.DAL.Modal.Block", "MyBlock")
                         .WithMany("Transactions")
-                        .HasForeignKey("BlockId")
+                        .HasForeignKey("MyBlockBlockID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

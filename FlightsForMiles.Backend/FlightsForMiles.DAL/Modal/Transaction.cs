@@ -29,6 +29,9 @@ namespace FlightsForMiles.DAL.Modal
         public double Fees { get; set; }
 
         [Required]
+        public bool IsValid { get; set; }
+
+        [Required]
         [JsonIgnore]
         public Block Block { get; set; }
     }

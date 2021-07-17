@@ -27,7 +27,7 @@ namespace FlightsForMiles.DAL.Repository
                 var tickets = _context.Tickets.Include(f => f.Flight);
                 foreach (var tic in tickets) 
                 {
-                    if (tic.Flight.Id.Equals(ticket.FlightID) && tic.Number_of_seat.Equals(ticket.Number)) 
+                    if (tic.Flight.Id.ToString().Equals(ticket.FlightID) && tic.Number_of_seat.ToString().Equals(ticket.Number)) 
                     {
                         throw new Exception("Add ticket unsuccessfully. This flight already has ticket with entered number.");
                     }
@@ -47,7 +47,6 @@ namespace FlightsForMiles.DAL.Repository
                         TicketType.ECONOMIC_CLASS,
                     Price = double.Parse(ticket.Price),
                     Is_ticket_purchased = false,
-                    Time_of_ticket_purchase = DateTime.Now,
                     Is_quick_booking = ticket.IsQuickBooking == "YES",
                     Flight = flight,
                     RegisteredUser = null

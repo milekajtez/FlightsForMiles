@@ -10,5 +10,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Bitcoin
         bool CreateDefaultBlock(string username);
         bool DeleteBlockchain(string username);
         List<IBlockResponseDTO> LoadBlockchain(string username);
+        bool AddUserAmount(IUserAmountRequestDTO userAmountRequestDTO);
     }
 }

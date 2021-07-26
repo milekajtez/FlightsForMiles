@@ -46,3 +46,16 @@ export const loadBlockchain = (username) => {
       });
   };
 };
+
+export const addUserAmount = (userAmount) => () =>
+  new Promise(function (resolve, reject) {
+    blockchainService
+      .addUserAmount(userAmount)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+

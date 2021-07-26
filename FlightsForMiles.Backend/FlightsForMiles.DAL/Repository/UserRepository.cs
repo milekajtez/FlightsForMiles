@@ -9,12 +9,15 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace FlightsForMiles.DAL.Repository
 {
@@ -24,13 +27,15 @@ namespace FlightsForMiles.DAL.Repository
         private readonly ApplicationSettings _appSettings;
         private readonly MailSettings _mailSettings;
         private const string GoogleApiTokenInfoUrl = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token={0}";
+        private readonly ApplicationDbContext _context;
 
         public UserRepository(UserManager<RegisteredUser> userManager, IOptions<ApplicationSettings> appSettings,
-            IOptions<MailSettings> mailSettings)
+            IOptions<MailSettings> mailSettings, ApplicationDbContext context)
         {
             _userManager = userManager;
             _appSettings = appSettings.Value;
             _mailSettings = mailSettings.Value;
+            _context = context;
         }
 
         #region 1 - Add user (Registration user)
@@ -114,6 +119,28 @@ namespace FlightsForMiles.DAL.Repository
                     Ukoliko token instekne, korisnik se ponovo loguje i ponovo dobija novi token, a postupak
                     kreirnja claim-ova se ponavlja.
                 */
+
+                var userBalance = _context.Balances;
+                foreach (var bal in userBalance) 
+                {
+                    if (bal.UserID.ToString().Equals(resultFind.Id))
+                    {
+                        throw new Exception("User's already had a balance for this application.");
+                    }
+                }
+
+                string fileName = "users\\" + username + ".txt";
+                GenerateKeyPair(fileName);
+                //LoadKeyPair(fileName);        // ovo ce mi trebati pri radu sa transakcijama
+                
+                userBalance.Add(new Balance() 
+                {
+                    UserID = resultFind.Id,
+                    Dollars = 0,
+                    Bitcoins = 0
+                });
+
+                _context.SaveChanges();
 
                 return true;
             }
@@ -368,6 +395,60 @@ namespace FlightsForMiles.DAL.Repository
 
             return false;
         }
+        #endregion
+
+        #region Method for generate key pair and add them to file 
+        private void GenerateKeyPair(string fileName) 
+        {
+            RSACryptoServiceProvider csp = new RSACryptoServiceProvider(2048);
+            string keysPairInfo = csp.ToXmlString(true);
+
+            using StreamWriter sw = new StreamWriter(fileName);
+            sw.WriteLine(keysPairInfo);
+        }
+        #endregion
+        #region Method for load key pair from file 
+        private string LoadKeyPair(string fileName) 
+        {
+            string line = "";
+            using (StreamReader sr = new StreamReader(fileName))
+            {
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+
+            return line;
+        }
+        #endregion
+
+        #region Kod koji ce mi verovatno trebati dok budem radio enkripciju/dekripciju
+        /*RSAParameters publicKey = csp.ToXmlString(false);
+            RSAParameters privateKey = csp.ExportParameters(true);
+
+            string www = publicKey.ToString();
+            //publicKey = (RSAParameters)www;
+
+            var sw = new StringWriter();
+            var xsPublic = new XmlSerializer(typeof(RSAParameters));
+            xsPublic.Serialize(sw, publicKey);
+            var xsPrivate = new XmlSerializer(typeof(RSAParameters));
+            xsPrivate.Serialize(sw, privateKey);
+
+            csp.ImportParameters(publicKey);
+            var data = Encoding.Unicode.GetBytes("Ja sam MIle.");
+            var cypher = csp.Encrypt(data, false);
+
+            var encripted = Convert.ToBase64String(cypher);
+
+            var dataBase = Convert.FromBase64String(encripted);
+            csp.ImportParameters(privateKey);
+            var plainText = csp.Decrypt(dataBase, false);
+            var deciripted = Encoding.Unicode.GetString(plainText);
+
+            //enkripcija i dekripcija rade...sad te kljuceve treba smestiti u bazu / scriptu
+            return new Tuple<string, string>(xsPublic.ToString(), xsPrivate.ToString());*/
         #endregion
     }
 }

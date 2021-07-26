@@ -10,6 +10,14 @@
     <Compile Remove="Migrations\20210703174030_BitcoinMigration.Designer.cs" />
     <Compile Remove="Migrations\20210703174613_BitcoinMigration.cs" />
     <Compile Remove="Migrations\20210703174613_BitcoinMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210722053531_BlochTransactionMigration.cs" />
+    <Compile Remove="Migrations\20210722053531_BlochTransactionMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210722054355_BlockTransactionMigration.cs" />
+    <Compile Remove="Migrations\20210722054355_BlockTransactionMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210722055053_BlockTransactionMigration1.cs" />
+    <Compile Remove="Migrations\20210722055053_BlockTransactionMigration1.Designer.cs" />
+    <Compile Remove="Migrations\20210722055534_BlockTransactionMigration1.cs" />
+    <Compile Remove="Migrations\20210722055534_BlockTransactionMigration1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

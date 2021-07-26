@@ -11,7 +11,7 @@ namespace FlightsForMiles.DAL.Modal
     public class Transaction
     {
         [Key]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public double Amount { get; set; }

@@ -1,5 +1,6 @@
 ﻿using FlightsForMiles.BLL.Contracts.DTO.Blockchain;
 using FlightsForMiles.BLL.Contracts.Services.Bitcoin;
+using FlightsForMiles.RequestDTO.Blockchain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -54,6 +55,15 @@ namespace FlightsForMiles.Controllers
             }
 
             return NotFound("Server not found blockchain.");
+        }
+        #endregion
+        #region 4 - Method for define user current amount
+        [HttpPost]
+        [Route("AddUserAmount")]
+        public IActionResult AddUserAmount(UserAmountRequestDTO userAmountRequestDTO) 
+        {
+            bool amountIsUpdate = _bitcoinService.AddUserAmount(userAmountRequestDTO);
+            return amountIsUpdate ? Ok(amountIsUpdate) : throw new Exception("Adding user amount successfully.");
         }
         #endregion
     }

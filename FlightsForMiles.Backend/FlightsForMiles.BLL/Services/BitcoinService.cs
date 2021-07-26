@@ -1,5 +1,6 @@
 ﻿using FlightsForMiles.BLL.Contracts.DTO.Blockchain;
 using FlightsForMiles.BLL.Contracts.Services.Bitcoin;
+using FlightsForMiles.BLL.Model.Blockchain;
 using FlightsForMiles.BLL.ResponseDTO.Blockchain;
 using FlightsForMiles.DAL.Contracts.Model;
 using FlightsForMiles.DAL.Contracts.Repository;
@@ -46,6 +47,18 @@ namespace FlightsForMiles.BLL.Services
             return result;
         }
         #endregion
+        #region 4 - Method for define user current amount
+        public bool AddUserAmount(IUserAmountRequestDTO userAmountRequestDTO)
+        {
+            if (userAmountRequestDTO == null)
+            {
+                throw new ArgumentNullException(nameof(userAmountRequestDTO));
+            }
+
+            IUserAmount userAmount = ConvertRequestObjectToUserAmount(userAmountRequestDTO);
+            return _bitcoinRepository.AddUserAmount(userAmount).Result;
+        }
+        #endregion
 
         #region Converting methods
         private IBlockResponseDTO ConvertBlockObjectToBlockResponse(IBlock block)
@@ -58,6 +71,11 @@ namespace FlightsForMiles.BLL.Services
                 PreviousHash = block.PreviousHash,
                 Hash = block.Hash
             };
+        }
+
+        private IUserAmount ConvertRequestObjectToUserAmount(IUserAmountRequestDTO userAmountRequestDTO) 
+        {
+            return new UserAmount(userAmountRequestDTO.Username, userAmountRequestDTO.Type, userAmountRequestDTO.Amount);
         }
         #endregion
         #region Methods for validations

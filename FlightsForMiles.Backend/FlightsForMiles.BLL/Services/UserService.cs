@@ -34,6 +34,7 @@ namespace FlightsForMiles.BLL.Services
         #region 2 - Confirm registration
         public void ConfirmRegistration(string username)
         {
+            //mozda ce trebati da se izvuce samo hex deo kljuca...to cu jos videti???
             if (!_userRepository.ConfirmRegistration(username).Result) 
             {
                 throw new Exception("Confirm unsuccessfully becouse user is not found or current user already confirm his registration");

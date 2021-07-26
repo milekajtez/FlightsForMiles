@@ -11,6 +11,16 @@ const blockchainService = {
 
     loadBlockchain: (username) => {
         return API.get(`Bitcoins/LoadBlockchain/${username}`);
+    },
+
+    addUserAmount: (userAmount) => {
+        var body = {
+            Username: userAmount.username,
+            Type: userAmount.type,
+            Amount: userAmount.amount 
+        }
+
+        return API.post(`Bitcoins/AddUserAmount`, body);
     }
 }
 

@@ -32,19 +32,21 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             var blockchain = _context.Blocks;
+            int counter = 0;
             foreach (var block in blockchain) 
             {
-                if (block.Id.Equals("1")) 
-                {
-                    throw new Exception("Creating block chain unsuccessfully. We've already had defined blcokchain.");
-                }
-
+                counter++;
                 break;
+            }
+
+            if (counter != 0)
+            {
+                throw new Exception("Creating block chain unsuccessfully. We've already had defined blcokchain.");
             }
 
             var deafultBlock = new Block()
             {
-                Id = "1",
+                Id = Guid.NewGuid(),
                 Index = 1,
                 Timestamp = DateTime.Now,
                 Proof = 0,
@@ -67,14 +69,17 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             bool blockchainExsist = false;
+            int counter = 0;
             var blockchain = _context.Blocks;
             foreach (var block in blockchain)
             {
-                if (block.Id.Equals("1"))
-                {
-                    blockchainExsist = true;
-                    break;
-                }
+                counter++;
+                break;
+            }
+
+            if (counter != 0)
+            {
+                blockchainExsist = true;
             }
 
             if (blockchainExsist) 
@@ -118,6 +123,52 @@ namespace FlightsForMiles.DAL.Repository
             return blocks;
         }
         #endregion
+        #region 4 - Method for define user current amount
+        public async Task<bool> AddUserAmount(IUserAmount userAmount)
+        {
+            var user = await _userManager.FindByNameAsync(userAmount.Username);
+            if (user == null) 
+            {
+                throw new Exception("User not found.");
+            }
+
+            var usersBalance = _context.Balances;
+            Balance balanceFound = null;
+            foreach (var bal in usersBalance) 
+            {
+                if (bal.UserID.Equals(user.Id)) 
+                {
+                    if (userAmount.Type.Equals("add"))
+                    {
+                        balanceFound = bal;
+                        balanceFound.Dollars += double.Parse(userAmount.Amount);
+                        break;
+                    }
+                    else 
+                    {
+                        balanceFound = bal;
+                        balanceFound.Dollars = double.Parse(userAmount.Amount);
+                        break;
+                    }
+                }
+            }
+
+            if (balanceFound == null) 
+            {
+                throw new Exception("User's balance not found.");
+            }
+
+            _context.Balances.Update(balanceFound);
+            await _context.SaveChangesAsync();
+
+            //kada se odradi promena, potrebno je pozvati API i izracunati koliko trenutno bitcoin-a na osnovu trenutnog kursa
+
+            return true;
+        }
+        #endregion
+
+
+
 
         #region X - Metode za generisanje hash-a u odnosu na blok
         //na osnovu bloka koji sma prosledio pravi se hash

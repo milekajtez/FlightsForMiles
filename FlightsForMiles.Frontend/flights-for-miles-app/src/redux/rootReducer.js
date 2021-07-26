@@ -10,7 +10,6 @@ import flightReducer from "./avio-admin/flight/flightReducer";
 import ticketReducer from "./avio-admin/ticket/ticketReducer";
 import friendshipReducer from "./regular-user/friendship/friendshipReducer";
 import bitcoinMiningReducer from "./system-admin/bitcoin-mining/bitcoinMiningReducer";
-import bookingReducer from "./regular-user/booking/bookingReaducer";
 
 const rootReducer = combineReducers({
   registration: registrationReducer,
@@ -23,8 +22,7 @@ const rootReducer = combineReducers({
   flight: flightReducer,
   ticket: ticketReducer,
   friendship: friendshipReducer,
-  blockchain: bitcoinMiningReducer,
-  booking: bookingReducer
+  blockchain: bitcoinMiningReducer
 });
 
 export default rootReducer;

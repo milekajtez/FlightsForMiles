@@ -10,7 +10,7 @@ namespace FlightsForMiles.DAL.Modal
     public class Block
     {
         [Key]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public int Index { get; set; }

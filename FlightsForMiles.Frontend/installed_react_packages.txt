@@ -19,4 +19,5 @@ $ npm install --save react-datetime-picker
 $ npm install --save leaflet
 $ npm install --save react-leaflet
 $ npm install --save react-geolocated
+$ npm install --save keypair
  

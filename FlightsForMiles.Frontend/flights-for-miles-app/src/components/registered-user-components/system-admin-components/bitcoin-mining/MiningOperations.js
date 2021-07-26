@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { createDefaultBlock, deleteBlockchain } from "../../../../redux/system-admin/bitcoin-mining/bitcoinMiningAction";
 import BlockchainView from "./BlockchainView";
+import UserAmountForm from "./UserAmountForm";
 
 function MiningOperations() {
   const [blockchain, setBlockchain] = useState(false);
+  const [userAmountModal, setUserAmountModal] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
   const alert = useAlert();
@@ -141,8 +143,22 @@ function MiningOperations() {
             CLEAR BLOCKCHAIN VIEW
           </button>
         </span>
+        <span className="box">
+          <button
+            type="submit"
+            style={{ backgroundColor: "#141e30" }}
+            onClick={() => setUserAmountModal(true)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            DEFINE USER'S AMOUNT
+          </button>
+        </span>
       </div>
       {blockchain ? <BlockchainView /> : null}
+      <UserAmountForm userAmountModal={userAmountModal} setUserAmountModal={setUserAmountModal}/>
     </div>
   );
 }

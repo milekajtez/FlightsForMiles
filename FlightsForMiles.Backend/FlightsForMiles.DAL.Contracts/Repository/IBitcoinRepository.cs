@@ -11,5 +11,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<bool> CreateDefaultBlock(string username);
         Task<bool> DeleteBlockchain(string username);
         Task<List<IBlock>> LoadBlockchain(string username);
+        Task<bool> AddUserAmount(IUserAmount userAmount);
     }
 }

@@ -33,9 +33,9 @@ function BlockchainView() {
                                     <hr style={{backgroundColor: 'aqua'}}></hr>
                                     <p className='blochchain-price'>Proof: {block.proof}</p>
                                     <hr style={{backgroundColor: 'aqua'}}></hr>
-                                    <p className="blochchain-price">Previous hash:<br></br>{block.previousHash === "" ? 'none' : block.previousHash.slice(0, 10) + "..."}</p>
+                                    <p className="blochchain-price">Previous hash:<br></br>{block.previousHash === "" ? 'none' : block.previousHash.slice(0, 16) + "..."}</p>
                                     <hr style={{backgroundColor: 'aqua'}}></hr>
-                                    <p className="blochchain-price">Hash: {block.hash.slice(0,10) + "..."}</p>
+                                    <p className="blochchain-price">Hash:<br></br>{block.hash.slice(0, 16) + "..."}</p>
                                 </div>
                             </span>
                         )

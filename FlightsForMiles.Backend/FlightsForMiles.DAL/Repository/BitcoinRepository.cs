@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -160,10 +162,41 @@ namespace FlightsForMiles.DAL.Repository
 
             _context.Balances.Update(balanceFound);
             await _context.SaveChangesAsync();
-
-            //kada se odradi promena, potrebno je pozvati API i izracunati koliko trenutno bitcoin-a na osnovu trenutnog kursa
+            await LoadBitcoinExchangeRates();
 
             return true;
+        }
+        #endregion
+
+        #region Method for loading current bitcoin exchange rates
+        private async Task<bool> LoadBitcoinExchangeRates() 
+        {
+            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, @"https://coinmarketcap.com/currencies/bitcoin/");
+            httpRequest.Content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(httpRequest);
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            if (result.Contains("priceValue___11gHJ "))
+            {
+                int index = result.IndexOf("priceValue___11gHJ ");
+                string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
+
+                List<Balance> newBalances = new List<Balance>();
+                var balances = _context.Balances;
+                foreach (var bal in balances) 
+                {
+                    bal.Bitcoins = bal.Dollars / double.Parse(currentBitcoinValue);
+                    _context.Update(bal);
+                }
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else 
+            {
+                throw new Exception("Loading exchange unsuccessfully.");
+            }
         }
         #endregion
 

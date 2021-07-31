@@ -6,6 +6,15 @@ using System.Text;
 
 namespace FlightsForMiles.DAL.Modal
 {
+    /// <summary>
+    /// Id ----------------------- block ID
+    /// Index -------------------- block's index
+    /// Timestamp ---------------- time of block creation
+    /// Proof -------------------- block proof
+    /// PreviousHash ------------- hash of previous block
+    /// Hash --------------------- hash of current block
+    /// Transactions ------------- block has 5 transactions
+    /// </summary>
     [Table("Blocks")]
     public class Block
     {
@@ -27,9 +36,8 @@ namespace FlightsForMiles.DAL.Modal
         [Required]
         public string Hash { get; set; }
 
-        [Required]
         public List<Transaction> Transactions { get; set; }
 
-        //mozda ce trebati dodati "ublic string Nonce {get; set;}"
+        //mozda ce trebati dodati "public string Nonce {get; set;}"
     }
 }

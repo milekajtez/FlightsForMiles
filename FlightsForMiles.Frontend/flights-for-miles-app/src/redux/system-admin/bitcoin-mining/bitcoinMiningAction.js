@@ -1,5 +1,5 @@
 import blockchainService from "../../../services/BlockchainService";
-import { LOADING_BLOCKCHAIN } from "./bitcoinMiningTypes";
+import { LOADING_BLOCKCHAIN, LOADING_TRANSACTION_FOR_VALIDATION } from "./bitcoinMiningTypes";
 
 export const createDefaultBlock = (username) => () =>
   new Promise(function (resolve, reject) {
@@ -58,4 +58,26 @@ export const addUserAmount = (userAmount) => () =>
         reject(error);
       });
   });
+
+export const loadTransactionsForValidationAction = (allTransactionsForValidation) => {
+  return {
+    type: LOADING_TRANSACTION_FOR_VALIDATION,
+    payload: allTransactionsForValidation
+  }
+};
+
+export const loadTransactionsForValidation = (username) => {
+  return (dispatch) => {
+    blockchainService
+      .loadTransactionsForValidation(username)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(loadTransactionsForValidationAction(response.data));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
 

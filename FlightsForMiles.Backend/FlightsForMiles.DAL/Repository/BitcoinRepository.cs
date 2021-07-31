@@ -167,7 +167,41 @@ namespace FlightsForMiles.DAL.Repository
             return true;
         }
         #endregion
+        #region - Method for load validations which haven't validate jet
+        public async Task<List<ITransaction>> LoadTransactionsForValidation(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null) 
+            {
+                throw new ArgumentException("Server not found system admin.");
+            }
 
+            if (!user.UserName.Equals("mainAdmin")) 
+            {
+                throw new ArgumentException("Only system admin can to load transactions.");
+            }
+
+            var transactions = _context.Transactions;
+            List<ITransaction> currentTransactions = new List<ITransaction>();
+            foreach (var trans in transactions) 
+            {
+                if (!trans.IsValid) 
+                {
+                    currentTransactions.Add(new TransactionDataModel() 
+                    {
+                        TransactionID = trans.Id.ToString(),
+                        Amount = trans.Amount.ToString(),
+                        Sender = trans.SenderPublicKey,
+                        Receiver = trans.RecipientPublicKey,
+                        Fees = trans.Fees.ToString(),
+                        Signature = trans.Signature
+                    });
+                }
+            }
+
+            return currentTransactions;
+        }
+        #endregion
         #region Method for loading current bitcoin exchange rates
         private async Task<bool> LoadBitcoinExchangeRates() 
         {
@@ -204,7 +238,7 @@ namespace FlightsForMiles.DAL.Repository
 
 
         #region X - Metode za generisanje hash-a u odnosu na blok
-        //na osnovu bloka koji sma prosledio pravi se hash
+        //na osnovu bloka koji sma prosledio pravi se hash...ova metoa ce trebati pri dodatnom kreiranje block-a
         private string GetHash(Block block)
         {
             string blockText = JsonConvert.SerializeObject(block);

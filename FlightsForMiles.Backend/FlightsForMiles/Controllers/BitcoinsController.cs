@@ -66,5 +66,14 @@ namespace FlightsForMiles.Controllers
             return amountIsUpdate ? Ok(amountIsUpdate) : throw new Exception("Adding user amount successfully.");
         }
         #endregion
+        #region 5 - Method for load validations which haven't validate jet
+        [HttpGet]
+        [Route("LoadTransactionsForValidation/{username}")]
+        public IActionResult LoadTransactionsForValidation(string username) 
+        {
+            List<ITransactionResponseDTO> transactions = _bitcoinService.LoadTransactionsForValidation(username);
+            return Ok(transactions);
+        }
+        #endregion
     }
 }

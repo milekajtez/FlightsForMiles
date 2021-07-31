@@ -11,5 +11,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Bitcoin
         bool DeleteBlockchain(string username);
         List<IBlockResponseDTO> LoadBlockchain(string username);
         bool AddUserAmount(IUserAmountRequestDTO userAmountRequestDTO);
+        List<ITransactionResponseDTO> LoadTransactionsForValidation(string username);
     }
 }

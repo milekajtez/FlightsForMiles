@@ -25,7 +25,13 @@ namespace FlightsForMiles.Controllers
         [Route("BookingWithoutFriends")]
         public IActionResult BookingWithoutFriends(BookingWithoutFriendsRequestDTO bookingWithoutFriendsRequestDTO) 
         {
-            return Ok();
+            bool bookingCreated = _bookingService.BookingWithoutFriends(bookingWithoutFriendsRequestDTO);
+            if (bookingCreated)
+            {
+                return Ok();
+            }
+
+            throw new Exception("Booking unsuccessfuly.");
         }
         #endregion
     }

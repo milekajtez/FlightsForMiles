@@ -7,6 +7,16 @@ using System.Text.Json.Serialization;
 
 namespace FlightsForMiles.DAL.Modal
 {
+    /// <summary>
+    /// Id ----------------------------- transaction ID
+    /// Amount ------------------------- amount in transaction (prive of booking)
+    /// RecipientPublicKey ------------- recipent public key
+    /// SenderPublicKey ---------------- sender public key
+    /// Signature ---------------------- transaction's siganture
+    /// Fees --------------------------- fees for adding transaction to blockchin
+    /// IsValid ------------------------ is transaction valid?
+    /// Block -------------------------- transaction is in this block
+    /// </summary>
     [Table("Transactions")]
     public class Transaction
     {
@@ -31,7 +41,6 @@ namespace FlightsForMiles.DAL.Modal
         [Required]
         public bool IsValid { get; set; }
 
-        [Required]
         [JsonIgnore]
         public Block Block { get; set; }
     }

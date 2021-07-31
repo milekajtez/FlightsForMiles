@@ -21,6 +21,10 @@ const blockchainService = {
         }
 
         return API.post(`Bitcoins/AddUserAmount`, body);
+    },
+
+    loadTransactionsForValidation: (username) => {
+        return API.get(`Bitcoins/LoadTransactionsForValidation/${username}`);
     }
 }
 

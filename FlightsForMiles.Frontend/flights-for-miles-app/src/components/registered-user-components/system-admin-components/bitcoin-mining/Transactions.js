@@ -1,6 +1,25 @@
 import React from "react";
+import { useEffect } from "react";
+import { /*useAlert*/ } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { loadTransactionsForValidation } from "../../../../redux/system-admin/bitcoin-mining/bitcoinMiningAction";
 
 function Transactions() {
+  const dispatch = useDispatch();
+  const blockchain = useSelector((state) => state.blockchain);
+  const params = useParams();
+  //const alert = useAlert();
+
+  useEffect(() => {
+    dispatch(loadTransactionsForValidation(params.username));
+  }, [dispatch, params.username]);
+
+  const validateAndMineTransaction = (/**verovatno cu slati sve podatke */) => {
+    // validacija transakcije
+    //ovde ce ici use alert da je transakcija uspesno validirana ili je obrisana jer je nevalidna
+  };
+
   return (
     <div>
       <h2 style={{ color: "white", marginTop: "8px" }}>
@@ -11,44 +30,37 @@ function Transactions() {
           <tr>
             <th>ID</th>
             <th>Amount</th>
-            <th>Sender public key</th>
-            <th>Recipient public key</th>
+            <th>Sender</th>
+            <th>Recipient</th>
             <th>Signature</th>
             <th>Fees</th>
-            <th>Mining oprations</th>
+            <th>Mining operations</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>0.0006 B</td>
-            <td>pubkey11</td>
-            <td>pubkey12</td>
-            <td>ahgdshjasdgjasdg</td>
-            <td>fees1</td>
-            <td>
-            <button
-                className="btn btn-light"
-                /*onClick={() =>
-                  setChangeIsOpen({ open: true, currentDest: destination })
-                }*/
-              >
-                <i className="fas fa-check"></i> VALIDATION
-              </button>
-              &nbsp;
-              <button
-                className="btn btn-dark"
-                /*onClick={() =>
-                  setChangeIsOpen({ open: true, currentDest: destination })
-                }*/
-              >
-                <i className="far fa-plus-square"></i> MINE
-              </button>
-            </td>
-          </tr>
+          {blockchain.transactionsForValidation.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{item.transactionID}</td>
+                    <td>{item.amount.substring(0, 20) + " ..."} ₿</td>
+                    <td>{item.sender}</td>
+                    <td>{item.receiver}</td>
+                    <td>{item.signature.substring(0, 20) + " ..."}</td>
+                    <td>{item.fees}</td>
+                    <td>
+                      <button
+                        className="btn btn-dark"
+                        onClick={() => validateAndMineTransaction()}
+                      >
+                        <i className="fas fa-check"></i> VALIDATION + MINE
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
         </tbody>
       </table>
-      <hr style={{backgroundColor: 'aqua', margin: '0px 5%'}}></hr>
+      <hr style={{ backgroundColor: "aqua", margin: "0px 5%" }}></hr>
     </div>
   );
 }

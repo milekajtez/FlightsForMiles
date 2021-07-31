@@ -18,6 +18,10 @@
     <Compile Remove="Migrations\20210722055053_BlockTransactionMigration1.Designer.cs" />
     <Compile Remove="Migrations\20210722055534_BlockTransactionMigration1.cs" />
     <Compile Remove="Migrations\20210722055534_BlockTransactionMigration1.Designer.cs" />
+    <Compile Remove="Migrations\20210731073933_BookingsTableMigration.cs" />
+    <Compile Remove="Migrations\20210731073933_BookingsTableMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210731080349_BookingsTableMigration.cs" />
+    <Compile Remove="Migrations\20210731080349_BookingsTableMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { bookingWithoutFriends } from "../../../../../redux/regular-user/booking/bookingAction";
 
 function FinishOperations() {
@@ -11,6 +11,7 @@ function FinishOperations() {
   const ticket = useSelector((state) => state.ticket);
   const flight = useSelector((state) => state.flight);
   const friendship = useSelector((state) => state.friendship);
+  const history = useHistory();
 
   const bookingFlightWithoutFriends = () => {
     if (ticket.selectedTickets.length !== 1) {
@@ -27,10 +28,44 @@ function FinishOperations() {
         ticketID: ticket.selectedTickets[0].ticketID
       }))
       .then(response => {
-
+        if (response.status === 200) {
+          alert.show("Send request for booking successfully. You will get a message if your request for booking is valid.",
+          {
+            type: 'success'
+          });
+          history.push(`/regular/${params.username}/flightBooking`);
+        }
       })
       .catch(error => {
         console.log(error);
+        if (
+          error.response.data.indexOf("(Server not found user.)") !== -1
+        ) {
+          alert.show("Server not found user.", {
+            type: "error",
+          });
+        } else if (
+          error.response.data.indexOf("(Server not found flight.)") !== -1
+        ) {
+          alert.show("Server not found flight.", {
+            type: "error",
+          });
+        }
+        else if(error.response.data.indexOf("Server not found ticket.") !== -1) {
+          alert.show("Server not found ticket.", {
+            type: "error",
+          });
+        }
+        else if(error.response.data.indexOf("User has already send request for booking for this flght and seat.") !== -1) {
+          alert.show("User has already send request for booking for this flght and seat.", {
+            type: "error",
+          });
+        }
+        else {
+          alert.show("Unknown error.", {
+            type: "error",
+          });
+        }
       })
     }
   };

@@ -25,6 +25,7 @@ namespace FlightsForMiles.DAL
         public DbSet<Balance> Balances { get; set; }
         public DbSet<Block> Blocks { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
 
 
         // Other settings

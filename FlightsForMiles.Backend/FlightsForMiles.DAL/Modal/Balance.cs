@@ -7,6 +7,11 @@ using System.Text;
 
 namespace FlightsForMiles.DAL.Modal
 {
+    /// <summary>
+    /// UserID ------------ user ID
+    /// Dollars ----------- amount in dollars
+    /// Bitcoins ---------- amount in bitcoins
+    /// </summary>
     [Table("UsersBalance")]
     public class Balance
     {

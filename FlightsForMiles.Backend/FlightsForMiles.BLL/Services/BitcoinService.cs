@@ -59,6 +59,20 @@ namespace FlightsForMiles.BLL.Services
             return _bitcoinRepository.AddUserAmount(userAmount).Result;
         }
         #endregion
+        #region 5 - Method for load validations which haven't validate jet
+        public List<ITransactionResponseDTO> LoadTransactionsForValidation(string username)
+        {
+            UsernameValidation(username);
+            List<ITransactionResponseDTO> result = new List<ITransactionResponseDTO>();
+            List<ITransaction> transactions = _bitcoinRepository.LoadTransactionsForValidation(username).Result;
+            foreach (var trans in transactions) 
+            {
+                result.Add(ConvertTransactionObjectToTransactionResponse(trans));
+            }
+
+            return result;
+        }
+        #endregion
 
         #region Converting methods
         private IBlockResponseDTO ConvertBlockObjectToBlockResponse(IBlock block)
@@ -76,6 +90,19 @@ namespace FlightsForMiles.BLL.Services
         private IUserAmount ConvertRequestObjectToUserAmount(IUserAmountRequestDTO userAmountRequestDTO) 
         {
             return new UserAmount(userAmountRequestDTO.Username, userAmountRequestDTO.Type, userAmountRequestDTO.Amount);
+        }
+
+        private ITransactionResponseDTO ConvertTransactionObjectToTransactionResponse(ITransaction transaction) 
+        {
+            return new TransactionResponseDTO() 
+            {
+                TransactionID = transaction.TransactionID,
+                Amount = transaction.Amount,
+                Sender = transaction.Sender,
+                Receiver = transaction.Receiver,
+                Fees = transaction.Fees,
+                Signature = transaction.Signature
+            };
         }
         #endregion
         #region Methods for validations

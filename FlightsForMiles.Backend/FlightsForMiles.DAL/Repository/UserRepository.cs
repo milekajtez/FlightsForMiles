@@ -407,48 +407,5 @@ namespace FlightsForMiles.DAL.Repository
             sw.WriteLine(keysPairInfo);
         }
         #endregion
-        #region Method for load key pair from file 
-        private string LoadKeyPair(string fileName) 
-        {
-            string line = "";
-            using (StreamReader sr = new StreamReader(fileName))
-            {
-                while ((line = sr.ReadLine()) != null)
-                {
-                    Console.WriteLine(line);
-                }
-            }
-
-            return line;
-        }
-        #endregion
-
-        #region Kod koji ce mi verovatno trebati dok budem radio enkripciju/dekripciju
-        /*RSAParameters publicKey = csp.ToXmlString(false);
-            RSAParameters privateKey = csp.ExportParameters(true);
-
-            string www = publicKey.ToString();
-            //publicKey = (RSAParameters)www;
-
-            var sw = new StringWriter();
-            var xsPublic = new XmlSerializer(typeof(RSAParameters));
-            xsPublic.Serialize(sw, publicKey);
-            var xsPrivate = new XmlSerializer(typeof(RSAParameters));
-            xsPrivate.Serialize(sw, privateKey);
-
-            csp.ImportParameters(publicKey);
-            var data = Encoding.Unicode.GetBytes("Ja sam MIle.");
-            var cypher = csp.Encrypt(data, false);
-
-            var encripted = Convert.ToBase64String(cypher);
-
-            var dataBase = Convert.FromBase64String(encripted);
-            csp.ImportParameters(privateKey);
-            var plainText = csp.Decrypt(dataBase, false);
-            var deciripted = Encoding.Unicode.GetString(plainText);
-
-            //enkripcija i dekripcija rade...sad te kljuceve treba smestiti u bazu / scriptu
-            return new Tuple<string, string>(xsPublic.ToString(), xsPrivate.ToString());*/
-        #endregion
     }
 }

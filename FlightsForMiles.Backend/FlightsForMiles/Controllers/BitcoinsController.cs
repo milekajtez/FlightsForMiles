@@ -75,5 +75,19 @@ namespace FlightsForMiles.Controllers
             return Ok(transactions);
         }
         #endregion
+        #region 6 - Method for mining validation
+        [HttpPut]
+        [Route("MiningTransaction/{username}")]
+        public IActionResult MiningTransaction(TransactionRequestDTO transactionRequestDTO, string username) 
+        {
+            bool transactionIsMinig = _bitcoinService.MiningTransaction(transactionRequestDTO, username);
+            if (transactionIsMinig == true)
+            {
+                return Ok();
+            }
+            
+            throw new Exception("Minig transaction unsucessfully.");       
+        }
+        #endregion
     }
 }

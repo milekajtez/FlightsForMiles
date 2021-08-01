@@ -73,6 +73,19 @@ namespace FlightsForMiles.BLL.Services
             return result;
         }
         #endregion
+        #region 6 - Method for minig transaction
+        public bool MiningTransaction(ITransactionRequestDTO transactionRequestDTO, string username)
+        {
+            UsernameValidation(username);
+            if (transactionRequestDTO == null) 
+            {
+                throw new ArgumentException(nameof(transactionRequestDTO));
+            }
+
+            ITransaction transaction = ConvertRequestObjectToTransaction(transactionRequestDTO);
+            return _bitcoinRepository.MiningTransaction(transaction, username).Result;
+        }
+        #endregion
 
         #region Converting methods
         private IBlockResponseDTO ConvertBlockObjectToBlockResponse(IBlock block)
@@ -103,6 +116,12 @@ namespace FlightsForMiles.BLL.Services
                 Fees = transaction.Fees,
                 Signature = transaction.Signature
             };
+        }
+
+        private ITransaction ConvertRequestObjectToTransaction(ITransactionRequestDTO transactionRequestDTO)
+        {
+            return new Transaction(transactionRequestDTO.TransactionID, transactionRequestDTO.Amount, transactionRequestDTO.Sender,
+                transactionRequestDTO.Reciever, transactionRequestDTO.Signature, transactionRequestDTO.Fees);
         }
         #endregion
         #region Methods for validations

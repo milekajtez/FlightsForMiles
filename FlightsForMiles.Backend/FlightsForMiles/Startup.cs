@@ -48,7 +48,7 @@ namespace FlightsForMiles
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            
             //Inject ApplicationSettings and MailSettings
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));

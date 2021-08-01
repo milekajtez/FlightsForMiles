@@ -25,7 +25,20 @@ const blockchainService = {
 
     loadTransactionsForValidation: (username) => {
         return API.get(`Bitcoins/LoadTransactionsForValidation/${username}`);
-    }
+    },
+
+    miningTransaction: (transaction, username) => {
+        var body = {
+            TransactionID: transaction.transactionID,
+            Amount: transaction.amount,
+            Sender: transaction.sender,
+            Reciever: transaction.reciever,
+            Fees: transaction.fees,
+            Signature: transaction.signature
+        }
+        
+        return API.put(`Bitcoins/MiningTransaction/${username}`, body);
+    },
 }
 
 export default blockchainService;

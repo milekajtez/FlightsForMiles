@@ -81,3 +81,14 @@ export const loadTransactionsForValidation = (username) => {
   };
 };
 
+export const miningTransaction = (transaction, username) => () =>
+  new Promise(function (resolve, reject) {
+    blockchainService
+      .miningTransaction(transaction, username)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });

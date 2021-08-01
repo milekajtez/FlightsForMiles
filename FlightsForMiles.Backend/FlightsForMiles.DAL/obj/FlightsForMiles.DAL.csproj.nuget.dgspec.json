@@ -122,6 +122,14 @@
               "target": "Package",
               "version": "[5.6.0, )"
             },
+            "NBitcoin": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Portable.BouncyCastle": {
+              "target": "Package",
+              "version": "[1.8.10, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[5.6.0, )"

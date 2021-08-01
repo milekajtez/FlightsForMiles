@@ -22,6 +22,12 @@
     <Compile Remove="Migrations\20210731073933_BookingsTableMigration.Designer.cs" />
     <Compile Remove="Migrations\20210731080349_BookingsTableMigration.cs" />
     <Compile Remove="Migrations\20210731080349_BookingsTableMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210801094451_ChangeBookingKeyMigration.cs" />
+    <Compile Remove="Migrations\20210801094451_ChangeBookingKeyMigration.Designer.cs" />
+    <Compile Remove="Migrations\20210801100250_ChangeBookingKeyMigration3.cs" />
+    <Compile Remove="Migrations\20210801100250_ChangeBookingKeyMigration3.Designer.cs" />
+    <Compile Remove="Migrations\20210801155549_BlockTransactionsMigration.cs" />
+    <Compile Remove="Migrations\20210801155549_BlockTransactionsMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +35,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+    <PackageReference Include="NBitcoin" Version="6.0.6" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
   </ItemGroup>
 

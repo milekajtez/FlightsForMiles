@@ -36,8 +36,6 @@ namespace FlightsForMiles.DAL.Modal
         [Required]
         public string Hash { get; set; }
 
-        public List<Transaction> Transactions { get; set; }
-
-        //mozda ce trebati dodati "public string Nonce {get; set;}"
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }

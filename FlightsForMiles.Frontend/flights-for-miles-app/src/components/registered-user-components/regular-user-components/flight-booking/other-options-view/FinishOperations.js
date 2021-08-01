@@ -33,7 +33,7 @@ function FinishOperations() {
           {
             type: 'success'
           });
-          history.push(`/regular/${params.username}/flightBooking`);
+          history.push(`/regular/${params.username}/airlineReview`);
         }
       })
       .catch(error => {

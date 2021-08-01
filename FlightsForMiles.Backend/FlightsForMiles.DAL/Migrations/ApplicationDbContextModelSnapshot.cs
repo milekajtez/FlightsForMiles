@@ -114,7 +114,7 @@ namespace FlightsForMiles.DAL.Migrations
 
             modelBuilder.Entity("FlightsForMiles.DAL.Modal.Booking", b =>
                 {
-                    b.Property<string>("UserID")
+                    b.Property<string>("TicketID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BookingStatus")
@@ -124,10 +124,17 @@ namespace FlightsForMiles.DAL.Migrations
                     b.Property<int>("FlightID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TicketID")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
-                    b.HasKey("UserID");
+                    b.Property<Guid>("TransactionID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TicketID");
 
                     b.ToTable("Bookings");
                 });

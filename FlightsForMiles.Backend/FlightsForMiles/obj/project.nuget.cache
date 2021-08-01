@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gOyhHQAT9lhTE8f343jzLpZT6tcxGvMR60hTfyggeGsjtvzAm1il+mPu5nPT05SlGFv/TCaB7fvTdAA44jrNmw==",
+  "dgSpecHash": "3Tm0qYUKE32IGtRtfA6JT11X/cz7jRXlxruOa6HQgKXvVSEjjSzJKkhBmHHFv1+0uxkqDHQLCJgK5wltACkPzg==",
   "success": true,
   "projectFilePath": "C:\\Users\\m.kajtez\\Desktop\\FlightsForMiles\\FlightsForMiles.Backend\\FlightsForMiles\\FlightsForMiles.csproj",
   "expectedPackageFiles": [
@@ -23,6 +23,8 @@
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.aspnetcore.identity\\2.2.0\\microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.1\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.1.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.1\\microsoft.aspnetcore.identity.ui.3.1.1.nupkg.sha512",
+    "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.1\\microsoft.aspnetcore.jsonpatch.3.1.1.nupkg.sha512",
+    "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.1\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.1.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
@@ -64,7 +66,10 @@
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.9\\microsoft.visualstudio.azure.containers.tools.targets.1.10.9.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
+    "C:\\Users\\m.kajtez\\.nuget\\packages\\nbitcoin\\6.0.6\\nbitcoin.6.0.6.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\m.kajtez\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\m.kajtez\\.nuget\\packages\\portable.bouncycastle\\1.8.10\\portable.bouncycastle.1.8.10.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\m.kajtez\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

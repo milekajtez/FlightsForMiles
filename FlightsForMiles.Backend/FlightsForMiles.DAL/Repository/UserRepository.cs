@@ -5,7 +5,13 @@ using FlightsForMiles.DAL.Modal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using NBitcoin;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Generators;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.OpenSsl;
+using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -129,10 +135,10 @@ namespace FlightsForMiles.DAL.Repository
                     }
                 }
 
-                string fileName = "users\\" + username + ".txt";
-                GenerateKeyPair(fileName);
-                //LoadKeyPair(fileName);        // ovo ce mi trebati pri radu sa transakcijama
-                
+                string fileNamePublic = "users\\public\\" + username + ".txt";
+                string fileNamePrivate = "users\\private\\" + username + ".txt";
+                GenerateKeyPair(fileNamePublic, fileNamePrivate);
+
                 userBalance.Add(new Balance() 
                 {
                     UserID = resultFind.Id,
@@ -398,13 +404,31 @@ namespace FlightsForMiles.DAL.Repository
         #endregion
 
         #region Method for generate key pair and add them to file 
-        private void GenerateKeyPair(string fileName) 
+        private void GenerateKeyPair(string fileNamePublic, string fileNamePrivate) 
         {
-            RSACryptoServiceProvider csp = new RSACryptoServiceProvider(2048);
-            string keysPairInfo = csp.ToXmlString(true);
+            RsaKeyPairGenerator rsaKeyGenerator = new RsaKeyPairGenerator();
+            rsaKeyGenerator.Init(new KeyGenerationParameters(new SecureRandom(), 2048));
+            AsymmetricCipherKeyPair keyPair = rsaKeyGenerator.GenerateKeyPair();
 
-            using StreamWriter sw = new StreamWriter(fileName);
-            sw.WriteLine(keysPairInfo);
+            RsaKeyParameters PrivateKey = (RsaKeyParameters)keyPair.Private;
+            RsaKeyParameters PublicKey = (RsaKeyParameters)keyPair.Public;
+
+            TextWriter textWriter1 = new StringWriter();
+            PemWriter pemWriter1 = new PemWriter(textWriter1);
+            pemWriter1.WriteObject(PublicKey);
+            pemWriter1.Writer.Flush();
+            string print_pubKey = textWriter1.ToString();
+
+            TextWriter textWriter2 = new StringWriter();
+            PemWriter pemWriter2 = new PemWriter(textWriter2);
+            pemWriter2.WriteObject(PrivateKey);
+            pemWriter2.Writer.Flush();
+            string print_privKey = textWriter2.ToString();
+
+            using StreamWriter swPUB = new StreamWriter(fileNamePublic);
+            swPUB.WriteLine(print_pubKey);
+            using StreamWriter swPRIV = new StreamWriter(fileNamePrivate);
+            swPRIV.WriteLine(print_privKey);
         }
         #endregion
     }

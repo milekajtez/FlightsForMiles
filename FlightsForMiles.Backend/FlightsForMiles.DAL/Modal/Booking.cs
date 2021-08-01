@@ -12,20 +12,28 @@ namespace FlightsForMiles.DAL.Modal
     /// TicketID ------------ ticket ID
     /// BookingStatus ------- status of booking ==> Waiting --- user waiting for validation transaction
     ///                                         ==> Valid ----- transaction is valid and added to blockchain
+    /// Price --------------- how many bitcoins booking is costed
+    /// TransactionID ------- transaction of booking
     /// </summary>
     [Table("Bookings")]
     public class Booking
     {
         [Key]
+        public string TicketID { get; set; }
+
+        [Required]
         public string UserID { get; set; }
 
         [Required]
         public int FlightID { get; set; }
 
         [Required]
-        public int TicketID {get; set;}
+        public string BookingStatus { get; set; }
 
         [Required]
-        public string BookingStatus { get; set; }
+        public double Price { get; set; }
+
+        [Required]
+        public Guid TransactionID { get; set; }
     }
 }

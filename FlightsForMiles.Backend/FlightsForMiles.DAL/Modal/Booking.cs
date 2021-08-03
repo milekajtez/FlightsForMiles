@@ -32,6 +32,9 @@ namespace FlightsForMiles.DAL.Modal
 
         [Required]
         public double Price { get; set; }
+        
+        [Required]
+        public double DiscountPrice { get; set; }
 
         [Required]
         public Guid TransactionID { get; set; }

@@ -289,7 +289,7 @@ namespace FlightsForMiles.DAL.Repository
                 throw new Exception("Mining transaction unsuccessfully. Reason: " + NO_TICKET);
             }
 
-            if (!ChangeUserBalance(senderBooking.Id, ticket.Price))
+            if (!ChangeUserBalance(senderBooking.Id, CaluclateDiscount(ticket.Price, senderBooking.Points)))
             {
                 // ukoliko nema dovoljno para isto otpada transakcija i booking
                 DeleteTransaction(transaction);
@@ -302,8 +302,13 @@ namespace FlightsForMiles.DAL.Repository
             //ako je sve ok sa tiketom i ako ima dovoljno para menja se status karte
             ChangeTicketStatus(ticket);
             #endregion
-            #region Na kraju se radi i izmena u samom booking-u tj booking je accepted a cena je u bitcoin-ima
+            #region Na kraju se radi i izmena u samom booking-u tj booking je accepted a cena je u bitcoin-ima plus povecavaju se poeni user-a
+            // dodavanje poena +70 korisniku ciji je booking
+            senderBooking.Points += 70;
+            await _userManager.UpdateAsync(senderBooking);
+
             booking.Price = ticket.Price / LoadBitcoinExchange().Result;
+            booking.DiscountPrice = CaluclateDiscount(ticket.Price, senderBooking.Points) / LoadBitcoinExchange().Result;
             booking.BookingStatus = "ACCEPTED";
             _context.Bookings.Update(booking);
             _context.SaveChanges();
@@ -311,6 +316,7 @@ namespace FlightsForMiles.DAL.Repository
 
             //kad se sve odradi transakcija se doda u blok i posalje se korisniku mejl da je njegov booking prihvacen
             AddTransactionToBlock(blocks, transaction);
+
             await SendEmailAsync(senderBooking.UserName, senderBooking.Email, SUCCESS);
             return true;
         }
@@ -504,6 +510,16 @@ namespace FlightsForMiles.DAL.Repository
                 _context.Blocks.Update(currentBlock);
                 _context.SaveChanges();
             }
+        }
+        #endregion
+        #region 13 - Method for calucating discount
+        public double CaluclateDiscount(double value, double currentPoints) 
+        {
+            var discount = _context.Discounts.Find("discID");
+            double discValue = currentPoints >= 1200 ? discount.Points_1200 : currentPoints >= 600 ? discount.Points_600 :
+                currentPoints >= 300 ? discount.Points_300 : 0;
+
+            return value - (discValue * value / 100);
         }
         #endregion
 

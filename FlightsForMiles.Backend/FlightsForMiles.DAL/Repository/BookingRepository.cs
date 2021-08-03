@@ -85,6 +85,7 @@ namespace FlightsForMiles.DAL.Repository
                 TicketID = bookingWithoutFriends.TicketID,
                 BookingStatus = "WAITING",
                 Price = 0,
+                DiscountPrice = 0,
                 TransactionID = newTransaction.Id
             };
 

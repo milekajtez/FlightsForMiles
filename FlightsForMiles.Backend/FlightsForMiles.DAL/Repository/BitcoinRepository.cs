@@ -207,7 +207,7 @@ namespace FlightsForMiles.DAL.Repository
             List<ITransaction> currentTransactions = new List<ITransaction>();
             foreach (var trans in transactions) 
             {
-                if (!trans.IsValid) 
+                if (!trans.IsValid && trans.SenderPublicKey.Equals(trans.BookingFrom)) 
                 {
                     currentTransactions.Add(new TransactionDataModel() 
                     {
@@ -216,7 +216,7 @@ namespace FlightsForMiles.DAL.Repository
                         Sender = trans.SenderPublicKey,
                         Receiver = trans.RecipientPublicKey,
                         Fees = trans.Fees.ToString(),
-                        Signature = trans.Signature
+                        Signature = trans.Signature,
                     });
                 }
             }

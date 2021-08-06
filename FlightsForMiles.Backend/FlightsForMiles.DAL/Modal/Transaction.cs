@@ -40,6 +40,9 @@ namespace FlightsForMiles.DAL.Modal
 
         [Required]
         public bool IsValid { get; set; }
+        
+        [Required]
+        public string BookingFrom { get; set; }
 
         [JsonIgnore]
         public Block Block { get; set; }

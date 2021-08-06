@@ -8,6 +8,8 @@ import ConfirmRegYes from './components/confirm-pages-component/ConfirmRegYes';
 import ConfirmRegNo from './components/confirm-pages-component/ConfirmRegNo';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import ConfirmBookingYes from './components/confirm-pages-component/ConfirmBookingYes';
+import ConfirmBookingNo from './components/confirm-pages-component/ConfirmBookingNo';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route exact path="/:option?" component={StartPage} />
             <Route exact path="/confirmRegYes/:username?" component={ConfirmRegYes} />
             <Route exact path="/confirmRegNo" component={ConfirmRegNo} />
+            <Route exact path="/confirmBookingYes/:ticketID?" component={ConfirmBookingYes} />
+            <Route exact path="/confirmBookingNo/:ticketID?" component={ConfirmBookingNo} />
             <Route exact path="/system/:username/:option" component={SystemAdmin} />
             <Route exact path="/avio/:username/:option" component={AvioAdmin} />
             <Route exact path="/regular/:username/:option" component={RegularUser} />

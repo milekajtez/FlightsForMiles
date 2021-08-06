@@ -2,7 +2,7 @@ import React from "react";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { bookingWithoutFriends } from "../../../../../redux/regular-user/booking/bookingAction";
+import { bookingForFriends, bookingWithoutFriends } from "../../../../../redux/regular-user/booking/bookingAction";
 
 function FinishOperations() {
   const dispatch = useDispatch();
@@ -70,11 +70,11 @@ function FinishOperations() {
     }
   };
 
-  const bookingFlightWithFriends = () => {
+  const bookingFlighForFriends = () => {
     if (friendship.friendsSelectedForBooking.length > 0) {
       if (
         ticket.selectedTickets.length !==
-        friendship.friendsSelectedForBooking.length + 1
+        friendship.friendsSelectedForBooking.length
       ) {
         alert.show(
           "Incorrect number of chosen tickets. Number of chosen tickets must me same as number of persons",
@@ -83,7 +83,25 @@ function FinishOperations() {
           }
         );
       } else {
-        // poziv za booking - pravljanje transakcije...
+        dispatch(bookingForFriends({
+          username: params.username,
+          friends: friendship.friendsSelectedForBooking,
+          tickets: ticket.selectedTickets,
+          flightID: flight.flightForBooking.flightID
+        }))
+        .then(response => {
+          if (response.status === 200) {
+            alert.show("Send requests for booking successfully. Your friends will get a message if your requests for booking are valid.",
+            {
+              type: 'success'
+            });
+            history.push(`/regular/${params.username}/airlineReview`);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          //ispis gresaka
+        })
       }
     } else {
       alert.show(
@@ -114,13 +132,13 @@ function FinishOperations() {
         <button
           type="submit"
           style={{ backgroundColor: "#141e30" }}
-          onClick={() => bookingFlightWithFriends()}
+          onClick={() => bookingFlighForFriends()}
         >
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-          BOOKING FLIGHT WITH FRIENDS
+          BOOKING FLIGHT FOR FRIENDS
         </button>
       </span>
     </div>

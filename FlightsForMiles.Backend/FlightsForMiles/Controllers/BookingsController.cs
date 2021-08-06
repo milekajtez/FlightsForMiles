@@ -34,5 +34,47 @@ namespace FlightsForMiles.Controllers
             throw new Exception("Booking unsuccessfuly.");
         }
         #endregion
+        #region 2 - Method for booking for friends
+        [HttpPost]
+        [Route("BookingForFriends")]
+        public IActionResult BookingForFriends(BookingForFriendsRequestDTO bookingForFriendsRequestDTO) 
+        {
+            bool bookingsCreated = _bookingService.BookingForFriends(bookingForFriendsRequestDTO);
+            if (bookingsCreated)
+            {
+                return Ok();
+            }
+
+            throw new Exception("Booking unsuccessfuly.");
+        }
+        #endregion
+        #region 3 - Method for confirm booking
+        [HttpPut]
+        [Route("ConfirmBookingRequest/{ticketID}")]
+        public IActionResult ConfirmBookingRequest(string ticketID) 
+        {
+            bool isConfirmed = _bookingService.ConfirmBookingRequest(ticketID);
+            if (isConfirmed) 
+            {
+                return Ok();
+            }
+
+            throw new Exception("Confirming booking reservation unsuccessfully.");
+        }
+        #endregion
+        #region 4 - Method for refuse booking
+        [HttpDelete]
+        [Route("RefuseBookingRequest/{ticketID}")]
+        public IActionResult RefuseBookingRequest(string ticketID) 
+        {
+            bool isRefused = _bookingService.RefuseBookingRequest(ticketID);
+            if (isRefused)
+            {
+                return Ok();
+            }
+
+            throw new Exception("refusing booking reservation unsuccessfully.");
+        }
+        #endregion
     }
 }

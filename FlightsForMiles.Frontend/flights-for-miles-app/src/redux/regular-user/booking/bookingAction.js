@@ -1,4 +1,5 @@
 import bookingService from "../../../services/BookingService";
+import { LOAD_QUICK_BOOKING } from "./bookingTypes";
 
 export const bookingWithoutFriends = (newBooking) => () =>
   new Promise(function (resolve, reject) {
@@ -47,3 +48,25 @@ export const refuseBooking = (ticketID) => () =>
         reject(error);
       });
   });
+
+export const loadQuickBookingsAction = (quickBookins) => {
+  return {
+    type: LOAD_QUICK_BOOKING,
+    payload: quickBookins,
+  };
+};
+  
+export const loadQuickBookings = (username) => {
+  return (dispatch) => {
+    bookingService
+      .loadQuickBookings(username)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(loadQuickBookingsAction(response.data));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};

@@ -76,5 +76,14 @@ namespace FlightsForMiles.Controllers
             throw new Exception("refusing booking reservation unsuccessfully.");
         }
         #endregion
+        #region 5 - Method for load quick bookings
+        [HttpGet]
+        [Route("LoadQuickBookings/{username}")]
+        public IActionResult LoadQuickBookings(string username) 
+        {
+            List<IQuickBookingResponseDTO> quickBookings = _bookingService.LoadQuickBookings(username);
+            return Ok(quickBookings);
+        }
+        #endregion
     }
 }

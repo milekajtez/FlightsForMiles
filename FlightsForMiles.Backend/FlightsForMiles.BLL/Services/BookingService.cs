@@ -1,6 +1,7 @@
 ﻿using FlightsForMiles.BLL.Contracts.DTO.Booking;
 using FlightsForMiles.BLL.Contracts.Services.Booking;
 using FlightsForMiles.BLL.Model.Booking;
+using FlightsForMiles.BLL.ResponseDTO.Booking;
 using FlightsForMiles.DAL.Contracts.Model;
 using FlightsForMiles.DAL.Contracts.Repository;
 using System;
@@ -56,6 +57,20 @@ namespace FlightsForMiles.BLL.Services
             return _bookingRepository.RefuseBookingRequest(ticketID).Result;
         }
         #endregion
+        #region 5 - Method for load qucik bookings
+        public List<IQuickBookingResponseDTO> LoadQuickBookings(string username)
+        {
+            UsernameValidation(username);
+            List<IQuickBookingResponseDTO> result = new List<IQuickBookingResponseDTO>();
+            List<IQuickBooking> quickBookings = _bookingRepository.LoadQuickBookings(username).Result;
+            foreach (var quickBook in quickBookings) 
+            {
+                result.Add(ConvertQuickBookingToResponseObject(quickBook));
+            }
+
+            return result;
+        }
+        #endregion
 
         #region Converting methods
         private IBookingWithoutFriends ConvertRequestObjectToBookingWithoutFriends(IBookingWithoutFriendsRequestDTO bookingWithoutFriendsRequestDTO) 
@@ -68,6 +83,24 @@ namespace FlightsForMiles.BLL.Services
         {
             return new BookingForFriends(bookingForFriendsRequestDTO.Username, bookingForFriendsRequestDTO.Friends,
                 bookingForFriendsRequestDTO.Tickets, bookingForFriendsRequestDTO.FlightID);
+        }
+
+        private IQuickBookingResponseDTO ConvertQuickBookingToResponseObject(IQuickBooking quickBooking) 
+        {
+            return new QuickBookingResponseDTO() 
+            {
+                TicketID = quickBooking.TicketID,
+                FlightID = quickBooking.FlightID,
+                StartLocation = quickBooking.StartLocation,
+                EndLocation = quickBooking.EndLocation,
+                StartTime = quickBooking.StartTime,
+                EndTime = quickBooking.EndTime,
+                TicketNumber = quickBooking.TicketNumber,
+                OriginalPrice = quickBooking.OriginalPrice,
+                DiscountPrice = quickBooking.DiscountPrice,
+                OriginalBitcoinPrice = quickBooking.OriginalBitcoinPrice,
+                DiscountBitcoinPrice = quickBooking.DiscountBitcoinPrice
+            };
         }
         #endregion
         #region Validation ticket ID
@@ -90,6 +123,14 @@ namespace FlightsForMiles.BLL.Services
                         throw new ArgumentException(nameof(ticketID));
                     }
                 }
+            }
+        }
+
+        private void UsernameValidation(string username) 
+        {
+            if (string.IsNullOrWhiteSpace(username)) 
+            {
+                throw new ArgumentException(nameof(username));
             }
         }
         #endregion

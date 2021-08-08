@@ -1,0 +1,1 @@
+export const LOAD_QUICK_BOOKING = 'LOAD_QUICK_BOOKING';

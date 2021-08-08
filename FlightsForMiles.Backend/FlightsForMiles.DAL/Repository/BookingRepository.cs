@@ -1,5 +1,6 @@
 ﻿using FlightsForMiles.DAL.Contracts.Model;
 using FlightsForMiles.DAL.Contracts.Repository;
+using FlightsForMiles.DAL.DataModel.booking;
 using FlightsForMiles.DAL.DataModel.login_and_registration;
 using FlightsForMiles.DAL.Modal;
 using Microsoft.AspNetCore.Identity;
@@ -314,6 +315,48 @@ namespace FlightsForMiles.DAL.Repository
 
         }
         #endregion
+        #region 5 - Method for load quick bookings
+        public async Task<List<IQuickBooking>> LoadQuickBookings(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null) 
+            {
+                throw new Exception("Server not fou user.");
+            }
+
+            var tickets = _context.Tickets.Include(f => f.Flight);
+            List<IQuickBooking> quickBookings = new List<IQuickBooking>();
+
+            foreach (var ticket in tickets) 
+            {
+                if (ticket.Is_quick_booking) 
+                {
+                    quickBookings.Add(new QuickBookingDataModel() 
+                    {
+                        TicketID = ticket.Id.ToString(),
+                        FlightID = ticket.Flight.Id.ToString(),
+                        StartLocation = ticket.Flight.Start_location,
+                        EndLocation = ticket.Flight.End_location,
+                        StartTime = ticket.Flight.Start_time.ToString(),
+                        EndTime = ticket.Flight.End_time.ToString(),
+                        TicketNumber = ticket.Number_of_seat.ToString(),
+                        OriginalPrice = ticket.Price.ToString(),
+                        DiscountPrice = CaluclateDiscount(ticket.Price, user.Points).ToString(),
+                        OriginalBitcoinPrice = (ticket.Price / LoadBitcoinExchange().Result).ToString(),
+                        DiscountBitcoinPrice = CaluclateDiscount(ticket.Price / LoadBitcoinExchange().Result, 
+                            user.Points).ToString(),
+                    });
+                }
+            }
+
+            if (quickBookings.Count == 0) 
+            {
+                throw new Exception("Server not found any is quick booking");
+            }
+
+            return quickBookings;
+        }
+        #endregion
 
         #region Method for getting keys
         private Tuple<RsaKeyParameters, RsaKeyParameters> GetKeys(string username)
@@ -432,6 +475,42 @@ namespace FlightsForMiles.DAL.Repository
             smtp.Credentials = new NetworkCredential(_mailSettings.Mail, _mailSettings.Password);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             await smtp.SendMailAsync(message);
+        }
+        #endregion
+
+        #region Method for calucating discount
+        public double CaluclateDiscount(double value, double currentPoints)
+        {
+            var discount = _context.Discounts.Find("discID");
+            double discValue = currentPoints >= 1200 ? discount.Points_1200 : currentPoints >= 600 ? discount.Points_600 :
+                currentPoints >= 300 ? discount.Points_300 : 0;
+
+            return value - (discValue * value / 100);
+        }
+        #endregion
+        #region Method for loading current bitcoin exchange rates
+        private async Task<double> LoadBitcoinExchange()
+        {
+            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, @"https://coinmarketcap.com/currencies/bitcoin/")
+            {
+                Content = new StringContent(string.Empty, Encoding.UTF8, "application/json")
+            };
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(httpRequest);
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            if (result.Contains("priceValue___11gHJ "))
+            {
+                int index = result.IndexOf("priceValue___11gHJ ");
+                string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
+
+
+                return double.Parse(currentBitcoinValue);
+            }
+            else
+            {
+                throw new Exception("Loading exchange unsuccessfully.");
+            }
         }
         #endregion
     }

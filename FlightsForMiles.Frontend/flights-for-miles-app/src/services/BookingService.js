@@ -39,6 +39,10 @@ const bookingService = {
     refuseBooking: (ticketID) => {
       return API.delete(`Bookings/RefuseBookingRequest/${ticketID}`);
     },
+
+    loadQuickBookings: (username) => {
+      return API.get(`Bookings/LoadQuickBookings/${username}`);
+    }
 }
 
 export default bookingService;

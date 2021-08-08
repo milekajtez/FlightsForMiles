@@ -321,7 +321,7 @@ namespace FlightsForMiles.DAL.Repository
             var user = await _userManager.FindByNameAsync(username);
             if (user == null) 
             {
-                throw new Exception("Server not fou user.");
+                throw new Exception("Server not found user.");
             }
 
             var tickets = _context.Tickets.Include(f => f.Flight);
@@ -341,9 +341,9 @@ namespace FlightsForMiles.DAL.Repository
                         EndTime = ticket.Flight.End_time.ToString(),
                         TicketNumber = ticket.Number_of_seat.ToString(),
                         OriginalPrice = ticket.Price.ToString(),
-                        DiscountPrice = CaluclateDiscount(ticket.Price, user.Points).ToString(),
+                        DiscountPrice = CaluclateQuickBookingDiscount(ticket.Price, user.Points).ToString(),
                         OriginalBitcoinPrice = (ticket.Price / LoadBitcoinExchange().Result).ToString(),
-                        DiscountBitcoinPrice = CaluclateDiscount(ticket.Price / LoadBitcoinExchange().Result, 
+                        DiscountBitcoinPrice = CaluclateQuickBookingDiscount(ticket.Price / LoadBitcoinExchange().Result, 
                             user.Points).ToString(),
                     });
                 }
@@ -477,15 +477,11 @@ namespace FlightsForMiles.DAL.Repository
             await smtp.SendMailAsync(message);
         }
         #endregion
-
         #region Method for calucating discount
-        public double CaluclateDiscount(double value, double currentPoints)
+        public double CaluclateQuickBookingDiscount(double value, double currentPoints)
         {
             var discount = _context.Discounts.Find("discID");
-            double discValue = currentPoints >= 1200 ? discount.Points_1200 : currentPoints >= 600 ? discount.Points_600 :
-                currentPoints >= 300 ? discount.Points_300 : 0;
-
-            return value - (discValue * value / 100);
+            return value - (discount.Is_quick_reservation * value / 100);
         }
         #endregion
         #region Method for loading current bitcoin exchange rates

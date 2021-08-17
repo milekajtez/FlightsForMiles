@@ -17,5 +17,6 @@ namespace FlightsForMiles.BLL.Contracts.DTO.Ticket
         public string IsQuickBooking { get; set; }
         public string StartLocation { get; set; }
         public string EndLocation { get; set; }
+        public string BitcoinPrice { get; set; }
     }
 }

@@ -18,5 +18,6 @@ namespace FlightsForMiles.DAL.DataModel.ticket
         public string FlightID { get; set; }
         public string StartLocation { get; set; }
         public string EndLocation { get; set; }
+        public string BitcoinPrice { get; set; }
     }
 }

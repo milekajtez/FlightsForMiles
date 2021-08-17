@@ -92,7 +92,8 @@ namespace FlightsForMiles.BLL.Services
                 Type = ticket.Type,
                 TimePurchased = ticket.TimePurchased,
                 StartLocation = ticket.StartLocation,
-                EndLocation = ticket.EndLocation
+                EndLocation = ticket.EndLocation,
+                BitcoinPrice = ticket.BitcoinPrice
             };
         }
 

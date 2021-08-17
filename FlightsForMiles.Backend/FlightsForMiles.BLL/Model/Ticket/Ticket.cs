@@ -36,6 +36,7 @@ namespace FlightsForMiles.BLL.Model.Ticket
         public string FlightID { get; }
         public string StartLocation { get; }
         public string EndLocation { get; }
+        public string BitcoinPrice { get; }
 
         #region Validation
         private void Validation(int ticketID, string airline, string number, string type, string price, string timePurchased,

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAlert } from "react-alert";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
   deleteTicket,
@@ -15,41 +16,70 @@ function Ticket(props) {
   });
   const dispatch = useDispatch();
   const alert = useAlert();
+  const tickets = useSelector((state) => state.ticket);
+
+  function ticketIsPurchased(ticketID) {
+    const foundTicket = tickets.selectedTickets.find(
+      (ticket) => ticket.ticketID === ticketID
+    );
+    if (foundTicket) {
+      if (foundTicket.isPurchased) {
+        alert.show(
+          "Delete ticket unsuccessfully because ticket is purchased.",
+          {
+            type: "error",
+          }
+        );
+
+        return false;
+      }
+
+      return true;
+    }
+
+    alert.show("Delete ticket unsuccessfully because ticket doesn't exsist.", {
+      type: "error",
+    });
+
+    return false;
+  }
 
   const deleteCurrentTicket = (ticketID) => {
-    dispatch(deleteTicket(ticketID))
-      .then((response) => {
-        if (response.status === 204) {
-          alert.show("Deleting ticket successfully.", {
-            type: "success",
-          });
+    if (ticketIsPurchased(ticketID)) {
+      dispatch(deleteTicket(ticketID))
+        .then((response) => {
+          if (response.status === 204) {
+            alert.show("Deleting ticket successfully.", {
+              type: "success",
+            });
 
-          dispatch(loadTickets(props.ticket.flightID));
-        } else {
-          alert.show("Unknown error.", {
-            type: "error",
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        if (
-          error.response.data.indexOf(
-            "(Deleting unsuccessfully. Ticket with sended id doesn't exsist or ticket is purchased.)"
-          ) !== -1
-        ) {
-          alert.show(
-            "Deleting unsuccessfully. Ticket with sended id doesn't exsist or ticket is purchased.",
-            {
+            dispatch(loadTickets(props.ticket.flightID));
+          } else {
+            alert.show("Unknown error.", {
               type: "error",
-            }
-          );
-        } else {
-          alert.show("Unknown error.", {
-            type: "error",
-          });
-        }
-      });
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (
+            error.response.data.indexOf(
+              "(Deleting unsuccessfully. Ticket with sended id doesn't exsist or ticket is purchased.)"
+            ) !== -1
+          ) {
+            alert.show(
+              "Deleting unsuccessfully. Ticket with sended id doesn't exsist or ticket is purchased.",
+              {
+                type: "error",
+              }
+            );
+          } else {
+            alert.show("Unknown error.", {
+              type: "error",
+            });
+          }
+        });
+    }
   };
 
   return (
@@ -121,7 +151,7 @@ function Ticket(props) {
               <span className="item">
                 PRICE
                 <br />
-                <span>{props.ticket.price}</span>
+                <span title={`${props.ticket.bitcoinPrice} ₿`}>{props.ticket.price} $</span>
               </span>
             </div>
             &emsp;&emsp;

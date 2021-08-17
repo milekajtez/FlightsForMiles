@@ -341,10 +341,9 @@ namespace FlightsForMiles.DAL.Repository
                         EndTime = ticket.Flight.End_time.ToString(),
                         TicketNumber = ticket.Number_of_seat.ToString(),
                         OriginalPrice = ticket.Price.ToString(),
-                        DiscountPrice = CaluclateQuickBookingDiscount(ticket.Price, user.Points).ToString(),
+                        DiscountPrice = CaluclateQuickBookingDiscount(ticket.Price).ToString(),
                         OriginalBitcoinPrice = (ticket.Price / LoadBitcoinExchange().Result).ToString(),
-                        DiscountBitcoinPrice = CaluclateQuickBookingDiscount(ticket.Price / LoadBitcoinExchange().Result, 
-                            user.Points).ToString(),
+                        DiscountBitcoinPrice = CaluclateQuickBookingDiscount(ticket.Price / LoadBitcoinExchange().Result).ToString(),
                     });
                 }
             }
@@ -478,7 +477,7 @@ namespace FlightsForMiles.DAL.Repository
         }
         #endregion
         #region Method for calucating discount
-        public double CaluclateQuickBookingDiscount(double value, double currentPoints)
+        public double CaluclateQuickBookingDiscount(double value)
         {
             var discount = _context.Discounts.Find("discID");
             return value - (discount.Is_quick_reservation * value / 100);

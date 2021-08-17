@@ -5,6 +5,7 @@ using FlightsForMiles.DAL.Modal;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -123,7 +124,8 @@ namespace FlightsForMiles.DAL.Repository
                             FlightID = currentTicket.Flight.Id.ToString(),
                             Airline = currentTicket.Flight.Airline.Id + " (" + currentTicket.Flight.Airline.Name + ")",
                             StartLocation = currentTicket.Flight.Start_location,
-                            EndLocation = currentTicket.Flight.End_location
+                            EndLocation = currentTicket.Flight.End_location,
+                            BitcoinPrice = (currentTicket.Price / LoadBitcoinExchange().Result).ToString()
                         });
                     }
                 }
@@ -220,6 +222,32 @@ namespace FlightsForMiles.DAL.Repository
             else
             {
                 throw new KeyNotFoundException("Updating unsuccessfully. Server not found ticket for updating or ticket is purchased.");
+            }
+        }
+        #endregion
+
+        #region Method for loading current bitcoin exchange rates
+        private async Task<double> LoadBitcoinExchange()
+        {
+            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, @"https://coinmarketcap.com/currencies/bitcoin/")
+            {
+                Content = new StringContent(string.Empty, Encoding.UTF8, "application/json")
+            };
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.SendAsync(httpRequest);
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            if (result.Contains("priceValue___11gHJ "))
+            {
+                int index = result.IndexOf("priceValue___11gHJ ");
+                string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
+
+
+                return double.Parse(currentBitcoinValue);
+            }
+            else
+            {
+                throw new Exception("Loading exchange unsuccessfully.");
             }
         }
         #endregion

@@ -41,7 +41,7 @@ namespace FlightsForMiles.Controllers
             return NotFound("Server not found a ticket.");
         }
         #endregion
-        #region 3 - Metgod for load tickets for one flight
+        #region 3 - Method for load tickets for one flight
         [HttpGet("LoadTickets/{flightID}")]
         public IActionResult LoadTickets(int flightID)
         {

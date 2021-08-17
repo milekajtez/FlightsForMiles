@@ -1,6 +1,7 @@
 import React from "react";
 import { useAlert } from "react-alert";
 import Modal from "react-modal";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useFormField, useFormWithFields } from "react-use-form-hooks";
 import {
@@ -11,6 +12,7 @@ import {
 function ChangeTicket(props) {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const tickets = useSelector((state) => state.ticket);
 
   const numberField = useFormField({
     initialValue: "",
@@ -32,9 +34,35 @@ function ChangeTicket(props) {
     isRequired: false,
   });
 
+  function ticketIsPurchased(ticketID) {
+    const foundTicket = tickets.selectedTickets.find(
+      (ticket) => ticket.ticketID === ticketID
+    );
+    if (foundTicket) {
+      if (foundTicket.isPurchased) {
+        alert.show(
+          "Delete ticket unsuccessfully because ticket is purchased.",
+          {
+            type: "error",
+          }
+        );
+
+        return false;
+      }
+
+      return true;
+    }
+
+    alert.show("Delete ticket unsuccessfully because ticket doesn't exsist.", {
+      type: "error",
+    });
+
+    return false;
+  }
+
   const changeTicketForm = useFormWithFields({
     onSubmit: (e) => {
-      if (Validation()) {
+      if (Validation() && ticketIsPurchased(props.changeTicket.ticketID)) {
         dispatch(
           changeTicket({
             ticketID: props.changeTicket.ticketID,

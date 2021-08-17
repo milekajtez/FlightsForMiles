@@ -17,5 +17,6 @@ namespace FlightsForMiles.DAL.Contracts.Model
         public string FlightID { get; }
         public string StartLocation { get; }
         public string EndLocation { get; }
+        public string BitcoinPrice { get; }
     }
 }

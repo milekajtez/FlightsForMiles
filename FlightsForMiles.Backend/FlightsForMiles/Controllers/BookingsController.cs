@@ -85,5 +85,14 @@ namespace FlightsForMiles.Controllers
             return Ok(quickBookings);
         }
         #endregion
+        #region 6 - Method for load active/previous bookings
+        [HttpGet]
+        [Route("LoadMyBookings/{username}/{type}")]
+        public IActionResult LoadMyBookings(string username, string type)
+        {
+            List<IQuickBookingResponseDTO> bookings = _bookingService.LoadMyBookings(username, type);
+            return Ok(bookings);
+        }
+        #endregion
     }
 }

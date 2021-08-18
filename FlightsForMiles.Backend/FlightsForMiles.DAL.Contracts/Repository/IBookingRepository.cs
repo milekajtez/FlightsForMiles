@@ -13,5 +13,6 @@ namespace FlightsForMiles.DAL.Contracts.Repository
         Task<bool> ConfirmBookingRequest(string ticketID);
         Task<bool> RefuseBookingRequest(string ticketID);
         Task<List<IQuickBooking>> LoadQuickBookings(string username);
+        Task<List<IQuickBooking>> LoadMyBookings(string username, string type);
     }
 }

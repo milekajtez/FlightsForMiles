@@ -1,5 +1,5 @@
 import bookingService from "../../../services/BookingService";
-import { LOAD_QUICK_BOOKING } from "./bookingTypes";
+import { LOAD_ACTIVE_BOOKING, LOAD_PREVIOUS_BOOKING, LOAD_QUICK_BOOKING } from "./bookingTypes";
 
 export const bookingWithoutFriends = (newBooking) => () =>
   new Promise(function (resolve, reject) {
@@ -63,6 +63,50 @@ export const loadQuickBookings = (username) => {
       .then((response) => {
         if (response.status === 200) {
           dispatch(loadQuickBookingsAction(response.data));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const loadActiveBookingsAction = (activeBookings) => {
+  return {
+    type: LOAD_ACTIVE_BOOKING,
+    payload: activeBookings,
+  };
+};
+  
+export const loadActiveBookings = (username) => {
+  return (dispatch) => {
+    bookingService
+      .loadActiveBookings(username)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(loadActiveBookingsAction(response.data));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const loadPreviousBookingsAction = (previousBookings) => {
+  return {
+    type: LOAD_PREVIOUS_BOOKING,
+    payload: previousBookings,
+  };
+};
+  
+export const loadPreviousBookings = (username) => {
+  return (dispatch) => {
+    bookingService
+      .loadPreviousBookings(username)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(loadPreviousBookingsAction(response.data));
         }
       })
       .catch((error) => {

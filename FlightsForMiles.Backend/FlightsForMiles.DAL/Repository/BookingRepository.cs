@@ -329,7 +329,7 @@ namespace FlightsForMiles.DAL.Repository
 
             foreach (var ticket in tickets) 
             {
-                if (ticket.Is_quick_booking) 
+                if (ticket.Is_quick_booking && !ticket.Is_ticket_purchased) 
                 {
                     quickBookings.Add(new QuickBookingDataModel() 
                     {
@@ -348,12 +348,83 @@ namespace FlightsForMiles.DAL.Repository
                 }
             }
 
-            if (quickBookings.Count == 0) 
+            return quickBookings;
+        }
+        #endregion
+        #region 6 - Method for load active bookings
+        public async Task<List<IQuickBooking>> LoadMyBookings(string username, string type)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
             {
-                throw new Exception("Server not found any is quick booking");
+                throw new Exception("Server not found user.");
             }
 
-            return quickBookings;
+            var allBookings = _context.Bookings;
+            List<Booking> myBookings = new List<Booking>();
+            foreach (var book in allBookings)
+            {
+                if (book.UserID.Equals(user.Id) && book.BookingStatus.Equals("ACCEPTED"))
+                {
+                    myBookings.Add(book);
+                }
+            }
+
+            List<IQuickBooking> result = new List<IQuickBooking>();
+
+            foreach (var myBook in myBookings) 
+            {
+                var currentTicket = _context.Tickets.Find(int.Parse(myBook.TicketID));
+                var currentFlight = _context.Flights.Find(myBook.FlightID);
+                bool indicator3Hours;
+
+                if (type.Equals("active"))
+                {
+                    indicator3Hours = CaluclateHoursBetweenDates(currentFlight.Start_time, DateTime.Now) >= 3;
+                    if (currentTicket.Is_ticket_purchased && indicator3Hours)
+                    {
+                        result.Add(new QuickBookingDataModel()
+                        {
+                            TicketID = currentTicket.Id.ToString(),
+                            FlightID = currentFlight.Id.ToString(),
+                            StartLocation = currentFlight.Start_location,
+                            EndLocation = currentFlight.End_location,
+                            StartTime = currentFlight.Start_time.ToString(),
+                            EndTime = currentFlight.End_time.ToString(),
+                            TicketNumber = currentTicket.Number_of_seat.ToString(),
+                            OriginalPrice = currentTicket.Price.ToString(),
+                            DiscountPrice = CaluclateQuickBookingDiscount(currentTicket.Price).ToString(),
+                            OriginalBitcoinPrice = (currentTicket.Price / LoadBitcoinExchange().Result).ToString(),
+                            DiscountBitcoinPrice = CaluclateQuickBookingDiscount(currentTicket.Price /
+                                LoadBitcoinExchange().Result).ToString(),
+                        });
+                    }
+                }
+                else
+                {
+                    indicator3Hours = CaluclateHoursBetweenDates(currentFlight.Start_time, DateTime.Now) < 3;
+                    if (currentTicket.Is_ticket_purchased && indicator3Hours)
+                    {
+                        result.Add(new QuickBookingDataModel()
+                        {
+                            TicketID = currentTicket.Id.ToString(),
+                            FlightID = currentFlight.Id.ToString(),
+                            StartLocation = currentFlight.Start_location,
+                            EndLocation = currentFlight.End_location,
+                            StartTime = currentFlight.Start_time.ToString(),
+                            EndTime = currentFlight.End_time.ToString(),
+                            TicketNumber = currentTicket.Number_of_seat.ToString(),
+                            OriginalPrice = currentTicket.Price.ToString(),
+                            DiscountPrice = CaluclateQuickBookingDiscount(currentTicket.Price).ToString(),
+                            OriginalBitcoinPrice = (currentTicket.Price / LoadBitcoinExchange().Result).ToString(),
+                            DiscountBitcoinPrice = CaluclateQuickBookingDiscount(currentTicket.Price /
+                                LoadBitcoinExchange().Result).ToString(),
+                        });
+                    }
+                }
+            }
+
+            return result;
         }
         #endregion
 
@@ -506,6 +577,13 @@ namespace FlightsForMiles.DAL.Repository
             {
                 throw new Exception("Loading exchange unsuccessfully.");
             }
+        }
+        #endregion
+        #region Method for caluclate hours between dates
+        private double CaluclateHoursBetweenDates(DateTime ticketStartDate, DateTime thisMoment) 
+        {
+            TimeSpan span = ticketStartDate.Subtract(thisMoment);
+            return span.Hours;
         }
         #endregion
     }

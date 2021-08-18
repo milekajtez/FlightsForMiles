@@ -57,7 +57,7 @@ namespace FlightsForMiles.BLL.Services
             return _bookingRepository.RefuseBookingRequest(ticketID).Result;
         }
         #endregion
-        #region 5 - Method for load qucik bookings
+        #region 5 - Method for load quick bookings
         public List<IQuickBookingResponseDTO> LoadQuickBookings(string username)
         {
             UsernameValidation(username);
@@ -66,6 +66,21 @@ namespace FlightsForMiles.BLL.Services
             foreach (var quickBook in quickBookings) 
             {
                 result.Add(ConvertQuickBookingToResponseObject(quickBook));
+            }
+
+            return result;
+        }
+        #endregion
+        #region 6 - Method for load active bookings
+        public List<IQuickBookingResponseDTO> LoadMyBookings(string username, string type)
+        {
+            UsernameValidation(username);
+            BookingTypeValidation(type);
+            List<IQuickBookingResponseDTO> result = new List<IQuickBookingResponseDTO>();
+            List<IQuickBooking> bookings = _bookingRepository.LoadMyBookings(username, type).Result;
+            foreach (var book in bookings)
+            {
+                result.Add(ConvertQuickBookingToResponseObject(book));
             }
 
             return result;
@@ -103,7 +118,7 @@ namespace FlightsForMiles.BLL.Services
             };
         }
         #endregion
-        #region Validation ticket ID
+        #region Validation ticket ID, username adn booking type
         private void ValidationTicketID(string ticketID) 
         {
             if (string.IsNullOrWhiteSpace(ticketID))
@@ -131,6 +146,21 @@ namespace FlightsForMiles.BLL.Services
             if (string.IsNullOrWhiteSpace(username)) 
             {
                 throw new ArgumentException(nameof(username));
+            }
+        }
+
+        private void BookingTypeValidation(string type) 
+        {
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                throw new ArgumentException(nameof(type));
+            }
+            else 
+            {
+                if (!type.Equals("active") && !type.Equals("previous")) 
+                {
+                    throw new ArgumentException("Unknown booking type.");
+                }
             }
         }
         #endregion

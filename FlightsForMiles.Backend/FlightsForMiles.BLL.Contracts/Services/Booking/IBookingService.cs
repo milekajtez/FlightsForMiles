@@ -12,5 +12,6 @@ namespace FlightsForMiles.BLL.Contracts.Services.Booking
         bool ConfirmBookingRequest(string ticketID);
         bool RefuseBookingRequest(string ticketID);
         List<IQuickBookingResponseDTO> LoadQuickBookings(string username);
+        List<IQuickBookingResponseDTO> LoadMyBookings(string username, string type);
     }
 }

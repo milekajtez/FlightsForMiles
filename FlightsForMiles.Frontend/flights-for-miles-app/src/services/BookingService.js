@@ -42,6 +42,14 @@ const bookingService = {
 
     loadQuickBookings: (username) => {
       return API.get(`Bookings/LoadQuickBookings/${username}`);
+    },
+
+    loadActiveBookings: (username) => {
+      return API.get(`Bookings/LoadMyBookings/${username}/active`);
+    },
+
+    loadPreviousBookings: (username) => {
+      return API.get(`Bookings/LoadMyBookings/${username}/previous`);
     }
 }
 

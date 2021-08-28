@@ -1,21 +1,79 @@
 import React from "react";
 import { useEffect } from "react";
-//import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { /*useHistory,*/ useParams } from "react-router";
-import { loadActiveBookings } from "../../../../redux/regular-user/booking/bookingAction";
+import { useParams } from "react-router";
+import { cancelBooking, loadActiveBookings } from "../../../../redux/regular-user/booking/bookingAction";
 
 function ActiveFlightReservations() {
   const dispatch = useDispatch();
   const booking = useSelector((state) => state.booking);
   const params = useParams();
-  //const history = useHistory();
-  /*const alert = useAlert();*/
+  const alert = useAlert();
 
   useEffect(() => {
     dispatch(loadActiveBookings(params.username));
   }, [dispatch, params.username]);
+
+  const flightCancallation = (ticketID, discountBitcoinPrice, discountPrice) => {
+    dispatch(cancelBooking({
+      ticketID: ticketID,
+      bitcoinPrice: discountBitcoinPrice,
+      dollarPrice: discountPrice
+    }))
+      .then(response => {
+        if (response.status === 204) {
+          alert.show("Flight cancel successfully.", {
+            type: "success",
+          });
+          dispatch(loadActiveBookings(params.username));
+        } else {
+          alert.show("Unknown error.", {
+            type: "error",
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.response.data.indexOf("(Booking with entered ID doesn't exsist.)") !== -1) {
+          alert.show(
+            "Cancelling booking unsuccessfully. Booking with entered ID doesn't exsist.",
+            {
+              type: "error",
+            }
+          );
+        }
+        else if(error.response.data.indexOf("(Balance doesn't exsist.)") !== -1){
+          alert.show(
+            "Cancelling booking unsuccessfully. Balance doesn't exsist.",
+            {
+              type: "error",
+            }
+          );
+        }
+        else if(error.response.data.indexOf("(Ticket with entered ID doesn't exsist.)") !== -1){
+          alert.show(
+            "Cancelling booking unsuccessfully. Ticket with entered ID doesn't exsist.",
+            {
+              type: "error",
+            }
+          );
+        }
+        else if(error.response.data.indexOf("(User doesn't exsist.)") !== -1){
+          alert.show(
+            "Cancelling booking unsuccessfully. User doesn't exsist.",
+            {
+              type: "error",
+            }
+          );
+        } else {
+          alert.show("Unknown error.", {
+            type: "error",
+          });
+        }
+      })
+  }
 
   return (
     <span>
@@ -54,12 +112,13 @@ function ActiveFlightReservations() {
                 <td>
                   <button
                     className="btn btn-danger"
-                    /*onClick={() =>
-                      quickBookingReservation(
-                        quickBooking.flightID,
-                        quickBooking.ticketID
+                    onClick={() =>
+                      flightCancallation(
+                        activeBooking.ticketID,
+                        activeBooking.discountBitcoinPrice,
+                        activeBooking.discountPrice
                       )
-                    }*/
+                    }
                   ><i className="fas fa-ban">&nbsp;</i>
                     CANCEL BOOKING
                   </button>

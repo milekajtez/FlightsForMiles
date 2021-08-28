@@ -427,6 +427,82 @@ namespace FlightsForMiles.DAL.Repository
             return result;
         }
         #endregion
+        #region 7 - Method for cancel booking
+        public async Task<bool> CancelBooking(ICancelBooking cancelBooking)
+        {
+            var booking = _context.Bookings.Find(cancelBooking.TicketID);
+            if (booking == null) 
+            {
+                throw new ArgumentException("Booking with entered ID doesn't exsist.");
+            }
+            var userID = booking.UserID;
+            var balance = _context.Balances.Find(userID);
+            if (balance == null)
+            {
+                throw new ArgumentException("Balance doesn't exsist.");
+            }
+            var ticket = _context.Tickets.Find(int.Parse(cancelBooking.TicketID));
+            if (ticket == null)
+            {
+                throw new ArgumentException("Ticket with entered ID doesn't exsist.");
+            }
+            var myUser = await _userManager.FindByIdAsync(userID);
+            if (myUser == null)
+            {
+                throw new ArgumentException("User doesn't exsist.");
+            }
+
+            //ticket update
+            ticket.Is_ticket_purchased = false;
+            ticket.Time_of_ticket_purchase = new DateTime();
+            _context.Tickets.Update(ticket);
+
+            //balance update
+            balance.Bitcoins += double.Parse(cancelBooking.BitcoinPrice);
+            balance.Dollars += double.Parse(cancelBooking.DollarPrice);
+            _context.Balances.Update(balance);
+
+            // booking delete
+            _context.Bookings.Remove(booking);
+
+            // user points update
+            myUser.Points -= 70;
+            await _userManager.UpdateAsync(myUser);
+
+            return true;
+        }
+        #endregion
+        #region 8 - Method for rating booking
+        public async Task<bool> RatingBooking(string flightID, string rate)
+        {
+            var flights = _context.Flights.Include(a => a.Airline);
+            Flight flight = new Flight();
+            foreach (var fly in flights) 
+            {
+                if (fly.Id == int.Parse(flightID)) 
+                {
+                    flight = fly;
+                    break;
+                }
+            }
+
+            var airline = _context.Airlines.Find(flight.Airline.Id);
+            if (airline == null) 
+            {
+                throw new Exception("Airline doesn't exsist.");
+            }
+
+            flight.Sum_of_all_grades += double.Parse(rate);
+            flight.Number_of_grades += 1;
+            airline.Sum_of_all_grades += double.Parse(rate);
+            airline.Number_of_grades += 1;
+
+            _context.Flights.Update(flight);
+            _context.Airlines.Update(airline);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        #endregion
 
         #region Method for getting keys
         private Tuple<RsaKeyParameters, RsaKeyParameters> GetKeys(string username)
@@ -471,9 +547,9 @@ namespace FlightsForMiles.DAL.Repository
             HttpResponseMessage response = await client.SendAsync(httpRequest);
             var result = response.Content.ReadAsStringAsync().Result;
 
-            if (result.Contains("priceValue___11gHJ "))
+            if (result.Contains("priceValue "))
             {
-                int index = result.IndexOf("priceValue___11gHJ ");
+                int index = result.IndexOf("priceValue ");
                 string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
 
                 
@@ -565,9 +641,9 @@ namespace FlightsForMiles.DAL.Repository
             HttpResponseMessage response = await client.SendAsync(httpRequest);
             var result = response.Content.ReadAsStringAsync().Result;
 
-            if (result.Contains("priceValue___11gHJ "))
+            if (result.Contains("priceValue "))
             {
-                int index = result.IndexOf("priceValue___11gHJ ");
+                int index = result.IndexOf("priceValue ");
                 string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
 
 

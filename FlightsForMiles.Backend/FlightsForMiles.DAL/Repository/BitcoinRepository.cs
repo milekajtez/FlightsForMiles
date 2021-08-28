@@ -534,9 +534,9 @@ namespace FlightsForMiles.DAL.Repository
             HttpResponseMessage response = await client.SendAsync(httpRequest);
             var result = response.Content.ReadAsStringAsync().Result;
 
-            if (result.Contains("priceValue___11gHJ "))
+            if (result.Contains("priceValue "))
             {
-                int index = result.IndexOf("priceValue___11gHJ ");
+                int index = result.IndexOf("priceValue ");
                 string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
 
                 var balances = _context.Balances;
@@ -566,9 +566,9 @@ namespace FlightsForMiles.DAL.Repository
             HttpResponseMessage response = await client.SendAsync(httpRequest);
             var result = response.Content.ReadAsStringAsync().Result;
 
-            if (result.Contains("priceValue___11gHJ "))
+            if (result.Contains("priceValue "))
             {
-                int index = result.IndexOf("priceValue___11gHJ ");
+                int index = result.IndexOf("priceValue ");
                 string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
 
 

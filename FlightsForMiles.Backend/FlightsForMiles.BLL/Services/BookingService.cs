@@ -86,6 +86,25 @@ namespace FlightsForMiles.BLL.Services
             return result;
         }
         #endregion
+        #region 7 - Method for cancel booking
+        public bool CancelBooking(IBookingCancelRequestDTO bookingCancelRequestDTO)
+        {
+            if (bookingCancelRequestDTO == null) 
+            {
+                throw new ArgumentException(nameof(bookingCancelRequestDTO));
+            }
+            ICancelBooking cancelBooking = ConvertRequestObjectToCancelBooking(bookingCancelRequestDTO);
+            return _bookingRepository.CancelBooking(cancelBooking).Result;
+        }
+        #endregion
+        #region 8 - Method for rating booking
+        public bool RatingBooking(string flightID, string rate)
+        {
+            ValidationTicketID(flightID);
+            ValidationRate(rate);
+            return _bookingRepository.RatingBooking(flightID, rate).Result;
+        }
+        #endregion
 
         #region Converting methods
         private IBookingWithoutFriends ConvertRequestObjectToBookingWithoutFriends(IBookingWithoutFriendsRequestDTO bookingWithoutFriendsRequestDTO) 
@@ -98,6 +117,12 @@ namespace FlightsForMiles.BLL.Services
         {
             return new BookingForFriends(bookingForFriendsRequestDTO.Username, bookingForFriendsRequestDTO.Friends,
                 bookingForFriendsRequestDTO.Tickets, bookingForFriendsRequestDTO.FlightID);
+        }
+
+        private ICancelBooking ConvertRequestObjectToCancelBooking(IBookingCancelRequestDTO bookingCancelRequestDTO)
+        {
+            return new CancelBooking(bookingCancelRequestDTO.TicketID, bookingCancelRequestDTO.BitcoinPrice,
+                bookingCancelRequestDTO.DollarPrice);
         }
 
         private IQuickBookingResponseDTO ConvertQuickBookingToResponseObject(IQuickBooking quickBooking) 
@@ -118,7 +143,7 @@ namespace FlightsForMiles.BLL.Services
             };
         }
         #endregion
-        #region Validation ticket ID, username adn booking type
+        #region Validation ticket ID, username and booking type
         private void ValidationTicketID(string ticketID) 
         {
             if (string.IsNullOrWhiteSpace(ticketID))
@@ -136,6 +161,28 @@ namespace FlightsForMiles.BLL.Services
                     if (int.Parse(ticketID) < 1)
                     {
                         throw new ArgumentException(nameof(ticketID));
+                    }
+                }
+            }
+        }
+
+        private void ValidationRate(string rate)
+        {
+            if (string.IsNullOrWhiteSpace(rate))
+            {
+                throw new ArgumentException(nameof(rate));
+            }
+            else
+            {
+                if (!int.TryParse(rate, out int _))
+                {
+                    throw new ArgumentException(nameof(rate));
+                }
+                else
+                {
+                    if (int.Parse(rate) < 0)
+                    {
+                        throw new ArgumentException(nameof(rate));
                     }
                 }
             }

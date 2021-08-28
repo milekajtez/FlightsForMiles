@@ -50,7 +50,21 @@ const bookingService = {
 
     loadPreviousBookings: (username) => {
       return API.get(`Bookings/LoadMyBookings/${username}/previous`);
-    }
+    },
+
+    cancelBooking: (priceObj) => {
+      var body = {
+        TicketID: priceObj.ticketID,
+        BitcoinPrice: priceObj.bitcoinPrice,
+        DollarPrice: priceObj.dollarPrice
+      };
+
+      return API.put('Bookings/CancelBooking', body);
+    },
+
+    ratingBooking: (flightID, rate) => {
+      return API.put(`Bookings/RatingBooking/${flightID}/${rate}`);
+    },
 }
 
 export default bookingService;

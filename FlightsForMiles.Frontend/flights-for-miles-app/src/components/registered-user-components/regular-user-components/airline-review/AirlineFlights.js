@@ -23,6 +23,13 @@ function AirlineFlights(props) {
     setCurrentFlight(flight);
   };
 
+  function makeRating(sumOfAllGrades, numberOfGrades) {
+    return numberOfGrades === "0"
+      ? 0
+      : (parseFloat(sumOfAllGrades) /
+          parseFloat(numberOfGrades)).toFixed(2);
+  }
+
   return (
     <Modal
       ariaHideApp={false}
@@ -71,17 +78,14 @@ function AirlineFlights(props) {
                   </td>
                   <td>
                     <span style={{ color: "white" }}>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star checked"></span>
-                      <span className="fa fa-star"></span>
-                      <span className="fa fa-star"></span>
+                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 0.5 ? ' checked': ''}`}></span>
+                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 1.5 ? ' checked': ''}`}></span>
+                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 2.5 ? ' checked': ''}`}></span>
+                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 3.5 ? ' checked': ''}`}></span>
+                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 4.5 ? ' checked': ''}`}></span>
                     </span>
                     <br></br>
-                    {flight.numberOfGrades === "0"
-                      ? 0
-                      : parseFloat(flight.sumOfAllGrades) /
-                        parseFloat(flight.numberOfGrades)}
+                    {makeRating(flight.sumOfAllGrades, flight.numberOfGrades)}
                   </td>
                   <td>
                     <button

@@ -94,5 +94,33 @@ namespace FlightsForMiles.Controllers
             return Ok(bookings);
         }
         #endregion
+        #region 7 - Method for cancel booking
+        [HttpPut]
+        [Route("CancelBooking")]
+        public IActionResult CancelBooking(BookingCancelRequestDTO bookingCancelRequestDTO) 
+        {
+            bool isCancelled = _bookingService.CancelBooking(bookingCancelRequestDTO);
+            if (isCancelled)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Canceling booking unsuccessfully.");
+        }
+        #endregion
+        #region 8 - Method for rating booking
+        [HttpPut]
+        [Route("RatingBooking/{flightID}/{rate}")]
+        public IActionResult RatingBooking(string flightID, string rate)
+        {
+            bool rating = _bookingService.RatingBooking(flightID, rate);
+            if (rating)
+            {
+                return NoContent();
+            }
+
+            throw new KeyNotFoundException("Rating booking unsuccessfully.");
+        }
+        #endregion
     }
 }

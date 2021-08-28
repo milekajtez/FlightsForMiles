@@ -114,3 +114,27 @@ export const loadPreviousBookings = (username) => {
       });
   };
 };
+
+export const cancelBooking = (priceObj) => () =>
+  new Promise(function (resolve, reject) {
+    bookingService
+      .cancelBooking(priceObj)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+
+export const ratingBooking = (flightID, rate) => () =>
+  new Promise(function (resolve, reject) {
+    bookingService
+      .ratingBooking(flightID, rate)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });

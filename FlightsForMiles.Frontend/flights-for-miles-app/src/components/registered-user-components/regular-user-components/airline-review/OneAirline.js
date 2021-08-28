@@ -13,7 +13,6 @@ function OneAirline(props) {
   const [pricelistIsOpen, setPricelist] = useState(false);
   const [destinationsIsOpen, setDestinations] = useState(false);
   const [flightsIsOpen, setFlights] = useState(false);
-  /*const [changeInfoIsOpen, setChangeInfo] = useState(false)*/
 
   function makeAddress() {
     return (
@@ -28,8 +27,8 @@ function OneAirline(props) {
   function makeRating() {
     return props.airline.numberOfGrades === "0"
       ? 0
-      : parseFloat(props.airline.sumOfAllGrades) /
-          parseFloat(props.airline.numberOfGrades);
+      : (parseFloat(props.airline.sumOfAllGrades) /
+          parseFloat(props.airline.numberOfGrades)).toFixed(2);
   }
 
   return (
@@ -50,11 +49,11 @@ function OneAirline(props) {
         </td>
         <td>
           <span style={{ color: "white" }}>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <span className="fa fa-star"></span>
+            <span className={`fa fa-star ${makeRating() >= 0.5 ? 'checked': ''}`}></span>
+            <span className={`fa fa-star ${makeRating() >= 1.5 ? 'checked': ''}`}></span>
+            <span className={`fa fa-star ${makeRating() >= 2.5 ? 'checked': ''}`}></span>
+            <span className={`fa fa-star ${makeRating() >= 3.5 ? 'checked': ''}`}></span>
+            <span className={`fa fa-star ${makeRating() >= 4.5 ? 'checked': ''}`}></span>
           </span>
           <br></br>
           {makeRating()}

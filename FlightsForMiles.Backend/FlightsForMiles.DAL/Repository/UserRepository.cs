@@ -380,7 +380,7 @@ namespace FlightsForMiles.DAL.Repository
             return profileData;
         }
         #endregion
-        #region 11 - Metohd for update profile data
+        #region 11 - Method for update profile data
         public async Task<bool> UpdateProfileData(IProfileChangeData profileChangeData)
         {
             var resultFind = await _userManager.FindByIdAsync(profileChangeData.Pin);

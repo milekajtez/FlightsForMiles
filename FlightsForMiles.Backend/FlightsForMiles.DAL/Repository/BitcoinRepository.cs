@@ -189,53 +189,14 @@ namespace FlightsForMiles.DAL.Repository
             return true;
         }
         #endregion
-        #region 5 - Method for load validations which haven't validate jet
-        public async Task<List<ITransaction>> LoadTransactionsForValidation(string username)
-        {
-            var user = await _userManager.FindByNameAsync(username);
-            if (user == null) 
-            {
-                throw new ArgumentException("Server not found system admin.");
-            }
-
-            if (!user.UserName.Equals("mainAdmin")) 
-            {
-                throw new ArgumentException("Only system admin can to load transactions.");
-            }
-
-            var transactions = _context.Transactions;
-            List<ITransaction> currentTransactions = new List<ITransaction>();
-            foreach (var trans in transactions) 
-            {
-                if (!trans.IsValid && trans.SenderPublicKey.Equals(trans.BookingFrom)) 
-                {
-                    currentTransactions.Add(new TransactionDataModel() 
-                    {
-                        TransactionID = trans.Id.ToString(),
-                        Amount = trans.Amount.ToString(),
-                        Sender = trans.SenderPublicKey,
-                        Receiver = trans.RecipientPublicKey,
-                        Fees = trans.Fees.ToString(),
-                        Signature = trans.Signature,
-                    });
-                }
-            }
-
-            return currentTransactions;
-        }
-        #endregion
         #region 6 - Method for transaction minig and validation
-        public async Task<bool> MiningTransaction(ITransaction transaction, string username)
+        public async Task<bool> MiningTransaction(ITransaction transaction)
         {
             #region Provera da li je to main admin i da li postoji blockchain
-            var user = await _userManager.FindByNameAsync(username);
+            var user = await _userManager.FindByNameAsync(transaction.Username);
             if (user == null) 
             {
                 throw new ArgumentException("Server not found user.");
-            }
-            if (!user.UserName.Equals("mainAdmin")) 
-            {
-                throw new ArgumentException("Only system admin can to minig transaction.");
             }
             var blocks = _context.Blocks.Include(t => t.Transactions);
             if (blocks == null)
@@ -244,7 +205,7 @@ namespace FlightsForMiles.DAL.Repository
             }
             #endregion
             #region Izvlacanje ID-a tiketa za koji hocemo potvrdu
-            var senderBooking = await _userManager.FindByNameAsync(transaction.Sender);
+            var senderBooking = await _userManager.FindByNameAsync(transaction.Username);
             var bookings = _context.Bookings;
             string ticketID = "";
             foreach (var b in bookings) 
@@ -267,7 +228,7 @@ namespace FlightsForMiles.DAL.Repository
             }
             #endregion
             #region Validiranje transakcije
-            if (!TransactionValidation(transaction, booking.TicketID))
+            if (!TransactionValidation(transaction))
             {
                 //ukoliko transakcija nije dobra tj  nevalidna..u metodi je vec izbrisana transakcija
                 // ja sad jos treba da izbrisem booking
@@ -307,8 +268,8 @@ namespace FlightsForMiles.DAL.Repository
             senderBooking.Points += 70;
             await _userManager.UpdateAsync(senderBooking);
 
-            booking.Price = ticket.Price / LoadBitcoinExchange().Result;
-            booking.DiscountPrice = CaluclateDiscount(ticket.Price, senderBooking.Points) / LoadBitcoinExchange().Result;
+            booking.Price = ticket.Price * LoadBitcoinExchange();
+            booking.DiscountPrice = CaluclateDiscount(ticket.Price, senderBooking.Points) * LoadBitcoinExchange();
             booking.BookingStatus = "ACCEPTED";
             _context.Bookings.Update(booking);
             _context.SaveChanges();
@@ -402,7 +363,7 @@ namespace FlightsForMiles.DAL.Repository
                 throw new Exception("Server not found user balance amount.");
             }
 
-            double ticketBitcoinPrice = ticketDollarPrice / LoadBitcoinExchange().Result;
+            double ticketBitcoinPrice = ticketDollarPrice * LoadBitcoinExchange();
 
             if (balance.Dollars < ticketDollarPrice || balance.Bitcoins < ticketBitcoinPrice)
             {
@@ -417,7 +378,7 @@ namespace FlightsForMiles.DAL.Repository
         }
         #endregion
         #region 11 - Method for validation transaction
-        private bool TransactionValidation(ITransaction transaction, string ticketID)
+        private bool TransactionValidation(ITransaction transaction)
         {
             var transactions = _context.Transactions;
             Transaction currentTransaction = null;
@@ -436,9 +397,9 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             //load keys
-            Tuple<RsaKeyParameters, RsaKeyParameters> keys = GetKeys(transaction.Sender);
-            string newSignature = GenerateSignature(transaction.Sender, transaction.Receiver,
-                double.Parse(transaction.Amount), ticketID, keys);
+            Tuple<RsaKeyParameters, RsaKeyParameters> keys = GetKeys(transaction.Username);
+            string newSignature = GenerateSignature(transaction.Username, "mainAdmin",
+                currentTransaction.Amount, transaction.TicketID, keys);
 
             if (currentTransaction.Signature.Equals(newSignature))
             {
@@ -526,58 +487,33 @@ namespace FlightsForMiles.DAL.Repository
         #region Method for loading current bitcoin exchange rates and change balance
         private async Task<bool> LoadBitcoinExchangeRates() 
         {
-            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, @"https://coinmarketcap.com/currencies/bitcoin/")
+            var uri = String.Format("https://blockchain.info/tobtc?currency=USD&value=1");
+            WebClient client = new WebClient
             {
-                Content = new StringContent(string.Empty, Encoding.UTF8, "application/json")
+                UseDefaultCredentials = true
             };
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.SendAsync(httpRequest);
-            var result = response.Content.ReadAsStringAsync().Result;
-
-            if (result.Contains("priceValue "))
+            var data = client.DownloadString(uri);
+            var balances = _context.Balances;
+            foreach (var bal in balances)
             {
-                int index = result.IndexOf("priceValue ");
-                string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
-
-                var balances = _context.Balances;
-                foreach (var bal in balances) 
-                {
-                    bal.Bitcoins = bal.Dollars / double.Parse(currentBitcoinValue);
-                    _context.Update(bal);
-                }
-
-                await _context.SaveChangesAsync();
-                return true;
+                bal.Bitcoins = bal.Dollars * Convert.ToDouble(data);
+                _context.Update(bal);
             }
-            else 
-            {
-                throw new Exception("Loading exchange unsuccessfully.");
-            }
+
+            await _context.SaveChangesAsync();
+            return true;
         }
         #endregion
         #region Method for loading current bitcoin exchange rates
-        private async Task<double> LoadBitcoinExchange()
+        private double LoadBitcoinExchange()
         {
-            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, @"https://coinmarketcap.com/currencies/bitcoin/")
+            var uri = String.Format("https://blockchain.info/tobtc?currency=USD&value=1");
+            WebClient client = new WebClient
             {
-                Content = new StringContent(string.Empty, Encoding.UTF8, "application/json")
+                UseDefaultCredentials = true
             };
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.SendAsync(httpRequest);
-            var result = response.Content.ReadAsStringAsync().Result;
-
-            if (result.Contains("priceValue "))
-            {
-                int index = result.IndexOf("priceValue ");
-                string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
-
-
-                return double.Parse(currentBitcoinValue);
-            }
-            else
-            {
-                throw new Exception("Loading exchange unsuccessfully.");
-            }
+            var data = client.DownloadString(uri);
+            return Convert.ToDouble(data);
         }
         #endregion
         #region Method for getting keys

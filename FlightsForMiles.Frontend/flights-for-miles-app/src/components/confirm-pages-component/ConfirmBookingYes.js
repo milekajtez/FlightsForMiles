@@ -4,19 +4,27 @@ import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { confirmBooking } from "../../redux/regular-user/booking/bookingAction";
+import { validateAndMineTransaction } from '../../utils/blockchainUtils';
 
 function ConfirmBookingYes() {
   const dispatch = useDispatch();
   const alert = useAlert();
-  let { ticketID } = useParams();
+  let params = useParams();
 
   useEffect(() => {
-    dispatch(confirmBooking(ticketID))
+    dispatch(confirmBooking(params.ticketID))
       .then((response) => {
-        if (response.status === 204) {
+        if (response.status === 200) {
           alert.show("Confirm booking successfully.", {
             type: "success",
           });
+          
+          validateAndMineTransaction({
+            username: params.friendsUsername,
+            flightID: params.flightID,
+            ticketID: params.ticketID,
+            transactionID: params.transactionID,
+          }, dispatch, alert);
         }
       })
       .catch((error) => {
@@ -38,7 +46,7 @@ function ConfirmBookingYes() {
       </div>
       <img
         style={{ display: "block", margin: "2.4% auto", fontSize: "50%" }}
-        src="../assets/images/registration-done.gif"
+        src="/assets/images/registration-done.gif"
         alt=""
       />
       <div>&nbsp;</div>

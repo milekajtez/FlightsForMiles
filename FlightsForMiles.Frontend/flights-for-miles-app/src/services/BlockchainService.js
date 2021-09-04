@@ -18,26 +18,18 @@ const blockchainService = {
             Username: userAmount.username,
             Type: userAmount.type,
             Amount: userAmount.amount 
-        }
-
+        };
         return API.post(`Bitcoins/AddUserAmount`, body);
     },
 
-    loadTransactionsForValidation: (username) => {
-        return API.get(`Bitcoins/LoadTransactionsForValidation/${username}`);
-    },
-
-    miningTransaction: (transaction, username) => {
+    miningTransaction: (validateTransactionObj) => {
         var body = {
-            TransactionID: transaction.transactionID,
-            Amount: transaction.amount,
-            Sender: transaction.sender,
-            Reciever: transaction.reciever,
-            Fees: transaction.fees,
-            Signature: transaction.signature
-        }
-        
-        return API.put(`Bitcoins/MiningTransaction/${username}`, body);
+            Username: validateTransactionObj.username,
+            FlightID: validateTransactionObj.flightID,
+            TicketID: validateTransactionObj.ticketID,
+            TransactionID: validateTransactionObj.transactionID
+        };
+        return API.put('Bitcoins/MiningTransaction', body);
     },
 }
 

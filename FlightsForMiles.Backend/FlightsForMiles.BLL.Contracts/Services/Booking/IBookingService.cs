@@ -7,7 +7,7 @@ namespace FlightsForMiles.BLL.Contracts.Services.Booking
 {
     public interface IBookingService
     {
-        bool BookingWithoutFriends(IBookingWithoutFriendsRequestDTO bookingWithoutFriendsRequestDTO);
+        string BookingWithoutFriends(IBookingWithoutFriendsRequestDTO bookingWithoutFriendsRequestDTO);
         bool BookingForFriends(IBookingForFriendsRequestDTO bookingForFriendsRequestDTO);
         bool ConfirmBookingRequest(string ticketID);
         bool RefuseBookingRequest(string ticketID);

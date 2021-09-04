@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { bookingWithoutFriends, loadQuickBookings } from "../../../../redux/regular-user/booking/bookingAction";
+import { validateAndMineTransaction } from '../../../../utils/blockchainUtils';
 
 function QuickBooking() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ function QuickBooking() {
   const params = useParams();
   const history = useHistory();
   const alert = useAlert();
+  var transactionID = '';
 
   useEffect(() => {
     dispatch(loadQuickBookings(params.username));
@@ -29,6 +31,14 @@ function QuickBooking() {
         {
           type: 'success'
         });
+        transactionID = response.data;
+        validateAndMineTransaction({
+          username: params.username,
+          flightID: flightID,
+          ticketID: ticketID,
+          transactionID: transactionID,
+        }, dispatch, alert);
+        transactionID = '';
         history.push(`/regular/${params.username}/airlineReview`);
       }
     })
@@ -63,7 +73,8 @@ function QuickBooking() {
         });
       }
     })
-  }
+  };
+
   return (
     <>
       <h2 style={{ color: "white", paddingTop: "8px" }}>QUICK BOOKINGS</h2>

@@ -6,11 +6,9 @@ namespace FlightsForMiles.DAL.Contracts.Model
 {
     public interface ITransaction
     {
+        public string Username { get; }
+        public string FlightID { get; }
+        public string TicketID { get; }
         public string TransactionID { get; }
-        public string Amount { get; }
-        public string Sender { get; }
-        public string Receiver { get; }
-        public string Signature { get; }
-        public string Fees { get; }
     }
 }

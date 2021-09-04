@@ -17,14 +17,6 @@ function SearchBookingFlightForm() {
     initialValue: "",
     isRequired: true,
   });
-  const startHoursField = useFormField({
-    initialValue: "",
-    isRequired: true,
-  });
-  const endHoursField = useFormField({
-    initialValue: "",
-    isRequired: true,
-  });
   const startLocationField = useFormField({
     initialValue: "",
     isRequired: true,
@@ -33,6 +25,22 @@ function SearchBookingFlightForm() {
     initialValue: "",
     isRequired: true,
   });
+
+  const getDayOrMounth = (dayOrMounth) => {
+    return !dayOrMounth.indexOf('0') === 1 ? dayOrMounth : dayOrMounth.replace('0', '');
+  };
+
+  const compareDates = (date1, date2) => {
+    let day = false;
+    let mounth = false;
+    let year = false;
+
+    if (getDayOrMounth(date1.split("/")[1]) === getDayOrMounth(date2.split("-")[2])) day = true;
+    if (getDayOrMounth(date1.split("/")[0]) === getDayOrMounth(date2.split("-")[1])) mounth = true;
+    if (date1.split("/")[2] === date2.split("-")[0]) year = true;
+    console.log(day, mounth, year);
+    return day && mounth && year;
+  };
 
   const filterFlightsForm = useFormWithFields({
     onSubmit: (e) => {
@@ -43,16 +51,12 @@ function SearchBookingFlightForm() {
         let searchStartLocation = false;
         let searchEndLocation = false;
 
-        if (
-          new Date(flights.allFlights[i].startTime).toString() ===
-          new Date(startDateField.value + " " + startHoursField.value).toString()
+        if (compareDates(flights.allFlights[i].startTime.split(" ")[0], startDateField.value)
         ) {
           searchStartTime = true;
         }
 
-        if (
-          new Date(flights.allFlights[i].endTime).toString() ===
-          new Date(endDateField.value + " " + endHoursField.value).toString()
+        if (compareDates(flights.allFlights[i].endTime.split(" ")[0], endDateField.value)
         ) {
           searchEndTime = true;
         }
@@ -82,8 +86,6 @@ function SearchBookingFlightForm() {
     fields: [
       startDateField,
       endDateField,
-      startHoursField,
-      endHoursField,
       startLocationField,
       endLocationField,
     ],
@@ -94,7 +96,9 @@ function SearchBookingFlightForm() {
         className="form-search"
         style={{ display: "inline-block", marginTop: "1%", width: "90%" }}
       >
-        <h3 className="subtitle" style={{paddingBottom: '8px'}}>FILTER FLIGHTS</h3>
+        <h3 className="subtitle" style={{ paddingBottom: "8px" }}>
+          FILTER FLIGHTS
+        </h3>
         <form onSubmit={filterFlightsForm.handleSubmit}>
           <span className="input-container" style={{ display: "inline-block" }}>
             <input
@@ -132,50 +136,16 @@ function SearchBookingFlightForm() {
           &nbsp;
           <span className="input-container" style={{ display: "inline-block" }}>
             <input
-              id="startHours"
-              className="input"
-              type="time"
-              placeholder=" "
-              value={startHoursField.value}
-              onChange={startHoursField.handleChange}
-              style={{ paddingRight: '5px' }}
-              required={startHoursField.isRequired}
-            />
-            <div className="cut" style={{width: '100px'}}></div>
-            <label htmlFor="startHours" className="placeholder">
-              Start hours time
-            </label>
-          </span>
-          &nbsp;
-          <span className="input-container" style={{ display: "inline-block" }}>
-            <input
-              id="endHours"
-              className="input"
-              type="time"
-              placeholder=" "
-              value={endHoursField.value}
-              onChange={endHoursField.handleChange}
-              style={{ paddingRight: '5px' }}
-              required={endHoursField.isRequired}
-            />
-            <div className="cut" style={{width: '100px'}}></div>
-            <label htmlFor="endHours" className="placeholder">
-              End hours time
-            </label>
-          </span>
-          &nbsp;
-          <span className="input-container" style={{ display: "inline-block" }}>
-            <input
               id="startLocation"
               className="input"
               type="text"
               placeholder=" "
               value={startLocationField.value}
               onChange={startLocationField.handleChange}
-              style={{ paddingRight: '5px' }}
+              style={{ paddingRight: "5px" }}
               required={startLocationField.isRequired}
             />
-            <div className="cut" style={{width: '100px'}}></div>
+            <div className="cut" style={{ width: "100px" }}></div>
             <label htmlFor="startLocation" className="placeholder">
               Start location
             </label>
@@ -189,10 +159,10 @@ function SearchBookingFlightForm() {
               placeholder=" "
               value={endLocationField.value}
               onChange={endLocationField.handleChange}
-              style={{ paddingRight: '5px' }}
+              style={{ paddingRight: "5px" }}
               required={endLocationField.isRequired}
             />
-            <div className="cut" style={{width: '100px'}}></div>
+            <div className="cut" style={{ width: "100px" }}></div>
             <label htmlFor="endLocation" className="placeholder">
               End location
             </label>

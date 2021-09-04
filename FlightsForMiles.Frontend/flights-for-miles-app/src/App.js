@@ -19,7 +19,7 @@ function App() {
             <Route exact path="/:option?" component={StartPage} />
             <Route exact path="/confirmRegYes/:username?" component={ConfirmRegYes} />
             <Route exact path="/confirmRegNo" component={ConfirmRegNo} />
-            <Route exact path="/confirmBookingYes/:ticketID?" component={ConfirmBookingYes} />
+            <Route exact path="/confirmBookingYes/:friendsUsername?/:flightID?/:ticketID?/:transactionID?" component={ConfirmBookingYes} />
             <Route exact path="/confirmBookingNo/:ticketID?" component={ConfirmBookingNo} />
             <Route exact path="/system/:username/:option" component={SystemAdmin} />
             <Route exact path="/avio/:username/:option" component={AvioAdmin} />

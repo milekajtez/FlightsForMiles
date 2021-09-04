@@ -59,31 +59,16 @@ namespace FlightsForMiles.BLL.Services
             return _bitcoinRepository.AddUserAmount(userAmount).Result;
         }
         #endregion
-        #region 5 - Method for load validations which haven't validate jet
-        public List<ITransactionResponseDTO> LoadTransactionsForValidation(string username)
-        {
-            UsernameValidation(username);
-            List<ITransactionResponseDTO> result = new List<ITransactionResponseDTO>();
-            List<ITransaction> transactions = _bitcoinRepository.LoadTransactionsForValidation(username).Result;
-            foreach (var trans in transactions) 
-            {
-                result.Add(ConvertTransactionObjectToTransactionResponse(trans));
-            }
-
-            return result;
-        }
-        #endregion
         #region 6 - Method for minig transaction
-        public bool MiningTransaction(ITransactionRequestDTO transactionRequestDTO, string username)
+        public bool MiningTransaction(ITransactionRequestDTO transactionRequestDTO)
         {
-            UsernameValidation(username);
             if (transactionRequestDTO == null) 
             {
                 throw new ArgumentException(nameof(transactionRequestDTO));
             }
 
             ITransaction transaction = ConvertRequestObjectToTransaction(transactionRequestDTO);
-            return _bitcoinRepository.MiningTransaction(transaction, username).Result;
+            return _bitcoinRepository.MiningTransaction(transaction).Result;
         }
         #endregion
 
@@ -105,23 +90,11 @@ namespace FlightsForMiles.BLL.Services
             return new UserAmount(userAmountRequestDTO.Username, userAmountRequestDTO.Type, userAmountRequestDTO.Amount);
         }
 
-        private ITransactionResponseDTO ConvertTransactionObjectToTransactionResponse(ITransaction transaction) 
-        {
-            return new TransactionResponseDTO() 
-            {
-                TransactionID = transaction.TransactionID,
-                Amount = transaction.Amount,
-                Sender = transaction.Sender,
-                Receiver = transaction.Receiver,
-                Fees = transaction.Fees,
-                Signature = transaction.Signature
-            };
-        }
 
         private ITransaction ConvertRequestObjectToTransaction(ITransactionRequestDTO transactionRequestDTO)
         {
-            return new Transaction(transactionRequestDTO.TransactionID, transactionRequestDTO.Amount, transactionRequestDTO.Sender,
-                transactionRequestDTO.Reciever, transactionRequestDTO.Signature, transactionRequestDTO.Fees);
+            return new Transaction(transactionRequestDTO.Username, transactionRequestDTO.FlightID, transactionRequestDTO.TicketID,
+                transactionRequestDTO.TransactionID);
         }
         #endregion
         #region Methods for validations

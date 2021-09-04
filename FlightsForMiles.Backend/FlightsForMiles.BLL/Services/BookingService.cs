@@ -19,7 +19,7 @@ namespace FlightsForMiles.BLL.Services
         }
 
         #region 1 - Method for booking without friends
-        public bool BookingWithoutFriends(IBookingWithoutFriendsRequestDTO bookingWithoutFriendsRequestDTO)
+        public string BookingWithoutFriends(IBookingWithoutFriendsRequestDTO bookingWithoutFriendsRequestDTO)
         {
             if (bookingWithoutFriendsRequestDTO == null) 
             {

@@ -3,6 +3,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { bookingForFriends, bookingWithoutFriends } from "../../../../../redux/regular-user/booking/bookingAction";
+import { validateAndMineTransaction } from '../../../../../utils/blockchainUtils';
 
 function FinishOperations() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ function FinishOperations() {
   const flight = useSelector((state) => state.flight);
   const friendship = useSelector((state) => state.friendship);
   const history = useHistory();
+  var transactionID = '';
 
   const bookingFlightWithoutFriends = () => {
     if (ticket.selectedTickets.length !== 1) {
@@ -21,7 +23,8 @@ function FinishOperations() {
           type: "error",
         }
       );
-    } else {
+    } 
+    else {
       dispatch(bookingWithoutFriends({
         username: params.username,
         flightID: flight.flightForBooking.flightID,
@@ -33,6 +36,14 @@ function FinishOperations() {
           {
             type: 'success'
           });
+          transactionID = response.data;
+          validateAndMineTransaction({
+            username: params.username,
+            flightID: flight.flightForBooking.flightID,
+            ticketID: ticket.selectedTickets[0].ticketID,
+            transactionID: transactionID,
+          })
+          transactionID = '';
           history.push(`/regular/${params.username}/airlineReview`);
         }
       })
@@ -69,7 +80,7 @@ function FinishOperations() {
       })
     }
   };
-
+  
   const bookingFlighForFriends = () => {
     if (friendship.friendsSelectedForBooking.length > 0) {
       if (
@@ -100,7 +111,39 @@ function FinishOperations() {
         })
         .catch(error => {
           console.log(error);
-          //ispis gresaka
+          if (
+            error.response.data.indexOf("(Server not found user.)") !== -1
+          ) {
+            alert.show("Server not found user.", {
+              type: "error",
+            });
+          } else if (
+            error.response.data.indexOf("(Server not found flight.)") !== -1
+          ) {
+            alert.show("Server not found flight.", {
+              type: "error",
+            });
+          }
+          else if(error.response.data.indexOf("Server not found ticket.") !== -1) {
+            alert.show("Server not found ticket.", {
+              type: "error",
+            });
+          }
+          else if(error.response.data.indexOf("Server not found friend.") !== -1) {
+            alert.show("Server not found friend.", {
+              type: "error",
+            });
+          }
+          else if(error.response.data.indexOf("User has already send request for booking for this flght and seat.") !== -1) {
+            alert.show("User has already send request for booking for this flght and seat.", {
+              type: "error",
+            });
+          }
+          else {
+            alert.show("Unknown error.", {
+              type: "error",
+            });
+          }
         })
       }
     } else {

@@ -38,7 +38,7 @@ namespace FlightsForMiles.DAL.Repository
         }
 
         #region 1 - Method for booking without friends
-        public async Task<bool> BookingWithoutFriends(IBookingWithoutFriends bookingWithoutFriends)
+        public async Task<string> BookingWithoutFriends(IBookingWithoutFriends bookingWithoutFriends)
         {
             var user = await _userManager.FindByNameAsync(bookingWithoutFriends.Username);
             if (user == null)
@@ -68,7 +68,7 @@ namespace FlightsForMiles.DAL.Repository
             }
 
             //ticket amount
-            double ticketPrice = ticket.Price / LoadBitcoinExchangeRates().Result;
+            double ticketPrice = ticket.Price * LoadBitcoinExchange();
 
             //load keys
             Tuple<RsaKeyParameters, RsaKeyParameters> keys = GetKeys(user.UserName);
@@ -101,7 +101,7 @@ namespace FlightsForMiles.DAL.Repository
             await _context.Transactions.AddAsync(newTransaction);       // add transaction
             await _context.Bookings.AddAsync(newBooking);               // add booking
             await _context.SaveChangesAsync();                          // save changes
-            return true;
+            return newTransaction.Id.ToString();
         }
         #endregion
         #region 2 - Method for booking for friends
@@ -179,7 +179,7 @@ namespace FlightsForMiles.DAL.Repository
             foreach (var ticketID in bookingForFriends.TicketsID) 
             {
                 var ticket = _context.Tickets.Find(int.Parse(ticketID));
-                ticketPrices.Add(ticket.Price / LoadBitcoinExchangeRates().Result);
+                ticketPrices.Add(ticket.Price * LoadBitcoinExchange());
             }
 
             //load keys for all friends
@@ -211,7 +211,7 @@ namespace FlightsForMiles.DAL.Repository
             List<Booking> newBookings = new List<Booking>();
             for (int i = 0; i < newTransactions.Count; i++) 
             {
-                newBookings.Add(new Booking() 
+                Booking newBooking = new Booking()
                 {
                     UserID = (await _userManager.FindByNameAsync(bookingForFriends.Friends[i])).Id,
                     FlightID = int.Parse(bookingForFriends.FlightID),
@@ -220,12 +220,13 @@ namespace FlightsForMiles.DAL.Repository
                     Price = 0,
                     DiscountPrice = 0,
                     TransactionID = newTransactions[i].Id
-                });
+                };
+                newBookings.Add(newBooking);
 
                 // kada se za svakog definise booking i transaction..salje se mejl tom korisniku
                 await SendEmailAsync(bookingForFriends.Username, bookingForFriends.Friends[i],
                     (await _userManager.FindByNameAsync(bookingForFriends.Friends[i])).Email,
-                    bookingForFriends.FlightID, bookingForFriends.TicketsID[i]);
+                    bookingForFriends.FlightID, bookingForFriends.TicketsID[i], newBooking.TransactionID);
             }
 
             await _context.Transactions.AddRangeAsync(newTransactions);     // add transaction
@@ -342,8 +343,8 @@ namespace FlightsForMiles.DAL.Repository
                         TicketNumber = ticket.Number_of_seat.ToString(),
                         OriginalPrice = ticket.Price.ToString(),
                         DiscountPrice = CaluclateQuickBookingDiscount(ticket.Price).ToString(),
-                        OriginalBitcoinPrice = (ticket.Price / LoadBitcoinExchange().Result).ToString(),
-                        DiscountBitcoinPrice = CaluclateQuickBookingDiscount(ticket.Price / LoadBitcoinExchange().Result).ToString(),
+                        OriginalBitcoinPrice = (ticket.Price * LoadBitcoinExchange()).ToString(),
+                        DiscountBitcoinPrice = CaluclateQuickBookingDiscount(ticket.Price * LoadBitcoinExchange()).ToString(),
                     });
                 }
             }
@@ -394,9 +395,9 @@ namespace FlightsForMiles.DAL.Repository
                             TicketNumber = currentTicket.Number_of_seat.ToString(),
                             OriginalPrice = currentTicket.Price.ToString(),
                             DiscountPrice = CaluclateQuickBookingDiscount(currentTicket.Price).ToString(),
-                            OriginalBitcoinPrice = (currentTicket.Price / LoadBitcoinExchange().Result).ToString(),
-                            DiscountBitcoinPrice = CaluclateQuickBookingDiscount(currentTicket.Price /
-                                LoadBitcoinExchange().Result).ToString(),
+                            OriginalBitcoinPrice = (currentTicket.Price * LoadBitcoinExchange()).ToString(),
+                            DiscountBitcoinPrice = CaluclateQuickBookingDiscount(currentTicket.Price *
+                                LoadBitcoinExchange()).ToString(),
                         });
                     }
                 }
@@ -416,9 +417,9 @@ namespace FlightsForMiles.DAL.Repository
                             TicketNumber = currentTicket.Number_of_seat.ToString(),
                             OriginalPrice = currentTicket.Price.ToString(),
                             DiscountPrice = CaluclateQuickBookingDiscount(currentTicket.Price).ToString(),
-                            OriginalBitcoinPrice = (currentTicket.Price / LoadBitcoinExchange().Result).ToString(),
-                            DiscountBitcoinPrice = CaluclateQuickBookingDiscount(currentTicket.Price /
-                                LoadBitcoinExchange().Result).ToString(),
+                            OriginalBitcoinPrice = (currentTicket.Price * LoadBitcoinExchange()).ToString(),
+                            DiscountBitcoinPrice = CaluclateQuickBookingDiscount(currentTicket.Price *
+                                LoadBitcoinExchange()).ToString(),
                         });
                     }
                 }
@@ -536,31 +537,6 @@ namespace FlightsForMiles.DAL.Repository
             return sr.ReadToEnd();
         }
         #endregion
-        #region Method for loading current bitcoin exchange rates
-        private async Task<double> LoadBitcoinExchangeRates()
-        {
-            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, @"https://coinmarketcap.com/currencies/bitcoin/")
-            {
-                Content = new StringContent(string.Empty, Encoding.UTF8, "application/json")
-            };
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.SendAsync(httpRequest);
-            var result = response.Content.ReadAsStringAsync().Result;
-
-            if (result.Contains("priceValue "))
-            {
-                int index = result.IndexOf("priceValue ");
-                string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
-
-                
-                return double.Parse(currentBitcoinValue);
-            }
-            else
-            {
-                throw new Exception("Loading exchange unsuccessfully.");
-            }
-        }
-        #endregion
         #region Method for generate signature
         private string GenerateSignature(string sender, string receiver, double amount,
             string ticketID, Tuple<RsaKeyParameters, RsaKeyParameters> keys)
@@ -587,7 +563,7 @@ namespace FlightsForMiles.DAL.Repository
         }
         #endregion
         #region  Method for sending E-mail
-        public async Task SendEmailAsync(string username, string friendsUsername, string mailID, string flightID, string ticketID)
+        public async Task SendEmailAsync(string username, string friendsUsername, string mailID, string flightID, string ticketID, Guid transactionID)
         {
             var flight = _context.Flights.Find(int.Parse(flightID));
             var ticket = _context.Tickets.Find(int.Parse(ticketID));
@@ -608,9 +584,9 @@ namespace FlightsForMiles.DAL.Repository
                 "\n\tFlight start time: " + flight.Start_time +
                 "\n\tFlight end time: " + flight.End_time +
                 "\n\tSeat (ticket) number: " + ticket.Number_of_seat +
-                "\n\tSeat (ticket) price: " + ticket.Price / LoadBitcoinExchangeRates().Result + " ₿" + 
+                "\n\tSeat (ticket) price: " + ticket.Price * LoadBitcoinExchange() + " ₿" + 
                 "\n\n\nIf you have to accept this booking reservation, please click on this link: " +
-                "http://localhost:3000/confirmBookingYes/" + ticketID + 
+                "http://localhost:3000/confirmBookingYes/" + friendsUsername + "/" + flightID + "/" + ticketID + "/" + transactionID.ToString() + 
                 "\n\n\nIf you have to refuse booking reservation, please click on this link: " +
                 "http://localhost:3000/confirmBookingNo/" + ticketID + "\n\n\nThank you for using FlightsForMiles application.";
         
@@ -631,28 +607,15 @@ namespace FlightsForMiles.DAL.Repository
         }
         #endregion
         #region Method for loading current bitcoin exchange rates
-        private async Task<double> LoadBitcoinExchange()
+        private double LoadBitcoinExchange()
         {
-            HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, @"https://coinmarketcap.com/currencies/bitcoin/")
+            var uri = String.Format("https://blockchain.info/tobtc?currency=USD&value=1");
+            WebClient client = new WebClient
             {
-                Content = new StringContent(string.Empty, Encoding.UTF8, "application/json")
+                UseDefaultCredentials = true
             };
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.SendAsync(httpRequest);
-            var result = response.Content.ReadAsStringAsync().Result;
-
-            if (result.Contains("priceValue "))
-            {
-                int index = result.IndexOf("priceValue ");
-                string currentBitcoinValue = result.Substring(index, 37).Split('$')[1].Split('<')[0];
-
-
-                return double.Parse(currentBitcoinValue);
-            }
-            else
-            {
-                throw new Exception("Loading exchange unsuccessfully.");
-            }
+            var data = client.DownloadString(uri);
+            return Convert.ToDouble(data);
         }
         #endregion
         #region Method for caluclate hours between dates

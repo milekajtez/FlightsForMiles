@@ -7,91 +7,68 @@ namespace FlightsForMiles.BLL.Model.Blockchain
 {
     public class Transaction : ITransaction
     {
-        public Transaction(string transactionID, string amount, string sender, string receiver,
-            string siganture, string fees)
+        public Transaction(string username, string flightID, string ticketID, string transactionID)
         {
-            Validation(transactionID, amount, sender, receiver, siganture, fees);
+            Validation(username, flightID, ticketID, transactionID);
+            Username = username;
+            FlightID = flightID;
+            TicketID = ticketID;
             TransactionID = transactionID;
-            Amount = amount;
-            Sender = sender;
-            Receiver = receiver;
-            Signature = siganture;
-            Fees = fees;
         }
+        public string Username { get; }
+        public string FlightID { get; }
+        public string TicketID { get; }
         public string TransactionID { get; }
-        public string Amount { get; }
-        public string Sender { get; }
-        public string Receiver { get; }
-        public string Signature { get; }
-        public string Fees { get; }
 
         #region Validation
-        private void Validation(string transactionID, string amount, string sender, string receiver,
-            string siganture, string fees)
+        private void Validation(string username, string flightID, string ticketID, string transactionID)
         {
             if (string.IsNullOrWhiteSpace(transactionID) || !Guid.TryParse(transactionID, out _))
             {
                 throw new ArgumentException(nameof(transactionID));
             }
 
-            if (string.IsNullOrWhiteSpace(amount))
+            if (string.IsNullOrWhiteSpace(ticketID))
             {
-                throw new ArgumentException(nameof(amount));
+                throw new ArgumentException(nameof(ticketID));
             }
             else 
             {
-                if (!double.TryParse(amount, out _))
+                if (!double.TryParse(ticketID, out _))
                 {
-                    throw new ArgumentException(nameof(amount));
+                    throw new ArgumentException(nameof(ticketID));
                 }
                 else 
                 {
-                    if (double.Parse(amount) <= 0)
+                    if (double.Parse(ticketID) <= 0)
                     {
-                        throw new ArgumentException(nameof(amount));
+                        throw new ArgumentException(nameof(ticketID));
                     }
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(sender))
+            if (string.IsNullOrWhiteSpace(flightID))
             {
-                throw new ArgumentException(nameof(sender));
-            }
-
-            if (string.IsNullOrWhiteSpace(receiver))
-            {
-                throw new ArgumentException(nameof(receiver));
-            }
-            else 
-            {
-                if (receiver != "mainAdmin") 
-                {
-                    throw new ArgumentException(nameof(receiver));
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(siganture))
-            {
-                throw new ArgumentException(nameof(siganture));
-            }
-
-            if (string.IsNullOrWhiteSpace(fees))
-            {
-                throw new ArgumentException(nameof(fees));
+                throw new ArgumentException(nameof(flightID));
             }
             else
             {
-                if (!double.TryParse(fees, out _))
+                if (!double.TryParse(flightID, out _))
                 {
-                    throw new ArgumentException(nameof(fees));
+                    throw new ArgumentException(nameof(flightID));
                 }
                 else
                 {
-                    if (double.Parse(fees) <= 0)
+                    if (double.Parse(flightID) <= 0)
                     {
-                        throw new ArgumentException(nameof(fees));
+                        throw new ArgumentException(nameof(flightID));
                     }
                 }
+            }
+
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                throw new ArgumentException(nameof(username));
             }
         }
         #endregion

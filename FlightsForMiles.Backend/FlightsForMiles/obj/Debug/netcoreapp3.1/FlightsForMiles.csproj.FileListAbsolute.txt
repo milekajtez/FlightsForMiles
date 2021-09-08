@@ -266,3 +266,8 @@ C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMile
 C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\m.kajtez\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\NBitcoin.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\milek\OneDrive\Desktop\FlightsForMiles\FlightsForMiles.Backend\FlightsForMiles\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

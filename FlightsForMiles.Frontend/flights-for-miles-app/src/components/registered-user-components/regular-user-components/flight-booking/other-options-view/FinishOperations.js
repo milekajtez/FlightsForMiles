@@ -42,7 +42,7 @@ function FinishOperations() {
             flightID: flight.flightForBooking.flightID,
             ticketID: ticket.selectedTickets[0].ticketID,
             transactionID: transactionID,
-          })
+          },dispatch, alert);
           transactionID = '';
           history.push(`/regular/${params.username}/airlineReview`);
         }

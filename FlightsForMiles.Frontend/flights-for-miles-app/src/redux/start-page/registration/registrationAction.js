@@ -1,6 +1,6 @@
 import userService from "../../../services/UserService";
 
-export const userRegistration = (newUser) => (/*dispatch*/) =>
+export const userRegistration = (newUser) => () =>
   new Promise(function (resolve, reject) {
     userService
       .userRegistration(newUser)

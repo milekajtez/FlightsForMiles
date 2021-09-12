@@ -34,7 +34,6 @@ function DisplayAllQuestions() {
           </div>
         );
       })}
-      <hr style={{ backgroundColor: "aqua" }}></hr>
     </div>
   );
 }

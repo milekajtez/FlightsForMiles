@@ -90,7 +90,7 @@ function AskQuestionForm(props) {
         <h2>ASK QUESTION</h2>
         <form onSubmit={askQuestionForm.handleSubmit}>
           <div className="user-box">
-            <h6 style={{ color: "aqua" }}>Question</h6>
+            <h6 style={{ color: "white" }}>Question</h6>
             <textarea
               type="text"
               value={questionField.value}

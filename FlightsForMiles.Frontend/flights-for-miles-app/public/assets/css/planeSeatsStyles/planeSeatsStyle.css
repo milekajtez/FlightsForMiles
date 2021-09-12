@@ -33,12 +33,8 @@
 }
 
 .seat input[type="checkbox"]:disabled + label:after {
-  /*content: "X";*/
   text-indent: 0;
   position: absolute;
-  /*top: 4px;
-  left: 50%;*/
-  /*transform: translate(-50%, 0%);*/
 }
 .seat input[type="checkbox"]:disabled + label:hover {
   box-shadow: none;

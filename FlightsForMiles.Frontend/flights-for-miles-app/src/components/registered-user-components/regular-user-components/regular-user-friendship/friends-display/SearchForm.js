@@ -139,7 +139,7 @@ function SearchForm() {
           </span>
           &nbsp;
           <span style={{ display: "inline-block" }}>
-            <button type="submit" className="submit">
+            <button type="submit" className="submit" style={{backgroundColor: '#14133b'}}>
               SEARCH
             </button>
           </span>

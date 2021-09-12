@@ -12,7 +12,7 @@
   height: 270px;
   background: #0563af;
   border-radius: 3px;
-  box-shadow: 0 0 100px aqua;
+  box-shadow: 0 0 100px #1f2429;
 }
 
 .content {
@@ -69,7 +69,6 @@
 }
 
 .barcode {
-  /*position: absolute;*/
   left: 8px;
   bottom: 6px;
   height: 30px;

@@ -65,7 +65,7 @@
 
 .login-box .user-box select option {
   background-color: #0563af;
-  color: aqua;
+  color: white;
 }
 
 .login-box .user-box label {
@@ -83,7 +83,7 @@
 .login-box .user-box input:valid ~ label {
   top: -20px;
   left: 0;
-  color: #03e9f4;
+  color: white;
   font-size: 12px;
 }
 
@@ -91,7 +91,7 @@
 .login-box .user-box select:valid ~ label {
   top: -20px;
   left: 0;
-  color: #03e9f4;
+  color: white;
   font-size: 12px;
 }
 
@@ -103,7 +103,7 @@
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #03e9f4;
+  color: white;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
@@ -111,7 +111,6 @@
   transition: 0.5s;
   margin-top: 40px;
   letter-spacing: 4px;
-  /*margin-left: 30%;*/
   text-align: center;
 }
 

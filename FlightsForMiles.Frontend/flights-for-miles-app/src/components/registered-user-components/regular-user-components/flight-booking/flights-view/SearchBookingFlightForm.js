@@ -169,7 +169,7 @@ function SearchBookingFlightForm() {
           </span>
           &nbsp;
           <span style={{ display: "inline-block" }}>
-            <button type="submit" className="submit">
+            <button type="submit" className="submit" style={{backgroundColor: '#14133b'}}>
               FILTER
             </button>
           </span>

@@ -25,7 +25,7 @@ function Help(props) {
     >
       <div
         style={{
-          backgroundColor: "#141e30",
+          backgroundColor: "#1c5260",
           padding: "10px",
           color: "white",
           textAlign: "center",
@@ -37,7 +37,7 @@ function Help(props) {
           width="80%"
           height="400px"
         />
-        <h3 style={{ textAlign: "center" }}>How FlightsForMiles works?</h3>
+        <h3 style={{ textAlign: "center", fontSize: '35px' }}>How FlightsForMiles works?</h3>
         <DisplayAppDescription />
         <DisplayAllQuestions />
       </div>

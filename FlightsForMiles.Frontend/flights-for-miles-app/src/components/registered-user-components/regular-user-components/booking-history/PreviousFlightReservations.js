@@ -92,7 +92,7 @@ function PreviousFlightReservations(props) {
                 </td>
                 <td>
                   <Rating onClick={(rate) => handleRating(rate, previousBooking.flightID, index)} 
-                    ratingValue={rating[index]} size={40} fillColor={'aqua'}/>
+                    ratingValue={rating[index]} size={40} fillColor={'orange'}/>
                 </td>
               </tr>
             );

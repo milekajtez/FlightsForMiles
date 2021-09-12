@@ -55,7 +55,7 @@
 }
 
 .blochchain-h1{
-    color: #1ab2ff;
+    color: white;
     font-family: 'Teko', sans-serif;
     font-weight: 600;
 }
@@ -66,7 +66,7 @@
 }
 
 .blochchain-price{
-    color: aqua;
+    color: white;
     font-size: 20px;
     padding: 6px;
     font-family: 'Teko', sans-serif;
@@ -75,11 +75,11 @@
 .blochchain-name{
     position: relative;
     bottom: 10px;
-    color: aqua;
+    color: white;
 }
 
 .blochchain-usd{
-    color: aqua;
+    color: white;
     font-size: 20px;
     padding-top: 12px;
     font-family: 'Cairo', sans-serif;

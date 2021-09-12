@@ -3,7 +3,7 @@ table {
   margin-right: 10%;
   margin-top: 1%;
   width: 80%;
-  background-color: #202932;
+  background-color: #1f2429;
 }
 
 tr {
@@ -23,9 +23,9 @@ th {
 }
 
 thead th {
-  background-color: #1b2229;
+  background-color: #0c1620;
   color: #fff;
-  border: 1px solid #1b2229;
+  border: 1px solid #0c1620;
   padding: 10px;
 }
 
@@ -37,5 +37,5 @@ thead th {
   width: 75%;
   height: 75vh;
   margin: auto;
-  box-shadow: 0 0 100px aqua;
+  box-shadow: 0 0 100px #14133b;
 }

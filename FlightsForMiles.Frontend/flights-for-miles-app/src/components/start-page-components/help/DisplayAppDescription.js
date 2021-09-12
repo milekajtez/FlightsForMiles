@@ -14,7 +14,7 @@ function DisplayAppDescription() {
   }, [dispatch]);
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", fontSize: '20px' }}>
       <br></br>
       {helpData.appDescription.description}
       <hr style={{ backgroundColor: "aqua" }}></hr>

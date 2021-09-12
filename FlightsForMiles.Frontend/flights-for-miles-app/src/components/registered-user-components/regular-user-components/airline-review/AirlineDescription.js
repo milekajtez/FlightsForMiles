@@ -26,7 +26,7 @@ function AirlineDescription(props) {
         {
           <div style={{ textAlign: "center" }}>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <p style={{ color: "aqua" }}>{props.description}</p>
+              <p style={{ color: "white", fontSize: '20px' }}>{props.description}</p>
             </span>
           </div>
         }

@@ -13,7 +13,7 @@ const slideImages = [
 function Pictures() {
   return (
     <div style={{ margin: "1%", color: "black" }} className="slide-container">
-      <Slide style={{ color: "#c4c3e8" }} arrows={false}>
+      <Slide style={{ color: 'white' }} arrows={false}>
         <div className="each-fade">
           <h3>Where to next?</h3>
           <img src={slideImages[0]} alt="" width="70%" height="70%" />

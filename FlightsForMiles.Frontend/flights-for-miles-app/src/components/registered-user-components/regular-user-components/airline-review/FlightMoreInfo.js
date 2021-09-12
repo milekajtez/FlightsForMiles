@@ -27,33 +27,33 @@ function FlightMoreInfo(props) {
         <h2>FLIGHT MORE INFO</h2>
         <div style={{ textAlign: "center" }}>
           <span className="user-box" style={{ display: "inline-block" }}>
-            <h5 style={{ color: "aqua" }}>Flight time (hours)</h5>
-            <p>{props.currentFlight.flightTime}</p>
+            <h5 style={{ color: "white", fontSize: '25px' }}>Flight time (hours)</h5>
+            <p style={{fontSize: '20px'}}>{props.currentFlight.flightTime}</p>
           </span>
           <span className="user-box" style={{ display: "inline-block" }}>
-            <h5 style={{ color: "aqua" }}>Flight length (km)</h5>
-            <p>{props.currentFlight.flightLengthKM}</p>
+            <h5 style={{ color: "white", fontSize: '25px' }}>Flight length (km)</h5>
+            <p style={{fontSize: '20px'}}>{props.currentFlight.flightLengthKM}</p>
           </span>
           <span className="user-box" style={{ display: "inline-block" }}>
-            <h5 style={{ color: "aqua" }}>Number of transfers</h5>
-            <p>{props.currentFlight.numberOfTransfers}</p>
+            <h5 style={{ color: "white" }}>Number of transfers</h5>
+            <p style={{fontSize: '20px'}}>{props.currentFlight.numberOfTransfers}</p>
           </span>
           <span className="user-box" style={{ display: "inline-block" }}>
-            <h5 style={{ color: "aqua" }}>All transfers</h5>
-            <p>{props.currentFlight.allTransfers}</p>
+            <h5 style={{ color: "white", fontSize: '25px' }}>All transfers</h5>
+            <p style={{fontSize: '20px'}}>{props.currentFlight.allTransfers}</p>
           </span>
           <span className="user-box" style={{ display: "inline-block" }}>
-            <h5 style={{ color: "aqua" }}>Plane name</h5>
-            <p>{props.currentFlight.planeName}</p>
+            <h5 style={{ color: "white", fontSize: '25px' }}>Plane name</h5>
+            <p style={{fontSize: '20px'}}>{props.currentFlight.planeName}</p>
           </span>
           <span className="user-box" style={{ display: "inline-block" }}>
-            <h5 style={{ color: "aqua" }}>Lugage weight (kg)</h5>
-            <p>{props.currentFlight.lugageWeight}</p>
+            <h5 style={{ color: "white", fontSize: '25px' }}>Lugage weight (kg)</h5>
+            <p style={{fontSize: '20px'}}>{props.currentFlight.lugageWeight}</p>
           </span>
           <div>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Additional informations</h5>
-              <p>{props.currentFlight.additionalInformation}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Additional informations</h5>
+              <p style={{fontSize: '20px'}}>{props.currentFlight.additionalInformation}</p>
             </span>
           </div>
         </div>

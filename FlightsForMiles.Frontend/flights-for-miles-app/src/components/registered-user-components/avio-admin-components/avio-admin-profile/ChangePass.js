@@ -80,7 +80,7 @@ function ChangePass() {
 
   return (
     <div className="profile-change reg-box">
-      <h4 style={{ color: "#1da1f2" }}>CHANGE PASSWORD</h4>
+      <h4 style={{ color: "white" }}>CHANGE PASSWORD</h4>
       <br></br>
       <form onSubmit={changePassForm.handleSubmit}>
         <div style={{ display: "inline-block" }}>

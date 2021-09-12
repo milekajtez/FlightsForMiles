@@ -136,7 +136,7 @@ function ChangeProfile() {
 
   return (
     <div className="profile-change reg-box">
-      <h4 style={{ color: "#1da1f2" }}>CHANGE PROFILE DATA</h4>
+      <h4 style={{ color: "white" }}>CHANGE PROFILE DATA</h4>
       <br></br>
       <form onSubmit={changeProfileDataForm.handleSubmit}>
         <div style={{ display: "inline-block" }}>

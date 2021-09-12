@@ -19,13 +19,14 @@
 .reg-box h2 {
   margin: 0 0 30px;
   padding: 0;
-  color: #fff;
+  color: white;
   text-align: center;
 }
 
 .reg-box form div {
   text-align: center;
 }
+
 .reg-box .user-box {
   position: relative;
   margin: 2%;
@@ -35,10 +36,10 @@
   width: 45%;
   padding: 10px 0;
   font-size: 16px;
-  color: #fff;
+  color: white;
   margin-bottom: 30px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid white;
   outline: none;
   background: transparent;
 }
@@ -48,10 +49,10 @@ textarea {
   width: 45%;
   padding: 10px 0;
   font-size: 16px;
-  color: #fff;
+  color: white;
   margin-bottom: 30px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid white;
   outline: none;
   background: transparent;
 }
@@ -62,7 +63,7 @@ textarea {
 }
 
 [type="date"] {
-  background-color: #fff
+  background-color: white
     url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
     97% 50% no-repeat;
 }
@@ -74,7 +75,7 @@ textarea {
 
 [type="date"]::-webkit-calendar-picker-indicator {
   opacity: 1;
-  background-color: aqua;
+  background-color:white;
 }
 
 input[type="date"]:required:invalid::-webkit-datetime-edit {
@@ -87,7 +88,7 @@ input[type="date"]:focus::-webkit-datetime-edit {
 
 [type="time"]::-webkit-calendar-picker-indicator {
   opacity: 1;
-  background-color: aqua;
+  background-color:white;
 }
 
 input[type="time"]:required:invalid::-webkit-datetime-edit {
@@ -104,7 +105,7 @@ input[type="time"]:focus::-webkit-datetime-edit {
   left: 0;
   padding: 10px 0;
   font-size: 16px;
-  color: #fff;
+  color: white;
   pointer-events: none;
   transition: 0.5s;
 }
@@ -113,7 +114,7 @@ input[type="time"]:focus::-webkit-datetime-edit {
 .reg-box .user-box input:valid ~ label {
   top: -20px;
   left: 0;
-  color: #03e9f4;
+  color: white;
   font-size: 12px;
 }
 
@@ -121,7 +122,7 @@ input[type="time"]:focus::-webkit-datetime-edit {
 .reg-box .user-box select:valid ~ label {
   top: -20px;
   left: 0;
-  color: #03e9f4;
+  color: white;
   font-size: 12px;
 }
 
@@ -129,7 +130,7 @@ input[type="time"]:focus::-webkit-datetime-edit {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #03e9f4;
+  color: white3e9f4;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
@@ -143,7 +144,7 @@ input[type="time"]:focus::-webkit-datetime-edit {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #03e9f4;
+  color: white;
   font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;

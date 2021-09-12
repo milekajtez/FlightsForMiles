@@ -100,7 +100,7 @@ function ChangeDescription(props) {
         <h2>CHANGE APP DESCRIPTION</h2>
         <form onSubmit={changeDescriptionForm.handleSubmit}>
           <div className="user-box">
-            <h6 style={{ color: "aqua" }}>Application description</h6>
+            <h6 style={{ color: "white" }}>Application description</h6>
             <textarea
               type="text"
               value={descriptionField.value}

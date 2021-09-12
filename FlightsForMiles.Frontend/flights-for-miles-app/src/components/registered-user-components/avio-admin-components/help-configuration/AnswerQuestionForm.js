@@ -100,14 +100,14 @@ function AnswerQuestionForm(props) {
           {props.answerIsOpen.currentQuest.questionText}
         </div>
         <hr style={{ backgroundColor: "aqua" }}></hr>
-        <p style={{ color: "aqua" }}>Current answer:</p>
+        <p style={{ color: "white" }}>Current answer:</p>
         <p style={{ color: "white" }}>
           {props.answerIsOpen.currentQuest.answer}
         </p>
         <hr style={{ backgroundColor: "aqua" }}></hr>
         <form onSubmit={answerForm.handleSubmit}>
           <div className="user-box">
-            <h6 style={{ color: "aqua" }}>Answer:</h6>
+            <h6 style={{ color: "white" }}>Answer:</h6>
             <textarea
               type="text"
               value={answerField.value}

@@ -29,43 +29,43 @@ function FlightMoreInfo(props) {
       <div className="reg-box" style={{ color: "white" }}>
         <h2>FLIGHT MORE INFO</h2>
         {props.moreInfoIsOpen.currentFlight.flightTime !== undefined ? (
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", fontSize: '25px' }}>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Flight time (hours)</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.flightTime}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Flight time (hours)</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.flightTime}</p>
             </span>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Flight length (km)</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.flightLengthKM}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Flight length (km)</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.flightLengthKM}</p>
             </span>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Number of transfers</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.numberOfTransfers}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Number of transfers</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.numberOfTransfers}</p>
             </span>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>All transfers</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.allTransfers}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>All transfers</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.allTransfers}</p>
             </span>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Plane name</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.planeName}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Plane name</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.planeName}</p>
             </span>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Lugage weight (kg)</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.lugageWeight}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Lugage weight (kg)</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.lugageWeight}</p>
             </span>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Sum of all grades</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.sumOfAllGrades}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Sum of all grades</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.sumOfAllGrades}</p>
             </span>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <h5 style={{ color: "aqua" }}>Number of grades</h5>
-              <p>{props.moreInfoIsOpen.currentFlight.numberOfGrades}</p>
+              <h5 style={{ color: "white", fontSize: '25px' }}>Number of grades</h5>
+              <p style={{fontSize: '20px'}}>{props.moreInfoIsOpen.currentFlight.numberOfGrades}</p>
             </span>
             <div>
               <span className="user-box" style={{ display: "inline-block" }}>
-                <h5 style={{ color: "aqua" }}>Additional informations</h5>
-                <p>
+                <h5 style={{ color: "white", fontSize: '25px' }}>Additional informations</h5>
+                <p style={{fontSize: '20px'}}>
                   {props.moreInfoIsOpen.currentFlight.additionalInformation}
                 </p>
               </span>

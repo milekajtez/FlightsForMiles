@@ -389,7 +389,7 @@ function AddFlights(props) {
           </div>
           <div>
             <span className="user-box">
-              <h6 style={{ color: "aqua" }}>Additional info</h6>
+              <h6 style={{ color: "white" }}>Additional info</h6>
               <textarea
                 type="text"
                 value={additionalInfoField.value}

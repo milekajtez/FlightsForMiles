@@ -1,5 +1,5 @@
 .form-search {
-  background-color: #14133b;
+  background-color: #005f77;
   border-radius: 20px;
   box-sizing: border-box;
   height: auto;
@@ -52,7 +52,7 @@
 }
 
 .placeholder {
-  color: aqua;
+  color: white;
   font-family: sans-serif;
   left: 20px;
   line-height: 14px;
@@ -73,11 +73,11 @@
 }
 
 .input:focus ~ .placeholder {
-  color: aqua;
+  color: white;
 }
 
 .submit {
-  background-color: #08d;
+  background-color: #5bc0de;
   border-radius: 0.25rem;
   border: 0;
   box-sizing: border-box;
@@ -86,11 +86,11 @@
   font-size: 18px;
   height: 50px;
   margin-top: 38px;
-  /*// outline: 0;*/
   text-align: center;
   width: 100%;
 }
 
 .submit:active {
-  background-color: #06b;
+  background-color: #14133b;
+  color: black;
 }

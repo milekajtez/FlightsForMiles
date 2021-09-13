@@ -9,3 +9,4 @@ export * from "./avio-admin/ticket/ticketAction";
 export * from "./regular-user/friendship/friendshipAction";
 export * from './regular-user/booking/bookingAction';
 export * from './system-admin/bitcoin-mining/bitcoinMiningAction';
+export * from './avio-admin/dashboard/dashboardAction';

@@ -1,5 +1,11 @@
 import flightService from "../../../services/FlightService";
-import { FILTER_FLIGHTS, FLIGHTS_FOR_AIRLINE_LOADING, FLIGHT_LOADING, SEARCH_FLIGHTS, SELECT_FLIGHT_FOR_BOOKING } from "./flightTypes";
+import {
+  FILTER_FLIGHTS,
+  FLIGHTS_FOR_AIRLINE_LOADING,
+  FLIGHT_LOADING,
+  SEARCH_FLIGHTS,
+  SELECT_FLIGHT_FOR_BOOKING,
+} from "./flightTypes";
 
 export const addFlight = (newFlight) => () =>
   new Promise(function (resolve, reject) {
@@ -100,4 +106,4 @@ export const selectFlightForBooking = (selectedFlight) => {
     type: SELECT_FLIGHT_FOR_BOOKING,
     payload: selectedFlight,
   };
-}
+};

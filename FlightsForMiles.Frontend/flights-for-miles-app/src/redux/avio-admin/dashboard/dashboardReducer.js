@@ -1,11 +1,11 @@
-import { LOAD_BITCOIN_DOLLAR_EXCHAGE, LOAD_TICKETS_FOR_ENTERED_AIRLINE } from "./dashboardTypes";
+import {
+  LOAD_BITCOIN_DOLLAR_EXCHAGE,
+  LOAD_TICKETS_FOR_ENTERED_AIRLINE,
+} from "./dashboardTypes";
 
 const initialState = {
   bitcoinDollarExchange: 0,
   ticketsForEnteredAirline: [],
-  /*dollarsInOneDay: [0, 0, 0, 0, 0, 0],
-  dollarsInOneWeek: [0, 0, 0, 0, 0, 0, 0],
-  dollarsInOneYear: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],*/
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -19,7 +19,7 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         ticketsForEnteredAirline: action.payload,
-      }
+      };
     default:
       return state;
   }

@@ -20,6 +20,7 @@ function AirlineReview() {
   useEffect(() => {
     dispatch(loadBitcoinDollarExchange());
     dispatch(loadAirlines());
+    
 
     arrayCharts = [];
     var ctxDay = document.getElementById("day");

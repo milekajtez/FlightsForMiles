@@ -2,6 +2,7 @@ import dashboardService from "../../../services/DashboardService";
 import {
   LOAD_BITCOIN_DOLLAR_EXCHAGE,
   LOAD_TICKETS_FOR_ENTERED_AIRLINE,
+  ADD_NEW_TIME_VALUE
 } from "./dashboardTypes";
 
 export const loadBitcoinDollarExchangeAction = (value) => {
@@ -44,3 +45,10 @@ new Promise(function (resolve, reject) {
       reject(error);
     });
 });
+
+export const addNewTimeValueAction = (newValue) => {
+  return {
+    type: ADD_NEW_TIME_VALUE,
+    payload: newValue
+  }
+}

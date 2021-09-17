@@ -7,10 +7,12 @@ import { useSelector } from "react-redux";
 import { loadAirlines } from "../../../../redux/system-admin/airline-reg/airlineRegAction";
 import AirlineDashboardForm from "./AirlineDashboardForm";
 import AirlineReviews from "../../../start-page-components/airline-and-flights/AirlinesAndFlights";
-import { dayChartData, weekChartData, mounthChartData } from './chartData';
+import { dayChartData, weekChartData, mounthChartData, timeChartData } from './chartData';
+import AirlineTimeRangeForm from "./AirlineTimeRangeForm";
 Chart.register(...registerables);
 
 var arrayCharts = [];
+var timeChart = {};
 
 function AirlineReview() {
   const dispatch = useDispatch();
@@ -21,7 +23,6 @@ function AirlineReview() {
     dispatch(loadBitcoinDollarExchange());
     dispatch(loadAirlines());
     
-
     arrayCharts = [];
     var ctxDay = document.getElementById("day");
     arrayCharts.push(new Chart(ctxDay, dayChartData));
@@ -29,6 +30,9 @@ function AirlineReview() {
     arrayCharts.push(new Chart(ctxWeek, weekChartData));
     var ctxMounth = document.getElementById('mounth');
     arrayCharts.push(new Chart(ctxMounth, mounthChartData));
+
+    var ctxTime = document.getElementById('time');
+    timeChart = new Chart(ctxTime, timeChartData)
   }, [dispatch]);
 
   return (
@@ -42,7 +46,12 @@ function AirlineReview() {
       <AirlineReviews />
       <AirlineDashboardForm 
         airlines={airlines} 
-        arrayCharts={arrayCharts}/>
+        arrayCharts={arrayCharts}
+      />
+      <AirlineTimeRangeForm 
+        airlines={airlines} 
+        timeChart={timeChart}
+        />
     </div>
   );
 }

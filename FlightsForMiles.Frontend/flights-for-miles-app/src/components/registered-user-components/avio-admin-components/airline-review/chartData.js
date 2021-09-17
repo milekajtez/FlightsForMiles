@@ -153,4 +153,33 @@ const mounthChartData = {
   },
 };
 
-export { dayChartData, weekChartData, mounthChartData };
+const timeChartData = {
+  type: "bar",
+  data: {
+    labels: [
+      "number of sold tickets",
+    ],
+    datasets: [
+      {
+        label: "# of sold ticket in entered period",
+        data: [0],
+        backgroundColor: [
+          "rgba(15, 176, 217, 0.2)",
+        ],
+        borderColor: [
+          "rgba(15, 176, 217, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+};
+
+export { dayChartData, weekChartData, mounthChartData, timeChartData };

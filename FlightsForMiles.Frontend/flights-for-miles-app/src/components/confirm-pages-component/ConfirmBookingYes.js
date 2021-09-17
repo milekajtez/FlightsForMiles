@@ -4,7 +4,7 @@ import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { confirmBooking } from "../../redux/regular-user/booking/bookingAction";
-import { validateAndMineTransaction } from '../../utils/blockchainUtils';
+import { validateAndMineTransaction } from "../../utils/blockchainUtils";
 
 function ConfirmBookingYes() {
   const dispatch = useDispatch();
@@ -18,13 +18,17 @@ function ConfirmBookingYes() {
           alert.show("Confirm booking successfully.", {
             type: "success",
           });
-          
-          validateAndMineTransaction({
-            username: params.friendsUsername,
-            flightID: params.flightID,
-            ticketID: params.ticketID,
-            transactionID: params.transactionID,
-          }, dispatch, alert);
+
+          validateAndMineTransaction(
+            {
+              username: params.friendsUsername,
+              flightID: params.flightID,
+              ticketID: params.ticketID,
+              transactionID: params.transactionID,
+            },
+            dispatch,
+            alert
+          );
         }
       })
       .catch((error) => {

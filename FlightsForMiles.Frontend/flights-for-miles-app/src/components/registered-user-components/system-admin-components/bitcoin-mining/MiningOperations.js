@@ -3,7 +3,10 @@ import { useState } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { createDefaultBlock, deleteBlockchain } from "../../../../redux/system-admin/bitcoin-mining/bitcoinMiningAction";
+import {
+  createDefaultBlock,
+  deleteBlockchain,
+} from "../../../../redux/system-admin/bitcoin-mining/bitcoinMiningAction";
 import BlockchainView from "./BlockchainView";
 import UserAmountForm from "./UserAmountForm";
 
@@ -17,75 +20,86 @@ function MiningOperations() {
   const destroyBlockchain = () => {
     if (window.confirm("Are you sure you want to delete blockchain?")) {
       dispatch(deleteBlockchain(params.username))
-      .then(response => {
-        if(response.status === 204){
-          alert.show("Deleting blockchain successfully.", {
-            type: 'success'
-          })
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        if (error.response.data.indexOf("Deleting unsuccessfully. Blockchain doesn't exsist or operation is currenly invalid.") !== -1) {
-          alert.show("Deleting unsuccessfully. Blockchain doesn't exsist or operation is currenly invalid.",
-            {
+        .then((response) => {
+          if (response.status === 204) {
+            alert.show("Deleting blockchain successfully.", {
+              type: "success",
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (
+            error.response.data.indexOf(
+              "Deleting unsuccessfully. Blockchain doesn't exsist or operation is currenly invalid."
+            ) !== -1
+          ) {
+            alert.show(
+              "Deleting unsuccessfully. Blockchain doesn't exsist or operation is currenly invalid.",
+              {
+                type: "error",
+              }
+            );
+          } else if (
+            error.response.data.indexOf(
+              "This is not system admin. Only system admin can to work with configuration of blockchain."
+            ) !== -1
+          ) {
+            alert.show(
+              "This is not system admin. Only system admin can to work with configuration of blockchain.",
+              {
+                type: "error",
+              }
+            );
+          } else {
+            alert.show("Unknown error.", {
               type: "error",
-            }
-          );
-        } 
-        else if(error.response.data.indexOf("This is not system admin. Only system admin can to work with configuration of blockchain.") !== -1) {
-          alert.show("This is not system admin. Only system admin can to work with configuration of blockchain.",
-            {
-              type: "error",
-            }
-          );
-        }
-        else {
-          alert.show("Unknown error.",
-            {
-              type: "error",
-            }
-          );
-        } 
-      })
+            });
+          }
+        });
     }
   };
 
   const createBlockchain = () => {
     dispatch(createDefaultBlock(params.username))
-    .then(response => {
-      if(response.status === 200){
-        alert.show("Default block created successfully.", {
-          type: 'success'
-        })
-      }
-    })
-    .catch(error => {
-      console.log(error);
-      if (error.response.data.indexOf("This is not system admin. Only system admin can to work with configuration of blockchain.") !== -1) {
-        alert.show("This is not system admin. Only system admin can to work with configuration of blockchain.",
-          {
+      .then((response) => {
+        if (response.status === 200) {
+          alert.show("Default block created successfully.", {
+            type: "success",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        if (
+          error.response.data.indexOf(
+            "This is not system admin. Only system admin can to work with configuration of blockchain."
+          ) !== -1
+        ) {
+          alert.show(
+            "This is not system admin. Only system admin can to work with configuration of blockchain.",
+            {
+              type: "error",
+            }
+          );
+        } else if (
+          error.response.data.indexOf(
+            "Creating block chain unsuccessfully. We've already had defined blcokchain."
+          ) !== -1
+        ) {
+          alert.show(
+            "Creating block chain unsuccessfully. We've already had defined blcokchain.",
+            {
+              type: "error",
+            }
+          );
+        } else {
+          alert.show("Unknown error.", {
             type: "error",
-          }
-        );
-      } 
-      else if(error.response.data.indexOf("Creating block chain unsuccessfully. We've already had defined blcokchain.") !== -1) {
-        alert.show("Creating block chain unsuccessfully. We've already had defined blcokchain.",
-          {
-            type: "error",
-          }
-        );
-      }
-      else {
-        alert.show("Unknown error.",
-          {
-            type: "error",
-          }
-        );
-      } 
-    })
-  }
-
+          });
+        }
+      });
+  };
 
   return (
     <div>
@@ -158,7 +172,10 @@ function MiningOperations() {
         </span>
       </div>
       {blockchain ? <BlockchainView /> : null}
-      <UserAmountForm userAmountModal={userAmountModal} setUserAmountModal={setUserAmountModal}/>
+      <UserAmountForm
+        userAmountModal={userAmountModal}
+        setUserAmountModal={setUserAmountModal}
+      />
     </div>
   );
 }

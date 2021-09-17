@@ -37,7 +37,9 @@ function Help(props) {
           width="80%"
           height="400px"
         />
-        <h3 style={{ textAlign: "center", fontSize: '35px' }}>How FlightsForMiles works?</h3>
+        <h3 style={{ textAlign: "center", fontSize: "35px" }}>
+          How FlightsForMiles works?
+        </h3>
         <DisplayAppDescription />
         <DisplayAllQuestions />
       </div>

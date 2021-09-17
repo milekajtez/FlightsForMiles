@@ -2,7 +2,7 @@ import dashboardService from "../../../services/DashboardService";
 import {
   LOAD_BITCOIN_DOLLAR_EXCHAGE,
   LOAD_TICKETS_FOR_ENTERED_AIRLINE,
-  ADD_NEW_TIME_VALUE
+  ADD_NEW_TIME_VALUE,
 } from "./dashboardTypes";
 
 export const loadBitcoinDollarExchangeAction = (value) => {
@@ -34,21 +34,21 @@ export const loadTicketsForEnteredAirlineAction = (tickets) => {
   };
 };
 
-export const loadTicketsForEnteredAirline = (airlineID) => () => 
-new Promise(function (resolve, reject) {
-  dashboardService
-    .loadTicketsForEnteredAirline(airlineID)
-    .then((response) => {
-      resolve(response);
-    })
-    .catch((error) => {
-      reject(error);
-    });
-});
+export const loadTicketsForEnteredAirline = (airlineID) => () =>
+  new Promise(function (resolve, reject) {
+    dashboardService
+      .loadTicketsForEnteredAirline(airlineID)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 
 export const addNewTimeValueAction = (newValue) => {
   return {
     type: ADD_NEW_TIME_VALUE,
-    payload: newValue
-  }
-}
+    payload: newValue,
+  };
+};

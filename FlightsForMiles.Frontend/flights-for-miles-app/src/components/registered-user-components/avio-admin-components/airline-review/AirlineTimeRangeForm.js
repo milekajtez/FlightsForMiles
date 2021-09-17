@@ -18,33 +18,34 @@ function AirlineTimeRangeForm(props) {
 
   const timeChartForm = useFormWithFields({
     onSubmit: (e) => {
-      if(new Date(startTimeField.value) >= new Date(endTimeField.value)){
-        alert.show('Start date must be before end date.', {
-          type: 'error'
-        })
-      }
-      else {
-        if(dashboard.ticketsForEnteredAirline.length === 0){
-          alert.show('It is necessary to choose the airline first.', {
-            type: 'error'
-          })
-        }
-        else {
+      if (new Date(startTimeField.value) >= new Date(endTimeField.value)) {
+        alert.show("Start date must be before end date.", {
+          type: "error",
+        });
+      } else {
+        if (dashboard.ticketsForEnteredAirline.length === 0) {
+          alert.show("It is necessary to choose the airline first.", {
+            type: "error",
+          });
+        } else {
           var newValue = 0;
-          dashboard.ticketsForEnteredAirline.data.forEach(element => {
-            if(new Date(element.purchasedTime) >= new Date(startTimeField.value) && 
-              new Date(element.purchasedTime) <= new Date(endTimeField.value)){
-                newValue += 1;
-              }
+          dashboard.ticketsForEnteredAirline.data.forEach((element) => {
+            if (
+              new Date(element.purchasedTime) >=
+                new Date(startTimeField.value) &&
+              new Date(element.purchasedTime) <= new Date(endTimeField.value)
+            ) {
+              newValue += 1;
+            }
           });
 
           props.timeChart.data.datasets[0].data[0] = newValue;
           props.timeChart.update();
 
-          alert.show('Successfully loading data.', {
-            type: 'success'
+          alert.show("Successfully loading data.", {
+            type: "success",
           });
-          
+
           timeChartForm.handleReset();
           addNewTimeValueAction(newValue);
         }
@@ -55,37 +56,45 @@ function AirlineTimeRangeForm(props) {
   });
   return (
     <>
-      <div
-        className="box"
-        style={{ alignItems: "center" }}
-      >
+      <div className="box" style={{ alignItems: "center" }}>
         <form onSubmit={timeChartForm.handleSubmit}>
           <div>
             <span>
-              <label style={{color: 'white', fontWeight: 'bold', fontSize: '20px'}}>Start date time: </label>
+              <label
+                style={{ color: "white", fontWeight: "bold", fontSize: "20px" }}
+              >
+                Start date time:{" "}
+              </label>
               <input
                 type="date"
                 value={startTimeField.value}
                 required={startTimeField.isRequired}
                 onChange={startTimeField.handleChange}
                 id="startTimeField"
-                style={{border: '2px solid black'}}
+                style={{ border: "2px solid black" }}
               ></input>
             </span>
             <span>
-              <label style={{color: 'white', fontWeight: 'bold', fontSize: '20px'}}>End date time: </label>
+              <label
+                style={{ color: "white", fontWeight: "bold", fontSize: "20px" }}
+              >
+                End date time:{" "}
+              </label>
               <input
                 type="date"
                 value={endTimeField.value}
                 required={endTimeField.isRequired}
                 onChange={endTimeField.handleChange}
                 id="endTimeField"
-                style={{border: '2px solid black'}}
+                style={{ border: "2px solid black" }}
               />
             </span>
           </div>
           <div>
-            <button type="submit" style={{ margin: '0 0 20px 0', backgroundColor: "#141e30" }}>
+            <button
+              type="submit"
+              style={{ margin: "0 0 20px 0", backgroundColor: "#141e30" }}
+            >
               <span></span>
               <span></span>
               <span></span>

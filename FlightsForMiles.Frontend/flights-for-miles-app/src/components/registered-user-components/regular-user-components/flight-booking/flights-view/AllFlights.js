@@ -20,22 +20,22 @@ function AllFlights() {
   const flights = useSelector((state) => state.flight);
   return (
     <div>
-        <hr style={{backgroundColor: "aqua", margin: '0 5% 0'}}></hr>
-        <h2 style={{color: 'white', marginTop: '8px'}}>ALL FLIGHTS</h2>
-        <table className="items-table">
-            <thead>
-            <tr>
-                <th>Flight ID</th>
-                <th>Start time</th>
-                <th>End time</th>
-                <th>Start location</th>
-                <th>End location</th>
-                <th>Airline ID + name</th>
-                <th>More info</th>
-            </tr>
-            </thead>
-            <tbody>
-            {flights.allFlights.map((flight) => {
+      <hr style={{ backgroundColor: "aqua", margin: "0 5% 0" }}></hr>
+      <h2 style={{ color: "white", marginTop: "8px" }}>ALL FLIGHTS</h2>
+      <table className="items-table">
+        <thead>
+          <tr>
+            <th>Flight ID</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Start location</th>
+            <th>End location</th>
+            <th>Airline ID + name</th>
+            <th>More info</th>
+          </tr>
+        </thead>
+        <tbody>
+          {flights.allFlights.map((flight) => {
             return (
               <tr key={flight.flightID}>
                 <td>{flight.flightID}</td>
@@ -57,9 +57,9 @@ function AllFlights() {
               </tr>
             );
           })}
-            </tbody>
-        </table>
-        <FlightMoreInfo
+        </tbody>
+      </table>
+      <FlightMoreInfo
         moreInfoIsOpen={moreInfoIsOpen}
         setMoreInfoIsOpen={setMoreInfoIsOpen}
       />

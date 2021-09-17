@@ -33,7 +33,6 @@ function AllDestinations() {
             type: "success",
           });
 
-          // na kraju ponovo ucitavanje jer se promenilo stanje baze
           dispatch(loadDestinations());
         } else {
           alert.show("Unknown error.", {

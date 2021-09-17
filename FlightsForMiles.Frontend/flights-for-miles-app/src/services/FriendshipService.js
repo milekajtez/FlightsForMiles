@@ -39,7 +39,9 @@ const friendshipService = {
   },
 
   chooseFriendForBooking: (friend) => {
-    return API.get(`Friendships/ChooseFriendForBooking/${friend.myusername}/${friend.username}/${friend.passport}`);
+    return API.get(
+      `Friendships/ChooseFriendForBooking/${friend.myusername}/${friend.username}/${friend.passport}`
+    );
   },
 };
 

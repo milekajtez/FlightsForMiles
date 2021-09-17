@@ -95,7 +95,7 @@ function DiscountForm(props) {
           required={discountField.isRequired}
           onChange={discountField.handleChange}
           id="discountField"
-          style={{border: '2px solid black'}}
+          style={{ border: "2px solid black" }}
         >
           <option value=""> -- select an option --</option>
           <option value="5">5%</option>

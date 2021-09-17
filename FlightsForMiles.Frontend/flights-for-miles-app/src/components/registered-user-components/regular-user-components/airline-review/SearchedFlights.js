@@ -78,10 +78,8 @@ function SearchedFlights() {
           />
         </>
       ) : (
-        <div style={{ textAlign: "center"}}>
-          <i>
-            --- list of searched flights ---
-          </i>
+        <div style={{ textAlign: "center" }}>
+          <i>--- list of searched flights ---</i>
         </div>
       )}
     </>

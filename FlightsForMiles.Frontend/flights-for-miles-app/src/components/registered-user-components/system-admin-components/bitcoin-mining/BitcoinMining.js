@@ -1,12 +1,12 @@
-import React from 'react'
-import MiningOperations from './MiningOperations'
+import React from "react";
+import MiningOperations from "./MiningOperations";
 
 function BitcoinMining() {
-    return (
-        <div>
-            <MiningOperations />
-        </div>
-    )
+  return (
+    <div>
+      <MiningOperations />
+    </div>
+  );
 }
 
-export default BitcoinMining
+export default BitcoinMining;

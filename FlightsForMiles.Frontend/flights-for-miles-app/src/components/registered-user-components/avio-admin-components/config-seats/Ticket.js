@@ -151,7 +151,9 @@ function Ticket(props) {
               <span className="item">
                 PRICE
                 <br />
-                <span title={`${props.ticket.bitcoinPrice} ₿`}>{props.ticket.price} $</span>
+                <span title={`${props.ticket.bitcoinPrice} ₿`}>
+                  {props.ticket.price} $
+                </span>
               </span>
             </div>
             &emsp;&emsp;

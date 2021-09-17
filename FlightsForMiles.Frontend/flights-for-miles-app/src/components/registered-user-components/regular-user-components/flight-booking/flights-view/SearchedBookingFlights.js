@@ -11,15 +11,14 @@ function SearchedBookingFlights() {
   const params = useParams();
 
   const booking = (flightForBooking) => {
-    dispatch(selectFlightForBooking(flightForBooking))
+    dispatch(selectFlightForBooking(flightForBooking));
     history.push(`/regular/${params.username}/flightBookingSeats`);
-  }
+  };
 
   function makeRating(sumOfAllGrades, numberOfGrades) {
     return numberOfGrades === "0"
       ? 0
-      : (parseFloat(sumOfAllGrades) /
-          parseFloat(numberOfGrades)).toFixed(2);
+      : (parseFloat(sumOfAllGrades) / parseFloat(numberOfGrades)).toFixed(2);
   }
 
   return (
@@ -56,14 +55,59 @@ function SearchedBookingFlights() {
                   <td>{flight.numberOfTransfers}</td>
                   <td>{flight.flightTime}</td>
                   <td>{flight.flightLengthKM}</td>
-                  <td>{flight.airlineID.split(' ')[2]}</td>
+                  <td>{flight.airlineID.split(" ")[2]}</td>
                   <td>
-                  <span style={{ color: "white" }}>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 0.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 1.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 2.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 3.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 4.5 ? ' checked': ''}`}></span>
+                    <span style={{ color: "white" }}>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 0.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 1.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 2.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 3.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 4.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
                     </span>
                     <br></br>
                     {makeRating(flight.sumOfAllGrades, flight.numberOfGrades)}
@@ -73,7 +117,11 @@ function SearchedBookingFlights() {
                       className="btn btn-success"
                       onClick={() => booking(flight)}
                     >
-                      <img src="https://img.icons8.com/dusk/24/000000/airport.png" alt=""/> BOOKING
+                      <img
+                        src="https://img.icons8.com/dusk/24/000000/airport.png"
+                        alt=""
+                      />{" "}
+                      BOOKING
                     </button>
                   </td>
                 </tr>

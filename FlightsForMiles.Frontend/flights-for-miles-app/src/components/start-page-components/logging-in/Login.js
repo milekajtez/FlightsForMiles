@@ -141,7 +141,6 @@ function Login(props) {
   //#endregion
   //#region Form fields validation
   function Validation() {
-    // password validation
     if (passwordField.value.length < 8) {
       alert.show("Minimum number of caracters in password is 8!", {
         type: "error",

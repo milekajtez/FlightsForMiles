@@ -3,7 +3,10 @@ import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { useFormField, useFormWithFields } from "react-use-form-hooks";
-import { addFriendForBooking, chooseFriendForBooking } from "../../../../../redux/regular-user/friendship/friendshipAction";
+import {
+  addFriendForBooking,
+  chooseFriendForBooking,
+} from "../../../../../redux/regular-user/friendship/friendshipAction";
 
 function AddFriendsForBookingForm() {
   const dispatch = useDispatch();
@@ -39,7 +42,7 @@ function AddFriendsForBookingForm() {
           addFriendsForBookingForm.handleReset();
         })
         .catch((error) => {
-            console.log(error)
+          console.log(error);
           if (
             error.response.data.indexOf(
               "(Server not found friend with entered username / passport.)"

@@ -4,7 +4,10 @@ import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { addSelectedTickets, loadTickets } from "../../../../../redux/avio-admin/ticket/ticketAction";
+import {
+  addSelectedTickets,
+  loadTickets,
+} from "../../../../../redux/avio-admin/ticket/ticketAction";
 
 function PlaneConfiguration(props) {
   const dispatch = useDispatch();
@@ -21,11 +24,13 @@ function PlaneConfiguration(props) {
 
   function makeTextShowUp(ticket) {
     var message = "";
-    if(ticket.isQuickBooking === "YES") {
-      message = "You can't to select this seats because this seats is currently for quick booking.\n-------------------------\n";
+    if (ticket.isQuickBooking === "YES") {
+      message =
+        "You can't to select this seats because this seats is currently for quick booking.\n-------------------------\n";
     }
-    if(ticket.isPurchased === "YES") {
-      message = "You can't to select this seats because this seats is already purchased.\n-------------------------\n";
+    if (ticket.isPurchased === "YES") {
+      message =
+        "You can't to select this seats because this seats is already purchased.\n-------------------------\n";
     }
 
     return `${message}Ticket number: ${ticket.number}\nTicket price: ${ticket.price} $\nTicket type: ${ticket.type}\nQuick booking: ${ticket.isQuickBooking}`;
@@ -50,10 +55,10 @@ function PlaneConfiguration(props) {
       );
 
       var ticketsResult = [];
-      for(let i = 0; i< checkedSeats.length; i++) {
-        for(let j = 0; j < ticket.ticketsForOneFlight.length; j++){
-          if(checkedSeats[i] === ticket.ticketsForOneFlight[j].ticketID){
-            ticketsResult.push(ticket.ticketsForOneFlight[j])
+      for (let i = 0; i < checkedSeats.length; i++) {
+        for (let j = 0; j < ticket.ticketsForOneFlight.length; j++) {
+          if (checkedSeats[i] === ticket.ticketsForOneFlight[j].ticketID) {
+            ticketsResult.push(ticket.ticketsForOneFlight[j]);
           }
         }
       }
@@ -61,10 +66,9 @@ function PlaneConfiguration(props) {
       dispatch(addSelectedTickets(ticketsResult));
       checkedSeats = [];
       ticketsResult = [];
-      
+
       history.push(`/regular/${params.username}/flightBookingOther`);
-    }
-    else {
+    } else {
       alert.show("You would to select one or higher number of tickets", {
         type: "info",
       });
@@ -85,7 +89,10 @@ function PlaneConfiguration(props) {
                 type="checkbox"
                 id={ticket.ticketID}
                 onChange={() => changeState(ticket.ticketID)}
-                disabled={ticket.isPurchased === "YES" || ticket.isQuickBooking === "YES"}
+                disabled={
+                  ticket.isPurchased === "YES" ||
+                  ticket.isQuickBooking === "YES"
+                }
               />
               <label htmlFor={ticket.ticketID}>{ticket.number}</label>
             </span>

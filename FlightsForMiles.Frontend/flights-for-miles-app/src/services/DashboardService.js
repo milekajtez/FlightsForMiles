@@ -7,7 +7,7 @@ const dashboardService = {
 
   loadTicketsForEnteredAirline: (airlineID) => {
     return API.get(`Dashboards/LoadTicketsForEnteredAirline/${airlineID}`);
-  }
+  },
 };
 
 export default dashboardService;

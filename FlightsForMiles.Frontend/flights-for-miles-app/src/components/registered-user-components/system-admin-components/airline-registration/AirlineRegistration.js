@@ -118,7 +118,7 @@ function AirlineRegistration() {
             onChange={nameField.handleChange}
             id="nameField"
             placeholder="Name"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -129,7 +129,7 @@ function AirlineRegistration() {
             onChange={houseNumberField.handleChange}
             id="houseNumberField"
             placeholder="House number"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -140,7 +140,7 @@ function AirlineRegistration() {
             onChange={streetField.handleChange}
             id="streetField"
             placeholder="Street"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -151,7 +151,7 @@ function AirlineRegistration() {
             onChange={cityField.handleChange}
             id="cityField"
             placeholder="City"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -162,7 +162,7 @@ function AirlineRegistration() {
             onChange={descriptionField.handleChange}
             id="descriptionField"
             placeholder="Description"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -173,7 +173,7 @@ function AirlineRegistration() {
             onChange={pricelistField.handleChange}
             id="pricelistField"
             placeholder="Pricelist"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>

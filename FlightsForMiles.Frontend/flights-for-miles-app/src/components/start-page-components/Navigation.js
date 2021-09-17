@@ -24,8 +24,6 @@ function Navigation() {
         if (response.status === 200) {
           localStorage.setItem("User_JWT_Token", response.data.token);
 
-          // regular user
-
           history.push(`/regular/${currentUser}`);
 
           alert.show("Login successfully", {

@@ -1,5 +1,9 @@
 import bookingService from "../../../services/BookingService";
-import { LOAD_ACTIVE_BOOKING, LOAD_PREVIOUS_BOOKING, LOAD_QUICK_BOOKING } from "./bookingTypes";
+import {
+  LOAD_ACTIVE_BOOKING,
+  LOAD_PREVIOUS_BOOKING,
+  LOAD_QUICK_BOOKING,
+} from "./bookingTypes";
 
 export const bookingWithoutFriends = (newBooking) => () =>
   new Promise(function (resolve, reject) {
@@ -55,7 +59,7 @@ export const loadQuickBookingsAction = (quickBookins) => {
     payload: quickBookins,
   };
 };
-  
+
 export const loadQuickBookings = (username) => {
   return (dispatch) => {
     bookingService
@@ -77,7 +81,7 @@ export const loadActiveBookingsAction = (activeBookings) => {
     payload: activeBookings,
   };
 };
-  
+
 export const loadActiveBookings = (username) => {
   return (dispatch) => {
     bookingService
@@ -99,7 +103,7 @@ export const loadPreviousBookingsAction = (previousBookings) => {
     payload: previousBookings,
   };
 };
-  
+
 export const loadPreviousBookings = (username) => {
   return (dispatch) => {
     bookingService

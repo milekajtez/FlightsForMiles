@@ -7,7 +7,7 @@ import {
 const initialState = {
   bitcoinDollarExchange: 0,
   ticketsForEnteredAirline: [],
-  timeValue: 0
+  timeValue: 0,
 };
 
 const dashboardReducer = (state = initialState, action) => {
@@ -26,7 +26,7 @@ const dashboardReducer = (state = initialState, action) => {
       return {
         ...state,
         timeValue: action.payload,
-      }
+      };
     default:
       return state;
   }

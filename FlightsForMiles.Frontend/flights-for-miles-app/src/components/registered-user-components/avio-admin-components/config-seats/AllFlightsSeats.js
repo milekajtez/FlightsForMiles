@@ -12,7 +12,7 @@ import {
 import { useAlert } from "react-alert";
 
 function AllFlightsSeats() {
-  const [showHideIndicator, setIndicator] = useState(0); // 0 - nema prikaza // != 0 - prikaz (id leta)
+  const [showHideIndicator, setIndicator] = useState(0);
   const [addTicket, setAddTicket] = useState({ isOpen: false, flightID: "" });
 
   const dispatch = useDispatch();

@@ -57,7 +57,6 @@ function AddDestination(props) {
               type: "success",
             });
 
-            // ponovo ucitavanje svih destinacija..jer se baza izmenila
             dispatch(loadDestinations());
 
             addDestinationForm.handleReset();

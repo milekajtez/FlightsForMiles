@@ -30,7 +30,7 @@ namespace FlightsForMiles.Controllers
         #endregion
         #region 2 - Get (Load one ticket)
         [HttpGet("{id}", Name = "GetTicket")]
-        public ActionResult GetTicket(long id)   //GetGetTicket....zato nije pozivalo metode kod destination i ostalim kontrolerima..popraviti to!!!!
+        public ActionResult GetTicket(long id)
         {
             ITicketResponseDTO newTicket = _ticketService.LoadTicket(id);
             if (newTicket != null)

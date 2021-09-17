@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import AirlineAddressMap from "./AirlineAddressMap";
-//import AirlineChangeInfo from './AirlineChangeInfo'
 import AirlineDescription from "./AirlineDescription";
 import AirlineDestinations from "./AirlineDestinations";
 import AirlineFlights from "./AirlineFlights";
@@ -27,8 +26,10 @@ function OneAirline(props) {
   function makeRating() {
     return props.airline.numberOfGrades === "0"
       ? 0
-      : (parseFloat(props.airline.sumOfAllGrades) /
-          parseFloat(props.airline.numberOfGrades)).toFixed(2);
+      : (
+          parseFloat(props.airline.sumOfAllGrades) /
+          parseFloat(props.airline.numberOfGrades)
+        ).toFixed(2);
   }
 
   return (
@@ -49,11 +50,21 @@ function OneAirline(props) {
         </td>
         <td>
           <span style={{ color: "white" }}>
-            <span className={`fa fa-star ${makeRating() >= 0.5 ? 'checked': ''}`}></span>
-            <span className={`fa fa-star ${makeRating() >= 1.5 ? 'checked': ''}`}></span>
-            <span className={`fa fa-star ${makeRating() >= 2.5 ? 'checked': ''}`}></span>
-            <span className={`fa fa-star ${makeRating() >= 3.5 ? 'checked': ''}`}></span>
-            <span className={`fa fa-star ${makeRating() >= 4.5 ? 'checked': ''}`}></span>
+            <span
+              className={`fa fa-star ${makeRating() >= 0.5 ? "checked" : ""}`}
+            ></span>
+            <span
+              className={`fa fa-star ${makeRating() >= 1.5 ? "checked" : ""}`}
+            ></span>
+            <span
+              className={`fa fa-star ${makeRating() >= 2.5 ? "checked" : ""}`}
+            ></span>
+            <span
+              className={`fa fa-star ${makeRating() >= 3.5 ? "checked" : ""}`}
+            ></span>
+            <span
+              className={`fa fa-star ${makeRating() >= 4.5 ? "checked" : ""}`}
+            ></span>
           </span>
           <br></br>
           {makeRating()}
@@ -71,9 +82,6 @@ function OneAirline(props) {
             <i className="fas fa-plane"></i> FLIGHTS
           </button>
         </td>
-        {/*<td>
-                    <button className="btn btn-warning" onClick={() => setChangeInfo(true)}><i className="fas fa-pencil-alt"></i> CHANGE</button>
-                </td>*/}
       </tr>
       <AirlineAddressMap
         addressMapIsOpen={addressMapIsOpen}
@@ -106,8 +114,6 @@ function OneAirline(props) {
         setFlights={setFlights}
         airlineID={props.airline.id}
       />
-      {/*<AirlineChangeInfo changeInfoIsOpen={changeInfoIsOpen} setChangeInfo={setChangeInfo} 
-                airline={props.airline}/>*/}
     </>
   );
 }

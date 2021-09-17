@@ -26,8 +26,7 @@ function AirlineFlights(props) {
   function makeRating(sumOfAllGrades, numberOfGrades) {
     return numberOfGrades === "0"
       ? 0
-      : (parseFloat(sumOfAllGrades) /
-          parseFloat(numberOfGrades)).toFixed(2);
+      : (parseFloat(sumOfAllGrades) / parseFloat(numberOfGrades)).toFixed(2);
   }
 
   return (
@@ -78,11 +77,56 @@ function AirlineFlights(props) {
                   </td>
                   <td>
                     <span style={{ color: "white" }}>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 0.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 1.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 2.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 3.5 ? ' checked': ''}`}></span>
-                      <span className={`fa fa-star${makeRating(flight.sumOfAllGrades, flight.numberOfGrades) >= 4.5 ? ' checked': ''}`}></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 0.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 1.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 2.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 3.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
+                      <span
+                        className={`fa fa-star${
+                          makeRating(
+                            flight.sumOfAllGrades,
+                            flight.numberOfGrades
+                          ) >= 4.5
+                            ? " checked"
+                            : ""
+                        }`}
+                      ></span>
                     </span>
                     <br></br>
                     {makeRating(flight.sumOfAllGrades, flight.numberOfGrades)}

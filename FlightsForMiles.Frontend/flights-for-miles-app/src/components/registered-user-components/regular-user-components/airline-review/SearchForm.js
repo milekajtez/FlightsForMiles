@@ -2,7 +2,7 @@ import React from "react";
 import { useFormField, useFormWithFields } from "react-use-form-hooks";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { searchAction } from '../../../../redux/avio-admin/flight/flightAction';
+import { searchAction } from "../../../../redux/avio-admin/flight/flightAction";
 import SearchedFlights from "./SearchedFlights";
 
 function SearchForm() {
@@ -16,7 +16,6 @@ function SearchForm() {
   const endLocationField = useFormField({
     initialValue: "",
   });
-  
 
   const searchFlightsForm = useFormWithFields({
     onSubmit: (e) => {
@@ -27,22 +26,26 @@ function SearchForm() {
           let searchEndLocation = true;
 
           if (startLocationField.value !== "") {
-            if (flights.flightsForAirline[i].startLocation === startLocationField.value) {
-                searchStartLocation = true;
+            if (
+              flights.flightsForAirline[i].startLocation ===
+              startLocationField.value
+            ) {
+              searchStartLocation = true;
             } else {
-                searchStartLocation = false;
+              searchStartLocation = false;
             }
           }
 
           if (endLocationField.value !== "") {
-            if (flights.flightsForAirline[i].endLocation === endLocationField.value) {
-                searchEndLocation = true;
+            if (
+              flights.flightsForAirline[i].endLocation ===
+              endLocationField.value
+            ) {
+              searchEndLocation = true;
             } else {
-                searchEndLocation = false;
+              searchEndLocation = false;
             }
           }
-
-          
 
           if (searchStartLocation && searchEndLocation) {
             searchedFlights.push(flights.flightsForAirline[i]);
@@ -60,10 +63,7 @@ function SearchForm() {
   });
 
   function SearchValidation() {
-    if (
-        startLocationField.value === "" &&
-        endLocationField.value === ""
-    ) {
+    if (startLocationField.value === "" && endLocationField.value === "") {
       alert.show("You must enter at least one parameter.", {
         type: "info",
       });
@@ -76,8 +76,12 @@ function SearchForm() {
   return (
     <>
       <div
-        
-        style={{ display: "inline-block", marginTop: "1%", textAlign: 'center', width: '100%' }}
+        style={{
+          display: "inline-block",
+          marginTop: "1%",
+          textAlign: "center",
+          width: "100%",
+        }}
       >
         <h3 className="subtitle">SEARCH FLIGHT</h3>
         <form onSubmit={searchFlightsForm.handleSubmit}>
@@ -90,7 +94,7 @@ function SearchForm() {
               value={startLocationField.value}
               onChange={startLocationField.handleChange}
             />
-            <div className="cut" style={{width: '100px'}}></div>
+            <div className="cut" style={{ width: "100px" }}></div>
             <label htmlFor="startLocation" className="placeholder">
               Start location
             </label>
@@ -105,14 +109,18 @@ function SearchForm() {
               value={endLocationField.value}
               onChange={endLocationField.handleChange}
             />
-            <div className="cut" style={{width: '100px'}}></div>
+            <div className="cut" style={{ width: "100px" }}></div>
             <label htmlFor="endLocation" className="placeholder">
               End location
             </label>
           </span>
           &nbsp;
           <span style={{ display: "inline-block" }}>
-            <button type="submit" className="submit" style={{color: 'white', backgroundColor: '#14133b'}}>
+            <button
+              type="submit"
+              className="submit"
+              style={{ color: "white", backgroundColor: "#14133b" }}
+            >
               SEARCH
             </button>
           </span>

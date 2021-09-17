@@ -4,8 +4,11 @@ import { useAlert } from "react-alert";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { bookingWithoutFriends, loadQuickBookings } from "../../../../redux/regular-user/booking/bookingAction";
-import { validateAndMineTransaction } from '../../../../utils/blockchainUtils';
+import {
+  bookingWithoutFriends,
+  loadQuickBookings,
+} from "../../../../redux/regular-user/booking/bookingAction";
+import { validateAndMineTransaction } from "../../../../utils/blockchainUtils";
 
 function QuickBooking() {
   const dispatch = useDispatch();
@@ -13,66 +16,78 @@ function QuickBooking() {
   const params = useParams();
   const history = useHistory();
   const alert = useAlert();
-  var transactionID = '';
+  var transactionID = "";
 
   useEffect(() => {
     dispatch(loadQuickBookings(params.username));
   }, [dispatch, params.username]);
 
   const quickBookingReservation = (flightID, ticketID) => {
-    dispatch(bookingWithoutFriends({
-      username: params.username,
-      flightID: flightID,
-      ticketID: ticketID
-    }))
-    .then(response => {
-      if (response.status === 200) {
-        alert.show("Send request for booking successfully. You will get a message if your request for booking is valid.",
-        {
-          type: 'success'
-        });
-        transactionID = response.data;
-        validateAndMineTransaction({
-          username: params.username,
-          flightID: flightID,
-          ticketID: ticketID,
-          transactionID: transactionID,
-        }, dispatch, alert);
-        transactionID = '';
-        history.push(`/regular/${params.username}/airlineReview`);
-      }
-    })
-    .catch(error => {
-      console.log(error);
-      if (
-        error.response.data.indexOf("(Server not found user.)") !== -1
-      ) {
-        alert.show("Server not found user.", {
-          type: "error",
-        });
-      } else if (
-        error.response.data.indexOf("(Server not found flight.)") !== -1
-      ) {
-        alert.show("Server not found flight.", {
-          type: "error",
-        });
-      }
-      else if(error.response.data.indexOf("Server not found ticket.") !== -1) {
-        alert.show("Server not found ticket.", {
-          type: "error",
-        });
-      }
-      else if(error.response.data.indexOf("User has already send request for booking for this flght and seat.") !== -1) {
-        alert.show("User has already send request for booking for this flght and seat.", {
-          type: "error",
-        });
-      }
-      else {
-        alert.show("Unknown error.", {
-          type: "error",
-        });
-      }
-    })
+    dispatch(
+      bookingWithoutFriends({
+        username: params.username,
+        flightID: flightID,
+        ticketID: ticketID,
+      })
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          alert.show(
+            "Send request for booking successfully. You will get a message if your request for booking is valid.",
+            {
+              type: "success",
+            }
+          );
+          transactionID = response.data;
+          validateAndMineTransaction(
+            {
+              username: params.username,
+              flightID: flightID,
+              ticketID: ticketID,
+              transactionID: transactionID,
+            },
+            dispatch,
+            alert
+          );
+          transactionID = "";
+          history.push(`/regular/${params.username}/airlineReview`);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.data.indexOf("(Server not found user.)") !== -1) {
+          alert.show("Server not found user.", {
+            type: "error",
+          });
+        } else if (
+          error.response.data.indexOf("(Server not found flight.)") !== -1
+        ) {
+          alert.show("Server not found flight.", {
+            type: "error",
+          });
+        } else if (
+          error.response.data.indexOf("Server not found ticket.") !== -1
+        ) {
+          alert.show("Server not found ticket.", {
+            type: "error",
+          });
+        } else if (
+          error.response.data.indexOf(
+            "User has already send request for booking for this flght and seat."
+          ) !== -1
+        ) {
+          alert.show(
+            "User has already send request for booking for this flght and seat.",
+            {
+              type: "error",
+            }
+          );
+        } else {
+          alert.show("Unknown error.", {
+            type: "error",
+          });
+        }
+      });
   };
 
   return (
@@ -110,13 +125,22 @@ function QuickBooking() {
                   {quickBooking.discountPrice} $
                 </td>
                 <td>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => quickBookingReservation(quickBooking.flightID, quickBooking.ticketID)}
-                    >
-                      <img src="https://img.icons8.com/dusk/24/000000/airport.png" alt=""/> BOOKING
-                    </button>
-                  </td>
+                  <button
+                    className="btn btn-success"
+                    onClick={() =>
+                      quickBookingReservation(
+                        quickBooking.flightID,
+                        quickBooking.ticketID
+                      )
+                    }
+                  >
+                    <img
+                      src="https://img.icons8.com/dusk/24/000000/airport.png"
+                      alt=""
+                    />{" "}
+                    BOOKING
+                  </button>
+                </td>
               </tr>
             );
           })}

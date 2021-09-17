@@ -1,70 +1,70 @@
 import API from "./api";
 
 const bookingService = {
-    bookingWithoutFriends: (newBooking) => {
-      var body = {
-        Username: newBooking.username,
-        FlightID: newBooking.flightID,
-        TicketID: newBooking.ticketID,
-      };
-    
-      return API.post(`Bookings/BookingWithoutFriends`, body);
-    },
+  bookingWithoutFriends: (newBooking) => {
+    var body = {
+      Username: newBooking.username,
+      FlightID: newBooking.flightID,
+      TicketID: newBooking.ticketID,
+    };
 
-    bookingForFriends: (newBookings) => {
-      var friendsUsername = [];
-      newBookings.friends.forEach(element => {
-        friendsUsername.push(element.username);
-      });
+    return API.post(`Bookings/BookingWithoutFriends`, body);
+  },
 
-      var ticketsID = [];
-      newBookings.tickets.forEach(element => {
-        ticketsID.push(element.ticketID);
-      });
+  bookingForFriends: (newBookings) => {
+    var friendsUsername = [];
+    newBookings.friends.forEach((element) => {
+      friendsUsername.push(element.username);
+    });
 
-      var body = {
-        Username: newBookings.username,
-        Friends: friendsUsername,
-        Tickets: ticketsID,
-        FlightID: newBookings.flightID,
-      };
-    
-      return API.post(`Bookings/BookingForFriends`, body);
-    },
+    var ticketsID = [];
+    newBookings.tickets.forEach((element) => {
+      ticketsID.push(element.ticketID);
+    });
 
-    confirmBooking: (ticketID) => {
-      return API.put(`Bookings/ConfirmBookingRequest/${ticketID}`);
-    },
+    var body = {
+      Username: newBookings.username,
+      Friends: friendsUsername,
+      Tickets: ticketsID,
+      FlightID: newBookings.flightID,
+    };
 
-    refuseBooking: (ticketID) => {
-      return API.delete(`Bookings/RefuseBookingRequest/${ticketID}`);
-    },
+    return API.post(`Bookings/BookingForFriends`, body);
+  },
 
-    loadQuickBookings: (username) => {
-      return API.get(`Bookings/LoadQuickBookings/${username}`);
-    },
+  confirmBooking: (ticketID) => {
+    return API.put(`Bookings/ConfirmBookingRequest/${ticketID}`);
+  },
 
-    loadActiveBookings: (username) => {
-      return API.get(`Bookings/LoadMyBookings/${username}/active`);
-    },
+  refuseBooking: (ticketID) => {
+    return API.delete(`Bookings/RefuseBookingRequest/${ticketID}`);
+  },
 
-    loadPreviousBookings: (username) => {
-      return API.get(`Bookings/LoadMyBookings/${username}/previous`);
-    },
+  loadQuickBookings: (username) => {
+    return API.get(`Bookings/LoadQuickBookings/${username}`);
+  },
 
-    cancelBooking: (priceObj) => {
-      var body = {
-        TicketID: priceObj.ticketID,
-        BitcoinPrice: priceObj.bitcoinPrice,
-        DollarPrice: priceObj.dollarPrice
-      };
+  loadActiveBookings: (username) => {
+    return API.get(`Bookings/LoadMyBookings/${username}/active`);
+  },
 
-      return API.put('Bookings/CancelBooking', body);
-    },
+  loadPreviousBookings: (username) => {
+    return API.get(`Bookings/LoadMyBookings/${username}/previous`);
+  },
 
-    ratingBooking: (flightID, rate) => {
-      return API.put(`Bookings/RatingBooking/${flightID}/${rate}`);
-    },
-}
+  cancelBooking: (priceObj) => {
+    var body = {
+      TicketID: priceObj.ticketID,
+      BitcoinPrice: priceObj.bitcoinPrice,
+      DollarPrice: priceObj.dollarPrice,
+    };
+
+    return API.put("Bookings/CancelBooking", body);
+  },
+
+  ratingBooking: (flightID, rate) => {
+    return API.put(`Bookings/RatingBooking/${flightID}/${rate}`);
+  },
+};
 
 export default bookingService;

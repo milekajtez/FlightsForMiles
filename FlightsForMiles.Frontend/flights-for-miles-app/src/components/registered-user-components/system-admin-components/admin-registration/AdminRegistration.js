@@ -120,7 +120,6 @@ function AdminRegistration() {
       }
     }
 
-    // PIN validation
     if (isNaN(Number(pinField.value)) || pinField.value.length !== 13) {
       alert.show(
         "Please insert a valid Personal identity number! This number must to have 13 digits! (For example '3006997800000')",
@@ -131,7 +130,6 @@ function AdminRegistration() {
       return false;
     }
 
-    // telephone validation
     if (isNaN(Number(telephoneField.value))) {
       alert.show(
         "Please insert a valid phone number! (For example '0628508315')",
@@ -157,7 +155,7 @@ function AdminRegistration() {
             onChange={usernameField.handleChange}
             id="usernameField"
             placeholder="Username"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -168,7 +166,7 @@ function AdminRegistration() {
             onChange={emailField.handleChange}
             id="emailField"
             placeholder="Email"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -179,7 +177,7 @@ function AdminRegistration() {
             onChange={passwordField.handleChange}
             id="passwordField"
             placeholder="Password"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -190,7 +188,7 @@ function AdminRegistration() {
             onChange={confirmPasswordField.handleChange}
             id="confirmPasswordField"
             placeholder="Confirm password"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -201,7 +199,7 @@ function AdminRegistration() {
             onChange={pinField.handleChange}
             id="pinField"
             placeholder="Personal indentify number"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>
@@ -212,7 +210,7 @@ function AdminRegistration() {
             onChange={telephoneField.handleChange}
             id="telephoneField"
             placeholder="Telephone number"
-            style={{border: '2px solid black'}}
+            style={{ border: "2px solid black" }}
           />
         </div>
         <div>

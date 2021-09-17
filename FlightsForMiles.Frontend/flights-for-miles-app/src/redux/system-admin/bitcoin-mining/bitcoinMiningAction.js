@@ -28,10 +28,10 @@ export const deleteBlockchain = (username) => () =>
 export const loadBlockchainAction = (allBlocks) => {
   return {
     type: LOADING_BLOCKCHAIN,
-    payload: allBlocks
-  }
+    payload: allBlocks,
+  };
 };
-  
+
 export const loadBlockchain = (username) => {
   return (dispatch) => {
     blockchainService

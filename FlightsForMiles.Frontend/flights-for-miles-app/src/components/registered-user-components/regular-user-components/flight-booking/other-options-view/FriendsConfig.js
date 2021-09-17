@@ -6,7 +6,7 @@ import FriendsForBookingList from "./FriendsForBookingList";
 function FriendsConfig() {
   return (
     <>
-      <div style={{width: '100%', display: 'inline-block'}}>
+      <div style={{ width: "100%", display: "inline-block" }}>
         <AddFriendsForBookingForm />
         <FriendsForBookingList />
       </div>

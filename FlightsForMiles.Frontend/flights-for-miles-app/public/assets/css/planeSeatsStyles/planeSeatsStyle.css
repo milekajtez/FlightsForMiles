@@ -9,10 +9,9 @@
   display: flex;
   padding: 5px;
   width: 50px;
-  height:auto;
+  height: auto;
   display: inline-block;
   margin: 0 3%;
-
 }
 
 .seat input[type="checkbox"] {

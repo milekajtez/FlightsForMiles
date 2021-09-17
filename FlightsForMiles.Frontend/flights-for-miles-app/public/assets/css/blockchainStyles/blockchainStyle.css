@@ -1,86 +1,86 @@
 .blochchain-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    background: linear-gradient(to right, #1BFFFF, #2E3192);
-    margin: 30px 10% 30px;
-    border-radius: 36px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  background: linear-gradient(to right, #1bffff, #2e3192);
+  margin: 30px 10% 30px;
+  border-radius: 36px;
 }
 
-.blochchain-frame{
-    height:80%;
-    justify-content: center;
+.blochchain-frame {
+  height: 80%;
+  justify-content: center;
 }
 
-.blochchain-box{
-    width: 300px;
-    min-width: 300px;
-    height: 600px;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    background: black;
-    border-radius: 36px;
-    margin: 50px;
-    box-shadow: 12px 12px 6px -2px rgba(0,0,0,.45);
-    animation: scale-box 1s forwards;
-    display: inline-block;
+.blochchain-box {
+  width: 300px;
+  min-width: 300px;
+  height: 600px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background: black;
+  border-radius: 36px;
+  margin: 50px;
+  box-shadow: 12px 12px 6px -2px rgba(0, 0, 0, 0.45);
+  animation: scale-box 1s forwards;
+  display: inline-block;
 }
 
-.blochchain-upper{
-    width: 160px;
-    height: 100px;
-    margin-top: 10px;
-    display: inline-block;
+.blochchain-upper {
+  width: 160px;
+  height: 100px;
+  margin-top: 10px;
+  display: inline-block;
 }
 
-.blochchain-round{
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-left: 35px;
+.blochchain-round {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 35px;
 }
 
-.blochchain-img{
-    width: 110px;
-    margin-left: -9px;
-    margin-top: -10px;
+.blochchain-img {
+  width: 110px;
+  margin-left: -9px;
+  margin-top: -10px;
 }
 
-.blochchain-lower{
-    position: absolute;
-    width: 280px;
-    height: auto;
+.blochchain-lower {
+  position: absolute;
+  width: 280px;
+  height: auto;
 }
 
-.blochchain-h1{
-    color: white;
-    font-family: 'Teko', sans-serif;
-    font-weight: 600;
+.blochchain-h1 {
+  color: white;
+  font-family: "Teko", sans-serif;
+  font-weight: 600;
 }
 
-.blochchain-h2{
-    font-family: 'Teko', sans-serif;
-    font-size: 30px;
+.blochchain-h2 {
+  font-family: "Teko", sans-serif;
+  font-size: 30px;
 }
 
-.blochchain-price{
-    color: white;
-    font-size: 20px;
-    padding: 6px;
-    font-family: 'Teko', sans-serif;
+.blochchain-price {
+  color: white;
+  font-size: 20px;
+  padding: 6px;
+  font-family: "Teko", sans-serif;
 }
 
-.blochchain-name{
-    position: relative;
-    bottom: 10px;
-    color: white;
+.blochchain-name {
+  position: relative;
+  bottom: 10px;
+  color: white;
 }
 
-.blochchain-usd{
-    color: white;
-    font-size: 20px;
-    padding-top: 12px;
-    font-family: 'Cairo', sans-serif;
+.blochchain-usd {
+  color: white;
+  font-size: 20px;
+  padding-top: 12px;
+  font-family: "Cairo", sans-serif;
 }

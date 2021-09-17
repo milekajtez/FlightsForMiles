@@ -26,50 +26,51 @@ function UserAmountForm(props) {
 
   const userAmountForm = useFormWithFields({
     onSubmit: (e) => {
-        if(amountField.value < 0) {
-            alert.show("You need to enter a positive amount value.", {
-                type: 'info'
-            })
-        }
-        else {
-            dispatch(addUserAmount({
-                username: usernameField.value,
-                type: typeField.value,
-                amount: amountField.value
-            }))
-            .then(response => {
-                if(response.status === 200){
-                    alert.show("Define user amount successfully.", {
-                      type: 'success'
-                    })
+      if (amountField.value < 0) {
+        alert.show("You need to enter a positive amount value.", {
+          type: "info",
+        });
+      } else {
+        dispatch(
+          addUserAmount({
+            username: usernameField.value,
+            type: typeField.value,
+            amount: amountField.value,
+          })
+        )
+          .then((response) => {
+            if (response.status === 200) {
+              alert.show("Define user amount successfully.", {
+                type: "success",
+              });
 
-                    props.setUserAmountModal(false);
-                    userAmountForm.handleReset();        
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                if (error.response.data.indexOf("(User not found.)") !== -1) {
-                  alert.show("User not found.", {
-                    type: "error",
-                  });
-                } 
-                else if (error.response.data.indexOf("(User's balance not found.)") !== -1) {
-                  alert.show("User's balance not found.", {
-                    type: "error",
-                  });
-                } 
-                else {
-                  alert.show("Unknown error", {
-                    type: "error",
-                  });
-                }
-            });
-        }
+              props.setUserAmountModal(false);
+              userAmountForm.handleReset();
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.response.data.indexOf("(User not found.)") !== -1) {
+              alert.show("User not found.", {
+                type: "error",
+              });
+            } else if (
+              error.response.data.indexOf("(User's balance not found.)") !== -1
+            ) {
+              alert.show("User's balance not found.", {
+                type: "error",
+              });
+            } else {
+              alert.show("Unknown error", {
+                type: "error",
+              });
+            }
+          });
+      }
 
-        e.preventDefault();
+      e.preventDefault();
     },
-    fields: [usernameField, amountField, typeField]
+    fields: [usernameField, amountField, typeField],
   });
 
   return (
@@ -94,7 +95,7 @@ function UserAmountForm(props) {
       <div className="login-box">
         <h2>Define user's amount</h2>
         <form onSubmit={userAmountForm.handleSubmit}>
-        <div className="user-box">
+          <div className="user-box">
             <input
               type="text"
               value={usernameField.value}

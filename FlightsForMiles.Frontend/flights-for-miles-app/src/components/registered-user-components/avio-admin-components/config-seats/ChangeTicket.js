@@ -120,7 +120,6 @@ function ChangeTicket(props) {
   });
 
   function Validation() {
-    // validacija da li sam ista uneo
     if (
       numberField.value === "" &&
       typeField.value === "" &&

@@ -53,7 +53,11 @@ const friendshipReducer = (state = initialState, action) => {
         ...state,
       };
     case DELETE_FRIEND_FOR_BOOKING:
-      var index = state.friendsSelectedForBooking.map(function(e) {return e.pin}).indexOf(action.payload.pin);
+      var index = state.friendsSelectedForBooking
+        .map(function (e) {
+          return e.pin;
+        })
+        .indexOf(action.payload.pin);
       if (index > -1) {
         state.friendsSelectedForBooking.splice(index, 1);
       }

@@ -26,7 +26,9 @@ function AirlinePricelist(props) {
         {
           <div style={{ textAlign: "center" }}>
             <span className="user-box" style={{ display: "inline-block" }}>
-              <p style={{ color: "white", fontSize: '20px' }}>{props.pricelist}</p>
+              <p style={{ color: "white", fontSize: "20px" }}>
+                {props.pricelist}
+              </p>
             </span>
           </div>
         }

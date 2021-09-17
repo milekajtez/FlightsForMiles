@@ -27,7 +27,9 @@ function SearchBookingFlightForm() {
   });
 
   const getDayOrMounth = (dayOrMounth) => {
-    return !dayOrMounth.indexOf('0') === 1 ? dayOrMounth : dayOrMounth.replace('0', '');
+    return !dayOrMounth.indexOf("0") === 1
+      ? dayOrMounth
+      : dayOrMounth.replace("0", "");
   };
 
   const compareDates = (date1, date2) => {
@@ -35,8 +37,16 @@ function SearchBookingFlightForm() {
     let mounth = false;
     let year = false;
 
-    if (getDayOrMounth(date1.split("/")[1]) === getDayOrMounth(date2.split("-")[2])) day = true;
-    if (getDayOrMounth(date1.split("/")[0]) === getDayOrMounth(date2.split("-")[1])) mounth = true;
+    if (
+      getDayOrMounth(date1.split("/")[1]) ===
+      getDayOrMounth(date2.split("-")[2])
+    )
+      day = true;
+    if (
+      getDayOrMounth(date1.split("/")[0]) ===
+      getDayOrMounth(date2.split("-")[1])
+    )
+      mounth = true;
     if (date1.split("/")[2] === date2.split("-")[0]) year = true;
     console.log(day, mounth, year);
     return day && mounth && year;
@@ -51,12 +61,20 @@ function SearchBookingFlightForm() {
         let searchStartLocation = false;
         let searchEndLocation = false;
 
-        if (compareDates(flights.allFlights[i].startTime.split(" ")[0], startDateField.value)
+        if (
+          compareDates(
+            flights.allFlights[i].startTime.split(" ")[0],
+            startDateField.value
+          )
         ) {
           searchStartTime = true;
         }
 
-        if (compareDates(flights.allFlights[i].endTime.split(" ")[0], endDateField.value)
+        if (
+          compareDates(
+            flights.allFlights[i].endTime.split(" ")[0],
+            endDateField.value
+          )
         ) {
           searchEndTime = true;
         }
@@ -169,7 +187,11 @@ function SearchBookingFlightForm() {
           </span>
           &nbsp;
           <span style={{ display: "inline-block" }}>
-            <button type="submit" className="submit" style={{backgroundColor: '#14133b'}}>
+            <button
+              type="submit"
+              className="submit"
+              style={{ backgroundColor: "#14133b" }}
+            >
               FILTER
             </button>
           </span>
